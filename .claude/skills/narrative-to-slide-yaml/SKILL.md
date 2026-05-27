@@ -40,6 +40,7 @@ A Markdown document with these characteristics:
 - **Data source breadcrumbs** in parenthetical form, indicating where the data came from upstream:
   - CSV: `(Source: ./data/foo.csv)`
   - Excel with sheet name: `(Source: ./data/foo.xlsx, sheet: SheetName)`
+  - The same `(Source: ...)` syntax may also be attached **inline to a prose sentence** to cite a claim that renders no table or chart of its own (e.g., `...growing ~2x faster than competitors (Source: ./data/market_share.csv).`). Capture these as slide-level `sources` (see schema)
 - **Image references**: parenthetical `(Image: ./images/team.jpg)`, or Markdown image syntax `![caption](./images/team.jpg)`
 
 Input may be supplied as:
@@ -74,6 +75,9 @@ slides:
         # ... type-specific fields, see below
     notes: |
       Speaker notes.
+    sources:
+      - claim: "the prose claim being cited"
+        source: "./data/foo.csv"
 ```
 
 Field reference:
@@ -85,6 +89,7 @@ Field reference:
 | `suggested_layout` | recommended (non-divider slides) | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
 | `data` | optional | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`. |
 | `notes` | optional | Speaker notes. |
+| `sources` | optional | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
 
 Each entry inside `data` has these common fields:
 
@@ -185,6 +190,7 @@ Extract the following without rewriting the user's content:
 - **Data source breadcrumbs**: parenthetical patterns like `(Source: ./path.csv)`, `(Source: ./data/foo.xlsx, sheet: SheetName)`, `(Source: path)`. Capture these as lineage metadata. **Do not read the referenced files during generation** — the inline tables in the narrative are authoritative here. (They are read only later, by the Step 6 QA subagent, to verify the inline tables against their source.)
 - **Image references**: parenthetical `(Image: path)`, or Markdown `![alt](path)`
 - **Numbers embedded in prose** (e.g., "Q3 reached a record high of $168 million"): use as supporting facts in the body text. Prefer the adjacent inline table for the chart `data:` block when one exists
+- **Prose-claim citations**: a `(Source: ...)` breadcrumb attached to a prose sentence that renders no table or chart of its own. Collect these into the slide's `sources` list, paired with the claim they back. They render no visual but are QA-checked for claim support in Step 6
 - **Tone**: formal/casual, optimistic/cautious, internal/external audience
 - **Anticipated Q&A**: often appears in a closing section
 
@@ -273,6 +279,16 @@ data:
 
 Notice the `source:` field. This breadcrumb makes the data verifiable: Step 6 (QA verification) reads the source file and cross-checks against the values above. Always include `source` when the narrative provided a data-source reference.
 
+When a prose sentence carries a `(Source: ...)` breadcrumb but no table/chart, record it at the slide level under `sources` instead. It renders no visual, but Step 6 QA still checks whether the source supports the claim (a softer, semantic check than chart value-matching):
+
+```yaml
+body: |
+  We are growing ~2x faster than our nearest competitor.
+sources:
+  - claim: "growing ~2x faster than nearest competitor"
+    source: "./data/market_share.csv"
+```
+
 ### Step 5: Write to file
 
 Write the YAML to the default path defined in the [Output](#output) section (ask first if the input was pasted text with no destination). Confirm the final path back to the user in your summary.
@@ -281,26 +297,7 @@ Write the YAML to the default path defined in the [Output](#output) section (ask
 
 After the YAML is on disk, spawn a subagent (use the Agent tool, `subagent_type: general-purpose`) to verify data integrity against the source files. Delegating to a subagent keeps the main flow lean and isolates the file-reading concern.
 
-The subagent's job:
-
-1. Open the generated YAML
-2. For every `data:` entry that has a `source:` field, locate and open the referenced file:
-   - **CSV**: use the Read tool (or `head`/`cat` via Bash for large files)
-   - **Excel**: use Python via Bash. The dev container has Python with pandas + openpyxl available at `/opt/uv-venv` (per `.devcontainer/Dockerfile`); a one-liner like `/opt/uv-venv/bin/python -c "import pandas as pd; print(pd.read_excel('<path>', sheet_name='<sheet>').to_csv(index=False))"` works
-   - If the file is missing or the sheet doesn't exist, record the issue and move on (don't crash)
-3. Compare the YAML's structured data against the source:
-   - For bar/line charts: `categories` align with the source's x-axis column? `series.values` match the source's series columns?
-   - For histograms: `bins` align with the source's interval labels? `frequencies` match the per-bin counts?
-   - For tables: do `headers` and `rows` correspond to the source rows for the relevant subset?
-   - Allow reasonable interpretation (the narrative may have aggregated or filtered — note these as "summarized" rather than "discrepancy" when the YAML is a clear subset/aggregate of the source)
-4. Report back, slide by slide:
-   - ✓ Verified (data matches)
-   - ⚠ Summarized (YAML is an aggregation or filtered view of the source — usually fine, but flag it)
-   - ✗ Discrepancy (specific differences: "YAML Q1 2024 = 100, source = 102")
-   - ✗ Source not accessible (file missing / unreadable / sheet not found)
-   - ⊘ Skipped (no `source` field)
-
-Use a prompt like this for the subagent (adapt as needed):
+The subagent reads the YAML, opens every referenced source file, cross-checks the data, and reports back slide-by-slide. It only sees the prompt you hand it — not this skill — so the prompt below is self-contained. Adapt paths as needed:
 
 ```
 QA task: verify the data in this slide-deck YAML against its source files.
@@ -308,13 +305,24 @@ QA task: verify the data in this slide-deck YAML against its source files.
 YAML path: <absolute-path-to-yaml>
 Working directory for resolving relative source paths: <usually the YAML's directory>
 
-For each `data:` entry that has a `source:` field:
-1. Open the source file (CSV via Read; Excel via pandas in Bash; sheet name comes after "sheet:")
-2. Cross-check the YAML's categories/series (bar/line), bins/frequencies (histogram), or rows (table) against the source
-3. Allow that the YAML may be a subset/aggregate — flag as "summarized" rather than "wrong" in that case
-
-Report slide-by-slide:
-- ✓ verified | ⚠ summarized | ✗ discrepancy (specifics) | ✗ source not accessible | ⊘ no source
+1. Open the YAML. For every source reference — both `data:` entries with a `source:` field and slide-level `sources` entries — locate and open the referenced file:
+   - CSV: read it directly (use head/cat for large files)
+   - Excel: use Python via Bash. pandas + openpyxl are installed at /opt/uv-venv. A one-liner like
+       /opt/uv-venv/bin/python -c "import pandas as pd; print(pd.read_excel('<path>', sheet_name='<sheet>').to_csv(index=False))"
+     works; the sheet name comes after "sheet:" in the source string
+   - If the file is missing or the sheet doesn't exist, record the issue and move on (don't crash)
+2. Compare the YAML against the source:
+   - bar/line charts: do `categories` align with the source's x-axis column, and `series.values` with the series columns?
+   - histograms: do `bins` align with the interval labels, and `frequencies` with the per-bin counts?
+   - tables: do `headers` and `rows` correspond to the source rows for the relevant subset?
+   - slide-level `sources` (prose claims): no structured value to match — run a softer, semantic check: does the source plausibly *support* the claim text (e.g., does the data back "~2x faster than competitors")? Don't demand exact figures; flag only clear contradictions or wholly unsupported claims
+   - Allow reasonable interpretation: when the YAML is a clear subset/aggregate of the source, mark it "summarized", not "discrepancy"
+3. Report slide-by-slide:
+   - ✓ verified (chart/table data matches, or a prose claim is clearly supported)
+   - ⚠ summarized / can't-confirm (an aggregated/filtered view, or a plausible-but-unsettled claim — usually fine, but flag it)
+   - ✗ discrepancy / contradicted (specifics: "YAML Q1 2024 = 100, source = 102"; or a claim the source contradicts)
+   - ✗ source not accessible (file missing / unreadable / sheet not found)
+   - ⊘ skipped (no `source`)
 
 Keep the report under 400 words. Highlight discrepancies first so they're easy to spot.
 ```
@@ -332,6 +340,7 @@ Tell the user:
 - Where the YAML was written
 - How many slides were generated
 - QA findings from Step 6 (verified / summarized / discrepancies / inaccessible)
+- How many chart/table entries were emitted **without** a `source`, and which ones — so the user can spot data that should have carried a breadcrumb (these are valid, just un-cited)
 - Any data sources that are still TODOs (the user said they'd provide but haven't)
 - If running non-interactively, the list of questions you would have asked and the defaults you took
 - Open question: "Anything to refine?"
