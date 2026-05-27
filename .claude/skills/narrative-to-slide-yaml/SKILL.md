@@ -23,16 +23,11 @@ This skill is the middle stage of a three-stage pipeline:
 
 Keep your scope narrow: read prose, produce YAML. Do not generate pptx. During the generation flow, do not open the referenced data files (CSV/Excel) — for producing the YAML, the narrative's inline tables are authoritative. (Those files *are* read later, but only by the QA subagent in Step 6, and only to verify that the inline tables were transcribed correctly from their source.)
 
-## When this skill applies
+## Out of scope
 
-Trigger when the user:
-- Has a flowing Markdown document (memo, review, proposal, briefing) and wants slides
-- Asks to "turn this into a presentation YAML" / "プレゼン資料のYAMLを作って"
-- Wants to feed a strategic writeup into a slide-generation pipeline
-
-Do not trigger for:
-- Generating the final pptx file (that's a different skill)
-- Editing an existing YAML deck (do it directly with Edit)
+Triggering is handled by the `description` in the frontmatter. Once this skill is running, step back and redirect if the request is actually one of these:
+- Generating the final pptx file — that's a different skill
+- Editing an existing YAML deck — do it directly with Edit
 
 ## Input
 
@@ -72,7 +67,7 @@ slides:
 
       Reference embedded data with {{placeholder_name}} where charts, tables,
       or images should appear in the slide.
-    suggested_layout: "Free-form layout hint, e.g., '2カラム: 左に課題、右に打ち手'"
+    suggested_layout: "Free-form layout hint, e.g., '2-column: issues on the left, actions on the right'"
     data:
       placeholder_name:
         type: bar_chart | line_chart | histogram | table | image
@@ -86,8 +81,8 @@ Field reference:
 | Field | Required | Purpose |
 |---|---|---|
 | `title` | yes | Slide title |
-| `body` | yes | Main content (Markdown OK). Use `""` for section divider slides. Place `{{name}}` to mark where data renders. |
-| `suggested_layout` | optional | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
+| `body` | yes (use `""` for section dividers) | Main content (Markdown OK). Place `{{name}}` to mark where data renders. |
+| `suggested_layout` | recommended (non-divider slides) | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
 | `data` | optional | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`. |
 | `notes` | optional | Speaker notes. |
 
@@ -101,7 +96,7 @@ Each entry inside `data` has these common fields:
 
 Data types and required fields:
 
-**bar_chart / line_chart / histogram**
+**bar_chart / line_chart**
 ```yaml
 type: bar_chart
 source: "./data/q3_financials.xlsx, sheet: Sales_Trend"
@@ -113,6 +108,18 @@ series:
     values: [100, 120, 145]
   - name: "2025"
     values: [110, 135, 168]
+```
+
+**histogram**
+
+A histogram shows the distribution of a single variable over pre-binned intervals — not grouped categories, so it does **not** use `categories`/`series`. Use `bins` (the interval labels) and `frequencies` (the count per bin). The narrative's inline table is expected to already be a frequency table (bin → count).
+```yaml
+type: histogram
+source: "./data/scores.csv"
+x_axis: "Score range"
+y_axis: "Count"
+bins: ["0-20", "20-40", "40-60", "60-80", "80-100"]
+frequencies: [3, 12, 45, 30, 10]
 ```
 
 **table**
@@ -136,12 +143,14 @@ alt_text: "Optional accessibility description"
 
 ### Cell values: number vs string
 
-For `categories`, `series.values`, and `rows` (in tables), use this rule:
+For `categories`, `series.values`, `frequencies`, and `rows` (in tables), use this rule:
 
 - **Number literal** (`45`, `168`, `100`, `12.5`): raw counts and measurements that the downstream pptx-AI may want to format, sum, or chart numerically
-- **String literal** (`"+24%"`, `"¥168M"`, `"高"`, `"完了"`): pre-formatted display values that include a unit, sign, currency, or qualitative label
+- **String literal** (`"+24%"`, `"$168M"`, `"High"`, `"Done"`): pre-formatted display values that include a unit, sign, currency, or qualitative label
 
-Rule of thumb: if the cell needs a non-numeric character (`%`, `+`, `¥`, units, status labels) to be meaningful when displayed, keep it as a string. Otherwise use a number.
+Rule of thumb: if the cell needs a non-numeric character (`%`, `+`, `$`, units, status labels) to be meaningful when displayed, keep it as a string. Otherwise use a number.
+
+**Exception — chart numeric fields**: `series.values` and `frequencies` feed numeric chart axes, so they must stay plain numbers; never wrap them in a unit or symbol (write `168`, not `"$168M"`). Put the unit in the axis label instead (e.g., `y_axis: "Revenue ($M)"`). Pre-formatted strings belong only in `table` rows, where nothing is plotted. (`categories` may be strings — they are axis labels, not plotted magnitudes.)
 
 Example mixed row in a table:
 ```yaml
@@ -175,7 +184,7 @@ Extract the following without rewriting the user's content:
 - **Inline data tables**: Markdown tables within sections are the **primary source** of chart/table data. Lift them as-is into the `data:` block of the corresponding slide. Do not paraphrase or aggregate numbers
 - **Data source breadcrumbs**: parenthetical patterns like `(Source: ./path.csv)`, `(Source: ./data/foo.xlsx, sheet: SheetName)`, `(Source: path)`. Capture these as lineage metadata. **Do not read the referenced files during generation** — the inline tables in the narrative are authoritative here. (They are read only later, by the Step 6 QA subagent, to verify the inline tables against their source.)
 - **Image references**: parenthetical `(Image: path)`, or Markdown `![alt](path)`
-- **Numbers embedded in prose** (e.g., "Q3は過去最高の168百万円"): use as supporting facts in the body text. Prefer the adjacent inline table for the chart `data:` block when one exists
+- **Numbers embedded in prose** (e.g., "Q3 reached a record high of $168 million"): use as supporting facts in the body text. Prefer the adjacent inline table for the chart `data:` block when one exists
 - **Tone**: formal/casual, optimistic/cautious, internal/external audience
 - **Anticipated Q&A**: often appears in a closing section
 
@@ -187,7 +196,7 @@ Use AskUserQuestion. Batch related questions into one call (the tool accepts up 
 
 Common questions:
 
-1. **Target slide count** — Show your estimate and ask: "I see roughly N sections that map to ~M slides. Target?" Options: "Concise (8-10)", "Standard (12-15)", "Detailed (20+)"
+1. **Target slide count** — Show your estimate and ask: "I see roughly N sections that map to ~M slides. Target?" Options: "Concise (8-11)", "Standard (12-19)", "Detailed (20+)"
 2. **Information density per slide** — "Sparse (one idea per slide)" / "Balanced" / "Dense (more content per slide)"
 3. **Missing data sources** — For every chart/table the prose mentions without a path, ask. Don't make paths up
 4. **Proactive additions** — If a section would clearly be strengthened by a chart not in the prose, suggest it: "Section X talks about trend Y. A line chart would help — do you have the data?"
@@ -199,7 +208,7 @@ Skip questions that already have clear answers. Over-asking is friction.
 
 If `AskUserQuestion` is not available (e.g., this skill was invoked by a parent agent, a script, or a test harness with no human in the loop), do **not** block. Instead:
 
-- Use these defaults: **target slide count = standard (12-15)**, **density = balanced**, **tone = inferred from the document**
+- Use these defaults: **target slide count = standard (12-19)**, **density = balanced**, **tone = inferred from the document**
 - For missing data: omit the chart rather than fabricating numbers
 - In the final summary (Step 7), list every question you would have asked and what default you took, so the caller can decide whether to re-run with overrides
 
@@ -221,44 +230,44 @@ Map the document to slides:
   This 3-slide ending creates a natural rhythm: pause → recap → handover to Q&A. Don't collapse into a single slide unless the document is very short (<5 slides total).
 
 For each non-divider slide, set a `suggested_layout` that reflects the slide's character. Examples:
-- Bullet slide → `"箇条書き: N項目を大きめのフォントで縦に"`
-- Chart slide → `"上にコメント1行、下に[bar|line|histogram]グラフを大きく中央配置"`
-- Table slide → `"表をスライド中央に大きく配置"`
-- Two-column comparison → `"2カラム: 左に〇〇、右に△△"`
-- Image slide → `"中央に大きく画像、上にコメント"`
+- Bullet slide → `"Bullet list: N items stacked vertically in a larger font"`
+- Chart slide → `"One-line comment on top, a large [bar|line|histogram] chart centered below"`
+- Table slide → `"Table placed large in the center of the slide"`
+- Two-column comparison → `"2-column: XXX on the left, YYY on the right"`
+- Image slide → `"Large image centered, with a comment on top"`
 
 When the narrative contains an inline data table, lift it into a structured `data` entry. Example:
 
 Narrative excerpt:
 ```markdown
-2025年も継続的に成長し、Q3は過去最高の168百万円。前年同期比+15.9%。
+Revenue kept growing through 2025; Q3 reached a record high of $168 million, up 15.9% year-over-year.
 
-| 四半期 | 2024年 | 2025年 |
-|--------|-------:|-------:|
-| Q1     |    100 |    110 |
-| Q2     |    120 |    135 |
-| Q3     |    145 |    168 |
+| Quarter | 2024 | 2025 |
+|---------|-----:|-----:|
+| Q1      |  100 |  110 |
+| Q2      |  120 |  135 |
+| Q3      |  145 |  168 |
 
-(データ元: ./data/q3_financials.xlsx, シート: 売上推移)
+(Source: ./data/q3_financials.xlsx, sheet: Sales_Trend)
 ```
 
 Becomes:
 ```yaml
 body: |
-  四半期売上は2025年も継続的に成長。Q3は過去最高の168百万円。
+  Quarterly revenue kept growing through 2025. Q3 reached a record high of $168 million.
 
   {{revenue_trend}}
 data:
   revenue_trend:
     type: bar_chart
-    source: "./data/q3_financials.xlsx, sheet: 売上推移"
-    x_axis: "四半期"
-    y_axis: "売上 (百万円)"
+    source: "./data/q3_financials.xlsx, sheet: Sales_Trend"
+    x_axis: "Quarter"
+    y_axis: "Revenue ($M)"
     categories: ["Q1", "Q2", "Q3"]
     series:
-      - name: "2024年"
+      - name: "2024"
         values: [100, 120, 145]
-      - name: "2025年"
+      - name: "2025"
         values: [110, 135, 168]
 ```
 
@@ -266,13 +275,11 @@ Notice the `source:` field. This breadcrumb makes the data verifiable: Step 6 (Q
 
 ### Step 5: Write to file
 
-- Default path: `<input_dir>/<input_basename>.yaml`
-- If pasted text and no destination given, ask before writing
-- Confirm the path back to the user in your summary
+Write the YAML to the default path defined in the [Output](#output) section (ask first if the input was pasted text with no destination). Confirm the final path back to the user in your summary.
 
 ### Step 6: QA verification (subagent)
 
-After the YAML is on disk, spawn a subagent (use the Agent tool, `subagent_type: general-purpose`) to verify data integrity against the source files. The main skill should not read CSV/Excel directly — delegating to a subagent keeps the main flow lean and isolates the file-reading concern.
+After the YAML is on disk, spawn a subagent (use the Agent tool, `subagent_type: general-purpose`) to verify data integrity against the source files. Delegating to a subagent keeps the main flow lean and isolates the file-reading concern.
 
 The subagent's job:
 
@@ -282,7 +289,8 @@ The subagent's job:
    - **Excel**: use Python via Bash. The dev container has Python with pandas + openpyxl available at `/opt/uv-venv` (per `.devcontainer/Dockerfile`); a one-liner like `/opt/uv-venv/bin/python -c "import pandas as pd; print(pd.read_excel('<path>', sheet_name='<sheet>').to_csv(index=False))"` works
    - If the file is missing or the sheet doesn't exist, record the issue and move on (don't crash)
 3. Compare the YAML's structured data against the source:
-   - For charts: `categories` align with the source's x-axis column? `series.values` match the source's series columns?
+   - For bar/line charts: `categories` align with the source's x-axis column? `series.values` match the source's series columns?
+   - For histograms: `bins` align with the source's interval labels? `frequencies` match the per-bin counts?
    - For tables: do `headers` and `rows` correspond to the source rows for the relevant subset?
    - Allow reasonable interpretation (the narrative may have aggregated or filtered — note these as "summarized" rather than "discrepancy" when the YAML is a clear subset/aggregate of the source)
 4. Report back, slide by slide:
@@ -301,8 +309,8 @@ YAML path: <absolute-path-to-yaml>
 Working directory for resolving relative source paths: <usually the YAML's directory>
 
 For each `data:` entry that has a `source:` field:
-1. Open the source file (CSV via Read; Excel via pandas in Bash; sheet name comes after "シート:" or "sheet:")
-2. Cross-check the YAML's categories/series/rows against the source
+1. Open the source file (CSV via Read; Excel via pandas in Bash; sheet name comes after "sheet:")
+2. Cross-check the YAML's categories/series (bar/line), bins/frequencies (histogram), or rows (table) against the source
 3. Allow that the YAML may be a subset/aggregate — flag as "summarized" rather than "wrong" in that case
 
 Report slide-by-slide:
@@ -331,15 +339,8 @@ Tell the user:
 ## Important principles
 
 - **Layout hints go only in `suggested_layout`**, never inside `body`. The downstream pptx skill decides actual layout.
-- **Data file paths (CSV, Excel) are lineage breadcrumbs, not generation-time sources**. In the main generation flow, do not read the referenced files; chart and table data comes from the **inline Markdown tables** in the narrative. The one exception is the Step 6 QA pass, where a subagent reads these files solely to verify the inline tables against their source. If a needed table is missing, ask the user — do not fabricate numbers.
+- **Data file paths (CSV, Excel) are lineage breadcrumbs, not generation-time sources**. Chart and table data comes from the **inline Markdown tables** in the narrative; for the full rule (and the Step 6 QA exception) see [Purpose](#purpose).
 - **Respect the upstream author's words**. Lightly compress prose for slide brevity, but don't invent claims or rewrite analysis. If something is unclear, ask the user, don't paper over it.
 - **Honest gaps**. If the prose mentions a visualization without an inline table, ask. Do not infer numbers from prose summaries when a structured table was expected.
 - **One slide, one idea**. If a `##` section spans multiple distinct topics, split it.
 - **Speaker notes carry the depth**. Pull supporting context, caveats, and anticipated questions into `notes` so the slide itself stays clean.
-
-## Examples
-
-- `references/example_narrative.md` — a sample input document
-- `references/example_output.yaml` — the corresponding YAML output
-
-Read both before generating your first deck for a user; they encode many conventions that are hard to convey in prose alone.
