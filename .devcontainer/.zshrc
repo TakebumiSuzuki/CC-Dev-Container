@@ -24,7 +24,7 @@ PROMPT='%F{green}%n%f@%F{cyan}%m%f:%F{blue}%~%f${vcs_info_msg_0_} %# '
 # ============================================================
 # 履歴
 # ============================================================
-HISTFILE=~/.zsh_history
+HISTFILE=/commandhistory/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY            # 複数ターミナル間で履歴共有

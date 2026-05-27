@@ -7,15 +7,28 @@ services:
     # user: は指定しない。Dockerfile の USER node がデフォルトユーザーになる。
     # compose 側で user: を固定すると VS Code Server の初期セットアップで
     # 権限エラーが起きるため、ユーザー切替は devcontainer.json の remoteUser に一任。
+    environment:
+      # Claude Code の全状態 (.claude/ 配下 + .claude.json) を /home/node/.claude に集約。
+      # これにより claude-state ボリューム１個で auth・設定・履歴の永続化が完結する。
+      - CLAUDE_CONFIG_DIR=/home/node/.claude
     volumes:
       # ワークスペース bind mount
       - ../:/workspaces/cc-dev-container
 
-      # /home/node 全体を named volume で永続化
-      # 初回作成時、Dockerfile で構築済みのホームの中身が空の volume に自動コピーされる。
-      # .claude / .claude.json / .cache/uv / .npm などすべてこの中に収まるので
-      # 個別マウントは不要。コンテナ再作成しても設定・認証・キャッシュが残る。
-      - node-home:/home/node
+      # Claude Code の状態 (auth, settings, plugins, sessions, history) を永続化。
+      # Anthropic 公式 dev container と同じスコープ。
+      # CLAUDE_CONFIG_DIR=/home/node/.claude を environment で設定しているため、
+      # ~/.claude.json (OAuth トークン等) もこの配下に集約され、ボリューム内に乗る。
+      - claude-state:/home/node/.claude
+
+      # shell 履歴 (.zsh_history)。単一ファイルは named volume にできないので、
+      # ディレクトリ /commandhistory をマウントし .zshrc 側で HISTFILE をそこに向ける。
+      - claude-bashhistory:/commandhistory
+
+      # .zshrc は repo を SSoT とする bind mount。
+      # named volume と独立したマウントポイントなので、リスト順に関係なく適用される。
+      - ./.zshrc:/home/node/.zshrc
 
 volumes:
-  node-home:
+  claude-state:
+  claude-bashhistory:

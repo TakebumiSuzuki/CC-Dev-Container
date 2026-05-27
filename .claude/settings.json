@@ -66,6 +66,7 @@
   },
   "sandbox": {
     "enabled": true,
+    "enableWeakerNestedSandbox": true,
     "failIfUnavailable": false,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
@@ -77,6 +78,15 @@
       ]
     },
     "filesystem": {
+      "denyRead": [
+        "~/.ssh/**",
+        "~/.aws/**",
+        "~/.netrc",
+        "**/.env*"
+      ],
+      "denyWrite": [
+        "**/.env*"
+      ],
       "allowWrite": [
         "~/.kube",
         "/tmp/build"
@@ -86,5 +96,20 @@
       "docker *"
     ]
   },
-  "plansDirectory": "./docs/plans"
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read -r f; echo \"$(date '+%Y-%m-%d %H:%M:%S') - $f\" >> /workspaces/cc-dev-container/creation_log.md; } 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  },
+  "plansDirectory": "./docs/plans",
+  "tui": "fullscreen",
+  "autoScrollEnabled": false
 }
