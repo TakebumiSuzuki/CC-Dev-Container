@@ -40,6 +40,8 @@ A Markdown document with these characteristics:
 - **Data source breadcrumbs** in parenthetical form, indicating where the data came from upstream:
   - CSV: `(Source: ./data/foo.csv)`
   - Excel with sheet name: `(Source: ./data/foo.xlsx, sheet: SheetName)`
+  - PDF with page number: `(Source: ./reports/q3.pdf, page: 7)` — the `page:` locator is **required** (it tells QA where to look)
+  - PowerPoint with slide number: `(Source: ./decks/board.pptx, slide: 3)` — the `slide:` locator is **required**
   - The same `(Source: ...)` syntax may also be attached **inline to a prose sentence** to cite a claim that renders no table or chart of its own (e.g., `...growing ~2x faster than competitors (Source: ./data/market_share.csv).`). Capture these as slide-level `sources` (see schema)
 - **Image references**: parenthetical `(Image: ./images/team.jpg)`, or Markdown image syntax `![caption](./images/team.jpg)`
 
@@ -96,7 +98,7 @@ Each entry inside `data` has these common fields:
 | Sub-field | Required | Purpose |
 |---|---|---|
 | `type` | yes | One of: `bar_chart`, `line_chart`, `histogram`, `table`, `image` |
-| `source` | recommended | Lineage breadcrumb: the path (and sheet, for Excel) that the inline table came from. Format: `"./data/foo.csv"` or `"./data/foo.xlsx, sheet: SheetName"`. Used by the QA step (Step 6) to verify data integrity. Omit for `image` (use `path` instead). |
+| `source` | recommended | Lineage breadcrumb: where the inline table came from. Formats: `"./data/foo.csv"`, `"./data/foo.xlsx, sheet: SheetName"`, `"./report.pdf, page: 7"`, `"./deck.pptx, slide: 3"`. A `page:`/`slide:` locator is **required** for PDF/PPTX. Used by the QA step (Step 6): structured sources (CSV/Excel) get exact value-matching, unstructured ones (PDF/PPTX) get a softer semantic check. Omit for `image` (use `path` instead). |
 | (type-specific fields) | varies | See per-type schemas below |
 
 Data types and required fields:
@@ -187,7 +189,7 @@ Extract the following without rewriting the user's content:
 - **Metadata**: title (H1 or top), and any author/date/audience/duration lines near the top
 - **Slide candidates**: each `##` typically becomes one or more slides; long `##` sections may split across multiple slides
 - **Inline data tables**: Markdown tables within sections are the **primary source** of chart/table data. Lift them as-is into the `data:` block of the corresponding slide. Do not paraphrase or aggregate numbers
-- **Data source breadcrumbs**: parenthetical patterns like `(Source: ./path.csv)`, `(Source: ./data/foo.xlsx, sheet: SheetName)`, `(Source: path)`. Capture these as lineage metadata. **Do not read the referenced files during generation** — the inline tables in the narrative are authoritative here. (They are read only later, by the Step 6 QA subagent, to verify the inline tables against their source.)
+- **Data source breadcrumbs**: parenthetical patterns like `(Source: ./path.csv)`, `(Source: ./data/foo.xlsx, sheet: SheetName)`, `(Source: ./report.pdf, page: 7)`, `(Source: ./deck.pptx, slide: 3)`, `(Source: path)`. Capture these as lineage metadata, keeping any `page:`/`slide:` locator (QA needs it). **Do not read the referenced files during generation** — the inline tables in the narrative are authoritative here. (They are read only later, by the Step 6 QA subagent, to verify the inline tables against their source.)
 - **Image references**: parenthetical `(Image: path)`, or Markdown `![alt](path)`
 - **Numbers embedded in prose** (e.g., "Q3 reached a record high of $168 million"): use as supporting facts in the body text. Prefer the adjacent inline table for the chart `data:` block when one exists
 - **Prose-claim citations**: a `(Source: ...)` breadcrumb attached to a prose sentence that renders no table or chart of its own. Collect these into the slide's `sources` list, paired with the claim they back. They render no visual but are QA-checked for claim support in Step 6
@@ -310,18 +312,23 @@ Working directory for resolving relative source paths: <usually the YAML's direc
    - Excel: use Python via Bash. pandas + openpyxl are installed at /opt/uv-venv. A one-liner like
        /opt/uv-venv/bin/python -c "import pandas as pd; print(pd.read_excel('<path>', sheet_name='<sheet>').to_csv(index=False))"
      works; the sheet name comes after "sheet:" in the source string
-   - If the file is missing or the sheet doesn't exist, record the issue and move on (don't crash)
+   - PDF: read only the cited page (number comes after "page:"). A one-liner like
+       /opt/uv-venv/bin/python -c "import pdfplumber; pg=pdfplumber.open('<path>').pages[<page>-1]; print(pg.extract_text()); print(pg.extract_tables())"
+     works. If the page is a scan with no extractable text, OCR it (pdf2image + pytesseract, lang 'eng' or 'jpn'), or try: pdftotext -f <page> -l <page> '<path>' -
+   - PPTX: convert the deck to Markdown with `markitdown '<path>'` (the binary is on PATH at /opt/uv-venv/bin) and find the cited slide (number comes after "slide:")
+   - If the file is missing, the sheet/page/slide doesn't exist, or extraction yields nothing, record the issue and move on (don't crash)
 2. Compare the YAML against the source:
    - bar/line charts: do `categories` align with the source's x-axis column, and `series.values` with the series columns?
    - histograms: do `bins` align with the interval labels, and `frequencies` with the per-bin counts?
    - tables: do `headers` and `rows` correspond to the source rows for the relevant subset?
    - slide-level `sources` (prose claims): no structured value to match — run a softer, semantic check: does the source plausibly *support* the claim text (e.g., does the data back "~2x faster than competitors")? Don't demand exact figures; flag only clear contradictions or wholly unsupported claims
+   - PDF/PPTX sources (any type, including chart/table): extraction from these is unstructured and lossy, so use the same softer semantic check — does the cited page/slide plausibly *contain or support* the YAML's numbers? Treat minor extraction noise as "can't-confirm", not "discrepancy"
    - Allow reasonable interpretation: when the YAML is a clear subset/aggregate of the source, mark it "summarized", not "discrepancy"
 3. Report slide-by-slide:
    - ✓ verified (chart/table data matches, or a prose claim is clearly supported)
    - ⚠ summarized / can't-confirm (an aggregated/filtered view, or a plausible-but-unsettled claim — usually fine, but flag it)
    - ✗ discrepancy / contradicted (specifics: "YAML Q1 2024 = 100, source = 102"; or a claim the source contradicts)
-   - ✗ source not accessible (file missing / unreadable / sheet not found)
+   - ✗ source not accessible (file missing / unreadable / sheet, page, or slide not found)
    - ⊘ skipped (no `source`)
 
 Keep the report under 400 words. Highlight discrepancies first so they're easy to spot.
