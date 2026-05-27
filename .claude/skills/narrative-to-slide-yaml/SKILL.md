@@ -1,9 +1,10 @@
 ---
-name: narrative-to-slide-yaml
-description: Convert a Markdown narrative or strategy document into a slide-deck YAML intermediate file used by a presentation pipeline (the middle step in a Markdown narrative → YAML → pptx flow). Use this skill whenever the user has flowing prose content (a strategy memo, quarterly review, business proposal, project recap, board update, etc.) and wants to turn it into structured slide data. Trigger on phrases like "make slides from this writeup", "turn this document into a presentation", or any request to produce slide YAML for downstream pptx generation. Trigger even when the user does not explicitly say "YAML" — if the input is prose and the output is slides, this skill applies.
+name: narrative-to-slide-outline
+description: Convert a Markdown narrative/strategy document into slide-deck YAML for a downstream pptx pipeline (narrative → YAML → pptx). Manual-only: invoke explicitly with /narrative-to-slide-outline.
+disable-model-invocation: true
 ---
 
-# Narrative to Slide YAML
+# Narrative to Slide Outline
 
 ## Purpose
 
@@ -12,8 +13,8 @@ Convert a Markdown narrative document (flowing prose containing analysis, recomm
 This skill is the middle stage of a three-stage pipeline:
 
 ```
-[Raw data: CSVs, Excel files, reports]
-        ↓
+[Raw data]
+        ↓ (CSVs, Excel files, PDFs, PPTX)
 [Upstream AI: writes a narrative strategy document]
         ↓ (Markdown)
 [THIS SKILL: produces slide-deck YAML]
@@ -25,9 +26,11 @@ Keep your scope narrow: read prose, produce YAML. Do not generate pptx. During t
 
 ## Out of scope
 
-Triggering is handled by the `description` in the frontmatter. Once this skill is running, step back and redirect if the request is actually one of these:
+This skill is **manual-only**: it runs only when the user invokes it explicitly (see `disable-model-invocation` in the frontmatter), so it never auto-triggers on prose. Once running, step back and redirect if the request is actually one of these:
 - Generating the final pptx file — that's a different skill
-- Editing an existing YAML deck — do it directly with Edit
+- A trivial text-only tweak to an existing YAML (rename a title, fix a typo, reword `notes`) — just do it with Edit; you don't need this skill's machinery
+
+Editing an existing deck in more substantial ways (changing chart/table data, adding or removing slides, re-syncing after the narrative changed) **is** in scope — see [Editing an existing deck](#editing-an-existing-deck).
 
 ## Input
 
@@ -46,7 +49,7 @@ A Markdown document with these characteristics:
 - **Image references**: parenthetical `(Image: ./images/team.jpg)`, or Markdown image syntax `![caption](./images/team.jpg)`
 
 Input may be supplied as:
-- A file path (`./narrative.md`)
+- A file path (e.g., `./narrative.md`)
 - Pasted text in the chat
 
 If neither is provided, ask the user.
@@ -204,7 +207,12 @@ Use AskUserQuestion. Batch related questions into one call (the tool accepts up 
 
 Common questions:
 
-1. **Target slide count** — Show your estimate and ask: "I see roughly N sections that map to ~M slides. Target?" Options: "Concise (8-11)", "Standard (12-19)", "Detailed (20+)"
+1. **Target slide count** — Derive a baseline from *this* document rather than using fixed cutoffs: roughly one slide per distinct idea (a long `##` section may split into 2-3 slides; several short ones may merge). Show it and ask: "I see roughly N sections → about M slides at one-idea-per-slide. Target?" Offer three options scaled to that baseline M, not fixed bands:
+   - **Concise** — compress below M (merge related sections, drop secondary charts)
+   - **Standard** — about M (~one slide per section/idea)
+   - **Detailed** — expand above M (split dense sections, add a chart per data table)
+
+   Fill the option labels with the concrete numbers you derived (e.g. "Concise (~8) / Standard (~13) / Detailed (~20)") so they track this document's size — a short memo and a 40-page report should land on very different numbers.
 2. **Information density per slide** — "Sparse (one idea per slide)" / "Balanced" / "Dense (more content per slide)"
 3. **Missing data sources** — For every chart/table the prose mentions without a path, ask. Don't make paths up
 4. **Proactive additions** — If a section would clearly be strengthened by a chart not in the prose, suggest it: "Section X talks about trend Y. A line chart would help — do you have the data?"
@@ -216,7 +224,7 @@ Skip questions that already have clear answers. Over-asking is friction.
 
 If `AskUserQuestion` is not available (e.g., this skill was invoked by a parent agent, a script, or a test harness with no human in the loop), do **not** block. Instead:
 
-- Use these defaults: **target slide count = standard (12-19)**, **density = balanced**, **tone = inferred from the document**
+- Use these defaults: **target slide count = the document-derived baseline (~one slide per distinct idea)**, **density = balanced**, **tone = inferred from the document**
 - For missing data: omit the chart rather than fabricating numbers
 - In the final summary (Step 7), list every question you would have asked and what default you took, so the caller can decide whether to re-run with overrides
 
@@ -351,6 +359,36 @@ Tell the user:
 - Any data sources that are still TODOs (the user said they'd provide but haven't)
 - If running non-interactively, the list of questions you would have asked and the defaults you took
 - Open question: "Anything to refine?"
+
+## Editing an existing deck
+
+This skill also revises a YAML deck that a prior run already produced — not just first-time generation. Because invocation is manual, there is no auto-trigger noise to weigh: when the user explicitly invokes the skill on an existing `.yaml`, follow this path instead of the generation Workflow above.
+
+Inputs: the existing YAML path and the edit instruction — plus, for a re-sync, the updated narrative. If the YAML path is unclear, ask for it. **Always Read the existing YAML first** so edits preserve its structure, slide ordering, and any manual tweaks. Then classify the edit:
+
+### (A) Trivial text edits
+
+Renaming a title, fixing a typo, rewording `body`/`notes`. These touch no `data:`/`sources:` and no slide structure. Apply directly with Edit — no schema reasoning, no QA. (This is the case the [Out of scope](#out-of-scope) note covers; if the user invoked the skill only for this, it was still fine to handle it.)
+
+### (B) Schema-affecting edits
+
+Changing chart/table values, adding or removing slides, adding or editing a `data:`/`sources:` entry, converting a table to a chart, etc. These obey the same schema rules as generation:
+
+- Follow the [number-vs-string rule](#cell-values-number-vs-string), including the chart-numeric exception (`series.values`/`frequencies` stay plain numbers; units go in the axis label).
+- Keep the required `page:`/`slide:` locator on any PDF/PPTX `source`.
+- When adding a slide, give it a `suggested_layout`; when editing near the end, preserve the closing 3-slide pattern (divider → recap → thank-you).
+- Don't invent data the user didn't supply — same honesty rule as generation.
+
+After any change that touches `data:` or `sources:`, re-run **Step 6 (QA verification)** on the affected slides, then report per **Step 7**.
+
+### (C) Narrative re-sync
+
+The upstream narrative changed and the YAML should catch up. Re-run the generation Workflow against the updated narrative, but treat the existing YAML as the baseline rather than overwriting blindly:
+
+- Infer slide-count/density from the existing deck — don't re-ask in Step 3 what's already settled there; only clarify genuinely new ambiguities.
+- Diff the narrative changes and update **only** the affected slides. Preserve hand-tuned titles, `suggested_layout`, `notes`, and slide ordering wherever the narrative did not change.
+- Run **Step 6 (QA)** on the changed slides and summarize per **Step 7**.
+- If you cannot cleanly tell what was hand-edited versus generated, surface the conflict and ask before overwriting — do not guess.
 
 ## Important principles
 
