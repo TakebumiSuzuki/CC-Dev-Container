@@ -28,7 +28,7 @@ Keep your scope narrow: read prose, produce YAML. Do not generate pptx. During t
 
 This skill is **manual-only**: it runs only when the user invokes it explicitly (see `disable-model-invocation` in the frontmatter), so it never auto-triggers on prose. Once running, step back and redirect if the request is actually one of these:
 - Generating the final pptx file — that's a different skill
-- A trivial text-only tweak to an existing YAML (rename a title, fix a typo, reword `notes`) — just do it with Edit; you don't need this skill's machinery
+- A trivial text-only tweak to an existing YAML (rename a title, fix a typo, reword `speaker_notes`) — just do it with Edit; you don't need this skill's machinery
 
 Editing an existing deck in more substantial ways (changing chart/table data, adding or removing slides, re-syncing after the narrative changed) **is** in scope — see [Editing an existing deck](#editing-an-existing-deck).
 
@@ -78,7 +78,7 @@ slides:
       placeholder_name:
         type: bar_chart | line_chart | histogram | table | image
         # ... type-specific fields, see below
-    notes: |
+    speaker_notes: |
       Speaker notes.
     sources:
       - claim: "the prose claim being cited"
@@ -93,7 +93,7 @@ Field reference:
 | `body` | yes (use `""` for section dividers) | Main content (Markdown OK). Place `{{name}}` to mark where data renders. |
 | `suggested_layout` | recommended (non-divider slides) | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
 | `data` | optional | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`. |
-| `notes` | optional | Speaker notes. |
+| `speaker_notes` | optional | Speaker notes. |
 | `sources` | optional | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
 
 Each entry inside `data` has these common fields:
@@ -171,7 +171,7 @@ rows:
 
 YAML formatting rules:
 - Use **2-space indentation** (the standard YAML convention; readability is much better than 4 spaces when nesting `data → chart → series`)
-- Use `|` (literal block scalar) for multi-line strings — preserves the newlines in `body` and `notes`
+- Use `|` (literal block scalar) for multi-line strings — preserves the newlines in `body` and `speaker_notes`
 - Wrap titles and any string containing `:`, `#`, `|`, or `>` in double quotes
 - Lists of small primitives (categories, values) can use flow style `[1, 2, 3]`
 
@@ -241,7 +241,7 @@ Map the document to slides:
 - **Closing block** (3 slides, in this order, as a deliberate pattern):
   1. Section divider with title like "Conclusion" — body is `""`, signals the wrap-up
   2. Recap slide — 2-4 bullets capturing the key takeaways (often Markdown bullets pulled from the final section of the narrative)
-  3. Thank-you slide — title like "Thank you", body holds "Q&A", and `notes` carries the anticipated questions extracted from the document
+  3. Thank-you slide — title like "Thank you", body holds "Q&A", and `speaker_notes` carries the anticipated questions extracted from the document
 
   This 3-slide ending creates a natural rhythm: pause → recap → handover to Q&A. Don't collapse into a single slide unless the document is very short (<5 slides total).
 
@@ -368,7 +368,7 @@ Inputs: the existing YAML path and the edit instruction — plus, for a re-sync,
 
 ### (A) Trivial text edits
 
-Renaming a title, fixing a typo, rewording `body`/`notes`. These touch no `data:`/`sources:` and no slide structure. Apply directly with Edit — no schema reasoning, no QA. (This is the case the [Out of scope](#out-of-scope) note covers; if the user invoked the skill only for this, it was still fine to handle it.)
+Renaming a title, fixing a typo, rewording `body`/`speaker_notes`. These touch no `data:`/`sources:` and no slide structure. Apply directly with Edit — no schema reasoning, no QA. (This is the case the [Out of scope](#out-of-scope) note covers; if the user invoked the skill only for this, it was still fine to handle it.)
 
 ### (B) Schema-affecting edits
 
@@ -386,7 +386,7 @@ After any change that touches `data:` or `sources:`, re-run **Step 6 (QA verific
 The upstream narrative changed and the YAML should catch up. Re-run the generation Workflow against the updated narrative, but treat the existing YAML as the baseline rather than overwriting blindly:
 
 - Infer slide-count/density from the existing deck — don't re-ask in Step 3 what's already settled there; only clarify genuinely new ambiguities.
-- Diff the narrative changes and update **only** the affected slides. Preserve hand-tuned titles, `suggested_layout`, `notes`, and slide ordering wherever the narrative did not change.
+- Diff the narrative changes and update **only** the affected slides. Preserve hand-tuned titles, `suggested_layout`, `speaker_notes`, and slide ordering wherever the narrative did not change.
 - Run **Step 6 (QA)** on the changed slides and summarize per **Step 7**.
 - If you cannot cleanly tell what was hand-edited versus generated, surface the conflict and ask before overwriting — do not guess.
 
@@ -397,4 +397,4 @@ The upstream narrative changed and the YAML should catch up. Re-run the generati
 - **Respect the upstream author's words**. Lightly compress prose for slide brevity, but don't invent claims or rewrite analysis. If something is unclear, ask the user, don't paper over it.
 - **Honest gaps**. If the prose mentions a visualization without an inline table, ask. Do not infer numbers from prose summaries when a structured table was expected.
 - **One slide, one idea**. If a `##` section spans multiple distinct topics, split it.
-- **Speaker notes carry the depth**. Pull supporting context, caveats, and anticipated questions into `notes` so the slide itself stays clean.
+- **Speaker notes carry the depth**. Pull supporting context, caveats, and anticipated questions into `speaker_notes` so the slide itself stays clean.
