@@ -22,7 +22,7 @@ This skill is the middle stage of a three-stage pipeline:
 [Downstream pptx skill: produces .pptx file]
 ```
 
-Keep your scope narrow: read prose, produce YAML. Do not generate pptx. During the generation flow, do not open the referenced data files (CSV/Excel) — for producing the YAML, the narrative's inline tables are authoritative. (Those files *are* read later, but only by the QA subagent in Step 6, and only to verify that the inline tables were transcribed correctly from their source.)
+Keep your scope narrow: read prose, produce YAML. Do not generate pptx. During the generation flow, do not open the referenced data files (CSV, Excel, PDF, PPTX) — for producing the YAML, the narrative's inline tables are authoritative. (Those files *are* read later, but only by the QA subagent in Step 6 — to verify that the inline tables were transcribed correctly from their source, and to check that any prose-claim citations are supported by their sources.)
 
 ## Out of scope
 
@@ -45,7 +45,7 @@ A Markdown document with these characteristics:
   - Excel with sheet name: `(Source: ./data/foo.xlsx, sheet: SheetName)`
   - PDF with page number: `(Source: ./reports/q3.pdf, page: 7)` — the `page:` locator is **required** (it tells QA where to look)
   - PowerPoint with slide number: `(Source: ./decks/board.pptx, slide: 3)` — the `slide:` locator is **required**
-  - The same `(Source: ...)` syntax may also be attached **inline to a prose sentence** to cite a claim that renders no table or chart of its own (e.g., `...growing ~2x faster than competitors (Source: ./data/market_share.csv).`). Capture these as slide-level `sources` (see schema)
+  - The same `(Source: ...)` syntax may also be attached **inline to a prose sentence** to cite a claim that renders no table or chart of its own (e.g., `...growing ~2x faster than competitors (Source: ./data/market_share.csv).`). Capture these as slide-level `prose_sources` (see schema)
 - **Image references**: parenthetical `(Image: ./images/team.jpg)`, or Markdown image syntax `![caption](./images/team.jpg)`
 
 Input may be supplied as:
@@ -80,7 +80,7 @@ slides:
         # ... type-specific fields, see below
     speaker_notes: |
       Speaker notes.
-    sources:
+    prose_sources:
       - claim: "the prose claim being cited"
         source: "./data/foo.csv"
 ```
@@ -91,17 +91,17 @@ Field reference:
 |---|---|---|
 | `title` | yes | Slide title |
 | `body` | yes (use `""` for section dividers) | Main content (Markdown OK). Place `{{name}}` to mark where data renders. |
-| `suggested_layout` | recommended (non-divider slides) | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
+| `suggested_layout` | recommended | Free-text hint to the downstream pptx-AI. Not a strict instruction. |
 | `data` | optional | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`. |
 | `speaker_notes` | optional | Speaker notes. |
-| `sources` | optional | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
+| `prose_sources` | optional | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
 
 Each entry inside `data` has these common fields:
 
 | Sub-field | Required | Purpose |
 |---|---|---|
 | `type` | yes | One of: `bar_chart`, `line_chart`, `histogram`, `table`, `image` |
-| `source` | recommended | Lineage breadcrumb: where the inline table came from. Formats: `"./data/foo.csv"`, `"./data/foo.xlsx, sheet: SheetName"`, `"./report.pdf, page: 7"`, `"./deck.pptx, slide: 3"`. A `page:`/`slide:` locator is **required** for PDF/PPTX. Used by the QA step (Step 6): structured sources (CSV/Excel) get exact value-matching, unstructured ones (PDF/PPTX) get a softer semantic check. Omit for `image` (use `path` instead). |
+| `source` | required if cited | Required whenever the narrative cited a data source; otherwise optional. Lineage breadcrumb: where the inline table came from. Formats: `"./data/foo.csv"`, `"./data/foo.xlsx, sheet: SheetName"`, `"./report.pdf, page: 7"`, `"./deck.pptx, slide: 3"`. A `page:`/`slide:` locator is **required** for PDF/PPTX. Used by the QA step (Step 6): structured sources (CSV/Excel) get exact value-matching, unstructured ones (PDF/PPTX) get a softer semantic check. Omit for `image` (use `path` instead). |
 | (type-specific fields) | varies | See per-type schemas below |
 
 Data types and required fields:
@@ -195,7 +195,7 @@ Extract the following without rewriting the user's content:
 - **Data source breadcrumbs**: parenthetical patterns like `(Source: ./path.csv)`, `(Source: ./data/foo.xlsx, sheet: SheetName)`, `(Source: ./report.pdf, page: 7)`, `(Source: ./deck.pptx, slide: 3)`, `(Source: path)`. Capture these as lineage metadata, keeping any `page:`/`slide:` locator (QA needs it). **Do not read the referenced files during generation** — the inline tables in the narrative are authoritative here. (They are read only later, by the Step 6 QA subagent, to verify the inline tables against their source.)
 - **Image references**: parenthetical `(Image: path)`, or Markdown `![alt](path)`
 - **Numbers embedded in prose** (e.g., "Q3 reached a record high of $168 million"): use as supporting facts in the body text. Prefer the adjacent inline table for the chart `data:` block when one exists
-- **Prose-claim citations**: a `(Source: ...)` breadcrumb attached to a prose sentence that renders no table or chart of its own. Collect these into the slide's `sources` list, paired with the claim they back. They render no visual but are QA-checked for claim support in Step 6
+- **Prose-claim citations**: a `(Source: ...)` breadcrumb attached to a prose sentence that renders no table or chart of its own. Collect these into the slide's `prose_sources` list, paired with the claim they back. They render no visual but are QA-checked for claim support in Step 6
 - **Tone**: formal/casual, optimistic/cautious, internal/external audience
 - **Anticipated Q&A**: often appears in a closing section
 
@@ -289,12 +289,12 @@ data:
 
 Notice the `source:` field. This breadcrumb makes the data verifiable: Step 6 (QA verification) reads the source file and cross-checks against the values above. Always include `source` when the narrative provided a data-source reference.
 
-When a prose sentence carries a `(Source: ...)` breadcrumb but no table/chart, record it at the slide level under `sources` instead. It renders no visual, but Step 6 QA still checks whether the source supports the claim (a softer, semantic check than chart value-matching):
+When a prose sentence carries a `(Source: ...)` breadcrumb but no table/chart, record it at the slide level under `prose_sources` instead. It renders no visual, but Step 6 QA still checks whether the source supports the claim (a softer, semantic check than chart value-matching):
 
 ```yaml
 body: |
   We are growing ~2x faster than our nearest competitor.
-sources:
+prose_sources:
   - claim: "growing ~2x faster than nearest competitor"
     source: "./data/market_share.csv"
 ```
@@ -315,21 +315,17 @@ QA task: verify the data in this slide-deck YAML against its source files.
 YAML path: <absolute-path-to-yaml>
 Working directory for resolving relative source paths: <usually the YAML's directory>
 
-1. Open the YAML. For every source reference — both `data:` entries with a `source:` field and slide-level `sources` entries — locate and open the referenced file:
+1. Open the YAML. For every source reference — both `data:` entries with a `source:` field and slide-level `prose_sources` entries — locate and open the referenced file. The libraries and CLI tools used below (pandas, openpyxl, pdfplumber, python-pptx, pdf2image, pytesseract, markitdown, poppler's pdftotext) are expected to be installed in this environment — so if an `import` or command fails, assume you reached for the wrong interpreter, not that the tool is missing. Find a Python that has them: prefer a project virtualenv (e.g. `./.venv/bin/python`) if one exists, otherwise any preconfigured venv on the system or the plain `python3`; confirm once with `python -c "import pandas, openpyxl, pdfplumber, pptx"` and reuse that interpreter for the steps below.
    - CSV: read it directly (use head/cat for large files)
-   - Excel: use Python via Bash. pandas + openpyxl are installed at /opt/uv-venv. A one-liner like
-       /opt/uv-venv/bin/python -c "import pandas as pd; print(pd.read_excel('<path>', sheet_name='<sheet>').to_csv(index=False))"
-     works; the sheet name comes after "sheet:" in the source string
-   - PDF: read only the cited page (number comes after "page:"). A one-liner like
-       /opt/uv-venv/bin/python -c "import pdfplumber; pg=pdfplumber.open('<path>').pages[<page>-1]; print(pg.extract_text()); print(pg.extract_tables())"
-     works. If the page is a scan with no extractable text, OCR it (pdf2image + pytesseract, lang 'eng' or 'jpn'), or try: pdftotext -f <page> -l <page> '<path>' -
-   - PPTX: convert the deck to Markdown with `markitdown '<path>'` (the binary is on PATH at /opt/uv-venv/bin) and find the cited slide (number comes after "slide:")
+   - Excel: read with pandas (openpyxl engine). The sheet name comes after "sheet:" in the source string — e.g. `pd.read_excel('<path>', sheet_name='<sheet>')`
+   - PDF: read only the cited page (number comes after "page:"; pdfplumber is 0-indexed, so page N is `.pages[N-1]`). Extract both its text and its tables. If the page is a scan with no extractable text, OCR it (pdf2image + pytesseract, lang 'eng' or 'jpn'), or fall back to `pdftotext -f <page> -l <page> '<path>' -`
+   - PPTX: open with python-pptx and index the cited slide directly (number comes after "slide:"; slides are 0-indexed, so slide N is `Presentation('<path>').slides[N-1]`). Walk `slide.shapes` and read text, tables (`shape.has_table` → `shape.table`, iterate rows/cells), and chart data (`shape.has_chart` → `shape.chart.plots[0]`, giving `.categories` and each `series.values`). For text-heavy slides where you only need readable prose, `markitdown '<path>'` is a fine fallback.
    - If the file is missing, the sheet/page/slide doesn't exist, or extraction yields nothing, record the issue and move on (don't crash)
 2. Compare the YAML against the source:
    - bar/line charts: do `categories` align with the source's x-axis column, and `series.values` with the series columns?
    - histograms: do `bins` align with the interval labels, and `frequencies` with the per-bin counts?
    - tables: do `headers` and `rows` correspond to the source rows for the relevant subset?
-   - slide-level `sources` (prose claims): no structured value to match — run a softer, semantic check: does the source plausibly *support* the claim text (e.g., does the data back "~2x faster than competitors")? Don't demand exact figures; flag only clear contradictions or wholly unsupported claims
+   - slide-level `prose_sources` (prose claims): no structured value to match — run a softer, semantic check: does the source plausibly *support* the claim text (e.g., does the data back "~2x faster than competitors")? Don't demand exact figures; flag only clear contradictions or wholly unsupported claims
    - PDF/PPTX sources (any type, including chart/table): extraction from these is unstructured and lossy, so use the same softer semantic check — does the cited page/slide plausibly *contain or support* the YAML's numbers? Treat minor extraction noise as "can't-confirm", not "discrepancy"
    - Allow reasonable interpretation: when the YAML is a clear subset/aggregate of the source, mark it "summarized", not "discrepancy"
 3. Report slide-by-slide:
@@ -368,18 +364,18 @@ Inputs: the existing YAML path and the edit instruction — plus, for a re-sync,
 
 ### (A) Trivial text edits
 
-Renaming a title, fixing a typo, rewording `body`/`speaker_notes`. These touch no `data:`/`sources:` and no slide structure. Apply directly with Edit — no schema reasoning, no QA. (This is the case the [Out of scope](#out-of-scope) note covers; if the user invoked the skill only for this, it was still fine to handle it.)
+Renaming a title, fixing a typo, rewording `body`/`speaker_notes`. These touch no `data:`/`prose_sources:` and no slide structure. Apply directly with Edit — no schema reasoning, no QA. (This is the case the [Out of scope](#out-of-scope) note covers; if the user invoked the skill only for this, it was still fine to handle it.)
 
 ### (B) Schema-affecting edits
 
-Changing chart/table values, adding or removing slides, adding or editing a `data:`/`sources:` entry, converting a table to a chart, etc. These obey the same schema rules as generation:
+Changing chart/table values, adding or removing slides, adding or editing a `data:`/`prose_sources:` entry, converting a table to a chart, etc. These obey the same schema rules as generation:
 
 - Follow the [number-vs-string rule](#cell-values-number-vs-string), including the chart-numeric exception (`series.values`/`frequencies` stay plain numbers; units go in the axis label).
 - Keep the required `page:`/`slide:` locator on any PDF/PPTX `source`.
 - When adding a slide, give it a `suggested_layout`; when editing near the end, preserve the closing 3-slide pattern (divider → recap → thank-you).
 - Don't invent data the user didn't supply — same honesty rule as generation.
 
-After any change that touches `data:` or `sources:`, re-run **Step 6 (QA verification)** on the affected slides, then report per **Step 7**.
+After any change that touches `data:` or `prose_sources:`, re-run **Step 6 (QA verification)** on the affected slides, then report per **Step 7**.
 
 ### (C) Narrative re-sync
 
@@ -393,7 +389,7 @@ The upstream narrative changed and the YAML should catch up. Re-run the generati
 ## Important principles
 
 - **Layout hints go only in `suggested_layout`**, never inside `body`. The downstream pptx skill decides actual layout.
-- **Data file paths (CSV, Excel) are lineage breadcrumbs, not generation-time sources**. Chart and table data comes from the **inline Markdown tables** in the narrative; for the full rule (and the Step 6 QA exception) see [Purpose](#purpose).
+- **Data file paths (CSV, Excel, PDF, PPTX) are lineage breadcrumbs, not generation-time sources**. Chart and table data comes from the **inline Markdown tables** in the narrative; for the full rule (and the Step 6 QA exception) see [Purpose](#purpose).
 - **Respect the upstream author's words**. Lightly compress prose for slide brevity, but don't invent claims or rewrite analysis. If something is unclear, ask the user, don't paper over it.
 - **Honest gaps**. If the prose mentions a visualization without an inline table, ask. Do not infer numbers from prose summaries when a structured table was expected.
 - **One slide, one idea**. If a `##` section spans multiple distinct topics, split it.
