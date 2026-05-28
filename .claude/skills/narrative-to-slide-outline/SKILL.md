@@ -1,6 +1,6 @@
 ---
 name: narrative-to-slide-outline
-description: Convert a Markdown narrative/strategy document into slide-deck YAML for a downstream pptx pipeline (narrative → YAML → pptx). Manual-only: invoke explicitly with /narrative-to-slide-outline.
+description: "Convert a Markdown narrative/strategy document into slide-deck YAML for a downstream pptx pipeline (narrative → YAML → pptx). Manual-only: invoke explicitly with /narrative-to-slide-outline."
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ This skill is the middle stage of a three-stage pipeline:
 
 ```
 [Raw data]
-        ↓ (CSVs, Excel files, PDFs, PPTX)
+        ↓ (CSV, txt, Excel, Word, PDF, PPTX)
 [Upstream AI: writes a narrative strategy document]
         ↓ (Markdown)
 [THIS SKILL: produces slide-deck YAML]
@@ -24,7 +24,7 @@ This skill is the middle stage of a three-stage pipeline:
 
 Keep your scope narrow: read prose, produce YAML. Do not generate pptx.
 
-**Rule on data files**: during YAML generation (Steps 1-5), do **not** open the referenced data files (CSV, Excel, PDF, PPTX). The narrative's inline tables are authoritative — they are what you transcribe into `data:` blocks. The original data files are read only later, by the QA subagent in Step 6, to verify two things:
+**Rule on data files**: during YAML generation (Steps 1-5), do **not** open the referenced data files (CSV, txt, Excel, Word, PDF, PPTX). The narrative's inline tables are authoritative — they are what you transcribe into `data:` blocks. The original data files are read only later, by the QA subagent in Step 6, to verify two things:
 
 1. The inline tables were transcribed correctly from their source.
 2. Any prose-claim citations are supported by their sources.
@@ -56,7 +56,7 @@ YAML files outlive the conversation that created them. A common workflow is to g
 
 ## Input
 
-A narrative Markdown document. **The file format is specified in `references/narrative_format.md` — read that file before parsing your first narrative.** It defines the document skeleton (title, metadata, sections, closing block), inline-table convention, `(Source: ...)` breadcrumb syntax with required `sheet:` / `page:` / `slide:` locators, inline-source-on-prose form, and image-reference syntax.
+A narrative Markdown document. **The file format is specified in `references/narrative_format.md` — read that file before parsing your first narrative.** It defines the document skeleton (title, metadata, sections, closing block), inline-table convention, `(Source: ...)` breadcrumb syntax with required `sheet:` / `heading:` / `page:` / `slide:` locators, inline-source-on-prose form, and image-reference syntax.
 
 Input may be supplied as:
 
@@ -107,7 +107,7 @@ Field reference:
 | `suggested_layout` | recommended                         | Free-text hint to the downstream pptx-AI. Not a strict instruction.                                                                                                                                                                                                                                          |
 | `data`             | optional                            | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`.                                                                                                                                                                                                                                  |
 | `speaker_notes`    | optional                            | Speaker notes.                                                                                                                                                                                                                                                                                               |
-| `prose_sources`    | optional                            | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. The `source` string follows the same format as `data.*.source` — including the required `page:`/`slide:` locator for PDF/PPTX. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
+| `prose_sources`    | optional                            | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. The `source` string follows the same format as `data.*.source` — including the required `heading:`/`page:`/`slide:` locator for Word/PDF/PPTX. Like `data.*.source`, it is QA-checked in Step 6 — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
 
 Each entry inside `data` has these common fields:
 
@@ -214,7 +214,7 @@ Recognize each pattern below using the syntax defined in the [Input](#input) sec
 - **Metadata**: title and any author/date/audience/duration lines
 - **Slide candidates**: each `##` typically becomes one or more slides; long sections may split, short adjacent ones may merge
 - **Inline data tables**: the **primary source** of chart/table data. Lift as-is into `data:`. Do not paraphrase or aggregate numbers
-- **Data source breadcrumbs**: capture as lineage metadata, keeping any `page:`/`slide:` locator (QA needs it). **Do not open the referenced files during generation** — see [Purpose](#purpose) for the rationale
+- **Data source breadcrumbs**: capture as lineage metadata, keeping any `heading:`/`page:`/`slide:` locator (QA needs it). **Do not open the referenced files during generation** — see [Purpose](#purpose) for the rationale
 - **Image references**: capture path (plus caption / alt text when present)
 - **Numbers embedded in prose**: use as supporting facts in body text. Prefer the adjacent inline table for the `data:` block when one exists. **If only prose numbers are available (no inline table), do not fabricate a chart from them** — surface the gap in Step 3 and ask the user
 - **Prose-claim citations**: collect into the slide's `prose_sources` list, paired with the claim they back (QA-checked in Step 6)
@@ -336,13 +336,13 @@ QA task: verify the data in this slide-deck YAML against its source files.
 YAML path: <absolute-path-to-yaml>
 Working directory for resolving relative source paths: <usually the YAML's directory>
 
-Use a Python where `pandas`, `openpyxl`, `pdfplumber`, `python-pptx` are all importable — check the project's venv first (e.g. `./.venv/bin/python`), then any system-wide venv, then plain `python3`. `pdf2image`/`pytesseract`/`markitdown`/`pdftotext` are available as fallbacks for scanned PDFs or text-heavy slides.
+Use a Python where `pandas`, `openpyxl`, `pdfplumber`, `python-pptx`, `python-docx` are all importable — check the project's venv first (e.g. `./.venv/bin/python`), then any system-wide venv, then plain `python3`. `pdf2image`/`pytesseract`/`markitdown`/`pdftotext` are available as fallbacks for scanned PDFs or text-heavy slides. Plain `.txt` files need no library — read them directly.
 
-1. For every referenced file — `data:` entries with `source:`, slide-level `prose_sources` entries, and `type: image` entries (which use `path:`) — open or stat it. Sheet name follows "sheet:", page/slide number follows "page:"/"slide:" in the source string. For `type: image`, do an existence check only — never inspect contents. If a file/sheet/page/slide is missing or extraction yields nothing, record it and continue (don't crash).
+1. For every referenced file — `data:` entries with `source:`, slide-level `prose_sources` entries, and `type: image` entries (which use `path:`) — open or stat it. Sheet name follows "sheet:", heading text follows "heading:" (Word), page/slide number follows "page:"/"slide:" in the source string. For a Word `heading:`, locate the matching heading in the `.docx` and verify against the content under it (CSV and `.txt` carry no locator — verify against the whole file). For `type: image`, do an existence check only — never inspect contents. If a file/sheet/page/slide is missing or extraction yields nothing, record it and continue (don't crash).
 
 2. Compare YAML against source:
-   - Charts/tables from CSV/Excel: `categories`/`series.values`/`bins`/`frequencies`/`headers`/`rows` must match the source values
-   - `prose_sources` and any PDF/PPTX source: softer semantic check — does the source plausibly *support* the claim or numbers? Treat extraction noise as "can't-confirm", not "discrepancy". Flag only clear contradictions.
+   - Charts/tables from CSV/Excel (or an extracted Word table): `categories`/`series.values`/`bins`/`frequencies`/`headers`/`rows` must match the source values
+   - `prose_sources` and any txt/Word/PDF/PPTX prose source: softer semantic check — does the source plausibly *support* the claim or numbers? Treat extraction noise as "can't-confirm", not "discrepancy". Flag only clear contradictions.
    - YAML that is a clear subset/aggregate of the source → "summarized", not "discrepancy"
 
 3. Report slide-by-slide, discrepancies first:

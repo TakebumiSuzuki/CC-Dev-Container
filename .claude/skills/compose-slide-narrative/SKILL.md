@@ -57,9 +57,10 @@ Scan the in-scope paths for _cheap_ signal — file names, folder structure, lig
 Recommended libraries:
 
 - **CSV / Excel** — `pandas` (with `openpyxl` for `.xlsx`)
+- **Word** (`.docx`) — `python-docx` (read paragraphs and tables; cite by enclosing heading text)
 - **PDF** — `pdfplumber`; fall back to `pdftotext` or `markitdown` for scanned PDFs
 - **PPTX** — `python-pptx`
-- **Markdown / text** — Read tool
+- **Markdown / text** (`.md`, `.txt`) — Read tool
 - **Images** — note path + filename only; do not OCR unless asked
 
 ### Step 3: Initial scoping dialogue
@@ -103,6 +104,7 @@ Composition rules:
 - **Tables vs. inline citation.** When a section should show data visually, extract just the relevant rows and columns from the source file into an inline Markdown table and attach a Source breadcrumb to it. When the number is just supporting a prose claim and doesn't need its own visualization, skip the table and put an inline `(Source: ...)` at the end of the sentence. The downstream pptx skill turns tables into charts, so embedding a table is a deliberate "render this as a chart" signal.
 - **Apply the three-state rule.** See the Source-attaches-to-claim rule above. **If you cannot find supporting data in scope, do not fabricate a Source path** — keep the claim as prose without Source, or mark `[needs-verification]`. Missing numbers → placeholder like `$XX M`, flag in Step 6.
 - **Respect the source author when re-formatting an existing document.** Lift structure and claims; compress and reframe for the audience, but don't rewrite the analysis.
+- **Images.** Embed an image (`![meaningful alt](path)`) only when the visual itself carries meaning that prose or a table cannot — a team/event photo, product or UI screenshot, logo, or an existing diagram the user supplied or that lives in scope.
 - **Closing block**: a Conclusion with Key Takeaways (3–5 bullets) is recommended for most decks but skippable for short talks, tutorials, or case-studies. Include Anticipated Q&A (3–5 questions with brief answers) only if the user said yes above.
 - **One slide ≠ one section.** This is a _narrative_, not a deck outline. Write coherent prose with embedded tables; let the downstream skill decide slide breaks.
 

@@ -7,7 +7,7 @@ Duration: 25 minutes
 
 ## Executive Summary
 
-Q2 2026 delivered our strongest quarter on record. Total revenue reached $187M, up 24% year-over-year and 11% sequentially. Net new ARR closed at $42M against a $35M target — the largest beat in eight quarters. Enterprise momentum continued, with three eight-figure deals signed in June alone. We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
+Q2 2026 delivered our strongest quarter on record. Total revenue reached $187M, up 24% year-over-year and 11% sequentially. Net new ARR closed at $42M against a $35M target — the largest beat in eight quarters. Enterprise momentum continued, with three seven-figure deals signed in June alone. We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
 
 This deck walks through the headline results, segment and regional performance, deal-size distribution, the wins and friction points carried out of the quarter, and the implications for the H2 plan.
 
@@ -80,8 +80,8 @@ The quarter produced several breakthrough wins, but also surfaced friction we wi
 
 | Wins                                                | Challenges                                           |
 | --------------------------------------------------- | ---------------------------------------------------- |
-| Three eight-figure enterprise deals closed in June  | Onboarding lead time grew from 14 to 21 days         |
-| APAC region grew 73% quarter-over-quarter           | EMEA pipeline coverage fell to 2.4x (target: 3.0x)   |
+| Three seven-figure enterprise deals closed in June  | Onboarding lead time grew from 14 to 21 days         |
+| APAC grew 71% April→June (7→12)                      | EMEA pipeline coverage fell to 2.4x (target: 3.0x)   |
 | ARR per rep climbed to $1.6M — a company record     | Two senior AEs departed in May; backfills not ramped |
 | PLG-sourced pipeline doubled vs Q1                  | Renewal team capacity flagged by CSM lead in June    |
 

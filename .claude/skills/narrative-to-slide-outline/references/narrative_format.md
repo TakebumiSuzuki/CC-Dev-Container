@@ -28,7 +28,7 @@ Prose framing.
 | ------ | -----: |
 | ...    | ...    |
 
-(Source: ./path/to/source)           ✓ whenever data is shown or a factual claim is made
+(Source: ./path/to/source)           ✓ when data from a source is shown; omit for claims with no backing data
 
 Prose interpretation.
 
@@ -92,9 +92,13 @@ Syntax — one breadcrumb per source, immediately after the relevant table (or i
 | File type | Format | Required locator |
 | --------- | ------ | ---------------- |
 | CSV       | `(Source: ./data/foo.csv)`                              | — |
+| TXT       | `(Source: ./notes/foo.txt)`                             | — |
 | Excel     | `(Source: ./data/foo.xlsx, sheet: SheetName)`           | `sheet:` |
+| Word      | `(Source: ./report.docx, heading: "Q2 Results")`        | `heading:` |
 | PDF       | `(Source: ./reports/x.pdf, page: 7)`                    | `page:` |
 | PPTX      | `(Source: ./decks/y.pptx, slide: 3)`                    | `slide:` |
+
+For Word (`.docx`), use the nearest enclosing **heading text** as the locator, not a page number — Word pagination is renderer-dependent and not stable enough to verify against.
 
 ### Inline source on a prose claim
 
@@ -102,6 +106,18 @@ The same `(Source: ...)` syntax may attach **inline to a prose sentence** to cit
 
 ```markdown
 We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
+```
+
+### Claims with no backing data
+
+A factual claim that has **no** supporting data in scope (e.g., something the author asserts from memory) carries **no** Source — leave it as plain prose.
+
+### `[needs-verification]` marker (optional, provisional)
+
+An inline `[needs-verification]` marker flags a claim the author inferred from context but could not directly back with source data. It is a **provisional** marker, expected to be resolved before the narrative is final — by attaching a source, dropping the marker once confirmed, or rewriting the claim. Downstream tooling should treat a marked claim as not-yet-verified, not as established fact.
+
+```markdown
+Onboarding capacity is the likely bottleneck for the H2 ramp [needs-verification].
 ```
 
 ---
