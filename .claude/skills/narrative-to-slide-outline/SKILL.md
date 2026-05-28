@@ -56,20 +56,7 @@ YAML files outlive the conversation that created them. A common workflow is to g
 
 ## Input
 
-A Markdown document with these characteristics:
-
-- A title (H1 or top-of-document text)
-- Optional metadata lines (author, date, audience, duration)
-- Section headings (`##`, `###`) that suggest natural slide breaks
-- Prose paragraphs with analysis embedded
-- **Inline Markdown tables** for any data that should appear as a chart or table on a slide. These tables are the primary source of structured numbers for the YAML
-- **Data source breadcrumbs** in parenthetical form, indicating where the data came from upstream:
-    - CSV: `(Source: ./data/foo.csv)`
-    - Excel with sheet name: `(Source: ./data/foo.xlsx, sheet: SheetName)`
-    - PDF with page number: `(Source: ./reports/q3.pdf, page: 7)` — the `page:` locator is **required in both the narrative input and the YAML output** (it tells QA where to look)
-    - PowerPoint with slide number: `(Source: ./decks/board.pptx, slide: 3)` — the `slide:` locator is **required in both the narrative input and the YAML output**
-    - The same `(Source: ...)` syntax may also be attached **inline to a prose sentence** to cite a claim that renders no table or chart of its own (e.g., `...growing ~2x faster than competitors (Source: ./data/market_share.csv).`). Capture these as slide-level `prose_sources` (see schema)
-- **Image references**: parenthetical `(Image: ./images/team.jpg)`, or Markdown image syntax `![caption](./images/team.jpg)`
+A narrative Markdown document. **The file format is specified in `references/narrative_format.md` — read that file before parsing your first narrative.** It defines the document skeleton (title, metadata, sections, closing block), inline-table convention, `(Source: ...)` breadcrumb syntax with required `sheet:` / `page:` / `slide:` locators, inline-source-on-prose form, and image-reference syntax.
 
 Input may be supplied as:
 
@@ -124,10 +111,12 @@ Field reference:
 
 Each entry inside `data` has these common fields:
 
+The `source` value mirrors the **content** of the narrative's `(Source: ...)` breadcrumb — the text between `(Source: ` and `)`, without the parentheses or the `Source:` prefix. For example, `(Source: ./data/foo.xlsx, sheet: Sales)` in the narrative becomes `source: "./data/foo.xlsx, sheet: Sales"` in the YAML.
+
 | Sub-field              | Required          | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                 | yes               | One of: `bar_chart`, `line_chart`, `histogram`, `table`, `image`                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `source`               | yes (see desc)    | Include whenever the narrative supplies a `(Source: ...)` breadcrumb. If the narrative has an inline table **without** a breadcrumb (rare — the Input section assumes one is always present), ask the user in Step 3 for the source rather than omitting it silently or guessing a path. Lineage breadcrumb: where the inline table came from. Formats: `"./data/foo.csv"`, `"./data/foo.xlsx, sheet: SheetName"`, `"./report.pdf, page: 7"`, `"./deck.pptx, slide: 3"`. A `page:`/`slide:` locator is **required** for PDF/PPTX. Used by the QA step (Step 6): structured sources (CSV/Excel) get exact value-matching, unstructured ones (PDF/PPTX) get a softer semantic check. Omit for `image` (use `path` instead). |
+| `source`               | conditional       | Required whenever the narrative provides a `(Source: ...)` breadcrumb. If an inline table lacks a breadcrumb, ask the user in Step 3 — never guess a path. Omit for `image` (use `path` instead). Format and locator rules: see `references/narrative_format.md`. |
 | (type-specific fields) | varies            | See per-type schemas below                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 Data types and required fields:
@@ -177,9 +166,10 @@ rows:
 ```yaml
 type: image
 path: "./images/team.jpg"
-caption: "Optional caption shown on the slide"
-alt_text: "Optional accessibility description"
+caption: "Optional caption shown on the slide (also serves as the accessibility description)"
 ```
+
+The `caption` is sourced from the Markdown image's alt text (`![alt text](path)`) and doubles as both the on-slide caption and the accessibility description — the narrative format only carries one string, so do not invent a separate accessibility-only description.
 
 ### Cell values: number vs string
 
@@ -269,7 +259,7 @@ Map the document to slides:
 - **Closing block** (3 slides, in this order, as a deliberate pattern):
     1. Section divider with title like "Conclusion" — body is `""`, signals the wrap-up
     2. Recap slide — 2-4 bullets capturing the key takeaways (often Markdown bullets pulled from the final section of the narrative)
-    3. Thank-you slide — title like "Thank you", body holds "Q&A", and `speaker_notes` carries the anticipated questions extracted from the document
+    3. Thank-you slide — title like "Thank you", body holds "Q&A". If the narrative includes an Anticipated Q&A section, lift those question/answer pairs into `speaker_notes`; otherwise keep `speaker_notes` minimal (e.g., a brief prompt to open the floor) or omit it.
 
     Collapse into a single slide only when the document is very short (<5 slides total).
 

@@ -182,7 +182,6 @@ slides:
         type: image
         path: "./images/q2_team_lisbon.jpg"
         caption: "Q2 2026 revenue org all-hands at the June kickoff in Lisbon"
-        alt_text: "Group photo of approximately 140 sales and customer success employees gathered outdoors in Lisbon"
     speaker_notes: |
       The hiring slowdown signaled in March has fully reversed. We are now constrained by ramp
       time, not headcount approval.
