@@ -1,90 +1,116 @@
-# 2025年 第3四半期 業績振り返りと第4四半期戦略提案
+# Q2 2026 Sales Report
 
-著者: 山田太郎 / 提出先: 全社経営会議 / 想定: 15分 + 質疑5分 / 日付: 2025-10-15
+Author: Sarah Chen, Head of Revenue
+Date: 2026-07-15
+Audience: Executive Leadership Team
+Duration: 25 minutes
 
-## エグゼクティブサマリー
+## Executive Summary
 
-2025年第3四半期は当社にとって極めて重要な四半期となった。売上は前年同期比20.0%増の168百万円を記録し、4四半期連続の成長を達成。新規顧客150社を獲得し、NPSスコアも12ポイント改善した(43→55)。解約率も2.8%から2.5%へと改善している。これらの成果は、エンタープライズセグメントへの集中投資と、7月の夏季キャンペーンの成功によるものと分析される。
+Q2 2026 delivered our strongest quarter on record. Total revenue reached $187M, up 24% year-over-year and 11% sequentially. Net new ARR closed at $42M against a $35M target — the largest beat in eight quarters. Enterprise momentum continued, with three eight-figure deals signed in June alone. We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
 
-業界平均の売上成長率は+8%なので、当社は倍以上のペースで成長していることになる。
+This deck walks through the headline results, segment and regional performance, deal-size distribution, the wins and friction points carried out of the quarter, and the implications for the H2 plan.
 
-## 売上の詳細分析
+## Headline Results
 
-2025年は継続的な成長を遂げ、Q3は過去最高の168百万円を記録した。前年同期比+15.9%。Q4はホリデー需要に加え、社外秘の新規大口契約3社が見込まれており、更なる上振れの可能性が高い。
+### Quarterly Revenue Trend
 
-| 四半期 | 2024年 | 2025年 |
-|--------|-------:|-------:|
-| Q1     |    100 |    110 |
-| Q2     |    120 |    135 |
-| Q3     |    145 |    168 |
+Revenue continued its upward trajectory through the first half of 2026. Q2 reached $187M — a record high and our sixth consecutive quarter of double-digit year-over-year growth. The 2026 trajectory is meaningfully steeper than 2025; Q2 alone exceeded the gap between Q1 and Q3 2025.
 
-(Source: ./data/q3_financials.xlsx, sheet: 売上推移)
+| Quarter | 2025 | 2026 |
+| ------- | ---: | ---: |
+| Q1      |  142 |  168 |
+| Q2      |  151 |  187 |
+| Q3      |  159 |    - |
+| Q4      |  165 |    - |
 
-顧客セグメント別に見ると、エンタープライズが全体の66.7%を占めており、当社の収益はこのセグメントが牽引している。一方、SMB獲得は意図的に抑制している(LTV/CACが悪化していたため)。ミッドマーケットも+18%と健闘している。
+(Source: ./data/q2_2026_financials.xlsx, sheet: Revenue_Trend)
 
-| セグメント       | 売上(百万円) | 前年比 |
-|------------------|-------------:|-------:|
-| エンタープライズ |          112 | +24%   |
-| ミッドマーケット |           38 | +18%   |
-| SMB              |           18 | +5%    |
-| 合計             |          168 | +20%   |
+The shape of the curve is as important as the level. The 2025 line was steady but gently sloped; the 2026 line is steeper from the start, which gives us materially more confidence in the H2 forecast even before applying the Q2 ARR overperformance.
 
-(Source: ./data/q3_financials.xlsx, sheet: 顧客セグメント)
+### Regional Performance
 
-## 顧客動向の変化
+All three regions grew in Q2, but the shape diverged. North America accelerated through the quarter, EMEA stayed roughly flat month over month, and APAC posted its strongest June on record after a slow April.
 
-月次アクティブユーザー数(MAU)は4月の120千人から9月の215千人へと、半年で約80%の成長を遂げた。特に7月の夏季キャンペーン以降は加速度的な伸びを示している。口コミによる自然流入が増えており、CACが大幅に低下している点も特筆すべき。9月時点で月初予測(180)を19%上回るペースで推移している。
+| Month | North America | EMEA | APAC |
+| ----- | ------------: | ---: | ---: |
+| April |            33 |   17 |    7 |
+| May   |            36 |   17 |    9 |
+| June  |            38 |   18 |   12 |
 
-| 月  | MAU (千人) |
-|-----|-----------:|
-| 4月 |        120 |
-| 5月 |        128 |
-| 6月 |        135 |
-| 7月 |        158 |
-| 8月 |        182 |
-| 9月 |        215 |
+(Source: ./data/q2_2026_financials.xlsx, sheet: Regional_Monthly)
 
-(Source: ./data/mau_monthly.csv)
+North America's acceleration is being carried by two named accounts that expanded mid-quarter; without those, the line would still be up and to the right, but more gently. APAC's June print reflects the first full month of the new Singapore team, and we expect the Q3 ramp to compound from here.
 
-NPS スコアは中央値の改善だけでなく、分布も大きく改善した。Q2 までは満足層と不満層が二極化する双峰性を示していたが、Q3ではこれが解消。推奨者(9-10)が大幅に増加し、批判者(0-6)が大幅に減少した。
+## Segment Performance
 
-| NPS スコア | Q2 2025 (人) | Q3 2025 (人) |
-|-----------:|-------------:|-------------:|
-|          0 |           12 |            3 |
-|          1 |            8 |            2 |
-|          2 |            6 |            2 |
-|          3 |            5 |            2 |
-|          4 |            4 |            3 |
-|          5 |            8 |            5 |
-|          6 |           15 |           10 |
-|          7 |           18 |           18 |
-|          8 |           14 |           22 |
-|          9 |            6 |           18 |
-|         10 |            4 |           15 |
+### Segment Breakdown
 
-(Source: ./data/nps_survey.xlsx, sheet: Q2_Q3分布)
+The Enterprise segment now accounts for roughly 60% of total revenue, up from 54% in Q1. Mid-market revenue grew 18% year-over-year on the back of a stronger PLG funnel. SMB revenue declined 4% as we deliberately deprioritized that channel — consistent with the FY26 plan reviewed at the April board meeting (Source: ./decks/april_board.pptx, slide: 12).
 
-## 課題と第4四半期の打ち手
+| Segment    | Customers | Revenue ($M) | YoY Growth |
+| ---------- | --------: | -----------: | ---------- |
+| Enterprise |        58 |          112 | +34%       |
+| Mid-market |       195 |           54 | +18%       |
+| SMB        |       640 |           21 | -4%        |
 
-ここまでは良いニュースだが、課題もある。まずエンタープライズ営業の人員不足が顕在化している。サポート応答時間も4時間から6時間へと延長してしまった。さらに大口顧客の更新タイミングが第4四半期に集中しており、リソース配分が難しい状況だ。
+(Source: ./data/q2_segment_breakdown.csv)
 
-これらの課題への第4四半期の打ち手として以下を実行する。営業については2名の中途採用が内定済みで11月に入社予定。サポートについてはAIチャットボットを導入して一次対応を自動化する。更新タイミング集中の問題には、更新3ヶ月前からの早期エンゲージプログラムで前倒し対応する。いずれもすでに着手済みで、計画段階ではなく実行段階にある。
+The mix shift is doing what we hoped: net retention follows segment, and the Enterprise lean is materially derisking the FY revenue plan. The SMB decline reads as bad on the surface but is a deliberate, planned outcome — the support load it removed is now flowing into mid-market enablement.
 
-(課題分析のSource: ./data/operations_kpi.xlsx, sheet: Q3課題ヒアリング)
+### Deal Size Distribution
 
-## Q3を支えたチーム
+The shape of our new-logo pipeline shifted meaningfully. We closed 47 new-logo deals in Q2, with a clear bimodal distribution: a healthy cluster around the $25–50K mid-market band and a growing tail of deals over $250K. Three deals exceeded $1M, two of which were multi-year.
 
-これらの成果はチーム全員の貢献によるもの。特に営業・CS・開発の連携が今四半期の数字を作った。新規大口契約に関わった営業3名の貢献は特筆に値する(社名は社外秘のため非公開)。
+| Deal size band | Count |
+| -------------- | ----: |
+| $0–25K         |     6 |
+| $25–50K        |    14 |
+| $50–100K       |    11 |
+| $100–250K      |     8 |
+| $250K+         |     8 |
 
-![Q3チーム集合写真](./images/team_2025q3.jpg)
+(Source: ./data/q2_new_logos.csv)
 
-## まとめ
+The median ACV moved up 22% quarter-over-quarter to $61K — see the FY26 pipeline analysis for the longer-running trend (Source: ./reports/fy26_pipeline_analysis.pdf, page: 14). The thickening right tail is the most important change in this chart; a year ago, the $250K+ band was a single deal.
 
-第3四半期は売上+20%の4四半期連続達成、顧客満足度の定量・定性ともに改善、と好調な結果となった。第4四半期はホリデー需要と新規大口契約により、更なる成長が見込まれる。
+## Wins and Challenges
 
-## 想定質疑への対応
+The quarter produced several breakthrough wins, but also surfaced friction we will need to address heading into H2. The pattern is familiar: speed at the top of funnel is outpacing our ability to scale onboarding and territory coverage.
 
-- SMB抑制戦略の妥当性 → LTV/CACデータを準備済み
-- 営業採用の進捗 → 内定2名、11月入社予定
-- NPS算出方法の変更有無 → 変更なし、NICE Satmetrix標準
-- エンタープライズ偏重リスク → 上位10社で売上35%、集中度は許容範囲
+| Wins                                                | Challenges                                           |
+| --------------------------------------------------- | ---------------------------------------------------- |
+| Three eight-figure enterprise deals closed in June  | Onboarding lead time grew from 14 to 21 days         |
+| APAC region grew 73% quarter-over-quarter           | EMEA pipeline coverage fell to 2.4x (target: 3.0x)   |
+| ARR per rep climbed to $1.6M — a company record     | Two senior AEs departed in May; backfills not ramped |
+| PLG-sourced pipeline doubled vs Q1                  | Renewal team capacity flagged by CSM lead in June    |
+
+(Source: ./data/q2_qbr_summary.xlsx, sheet: Wins_Challenges)
+
+None of the challenges is independently alarming, but they share a common root: capacity. The H2 plan addresses each with a specific investment, sized to the gap rather than the symptom.
+
+## The Q2 Team
+
+The revenue org grew to 142 people in Q2, with the addition of two regional VPs and a refreshed enablement team. The all-hands photo below was taken at the June kickoff in Lisbon.
+
+![Q2 2026 revenue org all-hands at the June kickoff in Lisbon](./images/q2_team_lisbon.jpg)
+
+The hiring slowdown signaled in March has fully reversed. We are now constrained by ramp time, not headcount approval.
+
+## Conclusion
+
+Q2 2026 was a record quarter on nearly every dimension that matters: revenue, ARR, deal size, segment mix, and regional balance. The binding constraint heading into H2 is execution capacity, not demand. The proposed investments in onboarding throughput and EMEA pipeline development are detailed in the H2 plan, and the data in this deck is the case for funding them now rather than next cycle.
+
+### Key Takeaways
+
+- Revenue $187M (+24% YoY); ARR $42M, $7M ahead of target
+- Enterprise mix at 60%; mid-market accelerating; SMB intentionally trimmed
+- North America strongest; APAC inflecting; EMEA needs pipeline attention
+- Capacity, not demand, is the binding H2 constraint — H2 investment plan addresses this directly
+
+### Anticipated Q&A
+
+- *Is the SMB decline a leading indicator of anything broader?* No — it was a deliberate channel reprioritization signed off in the April plan, and the customers we lost there were not predictive of mid-market churn.
+- *Why is EMEA pipeline coverage below target?* Two AE departures in May plus a slower-than-expected ramp of the new regional VP. Backfills are in flight; we expect coverage to recover by end of Q3.
+- *What is the confidence on the H2 forecast given Q2's beat?* High. The beat was concentrated in multi-year enterprise deals that derisk H2 ARR, not pull-forward of H2 pipeline.
+- *Are we comfortable with the onboarding lead-time increase?* Not at 21 days. The H2 plan funds two implementation engineer hires and a CS automation track; we expect to pull lead time back under 16 days by end of Q4.
