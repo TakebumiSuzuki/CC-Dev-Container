@@ -10,3 +10,4 @@
 2026-05-27 04:17:52 - /workspaces/cc-dev-container/skill-test/test_launch_narrative.yaml
 2026-05-28 06:22:41 - /workspaces/cc-dev-container/.claude/skills/narrative-to-slide-outline/references/example_narrative.md
 2026-05-28 06:23:30 - /workspaces/cc-dev-container/.claude/skills/narrative-to-slide-outline/references/example_output.yaml
+2026-05-28 07:52:28 - /workspaces/cc-dev-container/.claude/skills/compose-slide-narrative/SKILL.md

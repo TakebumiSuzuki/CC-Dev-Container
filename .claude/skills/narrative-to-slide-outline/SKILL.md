@@ -42,7 +42,7 @@ This skill is **manual-only**: it runs only when the user invokes it explicitly 
 
 YAML files outlive the conversation that created them. A common workflow is to generate the YAML in one thread, then return days later — in a fresh thread — to edit it. This skill supports that as a distinct entry point.
 
-**Use this entry point when** the user wants a non-trivial change to an existing YAML: adding or removing slides, splitting or merging slides, adding a new claim that needs a citation, swapping a chart's data source, restructuring the deck. Trivial text-only tweaks should still go through plain Edit as noted in [Out of scope](#out-of-scope).
+**Use this entry point when** the user wants a non-trivial change to an existing YAML: adding or removing slides, splitting or merging slides, adding a new claim that needs a citation, swapping a chart's data source, restructuring the deck.
 
 ### What to ask the user
 
@@ -239,12 +239,13 @@ Use AskUserQuestion. Batch related questions into one call (the tool accepts up 
 
 Common questions:
 
-1. **Target slide count** — Derive a baseline from _this_ document rather than using fixed cutoffs: roughly one slide per distinct idea (a long `##` section may split into 2-3 slides; several short ones may merge). Show it and ask: "I see roughly N sections → about M slides at one-idea-per-slide. Target?" Offer three options scaled to that baseline M, not fixed bands:
-    - **Concise** — compress below M (merge related sections, drop secondary charts)
-    - **Standard** — about M (~one slide per section/idea)
-    - **Detailed** — expand above M (split dense sections, add a chart per data table)
+1. **Target slide count** — Count distinct ideas in the document to derive a baseline **M** (≈ one slide per idea; long `##` sections may split, short ones may merge). Ask: *"About N sections → ~M slides at one-idea-per-slide. Target?"* with three options scaled to M:
 
-    Fill the option labels with the concrete numbers you derived (e.g. "Concise (~8) / Standard (~13) / Detailed (~20)") so they track this document's size — a short memo and a 40-page report should land on very different numbers.
+    - **Concise** ≈ 0.6×M — merge related sections, drop secondary charts
+    - **Standard** ≈ M — one slide per section/idea
+    - **Detailed** ≈ 1.5×M — split dense sections, add a chart per data table
+
+    Fill the labels with the rounded numbers (e.g. M=13 → "Concise (~8) / Standard (~13) / Detailed (~20)") — a short memo and a 40-page report should land on very different numbers.
 
 2. **Body verbosity** — "Terse (keywords and short bullets; the speaker carries the content, so push depth into `speaker_notes`)" / "Balanced (mixed bullets and short sentences)" / "Verbose (full sentences and prose paragraphs; the slide should read on its own as a document)". This is orthogonal to slide count (Q1): few slides can still be terse, and many slides can still be verbose. Q1 decides how the narrative is partitioned; Q2 decides how each slide is written.
 3. **Missing data sources** — For every chart/table where the narrative didn't supply a source (whether the inline table lacks a breadcrumb, or the prose mentions data with no table at all), ask. Don't make paths up
@@ -319,7 +320,7 @@ data:
 
 Notice the `source:` field. This breadcrumb makes the data verifiable: Step 6 (QA verification) reads the source file and cross-checks against the values above. Always include `source` when the narrative provided a data-source reference.
 
-When a prose sentence carries a `(Source: ...)` breadcrumb but no table/chart, record it at the slide level under `prose_sources` instead. It renders no visual, but Step 6 QA still checks whether the source supports the claim (a softer, semantic check than chart value-matching):
+When a prose sentence carries a `(Source: ...)` breadcrumb but no table/chart, record it at the slide level under `prose_sources` instead. It renders no visual, but Step 6 QA still checks whether the source supports the claim:
 
 ```yaml
 body: |
