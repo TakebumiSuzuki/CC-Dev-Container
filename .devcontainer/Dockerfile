@@ -55,6 +55,7 @@ RUN uv python install 3.13 \
     "markitdown[pptx]" \
     Pillow \
     defusedxml \
+    pyyaml \
     && chown -R node:node /opt/uv-venv /opt/uv-python
 
 # npm のグローバルインストール先をボリューム( /home/node )の外である

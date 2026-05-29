@@ -1,0 +1,22 @@
+[
+  {"yaml_index": 0,  "template_index": 0,  "notes": "Title slide (idx 0): large brand title + subtitle text boxes; picture background stays."},
+  {"yaml_index": 1,  "template_index": 13, "notes": "Agenda (idx 13): multi-text layout; 6 numbered items go into body text box; extra template text cleared."},
+  {"yaml_index": 2,  "template_index": 13, "notes": "Executive Summary (idx 13): 3-bullet body; extra template text cleared."},
+  {"yaml_index": 3,  "template_index": 6,  "notes": "Section divider (idx 6 'About Us'): large centered title; body '' clears second text box."},
+  {"yaml_index": 4,  "template_index": 11, "notes": "Bar chart (idx 11 'Market Research'): picture replaced by native clustered-column chart at picture's position."},
+  {"yaml_index": 5,  "template_index": 11, "notes": "Bar chart (idx 11): reused sample; picture replaced by native chart."},
+  {"yaml_index": 6,  "template_index": 11, "notes": "Bar chart (idx 11): reused sample; picture replaced by native chart."},
+  {"yaml_index": 7,  "template_index": 12, "notes": "Section divider (idx 12 'Our Products'): large centered title; body '' clears second text box."},
+  {"yaml_index": 8,  "template_index": 4,  "notes": "Table slide (idx 4 'Our company'): single text box → title only; table added at DEFAULT_TABLE_GEOM; body text not rendered (no second text box)."},
+  {"yaml_index": 9,  "template_index": 13, "notes": "Notable Wins (idx 13): 3 bold-named bullets in body; extra template text cleared."},
+  {"yaml_index": 10, "template_index": 13, "notes": "Delivery Issues (idx 13): 2 bold-named bullets in body; extra template text cleared."},
+  {"yaml_index": 11, "template_index": 2,  "notes": "Section divider (idx 2 'Introduction'): large centered title; body '' clears second text box."},
+  {"yaml_index": 12, "template_index": 10, "notes": "Line chart (idx 10 'Market Research'): picture replaced by native line chart at picture's position."},
+  {"yaml_index": 13, "template_index": 4,  "notes": "Table slide (idx 4): single text box → title only; table added at DEFAULT_TABLE_GEOM; body text not rendered. Non-ideal: body summary text lost."},
+  {"yaml_index": 14, "template_index": 6,  "notes": "Section divider (idx 6): reused sample; large centered title."},
+  {"yaml_index": 15, "template_index": 4,  "notes": "Table slide (idx 4): single text box → title only; table added at DEFAULT_TABLE_GEOM; callout text lost. Non-ideal: T&D capacity callout not rendered."},
+  {"yaml_index": 16, "template_index": 13, "notes": "Strategic Priorities (idx 13): 3 numbered bold-header bullets in body; extra template text cleared."},
+  {"yaml_index": 17, "template_index": 2,  "notes": "Section divider (idx 2): reused sample; large centered title."},
+  {"yaml_index": 18, "template_index": 13, "notes": "Key Takeaways (idx 13): 5 bullets in body; extra template text cleared."},
+  {"yaml_index": 19, "template_index": 3,  "notes": "Closing slide (idx 3 'Welcome'): large title + body 'Questions & Discussion'; person photo stays."}
+]
