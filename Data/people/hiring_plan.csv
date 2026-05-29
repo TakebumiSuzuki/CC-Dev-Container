@@ -1,0 +1,31 @@
+year,quarter,practice,grade_target,planned_hires,actual_hires,status
+2025,Q1,Strategy & Growth,Consultant,4,4,Completed
+2025,Q1,Operations Excellence,Consultant,4,4,Completed
+2025,Q1,Technology & Digital,Consultant,4,5,Completed
+2025,Q1,Finance & Risk,Senior Consultant,2,2,Completed
+2025,Q1,HR & People,Senior Consultant,2,1,Completed
+2025,Q2,Strategy & Growth,Analyst,4,5,Completed
+2025,Q2,Operations Excellence,Manager,3,2,Completed
+2025,Q2,Technology & Digital,Manager,2,1,Completed
+2025,Q2,Finance & Risk,Manager,4,4,Completed
+2025,Q2,HR & People,Manager,4,5,Completed
+2025,Q3,Strategy & Growth,Analyst,4,3,Completed
+2025,Q3,Operations Excellence,Senior Consultant,1,0,Completed
+2025,Q3,Technology & Digital,Consultant,1,1,Completed
+2025,Q3,Finance & Risk,Manager,3,2,Completed
+2025,Q3,HR & People,Analyst,4,5,Completed
+2025,Q4,Strategy & Growth,Senior Consultant,1,1,Completed
+2025,Q4,Operations Excellence,Manager,1,2,Completed
+2025,Q4,Technology & Digital,Analyst,2,2,Completed
+2025,Q4,Finance & Risk,Analyst,2,2,Completed
+2025,Q4,HR & People,Senior Consultant,4,4,Completed
+2026,Q1,Strategy & Growth,Manager,1,,Completed
+2026,Q1,Operations Excellence,Consultant,1,,Completed
+2026,Q1,Technology & Digital,Senior Consultant,2,,Completed
+2026,Q1,Finance & Risk,Consultant,4,,Completed
+2026,Q1,HR & People,Consultant,2,,Completed
+2026,Q2,Strategy & Growth,Analyst,2,,In Progress
+2026,Q2,Operations Excellence,Senior Consultant,3,,In Progress
+2026,Q2,Technology & Digital,Senior Consultant,2,,In Progress
+2026,Q2,Finance & Risk,Senior Consultant,3,,In Progress
+2026,Q2,HR & People,Analyst,3,,In Progress

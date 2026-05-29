@@ -1,0 +1,91 @@
+EMPLOYEE ENGAGEMENT SURVEY — FY2025 RESULTS SUMMARY
+Meridian Consulting Group | All Staff Survey
+Fielded: December 2025 | Response rate: 87% (104 of 120 active employees)
+
+─────────────────────────────────────────────────────────────────────────────
+HEADLINE SCORES
+─────────────────────────────────────────────────────────────────────────────
+
+Overall engagement score:        72 / 100   (FY2024: 69)
+Would recommend MCG as employer: 68%        (FY2024: 63%)
+Plan to stay 2+ years:           61%        (FY2024: 57%)
+Satisfaction with leadership:    74 / 100   (FY2024: 71)
+Satisfaction with career growth:  61 / 100  (FY2024: 65)  ← declined
+Work-life balance score:          58 / 100  (FY2024: 60)  ← declined
+
+─────────────────────────────────────────────────────────────────────────────
+KEY THEMES — WHAT'S WORKING
+─────────────────────────────────────────────────────────────────────────────
+
+1. Quality of client work (avg score 81/100)
+   Staff consistently rate the intellectual challenge and quality of MCG's
+   engagements as a top reason for joining and staying. Comments: "The problems
+   we solve are genuinely hard." "I learn more here in 6 months than I would
+   in 2 years at a corporate role."
+
+2. Peer quality (avg score 79/100)
+   "I work with the smartest colleagues of my career." This theme appeared in
+   37 of 104 open-ended responses. A strong signal for culture and talent density.
+
+3. Leadership visibility (avg score 76/100)
+   Partner accessibility improved noticeably vs. FY2024. Multiple respondents
+   cited the re-launch of biweekly all-hands calls as a positive change.
+
+─────────────────────────────────────────────────────────────────────────────
+KEY THEMES — AREAS OF CONCERN
+─────────────────────────────────────────────────────────────────────────────
+
+1. Career development clarity (avg score 58/100) — FLAGGED
+   The most common open-ended concern: "I don't know what I need to do to get
+   promoted." 28 respondents mentioned unclear promotion criteria, particularly
+   at the Consultant → Senior Consultant and Manager → Senior Manager transitions.
+   This is the largest driver of the YoY decline in the career growth score.
+   Recommended action: Publish updated promotion rubrics by practice by Q1 2026.
+
+2. Staffing and utilization pressure (avg score 55/100) — FLAGGED
+   Technology & Digital practice respondents scored this category at 48/100,
+   the lowest of any practice. Comments: "I've been above 90% utilization for
+   four consecutive months." "There's no slack for learning or business development."
+   Recommended action: Immediate hiring prioritization for Tech & Digital (2 Senior
+   Consultants). Cap on individual utilization at 87% in Q1 2026 with monitoring.
+
+3. Compensation competitiveness (avg score 61/100)
+   Scores declined 4 points vs. FY2024. Eight respondents mentioned competing
+   offers from Big Four or in-house strategy teams. The March 2025 compensation
+   benchmarking showed MCG at 92nd percentile vs. regional boutiques but 78th
+   percentile vs. national peers. A mid-cycle compensation adjustment was made
+   in September 2025 for Senior Consultant and Manager grades.
+
+4. Onboarding experience for new hires (avg score 54/100)
+   Particularly flagged by employees in their first 12 months (n=22).
+   "My onboarding was three days of HR paperwork and then I was staffed on a
+   client." The new hire buddy program launched in September 2025 is too recent
+   to show in this survey cycle.
+
+─────────────────────────────────────────────────────────────────────────────
+GRADE-LEVEL BREAKDOWN
+─────────────────────────────────────────────────────────────────────────────
+
+Grade               Engagement Score   Would Recommend   Plan to Stay 2+ Yrs
+──────────────────────────────────────────────────────────────────────────────
+Analyst             68                 62%               55%
+Consultant          70                 65%               58%
+Senior Consultant   73                 71%               63%
+Manager             76                 74%               67%
+Senior Manager      78                 76%               71%
+Principal           80                 80%               75%
+Partner             84                 88%               82%
+
+Analysts and Consultants continue to score lower on retention intent. This cohort
+drives the majority of voluntary attrition (see attrition_log.csv). Early-tenure
+flight risk is concentrated in Q2 of their second year, typically after completing
+one full project cycle and receiving their first year-end review.
+
+─────────────────────────────────────────────────────────────────────────────
+FOLLOW-UP ACTIONS COMMITTED BY LEADERSHIP
+─────────────────────────────────────────────────────────────────────────────
+
+Action 1: Publish practice-specific promotion criteria — Owner: COO — Due: Feb 2026
+Action 2: Hire 2 Senior Consultants in Tech & Digital — Owner: Tech Practice Lead — Due: Q1 2026
+Action 3: Review compensation benchmarks semi-annually — Owner: CHRO — Due: June 2026
+Action 4: Evaluate work-life balance monitoring dashboard — Owner: People Ops — Due: Q2 2026

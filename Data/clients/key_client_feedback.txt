@@ -1,0 +1,82 @@
+KEY CLIENT FEEDBACK SUMMARY — Meridian Consulting Group
+Source: Account Manager interviews + NPS follow-up calls, Q4 2025 & Q1 2026
+
+─────────────────────────────────────────────────────────────────────────────
+PROMOTERS (NPS Score 70+)
+─────────────────────────────────────────────────────────────────────────────
+
+APEX FINANCIAL CORP (NPS: 82, CFO: David Okafor)
+"MCG is the only consulting firm that gives us work we can actually implement
+without re-hiring someone to translate the deck. They understand our operational
+constraints and don't just deliver theory."
+Status: Active. Third engagement starting Q2 2026. Account valued at $2.1M LTM.
+
+CARDINAL HEALTH SYSTEMS (NPS: 79, VP HR: Linda Park)
+"Angela Torres and her team felt like they were part of our organization, not
+visitors. The workforce model they built is still in use 18 months later."
+Status: Active. Potential expansion into Talent Analytics. Renewal probability: High.
+
+PACIFIC HEALTHCARE (NPS: 75, COO: Marcus Bell)
+"The turnaround on deliverables is consistently faster than any firm we've worked
+with. When we had a board presentation moved up by two weeks, MCG made it happen."
+Status: Active. Current project: Revenue Cycle Optimization.
+
+ZENITH CAPITAL (NPS: 71, Managing Director: Priya Nair)
+"Depth of financial modeling is excellent. We've worked with three other advisory
+firms and MCG's quantitative rigor is noticeably higher."
+Status: Retainer client. Renewed for second year in January 2026.
+
+─────────────────────────────────────────────────────────────────────────────
+PASSIVES (NPS Score 50–69) — Selected Feedback
+─────────────────────────────────────────────────────────────────────────────
+
+SUMMIT FINANCIAL (NPS: 61, CFO: Richard Cole)
+"Good work, but there's been too much junior consultant turnover mid-engagement.
+We'd like to see more continuity, especially in year two of the relationship."
+Note: Two consultants were reassigned mid-project in FY2025 due to staffing gaps.
+Account Manager action: Commit to fixed team through end of FY2026 contract.
+
+DELTA FINANCIAL (NPS: 57, CRO: Alicia Yuen)
+"The strategy work was solid. We're less convinced about the implementation
+follow-through. MCG seems stronger in diagnosis than execution support."
+Note: Reflects a known gap in our Operations practice in the financial services
+vertical. Consider pairing with an Ops Excellence lead on the next proposal.
+
+TRIUMPH AUTOMOTIVE (NPS: 54, Head of Strategy: Tom Brennan)
+"We had delivery delays that impacted our internal timelines. The quality was
+there once deliverables arrived, but the project management could be tighter."
+Note: Scope creep issue (see project_notes.txt). Satisfaction recovered from 3.7
+at project close to 5.4 following the post-project executive debrief.
+
+─────────────────────────────────────────────────────────────────────────────
+DETRACTORS (NPS Score <50) — Watch List
+─────────────────────────────────────────────────────────────────────────────
+
+KINGSLEY CONSUMER BRANDS (NPS: 38, VP Finance: Helen Marsh)
+"Felt like we were training your consultants, not the other way around. The team
+lacked specific consumer goods experience and relied too heavily on generic
+frameworks."
+Status: Contract not renewed after Q3 2025. Churn confirmed. Root cause: MCG sent
+a team with limited retail/CPG domain experience. Recommendation: Do not pursue
+engagements in CPG without at least one domain specialist on the team.
+
+LIGHTNING RIDGE ENERGY (NPS: 31, COO: Brett Sullivan)
+"We asked for help with regulatory compliance but received a strategy deck. Scope
+misalignment from day one."
+Status: Project closed early by mutual agreement. Value invoiced: $180K of $400K.
+Root cause: Proposal was written at Partner level without scoping call with the
+operational team. Process fix has been submitted to the Sales Review Board.
+
+─────────────────────────────────────────────────────────────────────────────
+THEMES FROM Q1 2026 NPS FOLLOW-UP CALLS
+─────────────────────────────────────────────────────────────────────────────
+
+Top positive themes:
+1. Analytical rigor and quality of quantitative work (cited by 18 of 28 respondents)
+2. Responsiveness and turnaround speed (cited by 14)
+3. Senior advisor accessibility — Partners on call during critical phases (cited by 11)
+
+Top areas for improvement:
+1. Consultant continuity mid-engagement (cited by 9)
+2. Translation of recommendations into operational action plans (cited by 8)
+3. Pricing transparency — clients want clearer T&M breakdowns (cited by 6)

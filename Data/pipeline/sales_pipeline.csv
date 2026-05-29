@@ -1,0 +1,81 @@
+opportunity_id,client_name,industry,practice,engagement_type,stage,expected_value_usd,probability_pct,weighted_value_usd,expected_close_date,owner,source
+OPP4000,Xenon Energy,Public Sector,Finance & Risk,Implementation,Verbal Commit,1894000,85,1609900,2026-12-13,Joseph Evans,Outbound
+OPP4001,Delta Financial,Public Sector,Strategy & Growth,Strategy,Verbal Commit,461000,85,391850,2026-10-27,James Collins,Referral
+OPP4002,Triumph Automotive,Healthcare,Strategy & Growth,Strategy,Negotiation,407000,65,264550,2026-09-23,Christopher Anderson,Existing relationship
+OPP4003,Pacific Healthcare,Retail & Consumer,Operations Excellence,Assessment,Proposal Submitted,446000,35,156100,2026-12-07,Amy Smith,RFP
+OPP4004,Allstate Logistics,Manufacturing,HR & People,Implementation,Proposal Submitted,1991000,35,696850,2026-07-12,Alyssa Parker,Partner
+OPP4005,Dellworth Manufacturing,Retail & Consumer,Technology & Digital,Assessment,Negotiation,532000,65,345800,2026-08-24,Adam King,Referral
+OPP4006,Iris Medical,Financial Services,Operations Excellence,Implementation,Negotiation,1951000,65,1268150,2026-08-10,Matthew Wright,Partner
+OPP4007,Global Asset Corp,Manufacturing,Strategy & Growth,Implementation,Qualification,1149000,15,172350,2026-05-14,Katherine Wilson,RFP
+OPP4008,Fortis Insurance,Public Sector,Strategy & Growth,Transformation,Negotiation,1049000,65,681850,2026-08-06,Jason Parker,RFP
+OPP4009,Wyndham Financial,Manufacturing,Operations Excellence,Transformation,Negotiation,406000,65,263900,2026-09-04,David Rivera,RFP
+OPP4010,Diamond Manufacturing,Healthcare,Operations Excellence,Transformation,Negotiation,304000,65,197600,2026-05-12,Nicole Carter,Referral
+OPP4011,Horizon Medical,Retail & Consumer,HR & People,Assessment,Negotiation,1073000,65,697450,2026-08-20,Amy Smith,Referral
+OPP4012,Granite Retail Partners,Financial Services,Operations Excellence,Transformation,Proposal Submitted,185000,35,64749,2026-06-16,Thomas Harris,Existing relationship
+OPP4013,Diamond Manufacturing,Healthcare,Strategy & Growth,Advisory,Verbal Commit,158000,85,134300,2026-07-31,Amy Smith,Partner
+OPP4014,Summit Financial,Financial Services,Strategy & Growth,Implementation,Negotiation,260000,65,169000,2026-12-09,David Clark,RFP
+OPP4015,Wyndham Financial,Manufacturing,Operations Excellence,Transformation,Qualification,1090000,15,163500,2026-09-24,Amanda Evans,Referral
+OPP4016,Quest Healthcare,Financial Services,Strategy & Growth,Transformation,Negotiation,1388000,65,902200,2026-10-22,Jason Parker,Existing relationship
+OPP4017,Dellworth Manufacturing,Retail & Consumer,Strategy & Growth,Transformation,Verbal Commit,1675000,85,1423750,2026-10-16,Nicole Carter,Conference
+OPP4018,Falcon Financial,Retail & Consumer,Technology & Digital,Assessment,Proposal Submitted,486000,35,170100,2026-05-13,Timothy Wilson,Partner
+OPP4019,Sapphire Financial,Energy & Utilities,HR & People,Implementation,Verbal Commit,258000,85,219300,2026-07-05,James Collins,Referral
+OPP4020,Union Pacific Holdings,Manufacturing,Finance & Risk,Implementation,Verbal Commit,627000,85,532950,2026-11-09,Adam Thomas,Partner
+OPP4021,Northern Energy Systems,Retail & Consumer,HR & People,Advisory,Proposal Submitted,769000,35,269150,2026-05-25,Matthew Martin,RFP
+OPP4022,Iris Medical,Financial Services,Technology & Digital,Advisory,Verbal Commit,253000,85,215050,2026-08-17,Isabella Clark,RFP
+OPP4023,Lakewood Energy,Public Sector,Strategy & Growth,Implementation,Negotiation,1949000,65,1266850,2026-10-21,Amy Smith,Referral
+OPP4024,Keystone Bank,Energy & Utilities,Technology & Digital,Assessment,Verbal Commit,920000,85,782000,2026-12-19,Jessica Rodriguez,Conference
+OPP4025,Frontier Energy,Healthcare,HR & People,Strategy,Verbal Commit,647000,85,549950,2026-05-13,Brenda Collins,Outbound
+OPP4026,Century Healthcare,Financial Services,Finance & Risk,Assessment,Qualification,972000,15,145800,2026-11-01,Brittany Martin,Outbound
+OPP4027,Momentum Healthcare,Energy & Utilities,Strategy & Growth,Implementation,Qualification,1502000,15,225300,2026-08-27,James Collins,Referral
+OPP4028,Maple Healthcare,Manufacturing,Technology & Digital,Assessment,Verbal Commit,1534000,85,1303900,2026-08-24,Victoria Rivera,Outbound
+OPP4029,Keystone Bank,Energy & Utilities,HR & People,Advisory,Negotiation,1754000,65,1140100,2026-05-28,Joseph Evans,Conference
+OPP4030,BlueCrest Capital,Healthcare,Operations Excellence,Advisory,Verbal Commit,964000,85,819400,2026-08-12,Amy Smith,Partner
+OPP4031,United Financial Services,Energy & Utilities,Finance & Risk,Implementation,Negotiation,248000,65,161200,2026-06-04,Adam Thomas,Existing relationship
+OPP4032,Dellworth Manufacturing,Retail & Consumer,Operations Excellence,Transformation,Verbal Commit,1325000,85,1126250,2026-10-14,Christina Thompson,Referral
+OPP4033,Heritage Bank,Public Sector,Operations Excellence,Implementation,Verbal Commit,890000,85,756500,2026-05-30,Daniel Collins,Referral
+OPP4034,Falcon Financial,Retail & Consumer,HR & People,Strategy,Proposal Submitted,467000,35,163450,2026-09-23,Victoria Rivera,Conference
+OPP4035,Beacon Capital,Public Sector,Finance & Risk,Advisory,Negotiation,151000,65,98150,2026-08-11,Adam King,Conference
+OPP4036,Pinnacle Capital,Healthcare,Strategy & Growth,Assessment,Verbal Commit,1187000,85,1008950,2026-09-19,Alyssa Parker,Existing relationship
+OPP4037,Sterling Manufacturing,Manufacturing,Finance & Risk,Implementation,Verbal Commit,120000,85,102000,2026-07-13,Katherine Wilson,Partner
+OPP4038,Momentum Healthcare,Energy & Utilities,Operations Excellence,Transformation,Negotiation,1850000,65,1202500,2026-12-05,David Rivera,Partner
+OPP4039,Beacon Capital,Public Sector,Technology & Digital,Advisory,Verbal Commit,1616000,85,1373600,2026-12-03,Hannah Young,Referral
+OPP4040,Jade Capital,Healthcare,Operations Excellence,Strategy,Proposal Submitted,463000,35,162050,2026-10-03,Alyssa Parker,Conference
+OPP4041,Allstate Logistics,Manufacturing,HR & People,Assessment,Qualification,1999000,15,299850,2026-07-31,David Clark,RFP
+OPP4042,Indus Technologies,Manufacturing,Technology & Digital,Advisory,Verbal Commit,299000,85,254150,2026-06-28,Sean Rodriguez,Existing relationship
+OPP4043,Titan Energy,Retail & Consumer,Strategy & Growth,Advisory,Negotiation,1801000,65,1170650,2026-12-05,Hannah Parker,Partner
+OPP4044,Omega Asset Management,Manufacturing,Strategy & Growth,Strategy,Qualification,1661000,15,249150,2026-05-11,David Clark,Outbound
+OPP4045,Union Pacific Holdings,Manufacturing,Technology & Digital,Strategy,Verbal Commit,1543000,85,1311550,2026-09-05,Jessica Rodriguez,Partner
+OPP4046,Pacific Healthcare,Retail & Consumer,Operations Excellence,Implementation,Verbal Commit,1942000,85,1650700,2026-11-13,Katherine Wilson,Existing relationship
+OPP4047,Vector Technologies,Retail & Consumer,Strategy & Growth,Assessment,Negotiation,795000,65,516750,2026-11-10,Mark Johnson,Conference
+OPP4048,Delta Financial,Public Sector,Operations Excellence,Advisory,Verbal Commit,874000,85,742900,2026-08-13,Jason Parker,Conference
+OPP4049,BlueCrest Capital,Healthcare,HR & People,Implementation,Qualification,243000,15,36450,2026-07-20,Brenda Evans,Conference
+OPP4050,Triumph Automotive,Healthcare,HR & People,Advisory,Qualification,1957000,15,293550,2026-10-30,Emily Thompson,Partner
+OPP4051,Maple Healthcare,Manufacturing,Technology & Digital,Advisory,Negotiation,95000,65,61750,2026-07-11,Jessica Rodriguez,Outbound
+OPP4052,Radiant Healthcare,Retail & Consumer,HR & People,Transformation,Verbal Commit,1419000,85,1206150,2026-12-14,Matthew Martin,Partner
+OPP4053,Quartz Energy,Manufacturing,Technology & Digital,Advisory,Verbal Commit,1472000,85,1251200,2026-11-06,Christina Thompson,Referral
+OPP4054,Nexus Financial,Public Sector,HR & People,Implementation,Negotiation,1081000,65,702650,2026-11-10,Joseph Evans,Partner
+OPP4055,Horizon Medical,Retail & Consumer,Operations Excellence,Strategy,Negotiation,1475000,65,958750,2026-09-07,Jason Parker,Existing relationship
+OPP4056,Titan Energy,Retail & Consumer,Strategy & Growth,Transformation,Qualification,1533000,15,229950,2026-12-27,Isabella Johnson,Existing relationship
+OPP4057,Gemstone Retail,Energy & Utilities,Technology & Digital,Advisory,Proposal Submitted,1626000,35,569100,2026-09-26,Sean Rodriguez,Outbound
+OPP4058,Vertex Healthcare,Healthcare,Operations Excellence,Assessment,Verbal Commit,1078000,85,916300,2026-07-03,Christopher Anderson,Existing relationship
+OPP4059,Gemstone Retail,Energy & Utilities,Strategy & Growth,Strategy,Proposal Submitted,1446000,35,506099,2026-11-29,William Evans,Conference
+OPP4060,Iris Medical,Financial Services,Operations Excellence,Transformation,Verbal Commit,230000,85,195500,2026-10-21,Adam King,Outbound
+OPP4061,Horizon Medical,Retail & Consumer,HR & People,Transformation,Verbal Commit,1302000,85,1106700,2026-08-21,Alyssa Parker,Partner
+OPP4062,Quantum Computing Inc,Energy & Utilities,Finance & Risk,Advisory,Verbal Commit,328000,85,278800,2026-10-28,Adam Thomas,Outbound
+OPP4063,Eagle Energy Group,Energy & Utilities,Operations Excellence,Transformation,Negotiation,1850000,65,1202500,2026-05-31,Adam Thomas,Outbound
+OPP4064,Liberty Financial,Healthcare,Strategy & Growth,Assessment,Proposal Submitted,306000,35,107100,2026-07-18,Emily Thompson,RFP
+OPP4065,Summit Financial,Financial Services,HR & People,Assessment,Verbal Commit,173000,85,147050,2026-12-15,Hannah Young,RFP
+OPP4066,Apex Financial Corp,Financial Services,Strategy & Growth,Transformation,Negotiation,210000,65,136500,2026-05-12,Victoria Wright,Conference
+OPP4067,Redwood Capital,Healthcare,Finance & Risk,Implementation,Verbal Commit,1682000,85,1429700,2026-11-30,David Rivera,Outbound
+OPP4068,Falcon Financial,Retail & Consumer,Finance & Risk,Advisory,Proposal Submitted,1743000,35,610050,2026-07-23,Alyssa Parker,Existing relationship
+OPP4069,Redwood Capital,Healthcare,HR & People,Assessment,Qualification,1920000,15,288000,2026-12-14,William Evans,Conference
+OPP4070,Vertex Healthcare,Healthcare,Technology & Digital,Advisory,Qualification,1316000,15,197400,2026-05-22,Christina Thompson,Referral
+OPP4071,Oakwood Manufacturing,Financial Services,Operations Excellence,Advisory,Verbal Commit,1045000,85,888250,2026-05-05,Isabella Clark,Existing relationship
+OPP4072,Frontier Energy,Healthcare,HR & People,Assessment,Verbal Commit,243000,85,206550,2026-09-14,James Collins,Outbound
+OPP4073,Redwood Capital,Healthcare,Finance & Risk,Assessment,Proposal Submitted,877000,35,306950,2026-12-07,Matthew Wright,Outbound
+OPP4074,Meridian Pharma,Financial Services,HR & People,Strategy,Proposal Submitted,628000,35,219800,2026-06-16,Jessica Rodriguez,RFP
+OPP4075,Harbor Logistics,Healthcare,HR & People,Assessment,Negotiation,428000,65,278200,2026-10-30,Matthew Wright,Existing relationship
+OPP4076,Acme Financial,Energy & Utilities,Technology & Digital,Strategy,Negotiation,801000,65,520650,2026-11-28,Matthew Martin,Existing relationship
+OPP4077,Emerald Retail Group,Financial Services,Finance & Risk,Assessment,Verbal Commit,1903000,85,1617550,2026-07-08,Timothy Flores,Existing relationship
+OPP4078,Jade Capital,Healthcare,Strategy & Growth,Assessment,Verbal Commit,1296000,85,1101600,2026-12-20,Nicole Martin,Existing relationship
+OPP4079,Quantum Computing Inc,Energy & Utilities,Technology & Digital,Advisory,Verbal Commit,936000,85,795600,2026-12-03,Hannah Young,Partner

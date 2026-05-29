@@ -1,0 +1,59 @@
+project_id,project_name,client_id,client_name,industry,practice,engagement_type,start_date,planned_end_date,contract_value_usd,pct_complete,status,engagement_manager,team_size,billing_model
+P3000,Change Management Program — Acme,C1052,Acme Financial,Energy & Utilities,HR & People,Assessment,2026-01-04,2026-03-13,1470000,77,On Track,Adam Thomas,9,Capped T&M
+P3001,Procurement Optimization — Keystone,C1010,Keystone Bank,Energy & Utilities,Operations Excellence,Strategy,2025-11-21,2026-05-19,824000,71,Ahead of Schedule,Mark Johnson,9,Capped T&M
+P3002,Change Management Program — Jefferson,C1009,Jefferson Medical Center,Retail & Consumer,HR & People,Strategy,2025-12-07,2026-07-11,174000,48,On Track,Katherine Wilson,9,Capped T&M
+P3003,Finance Function Transformation — Iris,C1060,Iris Medical,Financial Services,HR & People,Strategy,2026-02-01,2026-07-01,1445000,42,On Track,Isabella Johnson,6,Fixed Fee
+P3004,ERP Implementation Support — Iris,C1060,Iris Medical,Financial Services,HR & People,Transformation,2025-07-27,2026-03-12,1487000,84,On Track,William Evans,4,Capped T&M
+P3005,Customer Experience Redesign — Jefferson,C1009,Jefferson Medical Center,Retail & Consumer,Technology & Digital,Strategy,2025-09-06,2026-04-11,493000,37,On Track,Isabella Clark,4,Capped T&M
+P3006,ERP Implementation Support — Falcon,C1057,Falcon Financial,Retail & Consumer,Technology & Digital,Advisory,2025-11-11,2026-07-29,1081000,67,On Track,Brenda Collins,7,Fixed Fee
+P3007,Go-to-Market Strategy — Summit,C1018,Summit Financial,Financial Services,HR & People,Transformation,2026-03-11,2026-11-18,1491000,54,On Track,David Clark,5,Capped T&M
+P3008,Customer Experience Redesign — Sterling,C1044,Sterling Manufacturing,Manufacturing,Strategy & Growth,Transformation,2025-08-29,2025-11-10,335000,56,On Track,Christina Thompson,5,T&M
+P3009,Customer Experience Redesign — Xavier,C1049,Xavier Technologies,Healthcare,Finance & Risk,Transformation,2025-09-13,2026-03-27,1318000,6,On Track,Matthew Wright,7,Capped T&M
+P3010,Data Analytics Strategy — Fortis,C1005,Fortis Insurance,Public Sector,Strategy & Growth,Assessment,2025-12-29,2026-10-01,705000,88,Ahead of Schedule,Nicole Carter,6,Fixed Fee
+P3011,Revenue Growth Strategy — Global,C1032,Global Asset Corp,Manufacturing,HR & People,Advisory,2026-02-22,2026-11-06,1045000,35,At Risk,Matthew Martin,10,T&M
+P3012,Data Analytics Strategy — Xenon,C1023,Xenon Energy,Public Sector,Technology & Digital,Strategy,2025-07-06,2026-02-23,112000,13,On Track,Christopher Anderson,3,Capped T&M
+P3013,Workforce Planning — Falcon,C1057,Falcon Financial,Retail & Consumer,Technology & Digital,Strategy,2025-11-23,2026-03-27,370000,8,At Risk,Hannah Young,3,Capped T&M
+P3014,Organizational Design — Pacific,C1015,Pacific Healthcare,Retail & Consumer,Strategy & Growth,Implementation,2025-09-05,2026-02-08,1019000,87,On Track,Adam Thomas,4,T&M
+P3015,M&A Integration Strategy — Liberty,C1037,Liberty Financial,Healthcare,Finance & Risk,Assessment,2026-02-18,2026-12-11,1493000,59,At Risk,Thomas Harris,4,Fixed Fee
+P3016,Revenue Growth Strategy — Junction,C1035,Junction Manufacturing,Public Sector,Strategy & Growth,Assessment,2026-01-15,2026-06-09,1494000,38,Ahead of Schedule,Isabella Clark,9,Fixed Fee
+P3017,Organizational Design — Kestrel,C1062,Kestrel Energy,Manufacturing,Operations Excellence,Transformation,2026-01-18,2026-05-03,1004000,18,On Track,Hannah Young,3,T&M
+P3018,Operational Efficiency Review — Horizon,C1033,Horizon Medical,Retail & Consumer,Strategy & Growth,Strategy,2025-08-07,2025-10-24,900000,37,On Hold,Amy Smith,4,Capped T&M
+P3019,Revenue Growth Strategy — Apex,C1000,Apex Financial Corp,Financial Services,Strategy & Growth,Advisory,2025-11-14,2026-02-20,1080000,55,On Track,Amy Smith,9,T&M
+P3020,Data Analytics Strategy — Zenith,C1051,Zenith Healthcare,Retail & Consumer,Strategy & Growth,Advisory,2025-10-24,2025-12-23,638000,66,On Track,Brittany Martin,7,Capped T&M
+P3021,Operational Efficiency Review — Maple,C1038,Maple Healthcare,Manufacturing,Finance & Risk,Transformation,2025-08-16,2026-01-16,848000,48,On Track,Emily Thompson,5,Fixed Fee
+P3022,Revenue Growth Strategy — Sapphire,C1070,Sapphire Financial,Energy & Utilities,Strategy & Growth,Assessment,2025-10-06,2026-02-19,1074000,18,At Risk,Amy Smith,3,Capped T&M
+P3023,Go-to-Market Strategy — Elite,C1056,Elite Energy,Manufacturing,Operations Excellence,Transformation,2025-07-19,2025-11-05,136000,80,On Track,Amanda Evans,10,Capped T&M
+P3024,Data Analytics Strategy — Northern,C1039,Northern Energy Systems,Retail & Consumer,Finance & Risk,Strategy,2026-02-16,2026-04-21,152000,12,On Track,James Collins,3,Fixed Fee
+P3025,Data Analytics Strategy — Oakwood,C1066,Oakwood Manufacturing,Financial Services,Finance & Risk,Implementation,2025-09-15,2026-05-22,911000,14,On Track,Amy Smith,2,T&M
+P3026,Go-to-Market Strategy — Fortis,C1005,Fortis Insurance,Public Sector,Operations Excellence,Strategy,2025-07-08,2025-10-20,986000,44,On Hold,Timothy Flores,4,Capped T&M
+P3027,Cost Reduction Program — Indus,C1008,Indus Technologies,Manufacturing,Strategy & Growth,Implementation,2026-03-12,2026-10-10,1219000,33,On Track,Brenda Evans,7,Capped T&M
+P3028,Cost Reduction Program — Zenith,C1051,Zenith Healthcare,Retail & Consumer,Technology & Digital,Advisory,2025-09-09,2026-01-29,1271000,32,On Hold,Isabella Clark,7,Fixed Fee
+P3029,Go-to-Market Strategy — Pacific,C1015,Pacific Healthcare,Retail & Consumer,Technology & Digital,Implementation,2026-01-29,2026-05-12,1075000,75,On Track,Adam King,2,Fixed Fee
+P3030,Revenue Growth Strategy — Meridian,C1012,Meridian Pharma,Financial Services,HR & People,Implementation,2025-09-19,2025-11-22,1331000,15,On Track,William Evans,6,T&M
+P3031,Risk Framework Assessment — Iris,C1060,Iris Medical,Financial Services,Operations Excellence,Implementation,2025-09-12,2026-04-23,479000,62,On Track,Brenda Collins,4,Capped T&M
+P3032,M&A Integration Strategy — Lighthouse,C1063,Lighthouse Insurance,Retail & Consumer,HR & People,Strategy,2025-12-02,2026-04-30,686000,76,On Track,Christopher Anderson,3,Capped T&M
+P3033,Procurement Optimization — United,C1046,United Financial Services,Energy & Utilities,HR & People,Strategy,2025-10-21,2026-04-17,1178000,89,On Track,Matthew Martin,3,Fixed Fee
+P3034,ERP Implementation Support — Iris,C1060,Iris Medical,Financial Services,Finance & Risk,Assessment,2025-09-20,2026-05-09,1392000,11,At Risk,Hannah Young,8,T&M
+P3035,Regulatory Compliance Audit — Quest,C1042,Quest Healthcare,Financial Services,HR & People,Strategy,2025-07-23,2025-10-17,1137000,73,On Track,Amy Smith,10,Fixed Fee
+P3036,Regulatory Compliance Audit — Jefferson,C1009,Jefferson Medical Center,Retail & Consumer,Operations Excellence,Strategy,2025-12-14,2026-05-30,378000,46,On Track,Timothy Wilson,5,Fixed Fee
+P3037,Risk Framework Assessment — Emerald,C1030,Emerald Retail Group,Financial Services,Finance & Risk,Strategy,2026-01-09,2026-10-24,409000,65,On Track,Brenda Evans,4,Fixed Fee
+P3038,Revenue Growth Strategy — Gemstone,C1058,Gemstone Retail,Energy & Utilities,Operations Excellence,Assessment,2026-01-08,2026-04-12,741000,29,At Risk,Matthew Martin,7,Fixed Fee
+P3039,Operational Efficiency Review — Eagle,C1004,Eagle Energy Group,Energy & Utilities,HR & People,Implementation,2025-11-21,2026-02-23,256000,64,On Track,Victoria Rivera,5,T&M
+P3040,ERP Implementation Support — Union,C1020,Union Pacific Holdings,Manufacturing,HR & People,Implementation,2025-10-26,2026-01-16,676000,71,On Track,Adam King,9,T&M
+P3041,Technology Architecture Review — Junction,C1035,Junction Manufacturing,Public Sector,Strategy & Growth,Advisory,2025-11-04,2026-03-07,558000,79,On Track,Jessica Rodriguez,2,T&M
+P3042,Post-Merger Integration — Fortis,C1005,Fortis Insurance,Public Sector,Strategy & Growth,Strategy,2026-03-16,2026-05-23,696000,55,On Track,Daniel Collins,9,Fixed Fee
+P3043,Digital Transformation Roadmap — Keystone,C1010,Keystone Bank,Energy & Utilities,HR & People,Strategy,2026-01-25,2026-05-20,286000,42,On Track,Joseph Evans,9,Capped T&M
+P3044,Regulatory Compliance Audit — Northern,C1039,Northern Energy Systems,Retail & Consumer,Operations Excellence,Transformation,2025-07-13,2026-01-05,749000,22,Ahead of Schedule,Isabella Clark,7,Capped T&M
+P3045,M&A Integration Strategy — Heritage,C1059,Heritage Bank,Public Sector,Strategy & Growth,Transformation,2026-01-14,2026-10-29,1067000,72,On Track,Nicole Carter,10,Capped T&M
+P3046,Organizational Design — Allstate,C1026,Allstate Logistics,Manufacturing,Strategy & Growth,Assessment,2025-12-19,2026-08-24,1405000,70,Ahead of Schedule,Katherine Sanchez,3,T&M
+P3047,Organizational Design — United,C1046,United Financial Services,Energy & Utilities,Finance & Risk,Strategy,2025-07-21,2025-12-21,613000,87,On Track,Nicole Martin,5,Fixed Fee
+P3048,Data Analytics Strategy — Quest,C1042,Quest Healthcare,Financial Services,Operations Excellence,Implementation,2025-08-28,2026-04-11,770000,79,Ahead of Schedule,Sean Rodriguez,7,T&M
+P3049,Technology Architecture Review — Imperial,C1034,Imperial Bank,Energy & Utilities,HR & People,Advisory,2025-11-19,2026-01-31,189000,49,On Track,Christopher Anderson,3,T&M
+P3050,Supply Chain Optimization — Quartz,C1068,Quartz Energy,Manufacturing,HR & People,Transformation,2026-02-17,2026-09-23,615000,13,On Track,William Evans,3,T&M
+P3051,M&A Integration Strategy — Westfield,C1022,Westfield Consumer Goods,Energy & Utilities,Technology & Digital,Implementation,2025-08-25,2025-12-05,486000,23,On Track,Christopher Anderson,2,T&M
+P3052,Go-to-Market Strategy — Beacon,C1053,Beacon Capital,Public Sector,HR & People,Implementation,2026-02-28,2026-07-26,688000,87,On Track,Amanda Evans,2,Fixed Fee
+P3053,Technology Architecture Review — Oakwood,C1066,Oakwood Manufacturing,Financial Services,Technology & Digital,Advisory,2025-12-23,2026-08-07,1004000,46,On Track,Nicole Martin,9,T&M
+P3054,Go-to-Market Strategy — Maple,C1038,Maple Healthcare,Manufacturing,HR & People,Assessment,2025-12-04,2026-03-17,1205000,34,On Track,Katherine Sanchez,4,T&M
+P3055,ERP Implementation Support — Kingsley,C1036,Kingsley Consumer Brands,Financial Services,Finance & Risk,Implementation,2025-09-21,2026-05-21,849000,28,Ahead of Schedule,David Clark,5,Fixed Fee
+P3056,Change Management Program — Fortis,C1005,Fortis Insurance,Public Sector,Technology & Digital,Strategy,2025-09-03,2026-02-22,465000,28,On Track,Timothy Wilson,7,Fixed Fee
+P3057,Data Analytics Strategy — Vista,C1047,Vista Healthcare,Public Sector,Finance & Risk,Transformation,2025-09-22,2026-04-06,522000,8,On Track,Jessica Rodriguez,9,T&M

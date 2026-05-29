@@ -1,0 +1,101 @@
+project_id,project_name,client_id,client_name,industry,practice,engagement_type,start_date,end_date,contract_value_usd,actual_revenue_usd,cost_usd,margin_pct,on_time_delivery,client_satisfaction_score,engagement_manager,team_size
+P2200,Workforce Planning — Zenith,C1025,Zenith Capital,Healthcare,Operations Excellence,Strategy,2023-06-28,2023-12-10,337000,360000,214000,40.5,True,4.6,Adam Thomas,12
+P2201,Digital Transformation Roadmap — Lighthouse,C1063,Lighthouse Insurance,Retail & Consumer,HR & People,Assessment,2025-01-13,2025-04-04,1030000,992000,714000,28.0,False,4.8,Victoria Wright,9
+P2202,Customer Experience Redesign — Xenon,C1023,Xenon Energy,Public Sector,HR & People,Advisory,2024-03-25,2024-09-14,920000,925000,726000,21.5,True,4.9,Brenda Collins,7
+P2203,Regulatory Compliance Audit — York,C1050,York Capital Management,Manufacturing,Operations Excellence,Assessment,2022-09-04,2023-07-26,595000,537000,340000,36.6,True,4.2,Timothy Wilson,11
+P2204,Data Analytics Strategy — Horizon,C1033,Horizon Medical,Retail & Consumer,Operations Excellence,Assessment,2023-06-23,2023-12-21,382000,370000,208000,43.9,True,4.0,Alyssa Parker,7
+P2205,Regulatory Compliance Audit — Zenith,C1051,Zenith Healthcare,Retail & Consumer,Technology & Digital,Advisory,2023-01-04,2023-12-22,227000,215000,143000,33.5,True,3.7,Mark Johnson,8
+P2206,Go-to-Market Strategy — Walton,C1048,Walton Retail,Financial Services,Operations Excellence,Advisory,2022-11-03,2023-09-01,982000,982000,758000,22.8,False,4.7,Christopher Anderson,7
+P2207,Customer Experience Redesign — Kestrel,C1062,Kestrel Energy,Manufacturing,Technology & Digital,Transformation,2025-02-25,2026-02-10,133000,124000,98000,20.7,True,3.7,Hannah Parker,7
+P2208,HR Operating Model — Horizon,C1033,Horizon Medical,Retail & Consumer,Technology & Digital,Advisory,2025-02-21,2026-02-01,1124000,1016000,762000,25.0,True,4.8,Matthew Martin,11
+P2209,Supply Chain Optimization — Quartz,C1068,Quartz Energy,Manufacturing,Operations Excellence,Transformation,2023-12-29,2024-08-11,834000,873000,601000,31.2,False,3.9,Emily Thompson,12
+P2210,Finance Function Transformation — Summit,C1018,Summit Financial,Financial Services,Operations Excellence,Assessment,2024-05-13,2025-04-30,533000,488000,281000,42.5,True,3.8,Emily Thompson,11
+P2211,Regulatory Compliance Audit — York,C1050,York Capital Management,Manufacturing,Technology & Digital,Assessment,2024-01-14,2025-01-08,663000,619000,432000,30.2,False,3.4,Mark Johnson,3
+P2212,Revenue Growth Strategy — Allstate,C1026,Allstate Logistics,Manufacturing,Operations Excellence,Strategy,2022-07-30,2022-11-15,151000,152000,89000,41.7,True,3.9,William Evans,6
+P2213,Revenue Growth Strategy — Triumph,C1019,Triumph Automotive,Healthcare,Strategy & Growth,Strategy,2023-09-26,2024-03-21,357000,366000,272000,25.7,True,4.7,Joseph Evans,12
+P2214,Post-Merger Integration — Titan,C1045,Titan Energy,Retail & Consumer,Technology & Digital,Advisory,2024-08-14,2025-07-16,1127000,1045000,702000,32.8,False,4.2,Adam King,9
+P2215,Procurement Optimization — Urbane,C1072,Urbane Capital,Financial Services,Finance & Risk,Assessment,2024-12-29,2025-08-04,1098000,1038000,716000,31.0,True,3.8,Alyssa Parker,4
+P2216,Digital Transformation Roadmap — Maple,C1038,Maple Healthcare,Manufacturing,Strategy & Growth,Assessment,2024-12-07,2025-04-15,465000,419000,290000,30.7,False,4.9,Katherine Wilson,2
+P2217,Organizational Design — Diamond,C1055,Diamond Manufacturing,Healthcare,Technology & Digital,Transformation,2023-04-19,2023-06-21,694000,747000,575000,23.1,True,3.6,Matthew Wright,5
+P2218,Technology Architecture Review — Horizon,C1033,Horizon Medical,Retail & Consumer,Strategy & Growth,Assessment,2023-05-06,2024-03-25,936000,994000,571000,42.6,True,3.7,Christina Thompson,8
+P2219,ERP Implementation Support — Yellowstone,C1024,Yellowstone Insurance,Financial Services,Strategy & Growth,Strategy,2022-10-07,2023-05-03,204000,202000,141000,30.3,True,4.1,Timothy Wilson,4
+P2220,Digital Transformation Roadmap — Granite,C1006,Granite Retail Partners,Financial Services,HR & People,Transformation,2023-01-16,2023-05-08,396000,391000,307000,21.4,True,3.4,Brian Nelson,5
+P2221,Supply Chain Optimization — Redwood,C1043,Redwood Capital,Healthcare,Finance & Risk,Assessment,2024-10-17,2025-06-24,599000,579000,351000,39.4,False,4.9,Katherine Sanchez,8
+P2222,Post-Merger Integration — Jefferson,C1009,Jefferson Medical Center,Retail & Consumer,HR & People,Transformation,2023-01-07,2023-06-14,1083000,1057000,795000,24.8,True,5.0,Mark Johnson,9
+P2223,Risk Framework Assessment — Frontier,C1031,Frontier Energy,Healthcare,Strategy & Growth,Implementation,2024-08-01,2024-11-17,664000,660000,366000,44.5,True,3.8,Timothy Wilson,12
+P2224,Procurement Optimization — Fortis,C1005,Fortis Insurance,Public Sector,HR & People,Implementation,2022-09-08,2023-03-16,619000,602000,445000,26.1,True,4.4,Adam Thomas,12
+P2225,Digital Transformation Roadmap — Diamond,C1055,Diamond Manufacturing,Healthcare,Technology & Digital,Advisory,2022-12-09,2023-06-28,735000,697000,497000,28.7,False,4.2,Katherine Wilson,4
+P2226,Workforce Planning — Vista,C1047,Vista Healthcare,Public Sector,Strategy & Growth,Assessment,2022-11-19,2023-09-30,182000,198000,129000,34.7,False,4.3,Katherine Sanchez,12
+P2227,Cost Reduction Program — Triumph,C1019,Triumph Automotive,Healthcare,HR & People,Implementation,2022-09-15,2023-07-21,341000,361000,200000,44.5,False,4.6,Daniel Collins,2
+P2228,Go-to-Market Strategy — Walton,C1048,Walton Retail,Financial Services,Technology & Digital,Advisory,2023-05-29,2023-08-17,624000,598000,420000,29.8,True,3.5,Isabella Clark,7
+P2229,Customer Experience Redesign — Premier,C1041,Premier Insurance,Public Sector,Finance & Risk,Strategy,2025-05-11,2026-04-19,260000,257000,174000,32.3,False,4.2,Timothy Flores,12
+P2230,ERP Implementation Support — Momentum,C1064,Momentum Healthcare,Energy & Utilities,Finance & Risk,Implementation,2022-02-08,2022-10-12,949000,991000,749000,24.4,True,4.2,Matthew Wright,10
+P2231,Go-to-Market Strategy — Lighthouse,C1063,Lighthouse Insurance,Retail & Consumer,HR & People,Implementation,2023-08-03,2024-03-15,539000,495000,363000,26.7,True,3.3,David Rivera,2
+P2232,Post-Merger Integration — Zenith,C1025,Zenith Capital,Healthcare,Strategy & Growth,Assessment,2023-01-28,2023-05-18,116000,113000,73000,35.3,True,4.3,Adam King,2
+P2233,Organizational Design — United,C1046,United Financial Services,Energy & Utilities,Operations Excellence,Assessment,2022-05-26,2022-07-31,1122000,1120000,855000,23.6,False,3.3,Katherine Sanchez,10
+P2234,Operational Efficiency Review — Beacon,C1053,Beacon Capital,Public Sector,Technology & Digital,Strategy,2023-06-29,2024-05-24,126000,121000,97000,19.9,False,4.9,Hannah Parker,5
+P2235,Risk Framework Assessment — Quartz,C1068,Quartz Energy,Manufacturing,Finance & Risk,Advisory,2023-01-31,2023-12-26,816000,889000,592000,33.4,True,4.2,Hannah Parker,7
+P2236,Cost Reduction Program — Gemstone,C1058,Gemstone Retail,Energy & Utilities,Finance & Risk,Assessment,2022-12-08,2023-05-09,696000,718000,491000,31.6,True,4.3,Brittany Martin,10
+P2237,Technology Architecture Review — Premier,C1041,Premier Insurance,Public Sector,Technology & Digital,Assessment,2024-05-31,2025-01-11,761000,717000,479000,33.2,False,4.9,Thomas Harris,9
+P2238,Digital Transformation Roadmap — Falcon,C1057,Falcon Financial,Retail & Consumer,Finance & Risk,Implementation,2022-03-12,2022-10-03,747000,821000,558000,32.0,True,3.7,Sean Rodriguez,7
+P2239,Data Analytics Strategy — Cardinal,C1002,Cardinal Health Systems,Manufacturing,Technology & Digital,Assessment,2024-11-13,2025-10-23,719000,661000,440000,33.4,True,3.5,Thomas Harris,11
+P2240,Customer Experience Redesign — Frontier,C1031,Frontier Energy,Healthcare,Operations Excellence,Implementation,2023-09-08,2023-12-24,719000,678000,452000,33.4,True,3.8,Katherine Wilson,9
+P2241,Organizational Design — Vertex,C1073,Vertex Healthcare,Healthcare,Strategy & Growth,Transformation,2023-09-08,2023-11-26,898000,822000,546000,33.6,True,4.6,Brittany Martin,8
+P2242,Organizational Design — Pacific,C1015,Pacific Healthcare,Retail & Consumer,Operations Excellence,Implementation,2022-01-24,2022-10-06,141000,136000,92000,32.2,True,3.8,Sean Rodriguez,2
+P2243,Organizational Design — York,C1050,York Capital Management,Manufacturing,Finance & Risk,Advisory,2025-03-24,2026-02-05,181000,191000,134000,29.7,True,3.8,Katherine Wilson,2
+P2244,Customer Experience Redesign — Sapphire,C1070,Sapphire Financial,Energy & Utilities,Finance & Risk,Transformation,2022-06-24,2023-03-15,642000,595000,364000,38.9,True,4.2,Amy Smith,12
+P2245,Data Analytics Strategy — Vertex,C1073,Vertex Healthcare,Healthcare,Operations Excellence,Transformation,2024-12-09,2025-06-13,351000,346000,259000,25.2,True,4.2,Adam Thomas,8
+P2246,Risk Framework Assessment — United,C1046,United Financial Services,Energy & Utilities,Technology & Digital,Advisory,2023-10-19,2024-06-11,745000,716000,582000,18.7,False,4.3,Daniel Collins,4
+P2247,Workforce Planning — Elite,C1056,Elite Energy,Manufacturing,Strategy & Growth,Assessment,2023-02-13,2023-10-22,255000,234000,146000,37.7,False,3.6,Jessica Rodriguez,2
+P2248,Supply Chain Optimization — Redwood,C1043,Redwood Capital,Healthcare,Strategy & Growth,Advisory,2024-07-10,2025-05-07,105000,106000,81000,23.6,True,4.1,Thomas Harris,9
+P2249,Revenue Growth Strategy — Summit,C1018,Summit Financial,Financial Services,Strategy & Growth,Transformation,2025-04-08,2026-03-03,129000,123000,95000,22.6,False,4.3,Katherine Sanchez,12
+P2250,Revenue Growth Strategy — BlueCrest,C1001,BlueCrest Capital,Healthcare,Strategy & Growth,Advisory,2023-07-10,2024-03-10,1048000,1125000,917000,18.5,True,3.6,Matthew Wright,3
+P2251,Organizational Design — Orion,C1040,Orion Technologies,Energy & Utilities,Finance & Risk,Advisory,2024-12-24,2025-04-08,289000,287000,197000,31.5,False,3.2,Mark Johnson,6
+P2252,Revenue Growth Strategy — Quest,C1042,Quest Healthcare,Financial Services,Finance & Risk,Assessment,2022-11-18,2023-01-26,468000,480000,348000,27.5,True,5.0,Amy Carter,2
+P2253,Digital Transformation Roadmap — Global,C1032,Global Asset Corp,Manufacturing,Finance & Risk,Advisory,2025-02-10,2025-09-01,333000,326000,237000,27.2,True,4.5,Christopher Anderson,12
+P2254,Workforce Planning — Delta,C1029,Delta Financial,Public Sector,Finance & Risk,Advisory,2025-03-19,2025-08-04,558000,570000,419000,26.4,True,3.4,David Rivera,10
+P2255,Supply Chain Optimization — Zenith,C1025,Zenith Capital,Healthcare,Operations Excellence,Assessment,2024-12-08,2025-04-16,562000,592000,340000,42.5,True,4.2,David Clark,3
+P2256,Cost Reduction Program — Tempest,C1071,Tempest Manufacturing,Public Sector,HR & People,Assessment,2023-01-13,2023-08-23,1020000,924000,721000,21.9,True,5.0,Alyssa Parker,9
+P2257,Risk Framework Assessment — Junction,C1035,Junction Manufacturing,Public Sector,Operations Excellence,Advisory,2022-08-07,2022-12-12,287000,293000,180000,38.6,True,4.2,Sean Rodriguez,5
+P2258,HR Operating Model — Delta,C1029,Delta Financial,Public Sector,Strategy & Growth,Transformation,2022-06-12,2023-04-12,230000,229000,135000,40.8,True,3.5,Matthew Wright,9
+P2259,Risk Framework Assessment — Riverside,C1017,Riverside Manufacturing,Public Sector,Operations Excellence,Implementation,2023-04-09,2023-06-24,538000,584000,326000,44.2,False,3.6,Matthew Martin,3
+P2260,Organizational Design — Westfield,C1022,Westfield Consumer Goods,Energy & Utilities,Finance & Risk,Assessment,2024-09-30,2025-05-14,1051000,1036000,601000,42.0,False,4.3,Matthew Wright,8
+P2261,Data Analytics Strategy — Vertex,C1073,Vertex Healthcare,Healthcare,HR & People,Advisory,2024-12-11,2025-02-28,663000,706000,493000,30.2,True,5.0,Christopher Anderson,8
+P2262,Revenue Growth Strategy — Fortis,C1005,Fortis Insurance,Public Sector,HR & People,Transformation,2024-11-23,2025-02-16,293000,316000,222000,29.9,False,3.7,David Clark,6
+P2263,Go-to-Market Strategy — Granite,C1006,Granite Retail Partners,Financial Services,HR & People,Implementation,2024-08-07,2025-05-25,181000,169000,116000,31.5,True,4.8,Christina Thompson,8
+P2264,Regulatory Compliance Audit — Acme,C1052,Acme Financial,Energy & Utilities,Technology & Digital,Implementation,2022-02-21,2022-07-22,588000,635000,367000,42.2,False,3.4,Timothy Wilson,3
+P2265,Regulatory Compliance Audit — Lakewood,C1011,Lakewood Energy,Public Sector,Strategy & Growth,Advisory,2024-01-14,2024-04-26,667000,706000,506000,28.4,True,4.9,Matthew Wright,8
+P2266,Finance Function Transformation — Fortis,C1005,Fortis Insurance,Public Sector,Operations Excellence,Assessment,2025-03-04,2025-07-18,262000,276000,216000,21.9,True,3.8,Daniel Collins,12
+P2267,Go-to-Market Strategy — Xenon,C1023,Xenon Energy,Public Sector,Strategy & Growth,Advisory,2023-02-20,2023-04-22,777000,771000,580000,24.8,False,4.2,Brian Nelson,9
+P2268,Change Management Program — Emerald,C1030,Emerald Retail Group,Financial Services,Operations Excellence,Implementation,2024-09-01,2025-06-20,539000,550000,439000,20.1,True,4.2,Nicole Martin,2
+P2269,Operational Efficiency Review — Xenon,C1023,Xenon Energy,Public Sector,Operations Excellence,Strategy,2023-12-16,2024-03-03,243000,247000,200000,18.9,True,3.8,William Evans,3
+P2270,ERP Implementation Support — Beacon,C1053,Beacon Capital,Public Sector,Operations Excellence,Strategy,2023-08-06,2024-08-04,721000,788000,527000,33.2,False,3.8,Brenda Collins,6
+P2271,Revenue Growth Strategy — Premier,C1041,Premier Insurance,Public Sector,Technology & Digital,Advisory,2022-05-19,2023-02-21,1025000,1019000,818000,19.8,True,4.7,Victoria Rivera,8
+P2272,Risk Framework Assessment — Pinnacle,C1067,Pinnacle Capital,Healthcare,Operations Excellence,Transformation,2022-04-30,2022-08-23,720000,724000,402000,44.4,True,4.5,Emily Thompson,11
+P2273,Procurement Optimization — Orion,C1040,Orion Technologies,Energy & Utilities,Technology & Digital,Advisory,2025-03-23,2025-11-19,1118000,1117000,731000,34.6,False,4.1,Isabella Clark,5
+P2274,Digital Transformation Roadmap — Liberty,C1037,Liberty Financial,Healthcare,Operations Excellence,Transformation,2022-08-31,2022-11-11,601000,630000,381000,39.5,True,4.3,Alyssa Parker,2
+P2275,Data Analytics Strategy — Quest,C1042,Quest Healthcare,Financial Services,Technology & Digital,Assessment,2023-03-11,2023-05-15,797000,758000,480000,36.6,True,3.7,Nicole Martin,2
+P2276,Finance Function Transformation — Omega,C1014,Omega Asset Management,Manufacturing,Technology & Digital,Transformation,2024-03-22,2025-03-08,770000,720000,585000,18.8,True,3.8,Katherine Wilson,2
+P2277,Go-to-Market Strategy — Riverside,C1017,Riverside Manufacturing,Public Sector,Finance & Risk,Assessment,2024-08-01,2025-07-01,1083000,1151000,800000,30.5,False,3.3,Christopher Anderson,11
+P2278,Data Analytics Strategy — Orion,C1040,Orion Technologies,Energy & Utilities,HR & People,Assessment,2022-02-08,2022-07-24,727000,788000,576000,27.0,False,3.3,Jessica Rodriguez,2
+P2279,Data Analytics Strategy — Redwood,C1043,Redwood Capital,Healthcare,Finance & Risk,Strategy,2022-12-06,2023-11-23,758000,700000,539000,23.1,False,3.8,Timothy Wilson,6
+P2280,Post-Merger Integration — Acme,C1052,Acme Financial,Energy & Utilities,Strategy & Growth,Implementation,2023-05-02,2024-01-07,586000,553000,312000,43.7,True,3.4,Brenda Collins,3
+P2281,Digital Transformation Roadmap — Elite,C1056,Elite Energy,Manufacturing,HR & People,Implementation,2024-09-15,2025-07-28,253000,252000,183000,27.2,False,3.8,Timothy Wilson,3
+P2282,Risk Framework Assessment — Oakwood,C1066,Oakwood Manufacturing,Financial Services,Operations Excellence,Assessment,2022-03-16,2023-01-05,514000,475000,279000,41.3,True,3.3,William Evans,9
+P2283,Procurement Optimization — Fortis,C1005,Fortis Insurance,Public Sector,Strategy & Growth,Advisory,2023-10-02,2023-12-12,727000,784000,577000,26.4,True,3.5,Nicole Carter,7
+P2284,Customer Experience Redesign — Elite,C1056,Elite Energy,Manufacturing,Strategy & Growth,Advisory,2022-11-02,2023-03-22,386000,395000,322000,18.4,True,3.6,Brittany Martin,7
+P2285,Supply Chain Optimization — Imperial,C1034,Imperial Bank,Energy & Utilities,Operations Excellence,Transformation,2025-03-21,2025-09-22,272000,293000,216000,26.4,True,3.3,Joseph Evans,12
+P2286,Revenue Growth Strategy — Granite,C1006,Granite Retail Partners,Financial Services,Strategy & Growth,Advisory,2022-04-21,2022-08-03,558000,569000,439000,22.8,True,4.7,Daniel Collins,7
+P2287,Risk Framework Assessment — Northern,C1039,Northern Energy Systems,Retail & Consumer,Technology & Digital,Strategy,2024-12-28,2025-04-07,1171000,1163000,716000,38.4,True,4.7,Timothy Flores,9
+P2288,Post-Merger Integration — Northern,C1039,Northern Energy Systems,Retail & Consumer,Finance & Risk,Assessment,2023-04-20,2023-10-11,241000,229000,132000,42.2,True,3.5,Victoria Rivera,9
+P2289,M&A Integration Strategy — Kestrel,C1062,Kestrel Energy,Manufacturing,Strategy & Growth,Advisory,2024-08-31,2024-12-26,474000,443000,308000,30.5,False,4.3,David Rivera,3
+P2290,Finance Function Transformation — Zenith,C1051,Zenith Healthcare,Retail & Consumer,Strategy & Growth,Implementation,2025-02-12,2025-05-19,968000,949000,642000,32.4,True,4.3,Nicole Martin,9
+P2291,Finance Function Transformation — Xavier,C1049,Xavier Technologies,Healthcare,Strategy & Growth,Strategy,2023-03-03,2024-02-28,563000,571000,317000,44.5,True,4.4,Isabella Clark,11
+P2292,Change Management Program — Kestrel,C1062,Kestrel Energy,Manufacturing,Strategy & Growth,Advisory,2025-05-05,2026-02-26,444000,439000,348000,20.6,True,3.9,Hannah Parker,8
+P2293,Operational Efficiency Review — Premier,C1041,Premier Insurance,Public Sector,Finance & Risk,Implementation,2022-07-05,2022-12-23,995000,1075000,624000,42.0,True,3.2,Jessica Rodriguez,9
+P2294,Revenue Growth Strategy — Quartz,C1068,Quartz Energy,Manufacturing,Technology & Digital,Transformation,2025-03-29,2026-01-11,299000,288000,183000,36.4,True,4.8,Isabella Johnson,7
+P2295,Digital Transformation Roadmap — Lakewood,C1011,Lakewood Energy,Public Sector,HR & People,Advisory,2024-11-11,2025-08-04,1029000,939000,554000,41.0,False,4.9,Brian Nelson,7
+P2296,Digital Transformation Roadmap — Omega,C1014,Omega Asset Management,Manufacturing,Technology & Digital,Implementation,2023-04-27,2024-02-02,866000,834000,595000,28.6,True,3.9,Christina Thompson,12
+P2297,Go-to-Market Strategy — Westfield,C1022,Westfield Consumer Goods,Energy & Utilities,Finance & Risk,Implementation,2023-01-21,2023-12-31,511000,546000,311000,43.0,True,5.0,David Rivera,2
+P2298,Go-to-Market Strategy — Jefferson,C1009,Jefferson Medical Center,Retail & Consumer,Strategy & Growth,Advisory,2024-09-23,2025-07-03,1172000,1087000,851000,21.7,False,4.7,Brenda Evans,4
+P2299,Technology Architecture Review — Gemstone,C1058,Gemstone Retail,Energy & Utilities,HR & People,Advisory,2025-02-04,2025-11-21,511000,503000,382000,24.1,True,4.1,Mark Johnson,6

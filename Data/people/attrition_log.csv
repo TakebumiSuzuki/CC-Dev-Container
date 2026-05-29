@@ -1,0 +1,33 @@
+emp_id,name,grade,practice,hire_date,termination_date,tenure_months,type,destination,reason
+1501,Jeffrey Davis,Analyst,Strategy & Growth,2026-03-13,2026-01-04,3,Voluntary,McKinsey & Company,Competitor offer
+1504,Joshua Anderson,Analyst,Finance & Risk,2026-03-23,2024-05-23,3,Voluntary,In-house strategy role,Personal reasons
+1507,Jennifer Reed,Analyst,Finance & Risk,2024-11-12,2023-04-01,3,Voluntary,Unknown,Performance
+1510,Matthew Wilson,Analyst,Technology & Digital,2026-03-25,2025-03-29,3,Involuntary,In-house strategy role,Internal transfer
+1513,Stephanie Adams,Analyst,Finance & Risk,2025-05-16,2025-05-31,3,Voluntary,McKinsey & Company,Graduate school
+1516,Jessica Carter,Analyst,Strategy & Growth,2026-12-15,2024-03-30,3,Voluntary,Startup,Relocation
+1519,Christopher Ramirez,Analyst,Operations Excellence,2026-09-14,2026-03-24,3,Voluntary,In-house strategy role,Career change
+1522,Brittany White,Consultant,Technology & Digital,2026-10-18,2025-08-06,3,Involuntary,Startup,Performance
+1525,Chloe Martin,Consultant,Finance & Risk,2022-08-20,2025-10-21,38,Voluntary,McKinsey & Company,Career change
+1528,Madison Perez,Consultant,Strategy & Growth,2024-12-08,2023-08-03,3,Voluntary,McKinsey & Company,Competitor offer
+1531,Madison Campbell,Consultant,Strategy & Growth,2025-06-23,2023-10-18,3,Voluntary,In-house strategy role,Career change
+1534,Emma Wright,Consultant,Strategy & Growth,2025-07-28,2024-02-28,3,Voluntary,In-house strategy role,Career change
+1537,Ashley Gonzalez,Consultant,Technology & Digital,2024-10-04,2023-07-19,3,Voluntary,Unknown,Career change
+1540,Megan Davis,Consultant,HR & People,2024-02-11,2024-10-15,8,Voluntary,McKinsey & Company,Internal transfer
+1543,James Robinson,Consultant,HR & People,2026-10-03,2023-08-24,3,Voluntary,In-house strategy role,Performance
+1546,Brittany Nelson,Senior Consultant,Strategy & Growth,2026-02-24,2023-08-12,3,Voluntary,Bain & Company,Performance
+1549,Jeffrey Ramirez,Senior Consultant,Technology & Digital,2024-03-07,2024-05-14,3,Voluntary,Startup,Personal reasons
+1552,Ashley Ramirez,Senior Consultant,Operations Excellence,2024-01-21,2024-11-08,9,Voluntary,Private equity,Personal reasons
+1555,Amanda Mitchell,Senior Consultant,Technology & Digital,2024-03-22,2025-04-09,12,Voluntary,Bain & Company,Performance
+1558,Nicole Edwards,Senior Consultant,Strategy & Growth,2021-09-18,2025-06-04,45,Voluntary,Unknown,Relocation
+1561,Eric Allen,Senior Consultant,Strategy & Growth,2024-01-23,2024-02-09,3,Voluntary,Private equity,Career change
+1564,Megan Hall,Senior Consultant,Technology & Digital,2025-08-04,2023-01-10,3,Voluntary,Bain & Company,Graduate school
+1567,Olivia Wilson,Senior Consultant,HR & People,2021-02-13,2023-05-09,27,Voluntary,Internal - other office,Internal transfer
+1570,Brenda Collins,Manager,Strategy & Growth,2023-12-23,2026-01-04,24,Voluntary,In-house strategy role,Personal reasons
+1573,William Evans,Manager,Finance & Risk,2019-11-10,2025-07-26,69,Voluntary,Unknown,Internal transfer
+1576,David Rivera,Manager,Technology & Digital,2021-06-13,2025-09-29,52,Voluntary,Unknown,Graduate school
+1579,Isabella Clark,Manager,Finance & Risk,2020-09-01,2025-03-06,54,Voluntary,Startup,Competitor offer
+1582,Sean Rodriguez,Manager,HR & People,2020-10-30,2024-12-13,50,Voluntary,Private equity,Relocation
+1585,Nicole Carter,Manager,Finance & Risk,2019-01-10,2023-12-20,60,Involuntary,Unknown,Internal transfer
+1588,Timothy Wilson,Senior Manager,Finance & Risk,2024-11-06,2024-09-01,3,Involuntary,Startup,Competitor offer
+1591,Jason Parker,Senior Manager,Operations Excellence,2025-10-17,2023-10-02,3,Voluntary,Bain & Company,Graduate school
+1594,Alyssa Parker,Senior Manager,Finance & Risk,2024-09-24,2023-08-28,3,Voluntary,Unknown,Personal reasons

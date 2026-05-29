@@ -1,0 +1,76 @@
+client_id,client_name,industry,region,relationship_start,account_manager,ltm_revenue_usd,contract_type,nps_score,status,active_projects,total_projects_lifetime
+C1000,Apex Financial Corp,Financial Services,Southeast,2020-08-12,David Rivera,2585000,Project-based,55,Inactive,1,5
+C1001,BlueCrest Capital,Healthcare,Midwest,2018-10-10,Alyssa Parker,2168000,Master Service Agreement,70,Active,3,15
+C1002,Cardinal Health Systems,Manufacturing,Northeast,2023-02-08,Jason Parker,2256000,Master Service Agreement,31,Active,3,16
+C1003,Dellworth Manufacturing,Retail & Consumer,Midwest,2022-07-11,Brittany Martin,157000,Spot,31,Active,0,18
+C1004,Eagle Energy Group,Energy & Utilities,West Coast,2018-06-11,Emily Thompson,2716000,Master Service Agreement,47,Active,2,18
+C1005,Fortis Insurance,Public Sector,International,2017-06-18,Brenda Collins,1650000,Retainer,82,Active,0,15
+C1006,Granite Retail Partners,Financial Services,Northeast,2017-05-23,Brenda Evans,2613000,Retainer,40,Active,1,5
+C1007,Harbor Logistics,Healthcare,Midwest,2017-10-13,Thomas Harris,2467000,Master Service Agreement,55,Active,0,12
+C1008,Indus Technologies,Manufacturing,Southeast,2016-07-31,Brenda Evans,1200000,Project-based,59,Active,0,4
+C1009,Jefferson Medical Center,Retail & Consumer,Northeast,2018-05-24,Brian Nelson,1414000,Spot,36,Active,0,11
+C1010,Keystone Bank,Energy & Utilities,Northeast,2020-09-25,William Evans,1989000,Spot,81,Active,0,4
+C1011,Lakewood Energy,Public Sector,Midwest,2020-02-14,Jessica Rodriguez,2485000,Project-based,37,Active,0,17
+C1012,Meridian Pharma,Financial Services,International,2016-02-04,Jessica Rodriguez,1767000,Project-based,41,Active,3,15
+C1013,Northgate Retail,Healthcare,Southeast,2016-12-21,Brittany Martin,2526000,Spot,37,Active,3,11
+C1014,Omega Asset Management,Manufacturing,Southeast,2018-10-11,Joseph Evans,884000,Master Service Agreement,30,Active,2,7
+C1015,Pacific Healthcare,Retail & Consumer,International,2022-10-21,Mark Johnson,1500000,Retainer,70,Active,3,13
+C1016,Quantum Computing Inc,Energy & Utilities,Northeast,2018-09-14,Jason Parker,1474000,Retainer,29,Active,2,5
+C1017,Riverside Manufacturing,Public Sector,West Coast,2022-05-17,Joseph Evans,1265000,Retainer,42,Active,4,3
+C1018,Summit Financial,Financial Services,Northeast,2018-12-09,Amy Carter,722000,Spot,27,Inactive,2,17
+C1019,Triumph Automotive,Healthcare,West Coast,2020-09-30,Nicole Carter,2010000,Project-based,30,Active,0,10
+C1020,Union Pacific Holdings,Manufacturing,Northeast,2021-09-25,Adam King,2590000,Spot,39,Active,0,10
+C1021,Vector Technologies,Retail & Consumer,West Coast,2018-09-04,Timothy Flores,303000,Retainer,31,Inactive,4,2
+C1022,Westfield Consumer Goods,Energy & Utilities,Midwest,2023-06-21,Brian Nelson,2115000,Project-based,42,Active,1,16
+C1023,Xenon Energy,Public Sector,Midwest,2021-11-12,Nicole Carter,1521000,Project-based,53,Active,0,1
+C1024,Yellowstone Insurance,Financial Services,Midwest,2020-10-24,Amy Smith,871000,Retainer,28,Active,3,17
+C1025,Zenith Capital,Healthcare,Midwest,2016-08-15,Hannah Parker,1474000,Master Service Agreement,41,Active,4,4
+C1026,Allstate Logistics,Manufacturing,Southeast,2021-09-15,Jason Parker,157000,Spot,21,Active,3,5
+C1027,Brightwood Healthcare,Retail & Consumer,Southeast,2016-05-24,Alyssa Parker,1615000,Project-based,73,Active,2,9
+C1028,Coastal Manufacturing,Energy & Utilities,Northeast,2022-05-30,Isabella Clark,1138000,Retainer,84,Active,1,17
+C1029,Delta Financial,Public Sector,Northeast,2020-06-30,Timothy Wilson,333000,Master Service Agreement,79,Inactive,0,18
+C1030,Emerald Retail Group,Financial Services,West Coast,2016-02-02,Mark Johnson,1128000,Master Service Agreement,57,Active,3,12
+C1031,Frontier Energy,Healthcare,International,2021-07-13,Jessica Rodriguez,2794000,Project-based,45,Active,0,14
+C1032,Global Asset Corp,Manufacturing,Northeast,2018-08-12,Matthew Wright,1585000,Retainer,21,Inactive,2,4
+C1033,Horizon Medical,Retail & Consumer,Southeast,2021-12-10,Jessica Rodriguez,2755000,Retainer,73,Active,2,3
+C1034,Imperial Bank,Energy & Utilities,Northeast,2018-08-06,Timothy Flores,2528000,Master Service Agreement,72,Active,0,4
+C1035,Junction Manufacturing,Public Sector,International,2017-06-30,Brenda Evans,1839000,Retainer,70,Active,1,8
+C1036,Kingsley Consumer Brands,Financial Services,Midwest,2018-12-05,Timothy Wilson,2405000,Master Service Agreement,70,Active,3,9
+C1037,Liberty Financial,Healthcare,Southeast,2016-11-01,Jessica Rodriguez,2650000,Retainer,37,Active,0,6
+C1038,Maple Healthcare,Manufacturing,West Coast,2021-03-23,Daniel Collins,982000,Project-based,35,Active,2,15
+C1039,Northern Energy Systems,Retail & Consumer,Midwest,2017-05-06,Hannah Young,390000,Retainer,58,Inactive,2,5
+C1040,Orion Technologies,Energy & Utilities,Northeast,2018-10-13,Thomas Harris,2716000,Master Service Agreement,70,Active,1,1
+C1041,Premier Insurance,Public Sector,West Coast,2021-01-26,David Rivera,1623000,Retainer,51,Active,0,1
+C1042,Quest Healthcare,Financial Services,Northeast,2018-06-29,Adam King,496000,Retainer,71,Active,4,9
+C1043,Redwood Capital,Healthcare,Northeast,2016-03-30,David Rivera,2792000,Spot,45,Inactive,0,11
+C1044,Sterling Manufacturing,Manufacturing,Northeast,2016-06-23,James Collins,2647000,Spot,26,Active,3,1
+C1045,Titan Energy,Retail & Consumer,West Coast,2020-10-13,Nicole Carter,608000,Master Service Agreement,47,Inactive,3,5
+C1046,United Financial Services,Energy & Utilities,Northeast,2022-11-20,Alyssa Parker,1791000,Spot,51,Active,4,16
+C1047,Vista Healthcare,Public Sector,Northeast,2016-12-25,Christina Thompson,891000,Project-based,37,Active,0,13
+C1048,Walton Retail,Financial Services,Midwest,2021-05-18,Matthew Wright,1593000,Master Service Agreement,82,Active,2,6
+C1049,Xavier Technologies,Healthcare,Northeast,2019-07-30,Katherine Sanchez,1732000,Master Service Agreement,23,Inactive,3,17
+C1050,York Capital Management,Manufacturing,Midwest,2022-07-20,Nicole Carter,2799000,Project-based,40,Active,4,2
+C1051,Zenith Healthcare,Retail & Consumer,Southeast,2022-06-16,Isabella Clark,2393000,Project-based,69,Active,1,11
+C1052,Acme Financial,Energy & Utilities,Midwest,2022-08-20,Victoria Wright,225000,Project-based,65,Inactive,1,16
+C1053,Beacon Capital,Public Sector,International,2019-06-19,Sean Rodriguez,615000,Project-based,24,Active,0,17
+C1054,Century Healthcare,Financial Services,West Coast,2016-01-03,Isabella Clark,1029000,Master Service Agreement,45,Active,2,2
+C1055,Diamond Manufacturing,Healthcare,Northeast,2017-08-28,Amanda Evans,1705000,Master Service Agreement,38,Active,2,13
+C1056,Elite Energy,Manufacturing,International,2017-02-17,Brenda Evans,1042000,Project-based,61,Active,3,11
+C1057,Falcon Financial,Retail & Consumer,Southeast,2022-04-20,Matthew Wright,1988000,Project-based,65,Active,2,10
+C1058,Gemstone Retail,Energy & Utilities,Southeast,2017-12-28,Isabella Clark,2081000,Retainer,70,Inactive,4,11
+C1059,Heritage Bank,Public Sector,International,2018-06-23,Victoria Rivera,1845000,Project-based,33,Inactive,0,8
+C1060,Iris Medical,Financial Services,Midwest,2019-08-01,Daniel Collins,595000,Master Service Agreement,31,Inactive,0,9
+C1061,Jade Capital,Healthcare,Southeast,2018-10-19,Brian Nelson,1987000,Retainer,64,Active,0,13
+C1062,Kestrel Energy,Manufacturing,West Coast,2020-09-14,Brittany Martin,2718000,Spot,72,Active,4,13
+C1063,Lighthouse Insurance,Retail & Consumer,Northeast,2021-05-17,Brenda Collins,2240000,Retainer,48,Active,2,1
+C1064,Momentum Healthcare,Energy & Utilities,Midwest,2018-12-05,David Clark,2672000,Spot,29,Active,0,18
+C1065,Nexus Financial,Public Sector,Northeast,2019-10-16,David Clark,1724000,Spot,81,Active,4,14
+C1066,Oakwood Manufacturing,Financial Services,Southeast,2016-08-07,Nicole Martin,418000,Spot,46,Inactive,4,9
+C1067,Pinnacle Capital,Healthcare,Midwest,2019-05-03,Jessica Rodriguez,780000,Spot,26,Active,0,12
+C1068,Quartz Energy,Manufacturing,Northeast,2020-10-17,Hannah Young,382000,Retainer,81,Active,1,10
+C1069,Radiant Healthcare,Retail & Consumer,Northeast,2021-04-23,Amy Smith,2386000,Spot,59,Active,2,3
+C1070,Sapphire Financial,Energy & Utilities,International,2020-05-06,Brenda Collins,640000,Spot,68,Active,2,15
+C1071,Tempest Manufacturing,Public Sector,West Coast,2018-12-14,Hannah Parker,750000,Project-based,54,Active,0,12
+C1072,Urbane Capital,Financial Services,International,2020-08-22,Christopher Anderson,2722000,Spot,49,Active,3,18
+C1073,Vertex Healthcare,Healthcare,West Coast,2022-06-03,Brenda Collins,2486000,Spot,80,Active,4,17
+C1074,Wyndham Financial,Manufacturing,International,2022-12-15,Hannah Young,541000,Project-based,77,Active,1,5

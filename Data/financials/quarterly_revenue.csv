@@ -1,0 +1,71 @@
+year,quarter,practice,revenue_usd,yoy_growth_pct
+2023,Q1,Finance & Risk,1377300,
+2023,Q1,HR & People,911700,
+2023,Q1,Operations Excellence,1534600,
+2023,Q1,Strategy & Growth,1594600,
+2023,Q1,Technology & Digital,2147800,
+2023,Q2,Finance & Risk,1582800,
+2023,Q2,HR & People,1054500,
+2023,Q2,Operations Excellence,1692300,
+2023,Q2,Strategy & Growth,1909000,
+2023,Q2,Technology & Digital,2427200,
+2023,Q3,Finance & Risk,1453800,
+2023,Q3,HR & People,991100,
+2023,Q3,Operations Excellence,1672200,
+2023,Q3,Strategy & Growth,1764000,
+2023,Q3,Technology & Digital,2285600,
+2023,Q4,Finance & Risk,1617600,
+2023,Q4,HR & People,1075000,
+2023,Q4,Operations Excellence,1791600,
+2023,Q4,Strategy & Growth,1972000,
+2023,Q4,Technology & Digital,2548300,
+2024,Q1,Finance & Risk,1497100,8.7
+2024,Q1,HR & People,1058200,16.1
+2024,Q1,Operations Excellence,1701500,10.9
+2024,Q1,Strategy & Growth,1905400,19.5
+2024,Q1,Technology & Digital,2413300,12.4
+2024,Q2,Finance & Risk,1834000,15.9
+2024,Q2,HR & People,1193400,13.2
+2024,Q2,Operations Excellence,2049200,21.1
+2024,Q2,Strategy & Growth,2284300,19.7
+2024,Q2,Technology & Digital,2871800,18.3
+2024,Q3,Finance & Risk,1694500,16.6
+2024,Q3,HR & People,1170200,18.1
+2024,Q3,Operations Excellence,1877400,12.3
+2024,Q3,Strategy & Growth,2165900,22.8
+2024,Q3,Technology & Digital,2674700,17.0
+2024,Q4,Finance & Risk,1834000,13.4
+2024,Q4,HR & People,1218900,13.4
+2024,Q4,Operations Excellence,2057900,14.9
+2024,Q4,Strategy & Growth,2259700,14.6
+2024,Q4,Technology & Digital,2912900,14.3
+2025,Q1,Finance & Risk,1743400,16.5
+2025,Q1,HR & People,1171300,10.7
+2025,Q1,Operations Excellence,1936800,13.8
+2025,Q1,Strategy & Growth,2165700,13.7
+2025,Q1,Technology & Digital,2770100,14.8
+2025,Q2,Finance & Risk,2036700,11.1
+2025,Q2,HR & People,1374700,15.2
+2025,Q2,Operations Excellence,2342100,14.3
+2025,Q2,Strategy & Growth,2573400,12.7
+2025,Q2,Technology & Digital,3169600,10.4
+2025,Q3,Finance & Risk,1919300,13.3
+2025,Q3,HR & People,1315300,12.4
+2025,Q3,Operations Excellence,2105700,12.2
+2025,Q3,Strategy & Growth,2362100,9.1
+2025,Q3,Technology & Digital,3024900,13.1
+2025,Q4,Finance & Risk,2071700,13.0
+2025,Q4,HR & People,1380600,13.3
+2025,Q4,Operations Excellence,2341500,13.8
+2025,Q4,Strategy & Growth,2545800,12.7
+2025,Q4,Technology & Digital,3332300,14.4
+2026,Q1,Finance & Risk,1863000,6.9
+2026,Q1,HR & People,1217500,3.9
+2026,Q1,Operations Excellence,2064700,6.6
+2026,Q1,Strategy & Growth,2269500,4.8
+2026,Q1,Technology & Digital,2934000,5.9
+2026,Q2,Finance & Risk,737000,-63.8
+2026,Q2,HR & People,475500,-65.4
+2026,Q2,Operations Excellence,797800,-65.9
+2026,Q2,Strategy & Growth,836200,-67.5
+2026,Q2,Technology & Digital,1085400,-65.8

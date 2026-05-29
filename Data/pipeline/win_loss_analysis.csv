@@ -1,0 +1,73 @@
+opportunity_id,client_name,industry,practice,deal_value_usd,outcome,close_date,primary_competitor,reason,engagement_type,source
+OPP5000,Summit Financial,Financial Services,Operations Excellence,1019000,Lost,2025-02-03,Accenture,Relationship gap,Transformation,Outbound
+OPP5001,Heritage Bank,Public Sector,Operations Excellence,1210000,Won,2024-08-15,Deloitte,Best proposal quality,Transformation,RFP
+OPP5002,Walton Retail,Financial Services,Operations Excellence,1532000,Lost,2024-12-20,PwC,Price too high,Implementation,Existing relationship
+OPP5003,York Capital Management,Manufacturing,HR & People,1512000,Won,2023-09-09,PwC,Relevant expertise,Implementation,RFP
+OPP5004,Redwood Capital,Healthcare,Finance & Risk,1765000,Lost,2024-06-19,PwC,Competitor brand preference,Assessment,RFP
+OPP5005,Quest Healthcare,Financial Services,Operations Excellence,1654000,Won,2023-02-02,Deloitte,Faster mobilization,Transformation,Existing relationship
+OPP5006,Westfield Consumer Goods,Energy & Utilities,Finance & Risk,1045000,Lost,2025-04-26,Oliver Wyman,Relationship gap,Strategy,Existing relationship
+OPP5007,Elite Energy,Manufacturing,Finance & Risk,700000,Lost,2023-09-10,KPMG,Timing,Implementation,Existing relationship
+OPP5008,Vista Healthcare,Public Sector,Operations Excellence,856000,Won,2024-01-31,Deloitte,Competitive price,Assessment,Referral
+OPP5009,Maple Healthcare,Manufacturing,Finance & Risk,498000,Won,2024-03-28,KPMG,Best proposal quality,Assessment,Outbound
+OPP5010,Allstate Logistics,Manufacturing,Finance & Risk,433000,Lost,2023-01-15,McKinsey & Company,Scope misalignment,Advisory,Outbound
+OPP5011,Yellowstone Insurance,Financial Services,HR & People,1243000,Won,2026-03-04,BCG,Best proposal quality,Advisory,Referral
+OPP5012,Quantum Computing Inc,Energy & Utilities,Operations Excellence,1687000,Lost,2024-06-15,PwC,Competitor brand preference,Strategy,RFP
+OPP5013,Gemstone Retail,Energy & Utilities,Strategy & Growth,1694000,Lost,2023-01-05,KPMG,Timing,Transformation,RFP
+OPP5014,Oakwood Manufacturing,Financial Services,HR & People,942000,Won,2025-08-13,Deloitte,Innovation in approach,Implementation,Existing relationship
+OPP5015,Beacon Capital,Public Sector,Strategy & Growth,863000,Won,2025-12-26,Oliver Wyman,Prior relationship,Assessment,Existing relationship
+OPP5016,Dellworth Manufacturing,Retail & Consumer,Finance & Risk,1763000,Lost,2024-04-07,McKinsey & Company,Competitor brand preference,Implementation,Referral
+OPP5017,Indus Technologies,Manufacturing,Finance & Risk,147000,Won,2023-07-18,Deloitte,Faster mobilization,Assessment,RFP
+OPP5018,Iris Medical,Financial Services,Strategy & Growth,1730000,Won,2024-05-03,KPMG,Faster mobilization,Implementation,Existing relationship
+OPP5019,Elite Energy,Manufacturing,HR & People,1163000,Lost,2023-07-15,McKinsey & Company,Price too high,Strategy,Existing relationship
+OPP5020,Indus Technologies,Manufacturing,Finance & Risk,205000,Won,2023-09-19,Deloitte,Competitive price,Advisory,Outbound
+OPP5021,Harbor Logistics,Healthcare,Finance & Risk,189000,Won,2026-02-19,Oliver Wyman,Best proposal quality,Advisory,Outbound
+OPP5022,BlueCrest Capital,Healthcare,Finance & Risk,753000,Won,2025-07-17,McKinsey & Company,Competitive price,Strategy,Outbound
+OPP5023,Yellowstone Insurance,Financial Services,HR & People,275000,Lost,2023-08-10,McKinsey & Company,Relationship gap,Implementation,Referral
+OPP5024,Global Asset Corp,Manufacturing,HR & People,816000,Lost,2024-12-28,None / Internal,Competitor brand preference,Implementation,Referral
+OPP5025,Harbor Logistics,Healthcare,Finance & Risk,630000,Lost,2023-09-19,KPMG,Scope misalignment,Advisory,Referral
+OPP5026,Northern Energy Systems,Retail & Consumer,Strategy & Growth,595000,Won,2024-12-03,BCG,Best proposal quality,Implementation,Existing relationship
+OPP5027,Zenith Capital,Healthcare,Operations Excellence,1189000,Lost,2024-02-15,McKinsey & Company,Scope misalignment,Implementation,Outbound
+OPP5028,Heritage Bank,Public Sector,HR & People,1548000,Lost,2024-11-09,KPMG,Relationship gap,Assessment,Outbound
+OPP5029,Northgate Retail,Healthcare,Strategy & Growth,1589000,Won,2025-07-19,None / Internal,Prior relationship,Strategy,Referral
+OPP5030,Heritage Bank,Public Sector,Technology & Digital,506000,Lost,2024-03-12,Oliver Wyman,Competitor brand preference,Transformation,Referral
+OPP5031,Apex Financial Corp,Financial Services,Technology & Digital,117000,Lost,2025-01-13,Deloitte,Relationship gap,Strategy,Referral
+OPP5032,Yellowstone Insurance,Financial Services,Strategy & Growth,175000,Won,2025-01-07,Accenture,Prior relationship,Assessment,Referral
+OPP5033,Horizon Medical,Retail & Consumer,HR & People,678000,Won,2023-12-23,Accenture,Prior relationship,Implementation,Existing relationship
+OPP5034,Horizon Medical,Retail & Consumer,Operations Excellence,136000,Won,2023-07-27,Oliver Wyman,Innovation in approach,Strategy,RFP
+OPP5035,Northern Energy Systems,Retail & Consumer,Technology & Digital,508000,Lost,2025-07-23,BCG,Relationship gap,Advisory,Outbound
+OPP5036,Indus Technologies,Manufacturing,Operations Excellence,346000,Lost,2023-08-31,Accenture,Competitor brand preference,Advisory,Outbound
+OPP5037,Orion Technologies,Energy & Utilities,Operations Excellence,1761000,Lost,2025-05-29,Deloitte,Relationship gap,Advisory,Referral
+OPP5038,Liberty Financial,Healthcare,Strategy & Growth,657000,Lost,2023-11-01,PwC,Competitor brand preference,Advisory,Outbound
+OPP5039,Keystone Bank,Energy & Utilities,HR & People,1445000,Won,2025-08-21,McKinsey & Company,Prior relationship,Advisory,Outbound
+OPP5040,Nexus Financial,Public Sector,Finance & Risk,948000,Lost,2025-02-05,BCG,Scope misalignment,Assessment,Outbound
+OPP5041,Lighthouse Insurance,Retail & Consumer,Finance & Risk,556000,Lost,2025-08-28,Deloitte,Competitor brand preference,Implementation,Referral
+OPP5042,Emerald Retail Group,Financial Services,Finance & Risk,472000,Lost,2025-03-21,Oliver Wyman,Relationship gap,Implementation,RFP
+OPP5043,Keystone Bank,Energy & Utilities,Technology & Digital,1378000,Won,2023-10-03,None / Internal,Faster mobilization,Assessment,Referral
+OPP5044,Heritage Bank,Public Sector,Finance & Risk,1156000,Lost,2025-11-15,None / Internal,Timing,Transformation,Outbound
+OPP5045,Lighthouse Insurance,Retail & Consumer,Strategy & Growth,564000,Won,2024-10-11,BCG,Relevant expertise,Implementation,RFP
+OPP5046,Titan Energy,Retail & Consumer,HR & People,601000,Lost,2023-06-18,McKinsey & Company,Scope misalignment,Implementation,Existing relationship
+OPP5047,United Financial Services,Energy & Utilities,Technology & Digital,1028000,Won,2023-03-20,Accenture,Innovation in approach,Assessment,RFP
+OPP5048,Junction Manufacturing,Public Sector,Operations Excellence,1300000,Won,2024-01-26,PwC,Best proposal quality,Assessment,RFP
+OPP5049,Zenith Healthcare,Retail & Consumer,Strategy & Growth,1497000,Lost,2025-04-10,None / Internal,Lost to internal team,Advisory,Referral
+OPP5050,Delta Financial,Public Sector,Operations Excellence,1330000,Lost,2024-04-09,None / Internal,Competitor brand preference,Advisory,Outbound
+OPP5051,Heritage Bank,Public Sector,Technology & Digital,1446000,Lost,2024-11-28,Accenture,Timing,Transformation,Referral
+OPP5052,Tempest Manufacturing,Public Sector,HR & People,737000,Lost,2023-03-03,BCG,Scope misalignment,Strategy,Outbound
+OPP5053,Titan Energy,Retail & Consumer,Finance & Risk,483000,Lost,2024-11-26,Oliver Wyman,Lost to internal team,Advisory,RFP
+OPP5054,Cardinal Health Systems,Manufacturing,Operations Excellence,1435000,Won,2026-03-08,BCG,Competitive price,Advisory,Outbound
+OPP5055,Allstate Logistics,Manufacturing,Finance & Risk,208000,Lost,2025-03-11,Accenture,Timing,Strategy,RFP
+OPP5056,Falcon Financial,Retail & Consumer,Strategy & Growth,259000,Lost,2024-09-15,BCG,Price too high,Advisory,Outbound
+OPP5057,Zenith Capital,Healthcare,Finance & Risk,1649000,Won,2023-05-23,PwC,Prior relationship,Implementation,RFP
+OPP5058,Indus Technologies,Manufacturing,HR & People,198000,Lost,2025-07-20,Deloitte,Competitor brand preference,Assessment,Outbound
+OPP5059,Omega Asset Management,Manufacturing,Finance & Risk,1012000,Won,2023-09-22,McKinsey & Company,Relevant expertise,Implementation,Referral
+OPP5060,Northern Energy Systems,Retail & Consumer,Finance & Risk,1490000,Lost,2025-06-04,BCG,Relationship gap,Advisory,RFP
+OPP5061,Momentum Healthcare,Energy & Utilities,Strategy & Growth,568000,Lost,2025-07-28,BCG,Timing,Strategy,Outbound
+OPP5062,Frontier Energy,Healthcare,HR & People,659000,Lost,2025-12-12,None / Internal,Timing,Transformation,Existing relationship
+OPP5063,Kingsley Consumer Brands,Financial Services,Technology & Digital,690000,Lost,2025-07-23,Oliver Wyman,Relationship gap,Implementation,Outbound
+OPP5064,Diamond Manufacturing,Healthcare,Operations Excellence,754000,Won,2025-07-26,McKinsey & Company,Relevant expertise,Strategy,Referral
+OPP5065,Union Pacific Holdings,Manufacturing,HR & People,1600000,Lost,2024-07-14,PwC,Lost to internal team,Strategy,Referral
+OPP5066,Acme Financial,Energy & Utilities,Technology & Digital,306000,Lost,2026-02-06,McKinsey & Company,Price too high,Advisory,RFP
+OPP5067,Vector Technologies,Retail & Consumer,Strategy & Growth,453000,Won,2024-06-01,None / Internal,Best proposal quality,Strategy,Outbound
+OPP5068,Zenith Healthcare,Retail & Consumer,Strategy & Growth,774000,Won,2024-02-03,PwC,Best proposal quality,Implementation,RFP
+OPP5069,Heritage Bank,Public Sector,Strategy & Growth,884000,Lost,2025-09-19,Accenture,Lost to internal team,Transformation,Referral
+OPP5070,Junction Manufacturing,Public Sector,Strategy & Growth,390000,Lost,2023-11-27,McKinsey & Company,Competitor brand preference,Assessment,Existing relationship
+OPP5071,York Capital Management,Manufacturing,Strategy & Growth,232000,Lost,2023-12-11,PwC,Competitor brand preference,Transformation,RFP

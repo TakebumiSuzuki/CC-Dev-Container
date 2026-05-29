@@ -27,6 +27,10 @@ slides:
       Five sections; the heaviest content is in segment performance and wins/challenges.
       Reserve roughly 8 minutes for Q&A.
 
+  - title: "Headline Results"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
   - title: "Headline Numbers"
     body: |
       - Revenue: **$187M** (+24% YoY, +11% QoQ) — record quarter
@@ -42,14 +46,10 @@ slides:
       - claim: "growing roughly 2x the rate of our nearest competitor"
         source: "./data/market_intel.csv"
 
-  - title: "Headline Results"
-    body: ""
-    suggested_layout: "Section Divider: Large centered title only"
-
   - title: "Quarterly Revenue Trend"
     body: |
       Sixth consecutive quarter of double-digit YoY growth. Q2 reached $187M — a record high,
-      and the 2026 curve is meaningfully steeper than 2025.
+      with both 2026 quarters running well ahead of 2025 (+18% and +24% YoY).
 
       {{revenue_trend}}
     suggested_layout: "One-line comment on top, a large bar chart centered below"
@@ -59,17 +59,17 @@ slides:
         source: "./data/q2_2026_financials.xlsx, sheet: Revenue_Trend"
         x_axis: "Quarter"
         y_axis: "Revenue ($M)"
-        categories: ["Q1", "Q2", "Q3", "Q4"]
+        categories: ["Q1", "Q2"]
         series:
           - name: "2025"
-            values: [142, 151, 159, 165]
+            values: [142, 151]
           - name: "2026"
-            values: [168, 187, 0, 0]
+            values: [168, 187]
     speaker_notes: |
-      Q3 and Q4 2026 are shown as zero because the quarters haven't happened yet — call this
-      out if the chart looks asymmetric. The H2 forecast is in the appendix.
-      Compare slopes, not just endpoints: the 2026 line is steeper from the start, which is
-      what gives us confidence in the H2 plan.
+      The chart compares Q1–Q2, where both years have actuals; the H2 2026 forecast lives in
+      the appendix rather than on this chart.
+      Compare slopes, not just endpoints: 2026 widens its YoY lead from +18% in Q1 to +24% in
+      Q2, which is what gives us confidence in the H2 plan.
 
   - title: "Regional Performance"
     body: |

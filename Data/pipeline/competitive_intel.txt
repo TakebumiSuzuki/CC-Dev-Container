@@ -1,0 +1,75 @@
+COMPETITIVE INTELLIGENCE MEMO — Meridian Consulting Group
+Prepared by: Business Development & Strategy Team
+Last updated: April 2026
+
+─────────────────────────────────────────────────────────────────────────────
+RECENT COMPETITIVE LOSSES — ROOT CAUSE ANALYSIS
+─────────────────────────────────────────────────────────────────────────────
+
+Lost to Deloitte — Northern Energy Systems (RFP, March 2026, est. $900K)
+Deloitte won on brand recognition and claimed a "pre-built regulatory compliance
+accelerator" for energy sector clients. Our proposal was technically stronger, per
+the client's own debrief, but the enterprise risk function at NES has a standing
+preference for Big Four on compliance-adjacent work. Recommendation: Build a
+one-page "MCG vs. Big Four" positioning sheet specifically for risk and compliance
+RFPs in regulated sectors.
+
+Lost to McKinsey — Omega Asset Management (sole-source approach, Jan 2026, est. $1.2M)
+McKinsey engaged the CEO of Omega directly through a board relationship before the
+formal scoping process began. By the time our account manager was aware of the
+opportunity, the decision was effectively made. This is the third time in 18 months
+that a McKinsey "above-the-sponsor" entry has cost us a financial services win.
+Recommendation: Invest in C-suite relationship development at our top 15 target
+accounts. Partners need to be present at industry events, not just at project kickoffs.
+
+Lost to PwC — Heritage Bank (competitive RFP, Feb 2026, est. $650K)
+PwC's proposal included a fintech ecosystem partnership component that we could not
+match. Heritage Bank is going through a digital core banking transformation and wanted
+an advisor with embedded fintech relationships. Gap identified: MCG lacks formal
+technology alliance partnerships. Exploring partnership conversations with two fintech
+advisory boutiques.
+
+─────────────────────────────────────────────────────────────────────────────
+RECENT COMPETITIVE WINS — WHAT WORKED
+─────────────────────────────────────────────────────────────────────────────
+
+Won vs. BCG — Redwood Capital (Q4 2025, $720K)
+BCG was the incumbent. We won by demonstrating a 30% faster mobilization timeline
+and providing two client references in private equity with near-identical mandates.
+The decision maker cited "BCG's team felt too senior and too removed from the work."
+This is a recurring theme — our model of keeping senior consultants actively in the
+work (rather than delegating to junior staff) is a genuine differentiator in the
+$500K–$1.5M deal range.
+
+Won vs. Accenture — Riverside Manufacturing (Q1 2026, $1.1M)
+Accenture submitted a technology-heavy proposal centered on an ERP platform
+implementation. We positioned as "technology-agnostic strategy first," which
+resonated with the CFO who had a prior bad experience with a vendor-driven
+transformation. Lesson: In manufacturing, lead with operational outcomes, not
+technology platforms.
+
+─────────────────────────────────────────────────────────────────────────────
+MARKET POSITIONING OBSERVATIONS
+─────────────────────────────────────────────────────────────────────────────
+
+The mid-market consulting segment ($200K–$2M engagements) is being squeezed from
+two directions:
+1. Boutique specialists (domain-specific, low overhead) are undercutting on price
+   in niche verticals like healthcare IT and ESG advisory.
+2. Large firms (Deloitte, Accenture) are increasingly willing to bid on smaller
+   engagements as a land-and-expand strategy, accepting lower initial margins.
+
+MCG's defensible position remains in multi-practice engagements where we can
+assemble cross-functional teams quickly. Single-practice RFPs under $300K are
+where we face the most price pressure and should be selective.
+
+Pricing intelligence (from client debriefs and sourced conversations, Q1 2026):
+- McKinsey blended rate for strategy work: ~$650–$750/hr
+- Deloitte blended rate for implementation: ~$280–$380/hr
+- BCG blended rate for strategy: ~$580–$680/hr
+- MCG blended rate (current book of business): ~$295/hr
+- Boutique competitors (e.g., West Monroe, Huron): ~$220–$280/hr
+
+The rate data suggests MCG is priced at a justified premium over boutiques but
+remains competitive below the MBB tier. We should not compete on price against
+boutiques — compete on breadth of expertise and track record.

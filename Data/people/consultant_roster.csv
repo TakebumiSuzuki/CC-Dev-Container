@@ -1,0 +1,106 @@
+emp_id,name,grade,practice,region,hire_date,years_experience,billing_rate_usd
+1001,Jeffrey Davis,Analyst,Strategy & Growth,Midwest,2026-03-13,1,111
+1002,Olivia Mitchell,Analyst,HR & People,Northeast,2026-01-16,3,110
+1003,Stephanie Anderson,Analyst,HR & People,International,2026-11-29,0,139
+1004,Joshua Anderson,Analyst,Finance & Risk,International,2026-03-23,2,132
+1005,Lauren Moore,Analyst,Operations Excellence,Southeast,2026-02-17,2,129
+1006,Robert Thompson,Analyst,Technology & Digital,International,2026-08-24,2,139
+1007,Jennifer Reed,Analyst,Finance & Risk,Northeast,2024-11-12,2,128
+1008,Timothy Gonzalez,Analyst,Strategy & Growth,Northeast,2025-02-10,1,119
+1009,Madison Miller,Analyst,Finance & Risk,Midwest,2024-03-24,3,128
+1010,Matthew Wilson,Analyst,Technology & Digital,Northeast,2026-03-25,1,134
+1011,Andrew Moore,Analyst,HR & People,Southeast,2026-04-28,2,107
+1012,Sophia Lee,Analyst,Finance & Risk,Midwest,2026-10-18,0,125
+1013,Stephanie Adams,Analyst,Finance & Risk,West Coast,2025-05-16,3,113
+1014,Melissa Mitchell,Analyst,HR & People,International,2024-10-26,2,132
+1015,Alyssa Nguyen,Analyst,Finance & Risk,Midwest,2026-09-18,1,136
+1016,Jessica Carter,Analyst,Strategy & Growth,Northeast,2026-12-15,1,132
+1017,Eric Jones,Analyst,Finance & Risk,West Coast,2024-10-10,3,105
+1018,Olivia Campbell,Analyst,Strategy & Growth,International,2024-06-23,2,112
+1019,Christopher Ramirez,Analyst,Operations Excellence,West Coast,2026-09-14,0,116
+1020,Brian Rogers,Analyst,Strategy & Growth,Midwest,2026-07-11,1,115
+1021,Steven Roberts,Consultant,HR & People,Northeast,2023-01-10,4,167
+1022,Brittany White,Consultant,Technology & Digital,Southeast,2026-10-18,2,165
+1023,Jessica Campbell,Consultant,Finance & Risk,Northeast,2025-12-04,3,190
+1024,Amy Hernandez,Consultant,Technology & Digital,International,2025-10-04,5,172
+1025,Chloe Martin,Consultant,Finance & Risk,Midwest,2022-08-20,5,167
+1026,Melissa Anderson,Consultant,Strategy & Growth,Midwest,2024-10-10,2,174
+1027,Angela Anderson,Consultant,Strategy & Growth,Northeast,2026-02-04,2,162
+1028,Madison Perez,Consultant,Strategy & Growth,International,2024-12-08,3,191
+1029,Stephanie Wright,Consultant,Operations Excellence,International,2025-08-31,5,186
+1030,Charles Miller,Consultant,Strategy & Growth,West Coast,2023-07-30,4,189
+1031,Madison Campbell,Consultant,Strategy & Growth,Northeast,2025-06-23,2,166
+1032,Melissa Gonzalez,Consultant,Operations Excellence,International,2025-08-05,5,171
+1033,Nicole Robinson,Consultant,Operations Excellence,Northeast,2022-02-20,5,163
+1034,Emma Wright,Consultant,Strategy & Growth,Northeast,2025-07-28,3,191
+1035,Kevin Wilson,Consultant,Finance & Risk,Northeast,2023-01-02,3,184
+1036,Thomas Reed,Consultant,Finance & Risk,Midwest,2021-10-12,5,191
+1037,Ashley Gonzalez,Consultant,Technology & Digital,Southeast,2024-10-04,2,163
+1038,Victoria Lee,Consultant,Strategy & Growth,Northeast,2022-09-29,5,170
+1039,Emily Allen,Consultant,Strategy & Growth,Southeast,2024-02-04,2,175
+1040,Megan Davis,Consultant,HR & People,Southeast,2024-02-11,2,186
+1041,Mark Nguyen,Consultant,HR & People,International,2024-04-14,4,180
+1042,Melissa Taylor,Consultant,Finance & Risk,Southeast,2023-06-11,4,164
+1043,James Robinson,Consultant,HR & People,International,2026-10-03,2,173
+1044,Brian Taylor,Consultant,Operations Excellence,Midwest,2026-07-09,2,178
+1045,Richard Lewis,Consultant,HR & People,Midwest,2024-10-10,2,179
+1046,Brittany Nelson,Senior Consultant,Strategy & Growth,Southeast,2026-02-24,6,245
+1047,Ashley Moore,Senior Consultant,Technology & Digital,International,2021-06-25,5,223
+1048,Olivia Green,Senior Consultant,Technology & Digital,International,2022-01-27,7,215
+1049,Jeffrey Ramirez,Senior Consultant,Technology & Digital,Northeast,2024-03-07,4,250
+1050,Thomas Hernandez,Senior Consultant,Finance & Risk,International,2026-02-27,7,214
+1051,Kyle Hall,Senior Consultant,Operations Excellence,International,2024-10-25,4,245
+1052,Ashley Ramirez,Senior Consultant,Operations Excellence,Northeast,2024-01-21,6,232
+1053,Stephanie Baker,Senior Consultant,Operations Excellence,Northeast,2020-10-13,6,236
+1054,Brenda Mitchell,Senior Consultant,Operations Excellence,Southeast,2025-07-31,5,211
+1055,Amanda Mitchell,Senior Consultant,Technology & Digital,West Coast,2024-03-22,5,216
+1056,Andrew Edwards,Senior Consultant,Strategy & Growth,West Coast,2025-08-24,5,232
+1057,Elizabeth Turner,Senior Consultant,Operations Excellence,Southeast,2025-07-24,4,231
+1058,Nicole Edwards,Senior Consultant,Strategy & Growth,Midwest,2021-09-18,6,235
+1059,Olivia Parker,Senior Consultant,HR & People,Midwest,2026-05-14,4,221
+1060,Angela Taylor,Senior Consultant,Strategy & Growth,Northeast,2021-06-10,7,237
+1061,Eric Allen,Senior Consultant,Strategy & Growth,West Coast,2024-01-23,5,237
+1062,James King,Senior Consultant,HR & People,Southeast,2023-02-05,6,231
+1063,Brenda Lee,Senior Consultant,Strategy & Growth,Midwest,2021-07-29,6,230
+1064,Megan Hall,Senior Consultant,Technology & Digital,International,2025-08-04,5,234
+1065,Alyssa Lopez,Senior Consultant,HR & People,International,2023-10-08,6,210
+1066,Elizabeth Jackson,Senior Consultant,Operations Excellence,West Coast,2023-08-15,6,238
+1067,Olivia Wilson,Senior Consultant,HR & People,West Coast,2021-02-13,5,228
+1068,Brian Nelson,Manager,HR & People,Midwest,2023-12-11,7,294
+1069,Joseph Evans,Manager,Operations Excellence,Southeast,2026-05-06,7,305
+1070,Brenda Collins,Manager,Strategy & Growth,West Coast,2023-12-23,10,299
+1071,Katherine Sanchez,Manager,Operations Excellence,Southeast,2025-08-06,7,289
+1072,Amanda Evans,Manager,HR & People,West Coast,2023-03-04,7,304
+1073,William Evans,Manager,Finance & Risk,International,2019-11-10,9,307
+1074,Hannah Parker,Manager,HR & People,West Coast,2019-08-19,8,291
+1075,Adam Thomas,Manager,Technology & Digital,International,2023-05-21,10,303
+1076,David Rivera,Manager,Technology & Digital,Southeast,2021-06-13,9,309
+1077,Jessica Rodriguez,Manager,Operations Excellence,Southeast,2024-12-27,10,288
+1078,David Clark,Manager,Finance & Risk,Midwest,2020-02-01,10,288
+1079,Isabella Clark,Manager,Finance & Risk,International,2020-09-01,7,275
+1080,Matthew Martin,Manager,Finance & Risk,West Coast,2019-04-23,8,292
+1081,Hannah Young,Manager,Strategy & Growth,West Coast,2020-03-25,9,304
+1082,Sean Rodriguez,Manager,HR & People,International,2020-10-30,7,311
+1083,Mark Johnson,Manager,Strategy & Growth,West Coast,2019-04-04,8,278
+1084,Thomas Harris,Manager,Technology & Digital,Southeast,2021-06-22,10,299
+1085,Nicole Carter,Manager,Finance & Risk,Midwest,2019-01-10,7,309
+1086,Emily Thompson,Senior Manager,Operations Excellence,Northeast,2026-05-07,10,347
+1087,Isabella Johnson,Senior Manager,HR & People,Southeast,2024-08-30,11,342
+1088,Timothy Wilson,Senior Manager,Finance & Risk,Midwest,2024-11-06,12,373
+1089,Victoria Rivera,Senior Manager,Strategy & Growth,Southeast,2025-10-24,12,336
+1090,Brittany Martin,Senior Manager,HR & People,West Coast,2023-02-08,13,372
+1091,Jason Parker,Senior Manager,Operations Excellence,Northeast,2025-10-17,12,337
+1092,Matthew Wright,Senior Manager,Finance & Risk,Midwest,2018-11-28,10,356
+1093,James Collins,Senior Manager,Finance & Risk,West Coast,2020-07-04,10,375
+1094,Alyssa Parker,Senior Manager,Finance & Risk,Southeast,2024-09-24,13,352
+1095,Brenda Evans,Senior Manager,HR & People,West Coast,2020-10-30,13,352
+1096,Daniel Collins,Principal,Operations Excellence,Northeast,2019-05-05,16,434
+1097,Timothy Flores,Principal,Finance & Risk,Midwest,2019-06-16,14,416
+1098,Katherine Wilson,Principal,Technology & Digital,Midwest,2022-11-02,16,422
+1099,Amy Smith,Principal,HR & People,Southeast,2023-07-28,14,436
+1100,Amy Carter,Principal,Operations Excellence,West Coast,2019-01-09,17,410
+1101,Christopher Anderson,Principal,Finance & Risk,Southeast,2021-08-31,16,440
+1102,Christina Thompson,Partner,Finance & Risk,International,2021-12-26,20,534
+1103,Nicole Martin,Partner,Technology & Digital,Southeast,2023-06-11,18,512
+1104,Victoria Wright,Partner,Operations Excellence,Southeast,2019-05-22,19,542
+1105,Adam King,Partner,HR & People,Midwest,2023-06-01,18,519

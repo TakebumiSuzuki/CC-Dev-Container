@@ -1,0 +1,101 @@
+project_id,client_name,practice,engagement_type,fiscal_year,quarter,contract_value_usd,actual_revenue_usd,cost_usd,gross_profit_usd,margin_pct,on_time,team_size
+P2200,Zenith Capital,Operations Excellence,Strategy,2023,Q4,337000,360000,214000,146000,40.5,True,12
+P2201,Lighthouse Insurance,HR & People,Assessment,2025,Q2,1030000,992000,714000,278000,28.0,False,9
+P2202,Xenon Energy,HR & People,Advisory,2024,Q3,920000,925000,726000,199000,21.5,True,7
+P2203,York Capital Management,Operations Excellence,Assessment,2023,Q3,595000,537000,340000,197000,36.6,True,11
+P2204,Horizon Medical,Operations Excellence,Assessment,2023,Q4,382000,370000,208000,162000,43.9,True,7
+P2205,Zenith Healthcare,Technology & Digital,Advisory,2023,Q4,227000,215000,143000,72000,33.5,True,8
+P2206,Walton Retail,Operations Excellence,Advisory,2023,Q3,982000,982000,758000,224000,22.8,False,7
+P2207,Kestrel Energy,Technology & Digital,Transformation,2026,Q1,133000,124000,98000,26000,20.7,True,7
+P2208,Horizon Medical,Technology & Digital,Advisory,2026,Q1,1124000,1016000,762000,254000,25.0,True,11
+P2209,Quartz Energy,Operations Excellence,Transformation,2024,Q3,834000,873000,601000,272000,31.2,False,12
+P2210,Summit Financial,Operations Excellence,Assessment,2025,Q2,533000,488000,281000,207000,42.5,True,11
+P2211,York Capital Management,Technology & Digital,Assessment,2025,Q1,663000,619000,432000,187000,30.2,False,3
+P2212,Allstate Logistics,Operations Excellence,Strategy,2022,Q4,151000,152000,89000,63000,41.7,True,6
+P2213,Triumph Automotive,Strategy & Growth,Strategy,2024,Q1,357000,366000,272000,94000,25.7,True,12
+P2214,Titan Energy,Technology & Digital,Advisory,2025,Q3,1127000,1045000,702000,343000,32.8,False,9
+P2215,Urbane Capital,Finance & Risk,Assessment,2025,Q3,1098000,1038000,716000,322000,31.0,True,4
+P2216,Maple Healthcare,Strategy & Growth,Assessment,2025,Q2,465000,419000,290000,129000,30.7,False,2
+P2217,Diamond Manufacturing,Technology & Digital,Transformation,2023,Q2,694000,747000,575000,172000,23.1,True,5
+P2218,Horizon Medical,Strategy & Growth,Assessment,2024,Q1,936000,994000,571000,423000,42.6,True,8
+P2219,Yellowstone Insurance,Strategy & Growth,Strategy,2023,Q2,204000,202000,141000,61000,30.3,True,4
+P2220,Granite Retail Partners,HR & People,Transformation,2023,Q2,396000,391000,307000,84000,21.4,True,5
+P2221,Redwood Capital,Finance & Risk,Assessment,2025,Q2,599000,579000,351000,228000,39.4,False,8
+P2222,Jefferson Medical Center,HR & People,Transformation,2023,Q2,1083000,1057000,795000,262000,24.8,True,9
+P2223,Frontier Energy,Strategy & Growth,Implementation,2024,Q4,664000,660000,366000,294000,44.5,True,12
+P2224,Fortis Insurance,HR & People,Implementation,2023,Q1,619000,602000,445000,157000,26.1,True,12
+P2225,Diamond Manufacturing,Technology & Digital,Advisory,2023,Q2,735000,697000,497000,200000,28.7,False,4
+P2226,Vista Healthcare,Strategy & Growth,Assessment,2023,Q3,182000,198000,129000,69000,34.7,False,12
+P2227,Triumph Automotive,HR & People,Implementation,2023,Q3,341000,361000,200000,161000,44.5,False,2
+P2228,Walton Retail,Technology & Digital,Advisory,2023,Q3,624000,598000,420000,178000,29.8,True,7
+P2229,Premier Insurance,Finance & Risk,Strategy,2026,Q2,260000,257000,174000,83000,32.3,False,12
+P2230,Momentum Healthcare,Finance & Risk,Implementation,2022,Q4,949000,991000,749000,242000,24.4,True,10
+P2231,Lighthouse Insurance,HR & People,Implementation,2024,Q1,539000,495000,363000,132000,26.7,True,2
+P2232,Zenith Capital,Strategy & Growth,Assessment,2023,Q2,116000,113000,73000,40000,35.3,True,2
+P2233,United Financial Services,Operations Excellence,Assessment,2022,Q3,1122000,1120000,855000,265000,23.6,False,10
+P2234,Beacon Capital,Technology & Digital,Strategy,2024,Q2,126000,121000,97000,24000,19.9,False,5
+P2235,Quartz Energy,Finance & Risk,Advisory,2023,Q4,816000,889000,592000,297000,33.4,True,7
+P2236,Gemstone Retail,Finance & Risk,Assessment,2023,Q2,696000,718000,491000,227000,31.6,True,10
+P2237,Premier Insurance,Technology & Digital,Assessment,2025,Q1,761000,717000,479000,238000,33.2,False,9
+P2238,Falcon Financial,Finance & Risk,Implementation,2022,Q4,747000,821000,558000,263000,32.0,True,7
+P2239,Cardinal Health Systems,Technology & Digital,Assessment,2025,Q4,719000,661000,440000,221000,33.4,True,11
+P2240,Frontier Energy,Operations Excellence,Implementation,2023,Q4,719000,678000,452000,226000,33.4,True,9
+P2241,Vertex Healthcare,Strategy & Growth,Transformation,2023,Q4,898000,822000,546000,276000,33.6,True,8
+P2242,Pacific Healthcare,Operations Excellence,Implementation,2022,Q4,141000,136000,92000,44000,32.2,True,2
+P2243,York Capital Management,Finance & Risk,Advisory,2026,Q1,181000,191000,134000,57000,29.7,True,2
+P2244,Sapphire Financial,Finance & Risk,Transformation,2023,Q1,642000,595000,364000,231000,38.9,True,12
+P2245,Vertex Healthcare,Operations Excellence,Transformation,2025,Q2,351000,346000,259000,87000,25.2,True,8
+P2246,United Financial Services,Technology & Digital,Advisory,2024,Q2,745000,716000,582000,134000,18.7,False,4
+P2247,Elite Energy,Strategy & Growth,Assessment,2023,Q4,255000,234000,146000,88000,37.7,False,2
+P2248,Redwood Capital,Strategy & Growth,Advisory,2025,Q2,105000,106000,81000,25000,23.6,True,9
+P2249,Summit Financial,Strategy & Growth,Transformation,2026,Q1,129000,123000,95000,28000,22.6,False,12
+P2250,BlueCrest Capital,Strategy & Growth,Advisory,2024,Q1,1048000,1125000,917000,208000,18.5,True,3
+P2251,Orion Technologies,Finance & Risk,Advisory,2025,Q2,289000,287000,197000,90000,31.5,False,6
+P2252,Quest Healthcare,Finance & Risk,Assessment,2023,Q1,468000,480000,348000,132000,27.5,True,2
+P2253,Global Asset Corp,Finance & Risk,Advisory,2025,Q3,333000,326000,237000,89000,27.2,True,12
+P2254,Delta Financial,Finance & Risk,Advisory,2025,Q3,558000,570000,419000,151000,26.4,True,10
+P2255,Zenith Capital,Operations Excellence,Assessment,2025,Q2,562000,592000,340000,252000,42.5,True,3
+P2256,Tempest Manufacturing,HR & People,Assessment,2023,Q3,1020000,924000,721000,203000,21.9,True,9
+P2257,Junction Manufacturing,Operations Excellence,Advisory,2022,Q4,287000,293000,180000,113000,38.6,True,5
+P2258,Delta Financial,Strategy & Growth,Transformation,2023,Q2,230000,229000,135000,94000,40.8,True,9
+P2259,Riverside Manufacturing,Operations Excellence,Implementation,2023,Q2,538000,584000,326000,258000,44.2,False,3
+P2260,Westfield Consumer Goods,Finance & Risk,Assessment,2025,Q2,1051000,1036000,601000,435000,42.0,False,8
+P2261,Vertex Healthcare,HR & People,Advisory,2025,Q1,663000,706000,493000,213000,30.2,True,8
+P2262,Fortis Insurance,HR & People,Transformation,2025,Q1,293000,316000,222000,94000,29.9,False,6
+P2263,Granite Retail Partners,HR & People,Implementation,2025,Q2,181000,169000,116000,53000,31.5,True,8
+P2264,Acme Financial,Technology & Digital,Implementation,2022,Q3,588000,635000,367000,268000,42.2,False,3
+P2265,Lakewood Energy,Strategy & Growth,Advisory,2024,Q2,667000,706000,506000,200000,28.4,True,8
+P2266,Fortis Insurance,Operations Excellence,Assessment,2025,Q3,262000,276000,216000,60000,21.9,True,12
+P2267,Xenon Energy,Strategy & Growth,Advisory,2023,Q2,777000,771000,580000,191000,24.8,False,9
+P2268,Emerald Retail Group,Operations Excellence,Implementation,2025,Q2,539000,550000,439000,111000,20.1,True,2
+P2269,Xenon Energy,Operations Excellence,Strategy,2024,Q1,243000,247000,200000,47000,18.9,True,3
+P2270,Beacon Capital,Operations Excellence,Strategy,2024,Q3,721000,788000,527000,261000,33.2,False,6
+P2271,Premier Insurance,Technology & Digital,Advisory,2023,Q1,1025000,1019000,818000,201000,19.8,True,8
+P2272,Pinnacle Capital,Operations Excellence,Transformation,2022,Q3,720000,724000,402000,322000,44.4,True,11
+P2273,Orion Technologies,Technology & Digital,Advisory,2025,Q4,1118000,1117000,731000,386000,34.6,False,5
+P2274,Liberty Financial,Operations Excellence,Transformation,2022,Q4,601000,630000,381000,249000,39.5,True,2
+P2275,Quest Healthcare,Technology & Digital,Assessment,2023,Q2,797000,758000,480000,278000,36.6,True,2
+P2276,Omega Asset Management,Technology & Digital,Transformation,2025,Q1,770000,720000,585000,135000,18.8,True,2
+P2277,Riverside Manufacturing,Finance & Risk,Assessment,2025,Q3,1083000,1151000,800000,351000,30.5,False,11
+P2278,Orion Technologies,HR & People,Assessment,2022,Q3,727000,788000,576000,212000,27.0,False,2
+P2279,Redwood Capital,Finance & Risk,Strategy,2023,Q4,758000,700000,539000,161000,23.1,False,6
+P2280,Acme Financial,Strategy & Growth,Implementation,2024,Q1,586000,553000,312000,241000,43.7,True,3
+P2281,Elite Energy,HR & People,Implementation,2025,Q3,253000,252000,183000,69000,27.2,False,3
+P2282,Oakwood Manufacturing,Operations Excellence,Assessment,2023,Q1,514000,475000,279000,196000,41.3,True,9
+P2283,Fortis Insurance,Strategy & Growth,Advisory,2023,Q4,727000,784000,577000,207000,26.4,True,7
+P2284,Elite Energy,Strategy & Growth,Advisory,2023,Q1,386000,395000,322000,73000,18.4,True,7
+P2285,Imperial Bank,Operations Excellence,Transformation,2025,Q3,272000,293000,216000,77000,26.4,True,12
+P2286,Granite Retail Partners,Strategy & Growth,Advisory,2022,Q3,558000,569000,439000,130000,22.8,True,7
+P2287,Northern Energy Systems,Technology & Digital,Strategy,2025,Q2,1171000,1163000,716000,447000,38.4,True,9
+P2288,Northern Energy Systems,Finance & Risk,Assessment,2023,Q4,241000,229000,132000,97000,42.2,True,9
+P2289,Kestrel Energy,Strategy & Growth,Advisory,2024,Q4,474000,443000,308000,135000,30.5,False,3
+P2290,Zenith Healthcare,Strategy & Growth,Implementation,2025,Q2,968000,949000,642000,307000,32.4,True,9
+P2291,Xavier Technologies,Strategy & Growth,Strategy,2024,Q1,563000,571000,317000,254000,44.5,True,11
+P2292,Kestrel Energy,Strategy & Growth,Advisory,2026,Q1,444000,439000,348000,91000,20.6,True,8
+P2293,Premier Insurance,Finance & Risk,Implementation,2022,Q4,995000,1075000,624000,451000,42.0,True,9
+P2294,Quartz Energy,Technology & Digital,Transformation,2026,Q1,299000,288000,183000,105000,36.4,True,7
+P2295,Lakewood Energy,HR & People,Advisory,2025,Q3,1029000,939000,554000,385000,41.0,False,7
+P2296,Omega Asset Management,Technology & Digital,Implementation,2024,Q1,866000,834000,595000,239000,28.6,True,12
+P2297,Westfield Consumer Goods,Finance & Risk,Implementation,2023,Q4,511000,546000,311000,235000,43.0,True,2
+P2298,Jefferson Medical Center,Strategy & Growth,Advisory,2025,Q3,1172000,1087000,851000,236000,21.7,False,4
+P2299,Gemstone Retail,HR & People,Advisory,2025,Q4,511000,503000,382000,121000,24.1,True,6

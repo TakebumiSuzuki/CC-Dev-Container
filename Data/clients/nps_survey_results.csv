@@ -1,0 +1,253 @@
+client_id,client_name,survey_date,nps_score,category,industry,primary_feedback_theme,would_recommend
+C1003,Dellworth Manufacturing,2024-03-31,23,Detractor,Retail & Consumer,Turnaround time,False
+C1031,Frontier Energy,2024-03-31,51,Passive,Healthcare,Communication,False
+C1006,Granite Retail Partners,2024-03-31,31,Detractor,Financial Services,Communication,False
+C1053,Beacon Capital,2024-03-31,21,Detractor,Public Sector,Team chemistry,False
+C1073,Vertex Healthcare,2024-03-31,81,Promoter,Healthcare,Value for money,True
+C1013,Northgate Retail,2024-03-31,37,Detractor,Healthcare,Project management,False
+C1065,Nexus Financial,2024-03-31,87,Promoter,Public Sector,Project management,True
+C1048,Walton Retail,2024-03-31,71,Promoter,Financial Services,Turnaround time,True
+C1010,Keystone Bank,2024-03-31,77,Promoter,Energy & Utilities,Recommendations actionability,True
+C1046,United Financial Services,2024-03-31,43,Detractor,Energy & Utilities,Recommendations actionability,False
+C1017,Riverside Manufacturing,2024-03-31,31,Detractor,Public Sector,Recommendations actionability,False
+C1023,Xenon Energy,2024-03-31,51,Passive,Public Sector,Expertise depth,False
+C1056,Elite Energy,2024-03-31,50,Passive,Manufacturing,Project management,False
+C1005,Fortis Insurance,2024-03-31,78,Promoter,Public Sector,Team chemistry,True
+C1072,Urbane Capital,2024-03-31,37,Detractor,Financial Services,Team chemistry,False
+C1027,Brightwood Healthcare,2024-03-31,70,Promoter,Retail & Consumer,Value for money,True
+C1041,Premier Insurance,2024-03-31,47,Detractor,Public Sector,Project management,False
+C1028,Coastal Manufacturing,2024-03-31,94,Promoter,Energy & Utilities,Communication,True
+C1054,Century Healthcare,2024-03-31,40,Detractor,Financial Services,Turnaround time,False
+C1062,Kestrel Energy,2024-03-31,69,Passive,Manufacturing,Project management,True
+C1019,Triumph Automotive,2024-03-31,42,Detractor,Healthcare,Team chemistry,False
+C1038,Maple Healthcare,2024-03-31,31,Detractor,Manufacturing,Recommendations actionability,False
+C1034,Imperial Bank,2024-03-31,79,Promoter,Energy & Utilities,Communication,True
+C1001,BlueCrest Capital,2024-03-31,64,Passive,Healthcare,Project management,True
+C1047,Vista Healthcare,2024-03-31,31,Detractor,Public Sector,Recommendations actionability,False
+C1030,Emerald Retail Group,2024-03-31,68,Passive,Financial Services,Project management,True
+C1008,Indus Technologies,2024-03-31,71,Promoter,Manufacturing,Team chemistry,True
+C1051,Zenith Healthcare,2024-03-31,58,Passive,Retail & Consumer,Turnaround time,False
+C1005,Fortis Insurance,2024-06-30,81,Promoter,Public Sector,Project management,True
+C1022,Westfield Consumer Goods,2024-06-30,49,Detractor,Energy & Utilities,Project management,False
+C1055,Diamond Manufacturing,2024-06-30,31,Detractor,Healthcare,Project management,False
+C1037,Liberty Financial,2024-06-30,43,Detractor,Healthcare,Team chemistry,False
+C1028,Coastal Manufacturing,2024-06-30,83,Promoter,Energy & Utilities,Turnaround time,True
+C1009,Jefferson Medical Center,2024-06-30,32,Detractor,Retail & Consumer,Communication,False
+C1062,Kestrel Energy,2024-06-30,69,Passive,Manufacturing,Delivery quality,True
+C1038,Maple Healthcare,2024-06-30,35,Detractor,Manufacturing,Delivery quality,False
+C1042,Quest Healthcare,2024-06-30,64,Passive,Financial Services,Expertise depth,True
+C1002,Cardinal Health Systems,2024-06-30,26,Detractor,Manufacturing,Expertise depth,False
+C1012,Meridian Pharma,2024-06-30,50,Passive,Financial Services,Expertise depth,False
+C1013,Northgate Retail,2024-06-30,33,Detractor,Healthcare,Recommendations actionability,False
+C1068,Quartz Energy,2024-06-30,85,Promoter,Manufacturing,Delivery quality,True
+C1004,Eagle Energy Group,2024-06-30,59,Passive,Energy & Utilities,Delivery quality,False
+C1016,Quantum Computing Inc,2024-06-30,32,Detractor,Energy & Utilities,Turnaround time,False
+C1003,Dellworth Manufacturing,2024-06-30,39,Detractor,Retail & Consumer,Turnaround time,False
+C1034,Imperial Bank,2024-06-30,79,Promoter,Energy & Utilities,Delivery quality,True
+C1057,Falcon Financial,2024-06-30,60,Passive,Retail & Consumer,Value for money,True
+C1026,Allstate Logistics,2024-06-30,28,Detractor,Manufacturing,Value for money,False
+C1061,Jade Capital,2024-06-30,74,Promoter,Healthcare,Value for money,True
+C1019,Triumph Automotive,2024-06-30,31,Detractor,Healthcare,Recommendations actionability,False
+C1051,Zenith Healthcare,2024-06-30,68,Passive,Retail & Consumer,Project management,True
+C1054,Century Healthcare,2024-06-30,41,Detractor,Financial Services,Expertise depth,False
+C1071,Tempest Manufacturing,2024-06-30,56,Passive,Public Sector,Value for money,False
+C1070,Sapphire Financial,2024-06-30,77,Promoter,Energy & Utilities,Recommendations actionability,True
+C1008,Indus Technologies,2024-06-30,65,Passive,Manufacturing,Communication,True
+C1064,Momentum Healthcare,2024-06-30,17,Detractor,Energy & Utilities,Team chemistry,False
+C1056,Elite Energy,2024-06-30,66,Passive,Manufacturing,Value for money,True
+C1022,Westfield Consumer Goods,2024-09-30,43,Detractor,Energy & Utilities,Recommendations actionability,False
+C1053,Beacon Capital,2024-09-30,24,Detractor,Public Sector,Delivery quality,False
+C1007,Harbor Logistics,2024-09-30,61,Passive,Healthcare,Expertise depth,True
+C1035,Junction Manufacturing,2024-09-30,68,Passive,Public Sector,Expertise depth,True
+C1005,Fortis Insurance,2024-09-30,91,Promoter,Public Sector,Project management,True
+C1024,Yellowstone Insurance,2024-09-30,37,Detractor,Financial Services,Team chemistry,False
+C1019,Triumph Automotive,2024-09-30,34,Detractor,Healthcare,Value for money,False
+C1048,Walton Retail,2024-09-30,75,Promoter,Financial Services,Turnaround time,True
+C1023,Xenon Energy,2024-09-30,50,Passive,Public Sector,Communication,False
+C1068,Quartz Energy,2024-09-30,84,Promoter,Manufacturing,Turnaround time,True
+C1017,Riverside Manufacturing,2024-09-30,53,Passive,Public Sector,Value for money,False
+C1050,York Capital Management,2024-09-30,51,Passive,Manufacturing,Turnaround time,False
+C1055,Diamond Manufacturing,2024-09-30,47,Detractor,Healthcare,Team chemistry,False
+C1062,Kestrel Energy,2024-09-30,80,Promoter,Manufacturing,Communication,True
+C1074,Wyndham Financial,2024-09-30,72,Promoter,Manufacturing,Team chemistry,True
+C1013,Northgate Retail,2024-09-30,32,Detractor,Healthcare,Value for money,False
+C1010,Keystone Bank,2024-09-30,82,Promoter,Energy & Utilities,Team chemistry,True
+C1038,Maple Healthcare,2024-09-30,34,Detractor,Manufacturing,Value for money,False
+C1016,Quantum Computing Inc,2024-09-30,35,Detractor,Energy & Utilities,Value for money,False
+C1004,Eagle Energy Group,2024-09-30,49,Detractor,Energy & Utilities,Communication,False
+C1046,United Financial Services,2024-09-30,54,Passive,Energy & Utilities,Delivery quality,False
+C1028,Coastal Manufacturing,2024-09-30,92,Promoter,Energy & Utilities,Communication,True
+C1065,Nexus Financial,2024-09-30,84,Promoter,Public Sector,Expertise depth,True
+C1009,Jefferson Medical Center,2024-09-30,40,Detractor,Retail & Consumer,Communication,False
+C1002,Cardinal Health Systems,2024-09-30,40,Detractor,Manufacturing,Recommendations actionability,False
+C1036,Kingsley Consumer Brands,2024-09-30,74,Promoter,Financial Services,Value for money,True
+C1020,Union Pacific Holdings,2024-09-30,40,Detractor,Manufacturing,Delivery quality,False
+C1063,Lighthouse Insurance,2024-09-30,40,Detractor,Retail & Consumer,Turnaround time,False
+C1013,Northgate Retail,2024-12-31,44,Detractor,Healthcare,Recommendations actionability,False
+C1024,Yellowstone Insurance,2024-12-31,36,Detractor,Financial Services,Recommendations actionability,False
+C1030,Emerald Retail Group,2024-12-31,57,Passive,Financial Services,Recommendations actionability,False
+C1042,Quest Healthcare,2024-12-31,74,Promoter,Financial Services,Recommendations actionability,True
+C1034,Imperial Bank,2024-12-31,60,Passive,Energy & Utilities,Delivery quality,True
+C1010,Keystone Bank,2024-12-31,86,Promoter,Energy & Utilities,Expertise depth,True
+C1023,Xenon Energy,2024-12-31,64,Passive,Public Sector,Team chemistry,True
+C1055,Diamond Manufacturing,2024-12-31,26,Detractor,Healthcare,Team chemistry,False
+C1012,Meridian Pharma,2024-12-31,53,Passive,Financial Services,Expertise depth,False
+C1062,Kestrel Energy,2024-12-31,60,Passive,Manufacturing,Delivery quality,True
+C1006,Granite Retail Partners,2024-12-31,48,Detractor,Financial Services,Expertise depth,False
+C1036,Kingsley Consumer Brands,2024-12-31,65,Passive,Financial Services,Team chemistry,True
+C1073,Vertex Healthcare,2024-12-31,77,Promoter,Healthcare,Turnaround time,True
+C1048,Walton Retail,2024-12-31,73,Promoter,Financial Services,Recommendations actionability,True
+C1065,Nexus Financial,2024-12-31,85,Promoter,Public Sector,Value for money,True
+C1068,Quartz Energy,2024-12-31,74,Promoter,Manufacturing,Communication,True
+C1057,Falcon Financial,2024-12-31,54,Passive,Retail & Consumer,Value for money,False
+C1004,Eagle Energy Group,2024-12-31,44,Detractor,Energy & Utilities,Project management,False
+C1001,BlueCrest Capital,2024-12-31,81,Promoter,Healthcare,Team chemistry,True
+C1033,Horizon Medical,2024-12-31,74,Promoter,Retail & Consumer,Turnaround time,True
+C1019,Triumph Automotive,2024-12-31,28,Detractor,Healthcare,Project management,False
+C1014,Omega Asset Management,2024-12-31,29,Detractor,Manufacturing,Expertise depth,False
+C1011,Lakewood Energy,2024-12-31,30,Detractor,Public Sector,Recommendations actionability,False
+C1071,Tempest Manufacturing,2024-12-31,42,Detractor,Public Sector,Expertise depth,False
+C1046,United Financial Services,2024-12-31,46,Detractor,Energy & Utilities,Turnaround time,False
+C1064,Momentum Healthcare,2024-12-31,23,Detractor,Energy & Utilities,Delivery quality,False
+C1063,Lighthouse Insurance,2024-12-31,54,Passive,Retail & Consumer,Turnaround time,False
+C1009,Jefferson Medical Center,2024-12-31,27,Detractor,Retail & Consumer,Team chemistry,False
+C1055,Diamond Manufacturing,2025-03-31,48,Detractor,Healthcare,Delivery quality,False
+C1050,York Capital Management,2025-03-31,37,Detractor,Manufacturing,Recommendations actionability,False
+C1063,Lighthouse Insurance,2025-03-31,57,Passive,Retail & Consumer,Communication,False
+C1003,Dellworth Manufacturing,2025-03-31,40,Detractor,Retail & Consumer,Value for money,False
+C1027,Brightwood Healthcare,2025-03-31,80,Promoter,Retail & Consumer,Turnaround time,True
+C1048,Walton Retail,2025-03-31,83,Promoter,Financial Services,Communication,True
+C1017,Riverside Manufacturing,2025-03-31,46,Detractor,Public Sector,Communication,False
+C1062,Kestrel Energy,2025-03-31,69,Passive,Manufacturing,Communication,True
+C1040,Orion Technologies,2025-03-31,61,Passive,Energy & Utilities,Project management,True
+C1047,Vista Healthcare,2025-03-31,31,Detractor,Public Sector,Expertise depth,False
+C1004,Eagle Energy Group,2025-03-31,59,Passive,Energy & Utilities,Value for money,False
+C1046,United Financial Services,2025-03-31,55,Passive,Energy & Utilities,Expertise depth,False
+C1072,Urbane Capital,2025-03-31,48,Detractor,Financial Services,Recommendations actionability,False
+C1051,Zenith Healthcare,2025-03-31,66,Passive,Retail & Consumer,Turnaround time,True
+C1007,Harbor Logistics,2025-03-31,44,Detractor,Healthcare,Project management,False
+C1073,Vertex Healthcare,2025-03-31,74,Promoter,Healthcare,Project management,True
+C1002,Cardinal Health Systems,2025-03-31,29,Detractor,Manufacturing,Expertise depth,False
+C1061,Jade Capital,2025-03-31,52,Passive,Healthcare,Delivery quality,False
+C1008,Indus Technologies,2025-03-31,68,Passive,Manufacturing,Communication,True
+C1030,Emerald Retail Group,2025-03-31,48,Detractor,Financial Services,Project management,False
+C1033,Horizon Medical,2025-03-31,65,Passive,Retail & Consumer,Communication,True
+C1070,Sapphire Financial,2025-03-31,80,Promoter,Energy & Utilities,Communication,True
+C1057,Falcon Financial,2025-03-31,76,Promoter,Retail & Consumer,Communication,True
+C1041,Premier Insurance,2025-03-31,47,Detractor,Public Sector,Expertise depth,False
+C1068,Quartz Energy,2025-03-31,83,Promoter,Manufacturing,Value for money,True
+C1035,Junction Manufacturing,2025-03-31,66,Passive,Public Sector,Project management,True
+C1010,Keystone Bank,2025-03-31,70,Promoter,Energy & Utilities,Communication,True
+C1014,Omega Asset Management,2025-03-31,23,Detractor,Manufacturing,Delivery quality,False
+C1068,Quartz Energy,2025-06-30,81,Promoter,Manufacturing,Project management,True
+C1020,Union Pacific Holdings,2025-06-30,35,Detractor,Manufacturing,Recommendations actionability,False
+C1026,Allstate Logistics,2025-06-30,31,Detractor,Manufacturing,Project management,False
+C1064,Momentum Healthcare,2025-06-30,30,Detractor,Energy & Utilities,Turnaround time,False
+C1053,Beacon Capital,2025-06-30,15,Detractor,Public Sector,Turnaround time,False
+C1023,Xenon Energy,2025-06-30,63,Passive,Public Sector,Delivery quality,True
+C1031,Frontier Energy,2025-06-30,38,Detractor,Healthcare,Communication,False
+C1057,Falcon Financial,2025-06-30,66,Passive,Retail & Consumer,Project management,True
+C1008,Indus Technologies,2025-06-30,65,Passive,Manufacturing,Project management,True
+C1007,Harbor Logistics,2025-06-30,48,Detractor,Healthcare,Recommendations actionability,False
+C1061,Jade Capital,2025-06-30,76,Promoter,Healthcare,Team chemistry,True
+C1003,Dellworth Manufacturing,2025-06-30,38,Detractor,Retail & Consumer,Delivery quality,False
+C1001,BlueCrest Capital,2025-06-30,79,Promoter,Healthcare,Turnaround time,True
+C1009,Jefferson Medical Center,2025-06-30,39,Detractor,Retail & Consumer,Project management,False
+C1051,Zenith Healthcare,2025-06-30,60,Passive,Retail & Consumer,Recommendations actionability,True
+C1050,York Capital Management,2025-06-30,42,Detractor,Manufacturing,Delivery quality,False
+C1011,Lakewood Energy,2025-06-30,27,Detractor,Public Sector,Value for money,False
+C1024,Yellowstone Insurance,2025-06-30,36,Detractor,Financial Services,Team chemistry,False
+C1025,Zenith Capital,2025-06-30,29,Detractor,Healthcare,Expertise depth,False
+C1033,Horizon Medical,2025-06-30,82,Promoter,Retail & Consumer,Team chemistry,True
+C1047,Vista Healthcare,2025-06-30,41,Detractor,Public Sector,Communication,False
+C1019,Triumph Automotive,2025-06-30,31,Detractor,Healthcare,Expertise depth,False
+C1006,Granite Retail Partners,2025-06-30,43,Detractor,Financial Services,Team chemistry,False
+C1072,Urbane Capital,2025-06-30,58,Passive,Financial Services,Recommendations actionability,False
+C1070,Sapphire Financial,2025-06-30,60,Passive,Energy & Utilities,Delivery quality,True
+C1012,Meridian Pharma,2025-06-30,29,Detractor,Financial Services,Turnaround time,False
+C1065,Nexus Financial,2025-06-30,85,Promoter,Public Sector,Project management,True
+C1028,Coastal Manufacturing,2025-06-30,87,Promoter,Energy & Utilities,Turnaround time,True
+C1005,Fortis Insurance,2025-09-30,82,Promoter,Public Sector,Recommendations actionability,True
+C1061,Jade Capital,2025-09-30,53,Passive,Healthcare,Delivery quality,False
+C1036,Kingsley Consumer Brands,2025-09-30,60,Passive,Financial Services,Value for money,True
+C1023,Xenon Energy,2025-09-30,57,Passive,Public Sector,Expertise depth,False
+C1016,Quantum Computing Inc,2025-09-30,37,Detractor,Energy & Utilities,Project management,False
+C1024,Yellowstone Insurance,2025-09-30,26,Detractor,Financial Services,Team chemistry,False
+C1019,Triumph Automotive,2025-09-30,19,Detractor,Healthcare,Expertise depth,False
+C1004,Eagle Energy Group,2025-09-30,49,Detractor,Energy & Utilities,Team chemistry,False
+C1037,Liberty Financial,2025-09-30,42,Detractor,Healthcare,Project management,False
+C1015,Pacific Healthcare,2025-09-30,80,Promoter,Retail & Consumer,Team chemistry,True
+C1041,Premier Insurance,2025-09-30,61,Passive,Public Sector,Project management,True
+C1050,York Capital Management,2025-09-30,31,Detractor,Manufacturing,Communication,False
+C1027,Brightwood Healthcare,2025-09-30,85,Promoter,Retail & Consumer,Expertise depth,True
+C1028,Coastal Manufacturing,2025-09-30,72,Promoter,Energy & Utilities,Team chemistry,True
+C1070,Sapphire Financial,2025-09-30,67,Passive,Energy & Utilities,Value for money,True
+C1006,Granite Retail Partners,2025-09-30,45,Detractor,Financial Services,Team chemistry,False
+C1034,Imperial Bank,2025-09-30,82,Promoter,Energy & Utilities,Communication,True
+C1033,Horizon Medical,2025-09-30,62,Passive,Retail & Consumer,Turnaround time,True
+C1042,Quest Healthcare,2025-09-30,74,Promoter,Financial Services,Turnaround time,True
+C1053,Beacon Capital,2025-09-30,34,Detractor,Public Sector,Recommendations actionability,False
+C1055,Diamond Manufacturing,2025-09-30,29,Detractor,Healthcare,Value for money,False
+C1072,Urbane Capital,2025-09-30,56,Passive,Financial Services,Expertise depth,False
+C1062,Kestrel Energy,2025-09-30,66,Passive,Manufacturing,Communication,True
+C1071,Tempest Manufacturing,2025-09-30,54,Passive,Public Sector,Expertise depth,False
+C1008,Indus Technologies,2025-09-30,61,Passive,Manufacturing,Expertise depth,True
+C1047,Vista Healthcare,2025-09-30,47,Detractor,Public Sector,Team chemistry,False
+C1002,Cardinal Health Systems,2025-09-30,22,Detractor,Manufacturing,Recommendations actionability,False
+C1007,Harbor Logistics,2025-09-30,44,Detractor,Healthcare,Communication,False
+C1062,Kestrel Energy,2025-12-31,79,Promoter,Manufacturing,Expertise depth,True
+C1071,Tempest Manufacturing,2025-12-31,50,Passive,Public Sector,Recommendations actionability,False
+C1033,Horizon Medical,2025-12-31,71,Promoter,Retail & Consumer,Value for money,True
+C1034,Imperial Bank,2025-12-31,74,Promoter,Energy & Utilities,Turnaround time,True
+C1051,Zenith Healthcare,2025-12-31,61,Passive,Retail & Consumer,Recommendations actionability,True
+C1044,Sterling Manufacturing,2025-12-31,33,Detractor,Manufacturing,Value for money,False
+C1037,Liberty Financial,2025-12-31,47,Detractor,Healthcare,Team chemistry,False
+C1009,Jefferson Medical Center,2025-12-31,46,Detractor,Retail & Consumer,Expertise depth,False
+C1036,Kingsley Consumer Brands,2025-12-31,64,Passive,Financial Services,Expertise depth,True
+C1001,BlueCrest Capital,2025-12-31,77,Promoter,Healthcare,Value for money,True
+C1038,Maple Healthcare,2025-12-31,44,Detractor,Manufacturing,Team chemistry,False
+C1057,Falcon Financial,2025-12-31,74,Promoter,Retail & Consumer,Turnaround time,True
+C1004,Eagle Energy Group,2025-12-31,57,Passive,Energy & Utilities,Turnaround time,False
+C1041,Premier Insurance,2025-12-31,55,Passive,Public Sector,Team chemistry,False
+C1031,Frontier Energy,2025-12-31,55,Passive,Healthcare,Communication,False
+C1069,Radiant Healthcare,2025-12-31,71,Promoter,Retail & Consumer,Team chemistry,True
+C1035,Junction Manufacturing,2025-12-31,75,Promoter,Public Sector,Project management,True
+C1068,Quartz Energy,2025-12-31,87,Promoter,Manufacturing,Recommendations actionability,True
+C1012,Meridian Pharma,2025-12-31,50,Passive,Financial Services,Value for money,False
+C1055,Diamond Manufacturing,2025-12-31,39,Detractor,Healthcare,Delivery quality,False
+C1070,Sapphire Financial,2025-12-31,72,Promoter,Energy & Utilities,Communication,True
+C1067,Pinnacle Capital,2025-12-31,14,Detractor,Healthcare,Recommendations actionability,False
+C1007,Harbor Logistics,2025-12-31,47,Detractor,Healthcare,Delivery quality,False
+C1027,Brightwood Healthcare,2025-12-31,82,Promoter,Retail & Consumer,Delivery quality,True
+C1023,Xenon Energy,2025-12-31,47,Detractor,Public Sector,Value for money,False
+C1053,Beacon Capital,2025-12-31,36,Detractor,Public Sector,Turnaround time,False
+C1050,York Capital Management,2025-12-31,37,Detractor,Manufacturing,Value for money,False
+C1030,Emerald Retail Group,2025-12-31,49,Detractor,Financial Services,Delivery quality,False
+C1054,Century Healthcare,2026-03-31,33,Detractor,Financial Services,Value for money,False
+C1063,Lighthouse Insurance,2026-03-31,42,Detractor,Retail & Consumer,Project management,False
+C1020,Union Pacific Holdings,2026-03-31,34,Detractor,Manufacturing,Team chemistry,False
+C1014,Omega Asset Management,2026-03-31,42,Detractor,Manufacturing,Expertise depth,False
+C1061,Jade Capital,2026-03-31,76,Promoter,Healthcare,Expertise depth,True
+C1040,Orion Technologies,2026-03-31,67,Passive,Energy & Utilities,Project management,True
+C1003,Dellworth Manufacturing,2026-03-31,24,Detractor,Retail & Consumer,Communication,False
+C1025,Zenith Capital,2026-03-31,34,Detractor,Healthcare,Turnaround time,False
+C1065,Nexus Financial,2026-03-31,92,Promoter,Public Sector,Communication,True
+C1033,Horizon Medical,2026-03-31,73,Promoter,Retail & Consumer,Delivery quality,True
+C1007,Harbor Logistics,2026-03-31,56,Passive,Healthcare,Value for money,False
+C1047,Vista Healthcare,2026-03-31,42,Detractor,Public Sector,Value for money,False
+C1053,Beacon Capital,2026-03-31,16,Detractor,Public Sector,Turnaround time,False
+C1057,Falcon Financial,2026-03-31,71,Promoter,Retail & Consumer,Value for money,True
+C1041,Premier Insurance,2026-03-31,39,Detractor,Public Sector,Team chemistry,False
+C1015,Pacific Healthcare,2026-03-31,72,Promoter,Retail & Consumer,Turnaround time,True
+C1050,York Capital Management,2026-03-31,29,Detractor,Manufacturing,Turnaround time,False
+C1056,Elite Energy,2026-03-31,59,Passive,Manufacturing,Delivery quality,False
+C1027,Brightwood Healthcare,2026-03-31,85,Promoter,Retail & Consumer,Value for money,True
+C1016,Quantum Computing Inc,2026-03-31,32,Detractor,Energy & Utilities,Team chemistry,False
+C1037,Liberty Financial,2026-03-31,27,Detractor,Healthcare,Team chemistry,False
+C1072,Urbane Capital,2026-03-31,53,Passive,Financial Services,Expertise depth,False
+C1004,Eagle Energy Group,2026-03-31,40,Detractor,Energy & Utilities,Communication,False
+C1051,Zenith Healthcare,2026-03-31,73,Promoter,Retail & Consumer,Turnaround time,True
+C1044,Sterling Manufacturing,2026-03-31,27,Detractor,Manufacturing,Recommendations actionability,False
+C1030,Emerald Retail Group,2026-03-31,47,Detractor,Financial Services,Team chemistry,False
+C1023,Xenon Energy,2026-03-31,48,Detractor,Public Sector,Expertise depth,False
+C1046,United Financial Services,2026-03-31,60,Passive,Energy & Utilities,Team chemistry,True
