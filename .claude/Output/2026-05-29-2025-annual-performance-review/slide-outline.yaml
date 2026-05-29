@@ -1,0 +1,280 @@
+---
+title: "Meridian Consulting Group — FY2025 Annual Performance Review"
+author: "[To be confirmed]"
+date: "2026-05-29"
+
+slides:
+  - title: "Meridian Consulting Group"
+    body: |
+      FY2025 Annual Performance Review
+
+      Executive Leadership Team
+      May 29, 2026 · 30 minutes
+    suggested_layout: "Title Slide: Large centered title, with date and audience in smaller text below"
+
+  - title: "Agenda"
+    body: |
+      1. Executive Summary
+      2. Financial Performance
+      3. Project Delivery Quality
+      4. Client Health
+      5. Active Pipeline & Practice Capacity
+      6. Strategic Priorities for FY2026
+    suggested_layout: "Bullet list: 6 numbered items stacked vertically in a larger font"
+
+  - title: "Executive Summary"
+    body: |
+      - **Revenue:** $43.7M (+13.0% YoY); margin held at 35.8% — third straight year of double-digit growth
+      - **Delivery:** On-time completion fell to 54.8% (from 68.8%) — primary operational risk for FY2026
+      - **Outlook:** $48.5M backlog across 58 active projects; priority is converting growth into delivery consistency
+    suggested_layout: "3-section summary: each bolded theme on its own row with a short supporting sentence"
+    speaker_notes: |
+      Set the frame for the session: strong financial year, but delivery quality is the story that needs the leadership team's attention. The data is clear — this is not a minor fluctuation.
+
+  - title: "Financial Performance"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Revenue Growth"
+    body: |
+      $43.7M in FY2025 (+13.0% YoY) — third consecutive year of double-digit growth. Three-year CAGR ~14.4%. Operating margin held in a tight 35.6–35.8% band throughout.
+
+      {{revenue_growth}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      revenue_growth:
+        type: bar_chart
+        source: "./Data/financials/monthly_financials.csv"
+        x_axis: "Fiscal Year"
+        y_axis: "Amount ($M)"
+        categories: ["FY2023", "FY2024", "FY2025"]
+        series:
+          - name: "Revenue"
+            values: [33.4, 38.7, 43.7]
+          - name: "Operating Profit"
+            values: [11.9, 13.8, 15.7]
+    speaker_notes: |
+      Margin by year: FY2023 35.7%, FY2024 35.6%, FY2025 35.8%. The tight band signals efficient cost scaling — no evidence of unsustainable discounting or cost overruns at the firm level.
+
+  - title: "FY2025 Quarterly Progression"
+    body: |
+      Q2 and Q4 both exceeded $11.5M; Q1 and Q3 softer. Q1 margin peaked at 37.3% (favorable practice mix); Q2–Q4 normalized to 35.3–35.6%.
+
+      {{quarterly_progression}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      quarterly_progression:
+        type: bar_chart
+        source: "./Data/financials/monthly_financials.csv"
+        x_axis: "Quarter"
+        y_axis: "Amount ($M)"
+        categories: ["Q1 2025", "Q2 2025", "Q3 2025", "Q4 2025"]
+        series:
+          - name: "Revenue"
+            values: [9.8, 11.5, 10.7, 11.7]
+          - name: "Operating Profit"
+            values: [3.6, 4.1, 3.8, 4.1]
+    speaker_notes: |
+      Quarterly margin detail: Q1 37.3%, Q2 35.3%, Q3 35.6%, Q4 35.4%. Q1 margin reflects a favorable mix in higher-margin practices; nothing structural — margins normalized in subsequent quarters.
+
+  - title: "Revenue by Practice"
+    body: |
+      All five practices grew within a 12.0–13.5% band — broad-based momentum, not a single-practice story. Technology & Digital leads at $12.3M (28% of firm revenue).
+
+      {{practice_revenue}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      practice_revenue:
+        type: bar_chart
+        source: "./Data/financials/monthly_financials.csv"
+        x_axis: "Practice"
+        y_axis: "Revenue ($M)"
+        categories: ["Technology & Digital", "Strategy & Growth", "Operations Excellence", "Finance & Risk", "HR & People"]
+        series:
+          - name: "FY2024"
+            values: [10.9, 8.6, 7.7, 6.9, 4.6]
+          - name: "FY2025"
+            values: [12.3, 9.6, 8.7, 7.8, 5.2]
+    speaker_notes: |
+      YoY growth rates: T&D +13.1%, S&G +12.0%, OpEx +13.5%, F&R +13.3%, HR +13.0%. The tight band rules out practice-specific factors as the primary driver — this is a firm-wide story.
+
+  - title: "Project Delivery Quality"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "On-Time Completion and Client Satisfaction"
+    body: |
+      31 projects completed ($20.5M). On-time rate: 54.8% — down sharply from 68.8% in FY2024. Avg. satisfaction: 4.15/5.0 (up slightly) — quality is strong when delivery lands on time.
+
+      {{delivery_quality}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      delivery_quality:
+        type: table
+        source: "./Data/projects/completed_projects.csv"
+        headers: ["Practice", "Projects", "On-Time Rate", "Avg. Satisfaction", "Avg. Margin"]
+        rows:
+          - ["Operations Excellence", 6, "100%", 3.92, "29.8%"]
+          - ["Strategy & Growth", 4, "50%", 4.50, "27.1%"]
+          - ["Technology & Digital", 7, "43%", 4.09, "31.6%"]
+          - ["HR & People", 7, "43%", 4.44, "30.3%"]
+          - ["Finance & Risk", 7, "43%", 3.91, "32.6%"]
+    speaker_notes: |
+      Key tension: Operations Excellence was 100% on-time but second-lowest in satisfaction (3.92). Strategy & Growth and HR & People posted the highest satisfaction scores despite below-average on-time rates — pointing to a practice culture that manages client expectations effectively when timelines slip. Six of 31 completed projects scored below 3.5 on satisfaction; these are disproportionate drivers of NPS risk and merit individual account reviews.
+
+  - title: "Notable Wins"
+    body: |
+      - **Apex Financial Corp (P2241):** $1.1M, delivered 2 weeks early. CFO reference call; follow-on compliance opportunity in negotiation.
+      - **Cardinal Health Systems (P2267):** Satisfaction 4.8/5.0. Methodology packaged as MCG framework; two direct referrals.
+      - **Quantum Computing Inc (P2289):** Satisfaction 4.6/5.0. CTO: "The clearest technical roadmap we've ever received from an external adviser."
+    suggested_layout: "Bullet list: 3 items, each with bold client name and 2-line description"
+    prose_sources:
+      - claim: "Apex Financial Corp delivered two weeks early, 34% margin, follow-on regulatory compliance opportunity in negotiation"
+        source: "./Data/projects/project_notes.txt"
+      - claim: "Cardinal Health Systems satisfaction 4.8, repeatable workforce planning methodology, two referrals generated"
+        source: "./Data/projects/project_notes.txt"
+      - claim: "Quantum Computing Inc satisfaction 4.6, CTO quote on quality of roadmap"
+        source: "./Data/projects/project_notes.txt"
+    speaker_notes: |
+      Angela Torres (Senior Manager) led the Cardinal Health engagement across three hospital networks — consider recognizing her and the team in this session. The Apex reference call and the Cardinal referrals are the highest-value downstream outcomes from any FY2025 engagements.
+
+  - title: "Delivery Issues"
+    body: |
+      - **Triumph Automotive (P2278):** 6 weeks over; scope expanded mid-engagement with no SOW gate. Q3 cash flow gap; follow-on renewal risk flagged.
+      - **Empire Retail (P2303):** Partial delivery — $320K of $500K — after three sponsor changes. No escalation protocol; firm not pursuing further work.
+
+      Common root cause: SOW and escalation design did not keep pace with mid-engagement change.
+    suggested_layout: "Bullet list: 2 items with bold client names and 3-line descriptions each"
+    prose_sources:
+      - claim: "Triumph Automotive ran six weeks over due to scope expansion; contract amendment processed late; follow-on renewal risk flagged"
+        source: "./Data/projects/project_notes.txt"
+      - claim: "Empire Retail partial delivery $320K of $500K following three executive sponsor changes; firm not pursuing further work"
+        source: "./Data/projects/project_notes.txt"
+    speaker_notes: |
+      Combined revenue leakage: Empire Retail $180K shortfall (invoiced $320K of $500K); Triumph Automotive was a Q3 cash flow timing gap, not lost revenue — the scope amendment was eventually processed. Total estimated leakage ~$180K against $43.7M firm revenue — immaterial at the top line, but a meaningful leading indicator of delivery risk that will compound as the firm scales.
+
+  - title: "Client Health"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Client Retention"
+    body: |
+      Recovered to 89.3% in FY2025, up from the FY2024 trough (85.3%). Eight churns; 4 were pricing- or competition-driven — active re-evaluation, not passive attrition. Not yet back to FY2023's 93.3%.
+
+      {{client_retention}}
+    suggested_layout: "One-line comment on top, a large line chart centered below"
+    data:
+      client_retention:
+        type: line_chart
+        source: "./Data/clients/client_retention.csv"
+        x_axis: "Fiscal Year"
+        y_axis: "Retention Rate (%)"
+        categories: ["FY2023", "FY2024", "FY2025"]
+        series:
+          - name: "Retention Rate"
+            values: [93.3, 85.3, 89.3]
+    speaker_notes: |
+      Full churn breakdown: 2 pricing losses, 2 competitive losses, 2 budget-driven, 1 relationship change, 1 natural scope completion. Full retention data: FY2023 75 clients / 70 renewed / 5 churned; FY2024 75 / 64 / 11; FY2025 75 / 67 / 8.
+
+  - title: "Client NPS"
+    body: |
+      Avg. NPS 54.5 — essentially flat vs. FY2024 (54.3). Promoters slipped 29% → 26%; detractor share held at 45% (50 clients at risk).
+
+      {{nps_breakdown}}
+
+      Strengths: analytical rigor, responsiveness. Improvement areas: consultant continuity, translating recommendations into action plans.
+    suggested_layout: "Table placed center, with 2-line text summary below"
+    data:
+      nps_breakdown:
+        type: table
+        source: "./Data/clients/nps_survey_results.csv"
+        headers: ["Category", "FY2024 (n=112)", "FY2025 (n=112)"]
+        rows:
+          - ["Promoters (≥70)", "32 (29%)", "29 (26%)"]
+          - ["Passives (50–69)", "30 (27%)", "33 (29%)"]
+          - ["Detractors (<50)", "50 (45%)", "50 (45%)"]
+          - ["Avg. NPS score", "54.3", "54.5"]
+    prose_sources:
+      - claim: "Analytical rigor and responsiveness are top strengths (cited by 18 and 14 of 28 NPS follow-up respondents); consultant continuity and action plan translation are top improvement areas (cited by 9 and 8 respondents)"
+        source: "./Data/clients/key_client_feedback.txt"
+    speaker_notes: |
+      A flat NPS in a year of strong revenue growth means the firm is adding clients without deepening existing relationships. Clients can renew out of switching costs or inertia without becoming promoters — that divergence explains why retention and NPS are moving differently. The 45% detractor share is the number that warrants a dedicated remediation track: at the firm's current scale, that many at-risk clients represents meaningful revenue and referral exposure.
+
+  - title: "Active Pipeline & Practice Capacity"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Active Pipeline and Practice Capacity"
+    body: |
+      $48.5M contracted across 58 engagements: 42 on track, 7 ahead, 6 at risk, 3 on hold.
+
+      {{active_pipeline}}
+
+      **Capacity watch — T&D:** 3 senior consultants at ≥95% utilization; $6.2M pipeline at risk without two Senior Consultant hires.
+    suggested_layout: "Table placed center, with a bold callout text below"
+    data:
+      active_pipeline:
+        type: table
+        source: "./Data/projects/active_projects.csv"
+        headers: ["Practice", "Active Projects", "Contracted Value"]
+        rows:
+          - ["HR & People", 17, "$15.4M"]
+          - ["Strategy & Growth", 13, "$12.2M"]
+          - ["Finance & Risk", 10, "$8.5M"]
+          - ["Technology & Digital", 9, "$6.4M"]
+          - ["Operations Excellence", 9, "$6.1M"]
+    prose_sources:
+      - claim: "Technology & Digital is over-capacity with three senior consultants at ≥95% utilization; practice lead has requested two Senior Consultant hires; external sales pipeline is $6.2M weighted"
+        source: "./Data/projects/project_notes.txt"
+      - claim: "Finance & Risk utilization averaging 80% in Q1 2026; regulatory compliance mandates generating inbound interest without heavy sales effort"
+        source: "./Data/projects/project_notes.txt"
+      - claim: "Strategy & Growth has a Northeast coverage gap following a Partner departure in February 2026, currently being backfilled by a Principal"
+        source: "./Data/projects/project_notes.txt"
+    speaker_notes: |
+      Six at-risk projects represent ~10% of the active portfolio by count — individual account reviews recommended at the next QBR. Technology & Digital's capacity constraint is the most urgent forward risk: $6.2M in weighted pipeline cannot convert at full efficiency without additional headcount. Operations Excellence is actively prospecting in the energy sector following end-of-scope on several manufacturing relationships.
+
+  - title: "Strategic Priorities for FY2026"
+    body: |
+      1. **Restore delivery consistency.** On-time rate fell to 54.8%. Implement firm-wide SOW standard with explicit scope gates and sponsor-change escalation clauses.
+
+      2. **Convert NPS detractors.** 45% of clients in the detractor band. Targeted account recovery + improvements in consultant continuity and action plan delivery.
+
+      3. **Resolve T&D capacity.** Highest pipeline ($6.2M), largest revenue share (28%), over-capacity now. Approve two Senior Consultant hires.
+    suggested_layout: "Bullet list: 3 numbered items with bold headers and 2-line descriptions each"
+    speaker_notes: |
+      These three priorities are sequenced intentionally: delivery consistency is the most urgent (internal process fix, no external dependency), detractor conversion is medium-term (requires account ownership and behavioral change), and T&D capacity is a near-term hiring decision the Partners can take in this session.
+
+  - title: "Conclusion"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Key Takeaways"
+    body: |
+      - FY2025 revenue reached $43.7M (+13.0% YoY) — the third consecutive year of double-digit growth; operating margin held at 35.8%.
+      - All five practices grew 12–13.5% YoY — growth is broad-based, not dependent on any single practice.
+      - On-time project completion declined to 54.8% (from 68.8% in FY2024); this is the primary operational risk heading into FY2026.
+      - Client retention recovered to 89.3% (from FY2024's trough of 85.3%); NPS is flat with 45% of clients still in the detractor band.
+      - Active backlog of $48.5M across 58 projects provides strong FY2026 revenue visibility; Technology & Digital capacity must be resolved to realize the pipeline.
+    suggested_layout: "Bullet list: 5 items stacked vertically in a larger font"
+
+  - title: "Thank You"
+    body: |
+      Questions & Discussion
+    suggested_layout: "Title Slide: Large centered title, with 'Questions & Discussion' in smaller text below"
+    speaker_notes: |
+      Anticipated Q&A:
+
+      Q: Revenue grew 13% but on-time delivery fell to 55% — are these connected?
+      A: Partially. Rapid growth can stretch delivery teams, but the specific root causes identified — inadequate scope gates (Triumph Automotive) and volatile client-side sponsorship (Empire Retail) — are process failures rather than pure capacity failures. The fix is structural, not just hiring.
+
+      Q: Why is NPS flat despite strong retention and revenue growth?
+      A: Retention measures whether clients renew; NPS measures how they feel about the relationship. A client can renew out of switching costs or inertia without becoming a promoter. The divergence signals that revenue metrics are healthy but relationship depth is not deepening at the same rate.
+
+      Q: What is the risk on the six at-risk active projects?
+      A: The six at-risk projects represent approximately 10% of the active portfolio by count. Individual account reviews are recommended at the next QBR to assess remediation options before any move toward partial delivery or early termination.
+
+      Q: Is the Technology & Digital capacity constraint impacting FY2025 results, or is it purely a forward risk?
+      A: The over-capacity situation was flagged as of April 2026 (Q1 2026 observation) and did not depress FY2025 results. It is a forward constraint: the $6.2M weighted sales pipeline cannot convert to revenue at full efficiency without additional headcount.
+
+      Q: What was the total revenue impact of the Triumph Automotive and Empire Retail issues?
+      A: Empire Retail invoiced $320K of a $500K contract — a $180K shortfall. Triumph Automotive's scope amendment was eventually processed, so the primary impact was a Q3 cash flow timing gap, not lost revenue. Combined leakage is estimated at ~$180K against $43.7M firm total — immaterial to the top line, but meaningful as a leading indicator of delivery risk.

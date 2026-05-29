@@ -1,6 +1,6 @@
 ---
 name: narrative-to-slide-outline
-description: "Convert a Markdown narrative/strategy document into slide-deck YAML for a downstream pptx pipeline (narrative → YAML → pptx). Manual-only: invoke explicitly with /narrative-to-slide-outline."
+description: "Convert a Markdown narrative/strategy document into slide-deck YAML for a downstream pptx pipeline (narrative → YAML → pptx). Manual-only: never auto-triggers — start it by running /narrative-to-slide-outline."
 disable-model-invocation: true
 ---
 
@@ -29,20 +29,15 @@ Keep your scope narrow: read prose, produce YAML. Do not generate pptx.
 1. The inline tables were transcribed correctly from their source.
 2. Any prose-claim citations are supported by their sources.
 
-In short: generation trusts the narrative; QA double-checks against the originals. Treating the file paths as lineage breadcrumbs (not generation-time inputs) keeps this skill fast and deterministic, and confines all file I/O for raw data to the QA step.
-
-## Out of scope
-
-This skill is **manual-only**: it runs only when the user invokes it explicitly (see `disable-model-invocation` in the frontmatter), so it never auto-triggers on prose. Once running, step back and redirect if the request is actually one of these:
-
-- Generating the final pptx file — that's a different skill
-- A trivial text-only tweak to an existing YAML (rename a title, fix a typo, reword `speaker_notes`) — just do it with Edit; you don't need this skill's machinery
+Treating the file paths as lineage breadcrumbs (not generation-time inputs) keeps this skill fast and deterministic, and confines all file I/O for raw data to the QA step.
 
 ## Editing an existing YAML in a new conversation
 
 YAML files outlive the conversation that created them. A common workflow is to generate the YAML in one thread, then return days later — in a fresh thread — to edit it. This skill supports that as a distinct entry point.
 
 **Use this entry point when** the user wants a non-trivial change to an existing YAML: adding or removing slides, splitting or merging slides, adding a new claim that needs a citation, swapping a chart's data source, restructuring the deck.
+
+For a trivial text-only tweak (rename a title, fix a typo, reword `speaker_notes`), skip this skill entirely — just do it with Edit; you don't need this skill's machinery.
 
 ### What to ask the user
 
@@ -51,33 +46,32 @@ YAML files outlive the conversation that created them. A common workflow is to g
 
 ### What to do
 
-1. Read the YAML (and the narrative, if provided).
+1. In a single parallel batch, read the YAML, the narrative (if provided), and `references/slide_yaml_schema.md` — your edits must conform to the schema.
 2. **Skip Steps 1-7. Jump directly to [Step 8](#step-8-iterative-revision-user-driven-loop)**. All operating rules — Edit-tool usage, citation reuse, degraded mode, exit handling (re-run Step 6 then Step 7) — live there.
 
 ## Input
 
-A narrative Markdown document. **The file format is specified in `references/narrative_format.md` — read that file before parsing your first narrative.** It defines the document skeleton (title, metadata, sections, closing block), inline-table convention, `(Source: ...)` breadcrumb syntax with required `sheet:` / `heading:` / `page:` / `slide:` locators, inline-source-on-prose form, and image-reference syntax.
+A narrative Markdown document. **The file format is specified in `references/narrative_format.md`** (read up front in [Step 1](#step-1-read-the-input-and-references)). It covers the document skeleton, inline tables, `(Source: ...)` breadcrumbs, and image references.
 
 Input may be supplied as:
 
 - A file path (e.g., `./narrative.md`)
 - Pasted text in the chat
 
-If neither is provided, ask the user.
+If neither is provided, ask the user. See [Step 1](#step-1-read-the-input-and-references).
 
 ## Output
 
-A YAML file. Default location: same directory as the input file, with the same basename and a `.yaml` extension (e.g., `q3_review.md` → `q3_review.yaml`). If the input was pasted text with no source file, ask the user for the desired output path before writing.
+A YAML file. Default location: **same directory as the input file** the user gave you, with the **fixed basename `slide-outline.yaml`** (e.g., if the input is `<dir>/narrative.md`, write `<dir>/slide-outline.yaml`). If the input was pasted text with no source file, ask the user for the desired output path before writing.
 
 ### Output schema
 
 The full YAML format — top-level fields, the per-`type` schemas
 (`bar_chart`/`line_chart`/`histogram`/`table`/`image`), the number-vs-string
 rule for cell values, and YAML formatting conventions — is defined in
-**`references/slide_yaml_schema.md`**. This is the shared contract between this
-skill (the producer) and the downstream `compose-pptx` skill (the consumer);
-**read it before writing your first YAML.** A complete worked example lives in
-`references/example_output.yaml`, paired with its input in
+**`references/slide_yaml_schema.md`** (read up front in
+[Step 1](#step-1-read-the-input-and-references)). A complete worked example
+lives in `references/example_output.yaml`, paired with its input in
 `references/example_narrative.md`.
 
 The key under `data:` MUST match the `{{placeholder_name}}` token in `body`. The
@@ -86,11 +80,15 @@ short `snake_case` (e.g. `revenue_trend`, `team_photo`, `segment_breakdown`).
 
 ## Workflow
 
-### Step 1: Read the input
+### Step 1: Read the input and references
 
-- If a file path was given, Read it
-- If text was pasted, use it directly
-- If neither, ask: "Where is the narrative document?"
+Issue these reads **together in a single parallel batch** (one round-trip), so later steps aren't stalled by sequential reads:
+
+- **The narrative input** — if a file path was given, Read it; if text was pasted, use it directly (nothing to read); if neither, ask: "Where is the narrative document?"
+- **`references/narrative_format.md`** — the input format spec you parse against in Step 2 (document skeleton, inline tables, `(Source: ...)` breadcrumbs, image references)
+- **`references/slide_yaml_schema.md`** — the output YAML schema you generate against in Step 4
+
+(If you instead entered at Step 8 to edit an existing YAML, you do the equivalent batched read there — see that section.)
 
 ### Step 2: Analyze the document
 
@@ -135,7 +133,7 @@ If `AskUserQuestion` is unavailable (parent agent, script, test harness), don't 
 
 ### Step 4: Generate the YAML
 
-First, read `references/slide_yaml_schema.md` if you have not already.
+Generate against `references/slide_yaml_schema.md` (read in Step 1; read it now only if you somehow skipped it).
 
 Map the document to slides:
 

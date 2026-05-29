@@ -108,7 +108,15 @@ Composition rules:
 - **Closing block**: a Conclusion with Key Takeaways (3–5 bullets) is recommended for most decks but skippable for short talks, tutorials, or case-studies. Include Anticipated Q&A (3–5 questions with brief answers) only if the user said yes above.
 - **One slide ≠ one section.** This is a _narrative_, not a deck outline. Write coherent prose with embedded tables; let the downstream skill decide slide breaks.
 
-Write the draft to the agreed output path (default `./narrative.md`).
+Write the draft to the output path.
+
+**Default path convention: `./Output/{YYYY-MM-DD}-{slug}/narrative.md`**
+
+- `{YYYY-MM-DD}` — today's date.
+- `{slug}` — a short **English** kebab-case identifier derived from the confirmed title/angle (lowercase ASCII, hyphen-separated, e.g. `h1-sales-review`). Always English even when the title is in another language: transliterate or summarize into English. Fall back to `narrative` if no sensible slug can be formed.
+- **Collision handling**: if that directory already exists (same theme rebuilt the same day), suffix the directory with `-02`, `-03`, … — e.g. `./Output/2026-05-29-h1-sales-review-02/`.
+
+The folder — not the file — is the unit of work: it is the home for all downstream artifacts of this deck (the slide outline YAML and the final `.pptx`), so the narrative file name stays the fixed `narrative.md`. The user may override this path.
 
 ### Step 6: Report and iterate
 

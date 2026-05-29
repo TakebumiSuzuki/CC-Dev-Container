@@ -2,9 +2,9 @@
 
 The structured YAML intermediate that flows between the pipeline stages
 (`narrative-to-slide-outline` produces it, `compose-pptx` consumes it).
-This file is the single source of truth for the format itself — the
-*generation guidance* (how to map a narrative into this shape) lives in the
-producer skill's `SKILL.md`.
+This file is the single source of truth for the format itself. A complete
+worked example is in `example_output.yaml` — read it before writing or parsing
+your first YAML.
 
 ## Top-level schema
 
@@ -47,14 +47,13 @@ names, so the producer coins them from context in short `snake_case`
 | `suggested_layout` | recommended                         | Free-text hint to the downstream pptx-AI. Not a strict instruction.                                                                                                                                                                                                                                          |
 | `data`             | optional                            | Map of `name → {type, source, ...}`. Referenced from `body` via `{{name}}`.                                                                                                                                                                                                                                  |
 | `speaker_notes`    | optional                            | Speaker notes.                                                                                                                                                                                                                                                                                               |
-| `prose_sources`    | optional                            | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. The `source` string follows the same format as `data.*.source` — including the required `heading:`/`page:`/`slide:` locator for Word/PDF/PPTX. Like `data.*.source`, it is QA-checked — but with a softer, semantic "does the source support this claim?" test rather than exact value matching (there are no structured values to compare). |
+| `prose_sources`    | optional                            | Provenance for **prose claims** that cite data but render no chart/table. List of `{claim, source}`. The `source` string uses the same format as `data.*.source`. It is QA-checked, but with a softer, semantic test (does the source support the claim?) rather than exact value matching. |
 
 Each entry inside `data` has these common fields:
 
 The `source` value mirrors the **content** of the narrative's `(Source: ...)`
-breadcrumb — the text between `(Source: ` and `)`, without the parentheses or
-the `Source:` prefix. For example, `(Source: ./data/foo.xlsx, sheet: Sales)` in
-the narrative becomes `source: "./data/foo.xlsx, sheet: Sales"` in the YAML.
+breadcrumb. For example, `(Source: ./data/foo.xlsx, sheet: Sales)` in the
+narrative becomes `source: "./data/foo.xlsx, sheet: Sales"` in the YAML.
 
 | Sub-field              | Required          | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -157,10 +156,3 @@ rows:
 - Use `|` (literal block scalar) for multi-line strings — preserves the newlines
   in `body` and `speaker_notes`
 - Wrap titles and any string containing `:`, `#`, `|`, or `>` in double quotes
-- Lists of small primitives (categories, values) can use flow style `[1, 2, 3]`
-
-A complete worked example is in `example_output.yaml`, paired with the input in
-`example_narrative.md`. **Read these before writing or parsing your first
-YAML** — they show conventions for title slides, section dividers, bullet
-slides, chart slides, table slides, two-column comparison slides, image slides,
-and closing slides.

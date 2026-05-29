@@ -20,3 +20,6 @@
 2026-05-29 02:34:21 - /workspaces/cc-dev-container/Data/people/team_survey_fy25.txt
 2026-05-29 02:34:57 - /workspaces/cc-dev-container/Data/market/market_trends_fy26.txt
 2026-05-29 02:55:55 - /workspaces/cc-dev-container/narrative.md
+2026-05-29 06:28:14 - /workspaces/cc-dev-container/.claude/Output/2026-05-29-2025-annual-performance-review/slide-outline.yaml
+2026-05-29 06:49:32 - /home/node/.claude/projects/-workspaces-cc-dev-container/memory/feedback_slide_verbosity.md
+2026-05-29 06:49:38 - /home/node/.claude/projects/-workspaces-cc-dev-container/memory/MEMORY.md
