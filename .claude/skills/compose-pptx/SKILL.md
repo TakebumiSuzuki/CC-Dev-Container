@@ -1,6 +1,6 @@
 ---
 name: compose-pptx
-description: "Consume slide-deck YAML (from narrative-to-slide-outline) and a mandatory sample-slide template .pptx, then build a .pptx by matching each slide to the best-fitting template sample and filling it. Builds via raw OOXML editing (unpack → edit XML → pack, the Anthropic pptx method) — NO python-pptx in the build — and includes a clone-to-grid solver for layouts the template has no sample for. Manual-only: never auto-triggers — start it by running /compose-pptx."
+description: "Build a .pptx from slide-deck YAML (from narrative-to-slide-outline) and a mandatory sample-slide template: match each slide to the best-fitting sample and fill it via raw OOXML editing (no python-pptx), with a clone-to-grid solver for layouts the template lacks. Manual-only."
 disable-model-invocation: true
 ---
 
@@ -22,9 +22,6 @@ Final stage of the three-stage pipeline. Consume the slide-deck YAML and produce
 
 The .pptx is built by **editing the raw OOXML** — unpack the template ZIP, edit
 the slide XML directly (with the Edit tool + small plumbing scripts), then repack.
-This is the method from `anthropics/skills:skills/pptx`. **No python-pptx is used
-in the build.** (The only python-pptx use anywhere is the read-only
-`inspect_template.py`, a Step-2 *inventory* fallback — never the build.)
 
 It includes a **clone-to-grid solver** (`clone_grid.py`) for the case where a YAML
 slide needs a layout the template has no sample for (e.g. a 2×4 card grid when the
@@ -56,24 +53,23 @@ later. This skill uses vision only to *understand and match the template*
    `type: image` entries are read from disk (via their `path:`).
 2. **Template `.pptx`** — required, sample-slide deck (see [Purpose](#purpose)).
 
-If either is missing, ask the user. Do not invent a template.
+**Both paths must be supplied explicitly by the user.** Do **not** scan the project
+to guess which YAML or template to use — if either path is missing, ask for it. Do
+not invent a template.
 
 ## Output
 
 A `.pptx` file. **Default location: same directory as the input YAML**, fixed
-basename `deck.pptx` (e.g. YAML at `./Output/2026-05-29-h1-sales-review/slide-outline.yaml`
-→ `./Output/2026-05-29-h1-sales-review/deck.pptx`). The user may override the path.
+basename `deck.pptx`. The user may override the path.
 
 ## Environment and tools
 
 Pick a Python interpreter where `defusedxml`, `openpyxl`, `yaml` (PyYAML) and `PIL`
-all import. In this container that is **`/opt/uv-venv/bin/python`**. Check it first,
-then a project `./.venv/bin/python`, then `python3`. Confirm the imports first.
+all import; **confirm the imports before relying on it**. Prefer a project-local
+environment (e.g. `./.venv/bin/python`); fall back to the system `python3`.
 
 > **Dependency note**: the build needs **`defusedxml`**, **`openpyxl`** and
-> **`pyyaml`**. If any is missing from the venv, add it
-> (`uv pip install --python /opt/uv-venv/bin/python defusedxml openpyxl pyyaml`)
-> or, for persistence, to `.devcontainer/Dockerfile`'s `uv pip install` list.
+> **`pyyaml`** — install any that are missing into the chosen interpreter.
 
 | Tool | Use |
 | ---- | --- |
@@ -82,55 +78,69 @@ then a project `./.venv/bin/python`, then `python3`. Confirm the imports first.
 | `soffice` (LibreOffice) + `pdftoppm` (poppler) | Render template samples → image grid for vision matching (Step 2) |
 | `PIL` | Thumbnail composition; `type: image` handling |
 
-**Scripts** (the skill drives them by CLI; it does not inline their logic). Run
-them with the chosen interpreter, from the skill's `scripts/` directory so the
-`office` package imports:
+The skill drives these by CLI; it does not inline their logic. Run them with the
+chosen interpreter, from the skill's `scripts/` directory so the `office` package
+imports.
 
-| Script | Role | Stage |
-| ------ | ---- | ----- |
-| `office/unpack.py <pptx> <dir>` | Extract + pretty-print + escape smart quotes | 4 |
-| `office/pack.py <dir> <pptx>` | Condense + zip back to .pptx | 4 |
-| `slide_order.py <dir> [--index N]` | Resolve 0-based presentation order → `slideN.xml` | 4 |
-| `add_slide.py <dir> <slideN.xml>` | Duplicate a sample slide (handles rels/Content_Types/rId) | 4 |
-| `clone_grid.py …` | Replicate a styled shape into an R×C grid | 4 |
-| `set_chart_data.py …` | Fork the slide's chart part + write YAML data into it | 4 |
-| `add_chart.py …` | Author a native chart **from scratch**; swaps a wrong-type sample chart in place, else places fresh | 4 |
-| `fill_table.py …` | Reshape + fill a template table | 4 |
-| `fill_text.py …` | Fill title/insight/caption + bullet bodies from a JSON spec (**optional** bulk helper; falls back to the Edit tool for rich formatting) | 4 |
-| `set_image.py …` | Replace a sample picture with a file | 4 |
-| `set_notes.py …` | Attach speaker notes (clones a template notesSlide) | 4 |
-| `clean.py <dir>` | Remove orphaned slides/media/rels/Content-Types | 4 |
-| `render_template_thumbnails.py <pptx>` | Labelled thumbnail grid for vision matching | 2 |
-| `inspect_template.py <pptx>` | JSON inventory (read-only, python-pptx) — Step-2 fallback | 2 |
+**Build scripts (Step 4):**
 
-`add_slide.py`, `clean.py`, `office/unpack.py`, `office/pack.py` are adapted from
-`anthropics/skills:skills/pptx`.
+| Script | Role |
+| ------ | ---- |
+| `office/unpack.py <pptx> <dir>` | Extract + pretty-print + escape smart quotes |
+| `office/pack.py <dir> <pptx>` | Condense + zip back to .pptx |
+| `slide_order.py <dir> [--index N]` | Resolve 0-based presentation order → `slideN.xml` |
+| `add_slide.py <dir> <slideN.xml>` | Duplicate a sample slide (handles rels/Content_Types/rId) |
+| `clone_grid.py …` | Replicate a styled shape into an R×C grid |
+| `set_chart_data.py …` | Fork the slide's chart part + write YAML data into it |
+| `add_chart.py …` | Author a native chart **from scratch**; swaps a wrong-type sample chart in place, else places fresh |
+| `fill_table.py …` | Reshape + fill a template table |
+| `fill_text.py …` | Fill title/insight/caption + bullet bodies from a JSON spec (**optional** bulk helper; falls back to the Edit tool for rich formatting) |
+| `set_image.py …` | Replace a sample picture with a file |
+| `set_notes.py …` | Attach speaker notes (clones a template notesSlide) |
+| `clean.py <dir>` | Remove orphaned slides/media/rels/Content-Types |
+
+**Inventory scripts (Step 2, template inspection only):**
+
+| Script | Role |
+| ------ | ---- |
+| `render_template_thumbnails.py <pptx>` | Labelled thumbnail grid for vision matching |
+| `inspect_template.py <pptx>` | JSON inventory of each slide's structure (read-only, python-pptx) — Step-2 complement / fallback |
+
 
 ## Workflow
 
 ### Step 1: Resolve inputs and read references
 
-Issue together in one parallel batch:
+Both input paths — the YAML and the template `.pptx` — must come from the user. If
+either is missing, **ask for it**; do not scan the project to guess which file to use.
+
+With both paths in hand, issue together in one parallel batch:
 
 - **Read the YAML** (the required input).
 - **Read `../narrative-to-slide-outline/references/slide_yaml_schema.md`** — the
-  schema you parse against (slide fields, the five `data` types, the
-  number-vs-string cell rule).
-- Confirm the **template path** (ask if not given) and pick the **interpreter**.
+  schema you parse against.
+- Pick the **interpreter**.
 
 ### Step 2: Build a template inventory
 
-Understand what sample slides the template offers.
+Understand what sample slides the template offers. The two tools below are
+**complementary — use both when available**: vision judges look and layout, while
+`inspect_template.py` confirms the underlying structure.
 
-**Primary (vision):** run `render_template_thumbnails.py`, then Read the resulting
-PNG/JPG. For each template slide record: its **index** (0-based presentation
+**Vision (look & layout):** run `render_template_thumbnails.py`, then Read the
+resulting PNG/JPG. For each template slide note its **index** (0-based presentation
 order), its **role/layout** (title, bullets, divider, chart, table, 2-column,
-image, closing, …), the **sample objects** it contains (native chart? table?
-picture? how many text placeholders?), and its visual character.
+image, closing, …), and its **visual character**.
 
-**Fallback (no `soffice`/`poppler`):** run `inspect_template.py` and build the same
-inventory from the parsed shape data. In this container vision is available, so
-this branch is for portability only.
+**Structure (`inspect_template.py`):** run it for the ground-truth inventory of each
+slide — whether a chart is a **native** chart vs a picture of one (`has_chart`),
+table/picture presence, and the **number of text placeholders**. This is what
+decides the chart branch in Step 3 (`set_chart_data.py` vs `add_chart.py`), which
+vision alone can misread. If `soffice`/`poppler` are unavailable (no thumbnails),
+`inspect_template.py` also stands in for the vision pass on its own.
+
+Hold this inventory in your **working context** — it is a scratch catalogue, not a
+saved file. The persisted decisions are written to `mapping.json` in Step 3.
 
 ### Step 3: Map YAML slides → template sample slides
 
@@ -140,15 +150,14 @@ For each YAML slide, choose the best-fitting sample, in priority order:
 2. **Body shape** — `body: ""` → a section-divider sample; numbered/bulleted body
    → a bullet sample; title-slide-style subtitle → the title sample.
 3. **`data` type** — `bar_chart`/`line_chart`/`pie_chart`/`histogram` → **prefer a
-   sample that contains a chart of that exact plot type** (`set_chart_data.py` reuses
-   the sample's plot type — route a line chart to a line sample, a bar chart to a bar
-   sample); a `table` → a table sample; an `image` → a picture sample.
+   sample whose chart is that exact plot type**; a `table` → a table sample; an
+   `image` → a picture sample.
    - **No sample of the needed plot type, but the template has *some* chart** → map
-     the slide to the **closest chart sample anyway** and note `add_chart (swap type)`
-     in `notes`. Step 4 copies that sample and has `add_chart.py` replace its chart
-     in place, so the new plot type keeps the template's chosen position and size.
-   - **No chart sample at all** → map to any plain sample and note `add_chart` in
-     `notes`; Step 4 builds the chart from scratch into a default/`--area-in` box.
+     to the **closest chart sample** and note `add_chart (swap type)` in `notes`.
+   - **No chart sample at all** → map to any plain sample and note `add_chart` in `notes`.
+
+   How each note is realised in Step 4 (reuse vs build from scratch, and why placement
+   is preserved) is covered in [Charts](#charts).
 
 **Closest match, never block.** If nothing fits, pick the nearest sample and move
 on. If the content needs a layout no sample provides (e.g. a 2×4 grid), pick the
@@ -179,8 +188,7 @@ Work in a scratch directory.
    sample-slide `<p:sldId>` entries** (the leftover samples). Do all structural
    changes before editing content.
 
-5. **Fill each new slide** (this is the Anthropic method: edit the slide's XML).
-   For each built `slideK.xml`:
+5. **Fill each new slide** by editing its XML. For each built `slideK.xml`:
    - **Title / body text** → **use the Edit tool** on the slide XML. Replace the
      sample's placeholder text; render light Markdown as separate `<a:p>`
      paragraphs (bold → `<a:rPr b="1">`, `-`/numbered → one `<a:p>` each); **strip
@@ -194,20 +202,12 @@ Work in a scratch directory.
        Edit tool** for richer formatting (hyperlinks, per-word colour, superscript,
        mixed sizes, multi-level nesting). See `fill_text.py`'s header for the schema.
    - **`data` entries**, by their `type`:
-     - `bar_chart`/`line_chart`/`pie_chart`/`histogram` → write the entry to a temp JSON.
-       **Route by plot type** (the decisive rule):
-       - The mapped sample has a chart of the **same plot type** → reuse it:
+     - `bar_chart`/`line_chart`/`pie_chart`/`histogram` → write the entry to a temp
+       JSON, then route by the `mapping.json` note (see [Charts](#charts) for the why):
+       - Same-type sample (no `add_chart` note) → reuse it:
          `python set_chart_data.py <work>/unpacked slideK.xml --data-json <entry.json>`.
-         It **forks** the chart part first (so two slides built from the same chart
-         sample get independent data — see [Charts](#charts)) then writes the data,
-         inheriting the sample's exact axis/label/colour styling and placement.
-       - The sample's chart is the **wrong plot type** (e.g. only a bar sample but the
-         YAML wants a pie), **or there is no chart sample at all** → build from scratch:
+       - `add_chart` note (wrong plot type, or no chart sample) → build from scratch:
          `python add_chart.py <work>/unpacked slideK.xml --data-json <entry.json>`.
-         When the copied sample already holds a chart, `add_chart.py` **takes over that
-         chart's frame in place** — same position and size — and removes the wrong-type
-         chart, so the new chart lands exactly where the template put it. With no chart
-         on the slide it uses `--area-in` or a default box. See [Charts](#charts).
      - `table` → `python fill_table.py <work>/unpacked slideK.xml --data-json <entry.json>`.
      - `image` → `python set_image.py <work>/unpacked slideK.xml --path <file> --alt "<caption>"`.
    - **`speaker_notes`** → write to a temp file and run
@@ -234,9 +234,6 @@ Tell the user:
   used the **grid solver**, so the user can adjust the template or YAML.
 - Any **missing image files** (`type: image` paths that didn't exist).
 
-Do **not** render or visually inspect the finished slides — that QA pass is a
-separate skill.
-
 ## Re-running and edits
 
 The deck is regenerated from the YAML, so to change content **edit the YAML and
@@ -249,6 +246,17 @@ re-run** rather than hand-editing the `.pptx`:
 The YAML is the single source of truth; the `.pptx` is a disposable build artifact.
 
 ## Charts
+
+Two scripts produce native, editable charts; which one to use is fixed by Step 3's
+mapping note:
+
+| Mapped sample's chart | Script | What it does |
+| --- | --- | --- |
+| **Same plot type** | `set_chart_data.py` | Reuse the sample chart: fork its part, write the YAML data, keep its axes/colours/placement (**preferred**) |
+| **Wrong plot type** | `add_chart.py` | Build from scratch, but **take over the wrong-type chart's frame in place** (same position & size); the old part is orphaned and `clean.py` drops it |
+| **No chart sample** | `add_chart.py` | Build from scratch into `--area-in` or a default box below the title |
+
+The rest of this section explains the why.
 
 Native, editable, and **forked per slide**. The hazard: `add_slide.py` duplicates a
 slide by copying its XML **and its rels**, so a duplicated chart slide still points
@@ -311,7 +319,8 @@ sample for.
 **Do not hand-author bare shapes and compute EMU by hand.** Instead:
 
 1. Map the slide to the closest sample that contains **one** already-styled cell
-   (a card / icon-box / stat tile) — note its shape's `cNvPr id` from the slide XML.
+   (a card / icon-box / stat tile — *card* is an informal name for a styled
+   `<p:sp>`/`<p:grpSp>`) — note its shape's `cNvPr id` from the slide XML.
 2. After duplicating that sample, run:
    ```
    python clone_grid.py <work>/unpacked slideK.xml \
@@ -324,8 +333,8 @@ sample for.
    language (fill, outline, font, effects) — **only the geometry is solved here**.
 3. Fill each cell's text with the Edit tool (find each by its `gridcell_rNcM` name).
 
-`clone_grid.py` does **not** fit text — a cell narrower than the source may overflow.
-That, like all visual checking, is the separate QA stage's job.
+`clone_grid.py` does **not** fit text — a cell narrower than the source may overflow
+(caught in the separate QA stage).
 
 ## Important principles
 
