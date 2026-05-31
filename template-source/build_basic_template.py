@@ -75,7 +75,7 @@ def add_title(slide, text, sub=None):
     p.runs[0].text = text
     # thin accent rule beneath the title (kept close under the title text)
     rule = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(1.13), Inches(2.6), Pt(3)
+        MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(1.13), Inches(5.2), Pt(3)
     )
     rule.fill.solid(); rule.fill.fore_color.rgb = ACCENT
     rule.line.fill.background()
@@ -91,8 +91,8 @@ def number_paragraph(p):
     """Turn a paragraph into an auto-numbered list item (1. 2. 3. ...)."""
     pPr = p._p.get_or_add_pPr()
     # marL = hanging width = the number->text gap. Keep it tight.
-    pPr.set("marL", "114300")
-    pPr.set("indent", "-114300")
+    pPr.set("marL", "88900")
+    pPr.set("indent", "-88900")
     for tag in ("a:buNone", "a:buAutoNum", "a:buChar"):
         ex = pPr.find(qn(tag))
         if ex is not None:
@@ -104,8 +104,8 @@ def number_paragraph(p):
 def bullet_paragraph(p):
     """Turn a paragraph into a plain bulleted list item (• ...)."""
     pPr = p._p.get_or_add_pPr()
-    pPr.set("marL", "228600")
-    pPr.set("indent", "-228600")
+    pPr.set("marL", "152400")
+    pPr.set("indent", "-152400")
     for tag in ("a:buNone", "a:buAutoNum", "a:buChar"):
         ex = pPr.find(qn(tag))
         if ex is not None:
@@ -137,10 +137,11 @@ def add_insight(slide, text):
 
 
 def add_caption(slide, text, y):
-    """A small footnote/source line placed below the content."""
-    _, tf = _box(slide, MARGIN, y, SW - 2 * MARGIN, 0.5)
+    """A normal-text line below the content — same format as the intro/insight
+    line (16pt, muted, non-italic), so it reads as ordinary prose, not a caption."""
+    _, tf = _box(slide, MARGIN, y, SW - 2 * MARGIN, 0.6)
     p = tf.paragraphs[0]
-    _style_run(p.add_run(), 12, MUTED, italic=True); p.runs[0].text = text
+    _style_run(p.add_run(), 16, MUTED); p.runs[0].text = text
 
 
 def blank(prs):
@@ -284,6 +285,22 @@ def slide_pie(prs):
     return s
 
 
+def slide_histogram(prs):
+    """Distribution of a single variable over pre-binned intervals. Built as a
+    single-series clustered column with near-zero gap so bars sit touching — the
+    textbook histogram look. compose-pptx maps `type: histogram` here."""
+    s = blank(prs); add_title(s, "Histogram")
+    add_insight(s, "One-line takeaway about the distribution.")
+    cd = CategoryChartData()
+    cd.categories = ["0-20", "20-40", "40-60", "60-80", "80-100"]
+    cd.add_series("Count", (3, 12, 45, 30, 10))
+    gf = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, *_chart_frame(s), cd)
+    plot = gf.chart.plots[0]
+    plot.gap_width = 10     # near-touching bars -> histogram look
+    gf.chart.has_legend = False
+    return s
+
+
 def slide_split_chart(prs):
     """Split layout: commentary text on the left, native chart on the right."""
     s = blank(prs); add_title(s, "Text + Chart")
@@ -356,6 +373,7 @@ def slide_table_chart(prs):
                             Inches(SW - MARGIN - rx), Inches(3.2), cd)
     plot = g2.chart.plots[0]; plot.overlap = -50; plot.gap_width = 160
     set_legend(g2.chart, "b")
+    add_caption(s, "Source / footnote line below the table and chart.", 5.7)
     return s
 
 
@@ -491,6 +509,9 @@ def main():
     prs = Presentation()
     prs.slide_width = Emu(int(SW * EMU_IN))
     prs.slide_height = Emu(int(SH * EMU_IN))
+    # python-pptx leaves the inherited type="screen4x3" on <p:sldSz>; the real
+    # dimensions are 16:9, so correct the label to match.
+    prs._element.find(qn("p:sldSz")).set("type", "screen16x9")
 
     slide_title(prs)
     slide_bullets(prs)
@@ -502,6 +523,7 @@ def main():
     slide_bar(prs)
     slide_line(prs)
     slide_pie(prs)
+    slide_histogram(prs)
     slide_split_chart(prs)
     slide_table(prs)
     slide_two_tables(prs)
@@ -511,6 +533,27 @@ def main():
     slide_image_split(prs, img_path)
     slide_conclusion(prs)
     slide_closing(prs)
+
+    # Seed every slide with a notes slide so set_notes.py (which clones an
+    # existing notesSlide) has a master+sample to work from; without this,
+    # speaker_notes from the YAML are silently dropped.
+    for slide in prs.slides:
+        slide.notes_slide.notes_text_frame.text = "Speaker notes here."
+
+    # python-pptx adds the notesMaster PART + relationship but does NOT register
+    # it in presentation.xml via <p:notesMasterIdLst>. PowerPoint tolerates the
+    # orphan relationship, but stricter consumers (macOS Quick Look / Keynote)
+    # reject the whole deck ("no displayable content"). Wire it up explicitly.
+    R_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    pres = prs._element
+    if pres.find(qn("p:notesMasterIdLst")) is None:
+        notes_rid = next((rel.rId for rel in prs.part.rels.values()
+                          if rel.reltype.endswith("notesMaster")), None)
+        if notes_rid:
+            nmidlst = pres.makeelement(qn("p:notesMasterIdLst"), {})
+            nmid = pres.makeelement(qn("p:notesMasterId"), {qn("r:id"): notes_rid})
+            nmidlst.append(nmid)
+            pres.find(qn("p:sldMasterIdLst")).addnext(nmidlst)
 
     prs.save(str(out))
     print(f"Wrote {out} with {len(prs.slides._sldIdLst)} slides.")
