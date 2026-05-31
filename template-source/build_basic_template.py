@@ -35,13 +35,30 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 
-# ---- Neutral / minimal palette ---------------------------------------------
-TEXT   = RGBColor(0x26, 0x2A, 0x2E)   # near-black, slightly warm
-MUTED  = RGBColor(0x6B, 0x72, 0x80)   # secondary text
-ACCENT = RGBColor(0x3B, 0x6E, 0xA5)   # one restrained accent (rules, tiles)
-CARD   = RGBColor(0xF4, 0xF5, 0xF7)   # tile fill
-HAIR   = RGBColor(0xD7, 0xDB, 0xE0)   # hairlines
-DIVBG  = RGBColor(0xE8, 0xEA, 0xED)   # full-page divider background
+# ---- Palette: Apple-style design tokens ------------------------------------
+# Single near-black ink + a SINGLE interactive accent (Action Blue). White /
+# parchment canvases punctuated by near-black "tiles" whose colour change is the
+# section divider. No second accent, no decorative colour.
+TEXT     = RGBColor(0x1D, 0x1D, 0x1F)   # ink — every headline & body line
+MUTED    = RGBColor(0x6E, 0x6E, 0x73)   # secondary text (Apple gray)
+ACCENT   = RGBColor(0x00, 0x66, 0xCC)   # Action Blue — the ONE accent
+CARD     = RGBColor(0xF5, 0xF5, 0xF7)   # parchment tile fill
+HAIR     = RGBColor(0xE0, 0xE0, 0xE0)   # hairline borders / rules
+DIVBG    = RGBColor(0x1D, 0x1D, 0x1F)   # near-black divider/closing tile
+ONDARK   = RGBColor(0xFF, 0xFF, 0xFF)   # text on dark tiles
+DARKMUTED = RGBColor(0xCC, 0xCC, 0xCC)  # secondary text on dark tiles
+
+# Chart accent palette written into the theme's accent1..6. python-pptx charts
+# carry NO explicit series colour, so the renderer auto-assigns accent1→series 1,
+# accent2→series 2, … — and compose-pptx's add_chart/set_chart_data inherit the
+# same theme accents. So this ordered list is the chart colour candidate pool;
+# accent1 is series-1 / first pie slice. Apple-system hues, calmed for slides.
+CHART_ACCENTS = ["0066CC",   # accent1 — Action Blue   (series 1 / first slice)
+                 "E8893B",   # accent2 — orange        (max contrast w/ blue)
+                 "34A853",   # accent3 — green
+                 "C44D8A",   # accent4 — pink
+                 "5AC8DC",   # accent5 — teal
+                 "5E5CE6"]   # accent6 — indigo
 
 # Cross-platform sans: Arial ships on Windows+Mac and substitutes to a sans
 # (Arimo) on ChromeOS/web, so no font embedding is needed and the file stays tiny.
@@ -102,7 +119,7 @@ def add_title(slide, text, sub=None):
     if sub:
         _, sf = _box(slide, MARGIN, 1.55, SW - 2 * MARGIN, 0.6)
         sp = sf.paragraphs[0]
-        _style_run(sp.add_run(), 16, MUTED)
+        _style_run(sp.add_run(), 17, MUTED)
         sp.runs[0].text = sub
 
 
@@ -152,15 +169,15 @@ def add_insight(slide, text):
     the object). compose-pptx-2 refills this as the slide's body text."""
     _, tf = _box(slide, MARGIN, 1.6, SW - 2 * MARGIN, 0.6)
     p = tf.paragraphs[0]
-    _style_run(p.add_run(), 16, MUTED); p.runs[0].text = text
+    _style_run(p.add_run(), 17, MUTED); p.runs[0].text = text
 
 
 def add_caption(slide, text, y):
     """A normal-text line below the content — same format as the intro/insight
-    line (16pt, muted, non-italic), so it reads as ordinary prose, not a caption."""
+    line (17pt, muted, non-italic), so it reads as ordinary prose, not a caption."""
     _, tf = _box(slide, MARGIN, y, SW - 2 * MARGIN, 0.6)
     p = tf.paragraphs[0]
-    _style_run(p.add_run(), 16, MUTED); p.runs[0].text = text
+    _style_run(p.add_run(), 17, MUTED); p.runs[0].text = text
 
 
 def blank(prs):
@@ -170,12 +187,14 @@ def blank(prs):
 
 def slide_title(prs):
     s = blank(prs)
+    # Near-black title tile (mirrors the divider/closing surface).
+    s.background.fill.solid(); s.background.fill.fore_color.rgb = DIVBG
     _, tf = _box(s, MARGIN, 2.7, SW - 2 * MARGIN, 1.4)
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.LEFT
-    _style_run(p.add_run(), 44, TEXT, bold=True); p.runs[0].text = "Presentation Title"
+    _style_run(p.add_run(), 44, ONDARK, bold=True); p.runs[0].text = "Presentation Title"
     _, sf = _box(s, MARGIN, 4.0, SW - 2 * MARGIN, 0.9)
     sp = sf.paragraphs[0]
-    _style_run(sp.add_run(), 20, MUTED); sp.runs[0].text = "Subtitle / author / date"
+    _style_run(sp.add_run(), 20, DARKMUTED); sp.runs[0].text = "Subtitle / author / date"
     return s
 
 
@@ -186,7 +205,7 @@ def slide_bullets(prs):
                "Third point with a bit more detail", "Fourth point"]
     for i, t in enumerate(samples):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.space_after = Pt(10)
+        p.space_after = Pt(10); p.line_spacing = 1.15
         _style_run(p.add_run(), 18, TEXT); p.runs[0].text = t
         number_paragraph(p)
     return s
@@ -199,7 +218,7 @@ def slide_bullets_plain(prs):
                "Third point with a bit more detail", "Fourth point"]
     for i, t in enumerate(samples):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.space_after = Pt(10)
+        p.space_after = Pt(10); p.line_spacing = 1.15
         _style_run(p.add_run(), 18, TEXT); p.runs[0].text = t
         bullet_paragraph(p)
     return s
@@ -207,13 +226,13 @@ def slide_bullets_plain(prs):
 
 def slide_divider(prs):
     s = blank(prs)
-    # Whole page in a soft gray (no band).
+    # Near-black full-bleed "tile": the surface colour change IS the divider.
     s.background.fill.solid()
     s.background.fill.fore_color.rgb = DIVBG
     _, tf = _box(s, MARGIN, 3.0, SW - 2 * MARGIN, 1.5)
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-    _style_run(p.add_run(), 34, TEXT, bold=True); p.runs[0].text = "Section Divider"
+    _style_run(p.add_run(), 34, ONDARK, bold=True); p.runs[0].text = "Section Divider"
     return s
 
 
@@ -330,7 +349,7 @@ def slide_split_chart(prs):
     for t in ["Supporting point one", "Supporting point two",
               "Supporting point three"]:
         p = tf.add_paragraph(); p.space_after = Pt(10)
-        _style_run(p.add_run(), 16, TEXT); p.runs[0].text = t
+        _style_run(p.add_run(), 17, TEXT); p.runs[0].text = t
     # Right: chart
     rx = 6.1
     cd = CategoryChartData()
@@ -343,19 +362,59 @@ def slide_split_chart(prs):
     return s
 
 
-def _populate_table(tbl, data, cols, rows, fontsz=13):
-    """Fill a table, styling the header row + first column (centered, bold/white
-    header). Matches the look of the single-table sample so fill_table reuses it."""
+# "No Style, No Grid" built-in table style GUID — strips python-pptx's default
+# coloured/banded style so we can paint a clean hairline table ourselves.
+_TBL_NO_STYLE = "{2D5ABB26-0587-4C30-8999-92F81FD0307C}"
+
+
+def _table_plain(tbl):
+    """Drop the default banded/filled table style and turn off the auto first-row
+    and banding flags, leaving an unstyled grid to paint by hand."""
+    tbl.first_row = False; tbl.horz_banding = False
+    tblPr = tbl._tbl.find(qn("a:tblPr"))
+    if tblPr is not None:
+        sid = tblPr.find(qn("a:tableStyleId"))
+        if sid is None:
+            sid = tblPr.makeelement(qn("a:tableStyleId"), {})
+            tblPr.append(sid)
+        sid.text = _TBL_NO_STYLE
+
+
+def _cell_bottom_border(cell, color, emu):
+    """Add only a bottom hairline to a cell (lines precede <a:fill> in
+    CT_TableCellProperties, so insert at the front of tcPr)."""
+    tcPr = cell._tc.get_or_add_tcPr()
+    ex = tcPr.find(qn("a:lnB"))
+    if ex is not None:
+        tcPr.remove(ex)
+    ln = tcPr.makeelement(qn("a:lnB"),
+                          {"w": str(emu), "cap": "flat", "cmpd": "sng", "algn": "ctr"})
+    sf = ln.makeelement(qn("a:solidFill"), {})
+    sf.append(ln.makeelement(qn("a:srgbClr"), {"val": str(color)}))
+    ln.append(sf)
+    tcPr.insert(0, ln)
+
+
+def _populate_table(tbl, data, cols, rows, fontsz=14):
+    """Minimal Apple-style table: white cells, ink text, left-aligned labels and
+    right-aligned numerics, a strong ink rule under the header, and thin hairline
+    row separators. No heavy header fill, no banding, no shadow."""
+    _table_plain(tbl)
     for r in range(rows):
+        header = (r == 0)
         for c in range(cols):
             cell = tbl.cell(r, c)
             cell.text = str(data[r][c])
             cell.vertical_anchor = MSO_ANCHOR.MIDDLE
+            cell.fill.solid(); cell.fill.fore_color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+            cell.margin_left = Inches(0.12); cell.margin_right = Inches(0.12)
             para = cell.text_frame.paragraphs[0]
-            _style_run(para.runs[0], fontsz,
-                       TEXT if r else RGBColor(0xFF, 0xFF, 0xFF), bold=(r == 0))
-            if r == 0 or c == 0:
-                para.alignment = PP_ALIGN.CENTER
+            _style_run(para.runs[0], fontsz, TEXT, bold=header)
+            para.alignment = PP_ALIGN.LEFT if c == 0 else PP_ALIGN.RIGHT
+            if header:
+                _cell_bottom_border(cell, TEXT, 19050)   # ~1.5pt ink under header
+            elif r < rows - 1:
+                _cell_bottom_border(cell, HAIR, 9525)     # ~1px hairline separator
 
 
 def slide_two_tables(prs):
@@ -407,17 +466,7 @@ def slide_table(prs):
             ["Enterprise", "45", "112"],
             ["SMB", "620", "84"],
             ["Consumer", "5,300", "39"]]
-    for r in range(rows):
-        for c in range(cols):
-            cell = tbl.cell(r, c)
-            cell.text = data[r][c]
-            cell.vertical_anchor = MSO_ANCHOR.MIDDLE
-            para = cell.text_frame.paragraphs[0]
-            _style_run(para.runs[0], 15, TEXT if r else RGBColor(0xFF, 0xFF, 0xFF),
-                       bold=(r == 0))
-            # Center the header row and the first (label) column.
-            if r == 0 or c == 0:
-                para.alignment = PP_ALIGN.CENTER
+    _populate_table(tbl, data, cols, rows, fontsz=15)
     add_caption(s, "Source / footnote line below the table.", 5.5)
     return s
 
@@ -433,6 +482,7 @@ def slide_cards(prs):
         x = MARGIN + i * (cw + gap)
         card = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE,
                                   Inches(x), Inches(cy), Inches(cw), Inches(ch))
+        card.adjustments[0] = 0.07   # ~18px (rounded.lg) corner, not pill-round
         card.fill.solid(); card.fill.fore_color.rgb = CARD
         card.line.color.rgb = HAIR; card.line.width = Pt(0.75)
         card.shadow.inherit = False; _kill_shadow(card)
@@ -462,7 +512,7 @@ def slide_image_split(prs, img_path):
     for t in ["Supporting point one", "Supporting point two",
               "Supporting point three"]:
         p = tf.add_paragraph(); p.space_after = Pt(10)
-        _style_run(p.add_run(), 16, TEXT); p.runs[0].text = t
+        _style_run(p.add_run(), 17, TEXT); p.runs[0].text = t
     rx = 6.1
     s.shapes.add_picture(str(img_path), Inches(rx), Inches(2.0),
                          Inches(SW - MARGIN - rx), Inches(4.2))
@@ -492,7 +542,7 @@ def slide_conclusion(prs):
     tb.word_wrap = True
     tb.vertical_anchor = MSO_ANCHOR.MIDDLE
     tb.margin_left = Inches(0.3)
-    p = tb.paragraphs[0]
+    p = tb.paragraphs[0]; p.alignment = PP_ALIGN.LEFT
     _style_run(p.add_run(), 18, TEXT, bold=True)
     p.runs[0].text = "Key message goes here."
     return s
@@ -500,13 +550,15 @@ def slide_conclusion(prs):
 
 def slide_closing(prs):
     s = blank(prs)
+    # Near-black tile to bookend the deck (mirrors the divider surface).
+    s.background.fill.solid(); s.background.fill.fore_color.rgb = DIVBG
     _, tf = _box(s, MARGIN, 3.0, SW - 2 * MARGIN, 1.4)
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
-    _style_run(p.add_run(), 40, TEXT, bold=True); p.runs[0].text = "Thank You"
+    _style_run(p.add_run(), 40, ONDARK, bold=True); p.runs[0].text = "Thank You"
     _, sf = _box(s, MARGIN, 4.2, SW - 2 * MARGIN, 0.7)
     sp = sf.paragraphs[0]; sp.alignment = PP_ALIGN.CENTER
-    _style_run(sp.add_run(), 18, MUTED); sp.runs[0].text = "name@example.com"
+    _style_run(sp.add_run(), 18, DARKMUTED); sp.runs[0].text = "name@example.com"
     return s
 
 
@@ -518,6 +570,35 @@ def make_placeholder_png(path):
     d.line([0, 0, w, h], fill=(0xD7, 0xDB, 0xE0), width=2)
     d.line([0, h, w, 0], fill=(0xD7, 0xDB, 0xE0), width=2)
     img.save(path)
+
+
+def patch_theme_accents(pptx_path, accents):
+    """Rewrite accent1..6 in every theme part of the saved .pptx (python-pptx has
+    no theme-colour API, so we post-process the package ZIP). Native charts carry
+    no explicit colour, so they auto-colour from these accents — and so will any
+    chart compose-pptx later builds from this template. `accents` is six 'RRGGBB'
+    strings, accent1 first."""
+    import zipfile, re, os
+    src = zipfile.ZipFile(pptx_path)
+    infos = src.infolist()
+    blobs = {i.filename: src.read(i.filename) for i in infos}
+    src.close()
+    theme_re = re.compile(r"ppt/theme/theme\d+\.xml$")
+    for name in blobs:
+        if not theme_re.match(name):
+            continue
+        xml = blobs[name].decode("utf-8")
+        for idx, hexv in enumerate(accents, start=1):
+            # Replace the single colour child (srgbClr or sysClr) inside <a:accentN>.
+            xml = re.sub(
+                r'(<a:accent%d>)\s*<a:(?:srgbClr|sysClr)\b[^>]*/>\s*(</a:accent%d>)' % (idx, idx),
+                r'\g<1><a:srgbClr val="%s"/>\g<2>' % hexv, xml, count=1)
+        blobs[name] = xml.encode("utf-8")
+    tmp = str(pptx_path) + ".tmp"
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as out:
+        for i in infos:                       # preserve original entry order
+            out.writestr(i, blobs[i.filename])
+    os.replace(tmp, str(pptx_path))
 
 
 def main():
@@ -575,6 +656,8 @@ def main():
             pres.find(qn("p:sldMasterIdLst")).addnext(nmidlst)
 
     prs.save(str(out))
+    # Recolour the theme accents AFTER saving (post-process the package ZIP).
+    patch_theme_accents(out, CHART_ACCENTS)
     print(f"Wrote {out} with {len(prs.slides._sldIdLst)} slides.")
 
 
