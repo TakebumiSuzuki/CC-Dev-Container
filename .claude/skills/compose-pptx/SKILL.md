@@ -132,7 +132,7 @@ For each YAML slide, choose the best-fitting template sample using, in priority 
    center"*, *"2-column: wins on the left, challenges on the right"*, *"Section Divider"*).
 2. **Body shape** — `body: ""` → a section-divider sample; numbered/bulleted body → a
    bullet sample; title-slide-style subtitle lines → the title sample.
-3. **`data` type** — a slide whose `data` is a `bar_chart`/`line_chart`/`histogram` needs a
+3. **`data` type** — a slide whose `data` is a `bar_chart`/`line_chart`/`pie_chart`/`histogram` needs a
    sample that contains a chart; a `table` needs a table sample; an `image` needs a picture
    sample.
 
@@ -159,13 +159,14 @@ The builder's contract (what it does, so the mapping you produce is correct):
     body text frame; **strip `{{placeholder}}` tokens** (they only marked where data goes —
     the sample already positions the object).
   - **`data` entries** (matched by order/type to the sample's objects):
-    - `bar_chart` / `line_chart` / `histogram` → the builder **records the sample chart's
+    - `bar_chart` / `line_chart` / `pie_chart` / `histogram` → the builder **records the sample chart's
       position, removes it, and adds a fresh native chart** (`add_chart`) there with the YAML
       data. It deliberately does **not** `replace_data()` the copied chart: duplicating a
       slide makes the copy share the *same* chart part as the original, so `replace_data()`
       would corrupt sibling slides mapped to the same sample. A fresh chart is independent and
       inherits the deck's theme colors. (Cost: a sample chart's bespoke styling is not kept.)
-      `bar_chart` → clustered columns, `line_chart` → line, `histogram` → columns with `bins`
+      `bar_chart` → clustered columns, `line_chart` → line, `pie_chart` → pie (one series of
+      `categories`/`values` as parts of a whole, legend on), `histogram` → columns with `bins`
       as categories and one series of `frequencies`.
     - `table` → if the sample has a table, rewrite its cells, **growing/shrinking both rows
       and columns** to fit (column widths are redistributed so a grown table still fits the
@@ -210,7 +211,7 @@ Both are **native PowerPoint objects**, by design:
 
 - **Native, not PNG** — they inherit the chosen template's theme (palette, fonts, legend
   styling) and stay editable by whoever receives the deck. The YAML's chart types
-  (`bar_chart` / `line_chart` / `histogram`) all map directly to native python-pptx chart
+  (`bar_chart` / `line_chart` / `pie_chart` / `histogram`) all map directly to native python-pptx chart
   types, so there is nothing PNG rendering would add. `matplotlib`/`seaborn` are
   intentionally not used (and not installed).
 - **Tables reuse the sample object** — cell-rewrite (with row/column grow-shrink) preserves

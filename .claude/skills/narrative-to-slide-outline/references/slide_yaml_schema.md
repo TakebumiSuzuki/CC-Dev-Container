@@ -24,7 +24,7 @@ slides:
     suggested_layout: "Free-form layout hint, e.g., '2-column: issues on the left, actions on the right'"
     data:
       placeholder_name:
-        type: bar_chart | line_chart | histogram | table | image
+        type: bar_chart | line_chart | pie_chart | histogram | table | image
         # ... type-specific fields, see below
     speaker_notes: |
       Speaker notes.
@@ -57,7 +57,7 @@ narrative becomes `source: "./data/foo.xlsx, sheet: Sales"` in the YAML.
 
 | Sub-field              | Required          | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                 | yes               | One of: `bar_chart`, `line_chart`, `histogram`, `table`, `image`                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `type`                 | yes               | One of: `bar_chart`, `line_chart`, `pie_chart`, `histogram`, `table`, `image`                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `source`               | conditional       | Required whenever the narrative provides a `(Source: ...)` breadcrumb. If an inline table lacks a breadcrumb, ask the user — never guess a path. Omit for `image` (use `path` instead). Format and locator rules: see `narrative_format.md`. |
 | (type-specific fields) | varies            | See per-type schemas below                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
@@ -76,6 +76,24 @@ series:
     values: [100, 120, 145]
   - name: "2025"
     values: [110, 135, 168]
+```
+
+**pie_chart**
+
+A pie chart shows **parts of a whole** — one series split across slice labels.
+Use it only when the values are components of a single total (shares,
+composition, breakdown), not for comparing independent quantities (use
+`bar_chart` for that). Use `categories` for the slice labels and **exactly one**
+`series` for the slice values; if the data has multiple series, it is not a pie —
+pick `bar_chart`/`line_chart` instead.
+
+```yaml
+type: pie_chart
+source: "./data/revenue_mix.xlsx, sheet: FY25"
+categories: ["Enterprise", "Mid-market", "SMB"]
+series:
+  - name: "Revenue share"
+    values: [112, 38, 18]
 ```
 
 **histogram**

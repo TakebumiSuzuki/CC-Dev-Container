@@ -50,6 +50,7 @@ BOLD_RE = re.compile(r"\*\*(.+?)\*\*")
 CHART_TYPE_MAP = {
     "bar_chart": XL_CHART_TYPE.COLUMN_CLUSTERED,  # vertical columns = the usual slide "bar"
     "line_chart": XL_CHART_TYPE.LINE,
+    "pie_chart": XL_CHART_TYPE.PIE,
     "histogram": XL_CHART_TYPE.COLUMN_CLUSTERED,
 }
 
@@ -315,7 +316,8 @@ def add_native_chart(slide, geom, entry):
     )
     chart = gframe.chart
     n_series = 1 if ctype == "histogram" else len(entry.get("series", []))
-    chart.has_legend = n_series > 1
+    # A pie always wants a legend (slice labels); multi-series bar/line too.
+    chart.has_legend = n_series > 1 or ctype == "pie_chart"
     if chart.has_legend:
         chart.legend.include_in_layout = False
     return chart

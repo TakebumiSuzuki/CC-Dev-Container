@@ -67,7 +67,7 @@ A YAML file. Default location: **same directory as the input file** the user gav
 ### Output schema
 
 The full YAML format — top-level fields, the per-`type` schemas
-(`bar_chart`/`line_chart`/`histogram`/`table`/`image`), the number-vs-string
+(`bar_chart`/`line_chart`/`pie_chart`/`histogram`/`table`/`image`), the number-vs-string
 rule for cell values, and YAML formatting conventions — is defined in
 **`references/slide_yaml_schema.md`** (read up front in
 [Step 1](#step-1-read-the-input-and-references)). A complete worked example
@@ -151,7 +151,7 @@ Map the document to slides:
 For each non-divider slide, set a `suggested_layout` that reflects the slide's character. Examples:
 
 - Bullet slide → `"Bullet list: N items stacked vertically in a larger font"`
-- Chart slide → `"One-line comment on top, a large [bar|line|histogram] chart centered below"`
+- Chart slide → `"One-line comment on top, a large [bar|line|pie|histogram] chart centered below"`
 - Table slide → `"Table placed large in the center of the slide"`
 - Two-column comparison → `"2-column: XXX on the left, YYY on the right"`
 - Image slide → `"Large image centered, with a comment on top"`

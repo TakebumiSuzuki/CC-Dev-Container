@@ -127,6 +127,26 @@ slides:
       - claim: "SMB decline is consistent with the FY26 plan reviewed at the April board meeting"
         source: "./decks/april_board.pptx, slide: 12"
 
+  - title: "Revenue Mix by Segment"
+    body: |
+      Enterprise now drives the clear majority of revenue — roughly 60% of the $187M total —
+      with mid-market a healthy second and SMB a deliberately thin slice.
+
+      {{revenue_mix}}
+    suggested_layout: "One-line comment on top, a large pie chart centered below"
+    data:
+      revenue_mix:
+        type: pie_chart
+        source: "./data/q2_segment_breakdown.csv"
+        categories: ["Enterprise", "Mid-market", "SMB"]
+        series:
+          - name: "Revenue ($M)"
+            values: [112, 54, 21]
+    speaker_notes: |
+      This is the same revenue split as the table on the previous slide, shown as a share of the
+      whole rather than as absolute numbers. The story is the Enterprise lean — ~60% and rising —
+      which is what materially derisks net retention heading into H2.
+
   - title: "Deal Size Distribution"
     body: |
       47 new-logo deals in Q2 with a clear bimodal shape — a healthy mid-market cluster around

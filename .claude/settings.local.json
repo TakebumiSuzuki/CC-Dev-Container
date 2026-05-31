@@ -1,7 +1,21 @@
 {
   "permissions": {
     "allow": [
-
+      "Bash(curl -s \"https://api.github.com/repos/anthropics/skills/contents/skills/pptx/scripts/office/helpers\")",
+      "Bash(curl -s \"https://api.github.com/repos/anthropics/skills/contents/skills/pptx/scripts/office/validators\")",
+      "Bash(curl -s \"https://api.github.com/repos/anthropics/skills/contents/skills/pptx/scripts/office/schemas\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/office/unpack.py\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/office/pack.py\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/clean.py\")",
+      "Bash(/opt/uv-venv/bin/python -)",
+      "Bash(unzip -p Data/SlideEgg_66484.pptx ppt/charts/chart1.xml)",
+      "Bash(/opt/uv-venv/bin/python -c \"import sys,re; s=sys.stdin.read\\(\\); s=re.sub\\(r'>\\\\s+<','><',s\\); print\\(s[:2600]\\)\")",
+      "Bash(curl -s -o clean.py     \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/clean.py\")",
+      "Bash(curl -s -o add_slide.py \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/add_slide.py\")",
+      "Bash(/opt/uv-venv/bin/python -c 'import ast,sys *)",
+      "Bash(/opt/uv-venv/bin/python office/unpack.py /tmp/ref.pptx /tmp/refunpacked)",
+      "Bash(/opt/uv-venv/bin/python *)"
     ]
   }
 }
