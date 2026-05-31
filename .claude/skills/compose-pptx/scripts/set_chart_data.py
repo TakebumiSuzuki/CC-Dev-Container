@@ -3,7 +3,7 @@
 Why this exists: add_slide.py duplicates a slide by copying its XML *and rels*, so
 a duplicated chart slide still points at the ORIGINAL chart part. Two slides built
 from the same chart sample therefore share one chart part — editing one would
-corrupt the other (the exact shared-part hazard the python-pptx skill documents).
+corrupt the other.
 
 So this script first FORKS the chart part (chart{N}.xml + its embedded workbook get
 fresh copies, the slide is repointed, Content_Types updated), then rewrites the

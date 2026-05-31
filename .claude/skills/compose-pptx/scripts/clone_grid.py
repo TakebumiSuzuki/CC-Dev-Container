@@ -1,6 +1,6 @@
 """Clone a styled shape into an R x C grid (the "novel-layout" helper).
 
-This is the augmentation the compose-pptx (python-pptx) skill lacks: when a YAML
+For the "novel-layout" case: when a YAML
 slide needs a grid the template has no sample for (e.g. a 2x4 card layout but the
 template only ships a 3-card row), you do NOT hand-author bare shapes and compute
 EMU by hand. Instead you point this script at ONE already-styled shape on the
