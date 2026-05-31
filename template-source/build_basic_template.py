@@ -59,6 +59,25 @@ def _box(slide, x, y, w, h):
     return tb, tf
 
 
+def _kill_shadow(shape):
+    """python-pptx's `shape.shadow.inherit = False` does NOT emit an explicit
+    empty <a:effectLst/>, so PowerPoint and LibreOffice still paint the preset
+    drop shadow. Inject an empty effectLst to truly disable it. (effectLst sits
+    after <a:ln> in CT_ShapeProperties; these shapes carry no scene3d/extLst, so
+    appending keeps the schema order valid.)"""
+    spPr = shape._element.spPr
+    if spPr.find(qn("a:effectLst")) is None:
+        spPr.append(spPr.makeelement(qn("a:effectLst"), {}))
+    # Autoshapes also carry a <p:style> whose <a:effectRef idx="N"> points at a
+    # THEME effect style that includes an outer shadow; LibreOffice honours that
+    # ref even when spPr has an empty effectLst. Force the ref to idx 0 (none).
+    style = shape._element.find(qn("p:style"))
+    if style is not None:
+        eref = style.find(qn("a:effectRef"))
+        if eref is not None:
+            eref.set("idx", "0")
+
+
 def _style_run(run, size, color=TEXT, bold=False, italic=False):
     f = run.font
     f.size = Pt(size)
@@ -79,7 +98,7 @@ def add_title(slide, text, sub=None):
     )
     rule.fill.solid(); rule.fill.fore_color.rgb = ACCENT
     rule.line.fill.background()
-    rule.shadow.inherit = False
+    rule.shadow.inherit = False; _kill_shadow(rule)
     if sub:
         _, sf = _box(slide, MARGIN, 1.55, SW - 2 * MARGIN, 0.6)
         sp = sf.paragraphs[0]
@@ -110,7 +129,7 @@ def bullet_paragraph(p):
         ex = pPr.find(qn(tag))
         if ex is not None:
             pPr.remove(ex)
-    pPr.append(pPr.makeelement(qn("a:buFont"), {"typeface": "Arial"}))
+    pPr.append(pPr.makeelement(qn("a:buFont"), {"typeface": FONT}))
     pPr.append(pPr.makeelement(qn("a:buChar"), {"char": "•"}))
 
 
@@ -416,7 +435,7 @@ def slide_cards(prs):
                                   Inches(x), Inches(cy), Inches(cw), Inches(ch))
         card.fill.solid(); card.fill.fore_color.rgb = CARD
         card.line.color.rgb = HAIR; card.line.width = Pt(0.75)
-        card.shadow.inherit = False
+        card.shadow.inherit = False; _kill_shadow(card)
         tf = card.text_frame; tf.word_wrap = True
         tf.vertical_anchor = MSO_ANCHOR.MIDDLE
         hp = tf.paragraphs[0]; hp.alignment = PP_ALIGN.CENTER
@@ -464,11 +483,11 @@ def slide_conclusion(prs):
     box = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(by),
                              Inches(bw), Inches(bh))
     box.fill.solid(); box.fill.fore_color.rgb = CARD
-    box.line.fill.background(); box.shadow.inherit = False
+    box.line.fill.background(); box.shadow.inherit = False; _kill_shadow(box)
     bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(by),
                              Inches(0.09), Inches(bh))
     bar.fill.solid(); bar.fill.fore_color.rgb = ACCENT
-    bar.line.fill.background(); bar.shadow.inherit = False
+    bar.line.fill.background(); bar.shadow.inherit = False; _kill_shadow(bar)
     tb = box.text_frame
     tb.word_wrap = True
     tb.vertical_anchor = MSO_ANCHOR.MIDDLE
