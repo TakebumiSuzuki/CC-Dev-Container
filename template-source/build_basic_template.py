@@ -32,6 +32,7 @@ from pptx.oxml.ns import qn
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.dml import MSO_LINE_DASH_STYLE, MSO_THEME_COLOR
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 
@@ -44,6 +45,7 @@ MUTED    = RGBColor(0x6E, 0x6E, 0x73)   # secondary text (Apple gray)
 ACCENT   = RGBColor(0x00, 0x66, 0xCC)   # Action Blue — the ONE accent
 CARD     = RGBColor(0xF5, 0xF5, 0xF7)   # parchment tile fill
 HAIR     = RGBColor(0xE0, 0xE0, 0xE0)   # hairline borders / rules
+GRID     = RGBColor(0xD9, 0xD9, 0xD9)   # faint grey value-axis gridlines
 DIVBG    = RGBColor(0x1D, 0x1D, 0x1F)   # near-black divider/closing tile
 ONDARK   = RGBColor(0xFF, 0xFF, 0xFF)   # text on dark tiles
 DARKMUTED = RGBColor(0xCC, 0xCC, 0xCC)  # secondary text on dark tiles
@@ -59,6 +61,21 @@ CHART_ACCENTS = ["0066CC",   # accent1 — Action Blue   (series 1 / first slice
                  "C44D8A",   # accent4 — pink
                  "5AC8DC",   # accent5 — teal
                  "5E5CE6"]   # accent6 — indigo
+
+# Soften the saturated accents slightly: render every coloured chart mark (bars,
+# lines, pie slices) and the two accent rules (title underline + takeaway bar) at
+# 87% opacity so the blues/oranges read a touch lighter against white. OOXML alpha
+# is in thousandths of a percent, so 87% == "87000".
+#
+# NOTE: an <a:alpha> placed in a THEME accent *definition* is NOT honoured when a
+# chart series resolves it through a <a:schemeClr> reference (verified: LibreOffice
+# renders such bars at full saturation). So opacity must live as a transform on the
+# reference itself — i.e. on the per-series/per-point schemeClr we write below — not
+# on the theme colour. Using schemeClr (not srgbClr) keeps charts theme-swappable.
+ACCENT_ALPHA = "87000"
+ACCENT_THEME = [MSO_THEME_COLOR.ACCENT_1, MSO_THEME_COLOR.ACCENT_2,
+                MSO_THEME_COLOR.ACCENT_3, MSO_THEME_COLOR.ACCENT_4,
+                MSO_THEME_COLOR.ACCENT_5, MSO_THEME_COLOR.ACCENT_6]
 
 # Cross-platform sans: Arial ships on Windows+Mac and substitutes to a sans
 # (Arimo) on ChromeOS/web, so no font embedding is needed and the file stays tiny.
@@ -95,6 +112,62 @@ def _kill_shadow(shape):
             eref.set("idx", "0")
 
 
+def _fill_alpha(shape, alpha=ACCENT_ALPHA):
+    """Render a solid-filled shape at partial opacity. python-pptx has no opacity
+    API, so inject an <a:alpha> (thousandths of a percent) into the fill colour's
+    <a:srgbClr>. Call AFTER the solid fore_color has been set."""
+    srgbClr = shape._element.spPr.find(qn("a:solidFill")).find(qn("a:srgbClr"))
+    srgbClr.append(srgbClr.makeelement(qn("a:alpha"), {"val": alpha}))
+
+
+def _style_gridlines(chart):
+    """Replace a cartesian chart's default solid-black value-axis gridlines (the
+    horizontal scale rules) with a faint light-grey DOTTED rule. Pie charts have
+    no value axis, so this is only called for the column/line charts."""
+    va = chart.value_axis
+    va.has_major_gridlines = True
+    ln = va.major_gridlines.format.line
+    ln.color.rgb = GRID
+    ln.width = Pt(0.75)
+    ln.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
+
+
+def _alpha_on(scheme_clr):
+    """Tag an <a:schemeClr> element with ACCENT_ALPHA opacity."""
+    scheme_clr.append(scheme_clr.makeelement(qn("a:alpha"), {"val": ACCENT_ALPHA}))
+
+
+def _series_fill_alpha(chart):
+    """Column/bar/histogram charts: give each series an explicit theme-accent SOLID
+    FILL at ACCENT_ALPHA opacity. Written as a schemeClr reference (+ <a:alpha>), so
+    it reproduces the renderer's auto accent1..N order yet stays theme-swappable."""
+    for i, ser in enumerate(chart.series):
+        ser.format.fill.solid()
+        ser.format.fill.fore_color.theme_color = ACCENT_THEME[i % 6]
+        spPr = ser.format._element.get_or_add_spPr()
+        _alpha_on(spPr.find(qn("a:solidFill")).find(qn("a:schemeClr")))
+
+
+def _line_alpha(chart):
+    """Line charts: the visible mark is the series LINE, so colour the line with a
+    theme accent at ACCENT_ALPHA opacity (schemeClr + <a:alpha>)."""
+    for i, ser in enumerate(chart.series):
+        ser.format.line.color.theme_color = ACCENT_THEME[i % 6]
+        spPr = ser.format._element.get_or_add_spPr()
+        ln = spPr.find(qn("a:ln"))
+        _alpha_on(ln.find(qn("a:solidFill")).find(qn("a:schemeClr")))
+
+
+def _pie_alpha(chart):
+    """Pie charts: each slice is a separate data point, so fill every point with its
+    auto accent (accent1.. for slice 1..) at ACCENT_ALPHA opacity."""
+    for i, pt in enumerate(chart.plots[0].series[0].points):
+        pt.format.fill.solid()
+        pt.format.fill.fore_color.theme_color = ACCENT_THEME[i % 6]
+        spPr = pt.format._element.get_or_add_spPr()
+        _alpha_on(spPr.find(qn("a:solidFill")).find(qn("a:schemeClr")))
+
+
 def _style_run(run, size, color=TEXT, bold=False, italic=False):
     f = run.font
     f.size = Pt(size)
@@ -113,7 +186,7 @@ def add_title(slide, text, sub=None):
     rule = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(1.13), Inches(5.2), Pt(3)
     )
-    rule.fill.solid(); rule.fill.fore_color.rgb = ACCENT
+    rule.fill.solid(); rule.fill.fore_color.rgb = ACCENT; _fill_alpha(rule)
     rule.line.fill.background()
     rule.shadow.inherit = False; _kill_shadow(rule)
     if sub:
@@ -126,9 +199,10 @@ def add_title(slide, text, sub=None):
 def number_paragraph(p):
     """Turn a paragraph into an auto-numbered list item (1. 2. 3. ...)."""
     pPr = p._p.get_or_add_pPr()
-    # marL = hanging width = the number->text gap. Keep it tight.
-    pPr.set("marL", "88900")
-    pPr.set("indent", "-88900")
+    # marL = hanging width = the number->text gap. The "N." glyph is wider than a
+    # bullet, so it needs a larger marL than bullets to leave the same visible gap.
+    pPr.set("marL", "247650")
+    pPr.set("indent", "-247650")
     for tag in ("a:buNone", "a:buAutoNum", "a:buChar"):
         ex = pPr.find(qn(tag))
         if ex is not None:
@@ -140,8 +214,9 @@ def number_paragraph(p):
 def bullet_paragraph(p):
     """Turn a paragraph into a plain bulleted list item (• ...)."""
     pPr = p._p.get_or_add_pPr()
-    pPr.set("marL", "152400")
-    pPr.set("indent", "-152400")
+    # marL = hanging width = the bullet->text gap. A touch of breathing room.
+    pPr.set("marL", "203200")
+    pPr.set("indent", "-203200")
     for tag in ("a:buNone", "a:buAutoNum", "a:buChar"):
         ex = pPr.find(qn(tag))
         if ex is not None:
@@ -296,6 +371,8 @@ def slide_bar(prs):
     plot = gf.chart.plots[0]
     plot.overlap = -50      # negative -> a clear gap between the two bars in each group
     plot.gap_width = 160    # wider category gap -> slightly narrower bars
+    _style_gridlines(gf.chart)
+    _series_fill_alpha(gf.chart)
     set_legend(gf.chart, "b")
     return s
 
@@ -307,6 +384,8 @@ def slide_line(prs):
     cd.categories = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
     cd.add_series("Revenue", (12, 15, 14, 19, 22, 27))
     gf = s.shapes.add_chart(XL_CHART_TYPE.LINE_MARKERS, *_chart_frame(s), cd)
+    _style_gridlines(gf.chart)
+    _line_alpha(gf.chart)
     set_legend(gf.chart, "b")
     return s
 
@@ -317,7 +396,13 @@ def slide_pie(prs):
     cd = CategoryChartData()
     cd.categories = ["Enterprise", "SMB", "Consumer", "Other"]
     cd.add_series("Share", (42, 28, 22, 8))
-    gf = s.shapes.add_chart(XL_CHART_TYPE.PIE, *_chart_frame(s), cd)
+    # A pie reads better narrow: shrink the frame width to 60% of the full content
+    # width and centre it horizontally (the cartesian charts keep full width).
+    fx, fy, fw, fh = _chart_frame(s)
+    narrow = Emu(int(fw * 0.6))
+    cx = Emu(int((prs.slide_width - narrow) / 2))
+    gf = s.shapes.add_chart(XL_CHART_TYPE.PIE, cx, fy, narrow, fh, cd)
+    _pie_alpha(gf.chart)
     set_legend(gf.chart, "r")
     gf.chart.plots[0].has_data_labels = True
     return s
@@ -335,6 +420,8 @@ def slide_histogram(prs):
     gf = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, *_chart_frame(s), cd)
     plot = gf.chart.plots[0]
     plot.gap_width = 10     # near-touching bars -> histogram look
+    _style_gridlines(gf.chart)
+    _series_fill_alpha(gf.chart)
     gf.chart.has_legend = False
     return s
 
@@ -358,6 +445,8 @@ def slide_split_chart(prs):
     gf = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED,
                             Inches(rx), Inches(2.0),
                             Inches(SW - MARGIN - rx), Inches(4.4), cd)
+    _style_gridlines(gf.chart)
+    _series_fill_alpha(gf.chart)
     gf.chart.has_legend = False
     return s
 
@@ -450,6 +539,8 @@ def slide_table_chart(prs):
     g2 = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(rx), Inches(2.3),
                             Inches(SW - MARGIN - rx), Inches(3.2), cd)
     plot = g2.chart.plots[0]; plot.overlap = -50; plot.gap_width = 160
+    _style_gridlines(g2.chart)
+    _series_fill_alpha(g2.chart)
     set_legend(g2.chart, "b")
     add_caption(s, "Source / footnote line below the table and chart.", 5.7)
     return s
@@ -536,7 +627,7 @@ def slide_conclusion(prs):
     box.line.fill.background(); box.shadow.inherit = False; _kill_shadow(box)
     bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(MARGIN), Inches(by),
                              Inches(0.09), Inches(bh))
-    bar.fill.solid(); bar.fill.fore_color.rgb = ACCENT
+    bar.fill.solid(); bar.fill.fore_color.rgb = ACCENT; _fill_alpha(bar)
     bar.line.fill.background(); bar.shadow.inherit = False; _kill_shadow(bar)
     tb = box.text_frame
     tb.word_wrap = True

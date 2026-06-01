@@ -6,14 +6,23 @@ built slide its own notes, this clones an existing notesSlide from the template
 (reusing its notesMaster wiring and body styling), repoints it at this slide,
 rewrites the notes body text, and registers it.
 
+The notes body is assembled from the slide entry (`--entry-json`), in this order:
+  1. `speaker_notes` — the prose notes.
+  2. `prose_sources` — a "Supporting claims" block: each claim + its source.
+  3. `data` — a "Data sources" block: each entry's name, type and source/path.
+A slide that has none of these gets no notes part. (`--text-file` is still
+accepted for raw, pre-assembled text.)
+
 If the template contains no notesSlide at all (no notesMaster to hang one on),
 it prints a warning and does nothing — notes are skipped for that deck.
 
 Usage:
+    python set_notes.py <unpacked_dir> <slideN.xml> --entry-json <entry.json>
     python set_notes.py <unpacked_dir> <slideN.xml> --text-file <notes.txt>
 """
 
 import argparse
+import json
 import re
 import shutil
 from pathlib import Path
@@ -21,6 +30,44 @@ from pathlib import Path
 import defusedxml.minidom as minidom
 
 R_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+
+
+def build_notes_text(entry: dict) -> str:
+    """Assemble the notes body from a slide entry: speaker_notes, then a
+    Supporting-claims block (prose_sources), then a Data-sources block (data)."""
+    sections = []
+
+    notes = (entry.get("speaker_notes") or "").rstrip()
+    if notes:
+        sections.append(notes)
+
+    prose = entry.get("prose_sources") or []
+    if prose:
+        lines = ["── Supporting claims ──"]
+        for ps in prose:
+            claim = (ps.get("claim") or "").strip()
+            source = (ps.get("source") or "").strip()
+            line = f'• "{claim}"' if claim else "•"
+            if source:
+                line += f"\n  — {source}"
+            lines.append(line)
+        sections.append("\n".join(lines))
+
+    data = entry.get("data") or {}
+    if data:
+        lines = ["── Data sources ──"]
+        for name, d in data.items():
+            d = d or {}
+            typ = d.get("type")
+            source = d.get("source") or d.get("path")
+            label = f"{name} ({typ})" if typ else name
+            line = f"• {label}"
+            if source:
+                line += f": {source}"
+            lines.append(line)
+        sections.append("\n".join(lines))
+
+    return "\n\n".join(sections)
 
 
 def _next_index(d: Path, stem: str, ext: str) -> int:
@@ -59,11 +106,21 @@ def main():
     ap = argparse.ArgumentParser(description="Attach speaker notes to a slide.")
     ap.add_argument("unpacked_dir")
     ap.add_argument("slide", help="slide file name, e.g. slide5.xml")
-    ap.add_argument("--text-file", required=True, help="file holding the notes text")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--entry-json", help="slide entry JSON; notes are assembled from it")
+    src.add_argument("--text-file", help="file holding raw, pre-assembled notes text")
     args = ap.parse_args()
 
     unpacked = Path(args.unpacked_dir)
-    notes_text = Path(args.text_file).read_text(encoding="utf-8").rstrip("\n")
+    if args.entry_json:
+        entry = json.loads(Path(args.entry_json).read_text(encoding="utf-8"))
+        notes_text = build_notes_text(entry).rstrip("\n")
+    else:
+        notes_text = Path(args.text_file).read_text(encoding="utf-8").rstrip("\n")
+
+    if not notes_text:
+        print(f"No speaker notes / sources for {args.slide}; skipped.")
+        return
 
     notes_dir = unpacked / "ppt" / "notesSlides"
     samples = sorted(notes_dir.glob("notesSlide*.xml")) if notes_dir.exists() else []

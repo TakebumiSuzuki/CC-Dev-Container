@@ -3,8 +3,6 @@ Helper for running LibreOffice (soffice) in environments where AF_UNIX
 sockets may be blocked (e.g., sandboxed VMs).  Detects the restriction
 at runtime and applies an LD_PRELOAD shim if needed.
 
-Vendored, unchanged, from anthropics/skills:skills/pptx/scripts/office/soffice.py.
-
 Usage:
     from office.soffice import run_soffice, get_soffice_env
 

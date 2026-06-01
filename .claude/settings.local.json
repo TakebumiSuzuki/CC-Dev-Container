@@ -15,7 +15,19 @@
       "Bash(curl -s -o add_slide.py \"https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/scripts/add_slide.py\")",
       "Bash(/opt/uv-venv/bin/python -c 'import ast,sys *)",
       "Bash(/opt/uv-venv/bin/python office/unpack.py /tmp/ref.pptx /tmp/refunpacked)",
-      "Bash(/opt/uv-venv/bin/python *)"
+      "Bash(/opt/uv-venv/bin/python *)",
+      "Bash(python3 -c \"import defusedxml, openpyxl, yaml, PIL; print\\('OK'\\)\")",
+      "Bash(python3 *)",
+      "Bash(ls -la bt.pdf)",
+      "Bash(pdftoppm -f 2 -l 2 -r 90 -png bt.pdf bt-2)",
+      "Bash(pdftoppm -f 3 -l 3 -r 90 -png bt.pdf bt-3)",
+      "Bash(pdftoppm -f 10 -l 10 -r 90 -png bt.pdf bt-10)",
+      "Bash(libreoffice --headless --convert-to pdf --outdir /tmp /workspaces/cc-dev-container/template-source/basic_template.pptx)",
+      "Bash(pdftoppm -f 2 -l 2 -r 90 -png basic_template.pdf s2)",
+      "Bash(pdftoppm -f 3 -l 3 -r 90 -png basic_template.pdf s3)",
+      "Bash(pdftoppm -f 10 -l 10 -r 90 -png basic_template.pdf s10)",
+      "Bash(grep -rni \"yaml slide\" .)",
+      "Bash(grep -rni -E \"yaml[ -]slide|per[- ]yaml\" .)"
     ]
   }
 }

@@ -1,11 +1,8 @@
 """Pack an unpacked directory back into a .pptx.
 
-Adapted (trimmed) from anthropics/skills:skills/pptx/scripts/office/pack.py.
-Difference from upstream: the heavyweight XSD/redline validation framework is NOT
-vendored here, so packing never validates — it condenses whitespace and zips.
-(Validation belongs to the separate, out-of-scope QA stage.) The fidelity-relevant
-behavior — stripping only inter-element whitespace while preserving text inside
-`<a:t>` runs — is kept identical to upstream.
+Packing never validates — it condenses whitespace and zips. (Validation belongs to
+the separate, out-of-scope QA stage.) It strips only inter-element whitespace while
+preserving text inside `<a:t>` runs.
 
 Usage:
     python pack.py <input_directory> <output.pptx>

@@ -1,10 +1,8 @@
 """Render a template .pptx into labelled thumbnail grid image(s) for vision matching.
 
-Adapted from anthropics/skills:skills/pptx/scripts/thumbnail.py. The one
-meaningful change: each thumbnail is labelled with its **0-based presentation
-index** (`idx: N`) so the labels line up exactly with the indices emitted by
-`inspect_template.py` and consumed by `build_pptx.py` (mapping.json's
-`template_index`).
+Each thumbnail is labelled with its **0-based presentation index** (`idx: N`) so the
+labels line up exactly with the indices emitted by `inspect_template.py` and consumed
+by the Step-4 build (mapping.json's `template_index`).
 
 Pipeline: soffice (.pptx -> .pdf) then pdftoppm (.pdf -> .jpg per page), then
 Pillow composes a grid. Needs LibreOffice + poppler-utils on PATH.

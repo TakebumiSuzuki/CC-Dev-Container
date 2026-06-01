@@ -2,11 +2,11 @@
 
 Used when `soffice`/`poppler` are unavailable for the vision path. Walks each
 slide (in presentation order) with python-pptx and reports what objects it
-holds, so the matching step can pick a template sample per YAML slide using
+holds, so the matching step can pick a template sample per slide entry using
 text instead of an image.
 
 Indices are 0-based presentation order, matching
-`render_template_thumbnails.py` labels and `build_pptx.py`'s mapping.json
+`render_template_thumbnails.py` labels and the Step-4 build's mapping.json
 `template_index`.
 
 Usage:

@@ -1,8 +1,6 @@
 """Unpack a PPTX for raw-XML editing.
 
-Adapted (trimmed) from anthropics/skills:skills/pptx/scripts/office/unpack.py.
-Differences from upstream: this is PPTX-only and drops the DOCX run-merging /
-redline-simplification helpers, so it has no dependency beyond `defusedxml`.
+PPTX-only, so it has no dependency beyond `defusedxml`.
 
 It does three things, in order:
   1. Extract the .pptx ZIP into <output_dir>.
