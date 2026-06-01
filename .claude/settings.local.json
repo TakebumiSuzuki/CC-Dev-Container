@@ -27,7 +27,15 @@
       "Bash(pdftoppm -f 3 -l 3 -r 90 -png basic_template.pdf s3)",
       "Bash(pdftoppm -f 10 -l 10 -r 90 -png basic_template.pdf s10)",
       "Bash(grep -rni \"yaml slide\" .)",
-      "Bash(grep -rni -E \"yaml[ -]slide|per[- ]yaml\" .)"
+      "Bash(grep -rni -E \"yaml[ -]slide|per[- ]yaml\" .)",
+      "WebFetch(domain:fonts.google.com)",
+      "WebFetch(domain:www.chartjs.org)",
+      "WebFetch(domain:data.jsdelivr.com)",
+      "Bash(awk '/<section class=\"panel\" id=\"pipeline\"/,/<\\\\/section>/' index.html)",
+      "Bash(mkdir -p /home/node/.claude/skills/scroll-deck/assets/template/css /home/node/.claude/skills/scroll-deck/assets/template/js)",
+      "Bash(cp /workspaces/cc-dev-container/.claude/Output/2026-05-29-2025-annual-performance-review/2025-annual-performance-review-site/css/styles.css /home/node/.claude/skills/scroll-deck/assets/template/css/styles.css)",
+      "Bash(cp /workspaces/cc-dev-container/.claude/Output/2026-05-29-2025-annual-performance-review/2025-annual-performance-review-site/js/main.js /home/node/.claude/skills/scroll-deck/assets/template/js/main.js)",
+      "Read(//home/node/.claude/skills/**)"
     ]
   }
 }

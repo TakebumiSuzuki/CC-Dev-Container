@@ -1,0 +1,472 @@
+/* ============================================================
+   Meridian Consulting Group — FY2025 Annual Performance Review
+   "Scroll-deck" executive report styles
+   ============================================================ */
+
+:root {
+  /* Brand / neutrals */
+  --navy:        #1f3a5f;
+  --navy-deep:   #142844;
+  --blue:        #3b6fb0;
+  --ink:         #1c2733;
+  --body:        #38465a;
+  --muted:       #7a8aa0;
+  --line:        #e4e9f0;
+  --line-soft:   #eef2f7;
+  --rule:        #c8d0dc;   /* divider between slots */
+  --bg:          #f5f7fa;
+  --surface:     #ffffff;
+
+  /* Semantic (good / bad / neutral) */
+  --good:        #1a7f5a;
+  --bad:         #b3402f;
+  --warn:        #b5760f;
+  --neutral:     #4a6080;
+  --neutral-bg:  #eef2f8;
+  --warn-bg:     #fbf2e1;
+
+  /* Type scale (headings use clamp() directly; these cover the rest) */
+  --fs-base:     19px;   /* body, list items, callout & card & Q&A text */
+  --fs-data:     16px;   /* dense data tables                          */
+  --fs-ui:       15px;   /* tab labels, controls, hints, deltas        */
+  --fs-label:    13px;   /* uppercase labels, captions, source, tags   */
+
+  --radius:      14px;
+  --radius-sm:   9px;
+  --pad-box:     22px;   /* inner padding shared by surface boxes       */
+  --shadow:      0 1px 2px rgba(20,40,68,.06), 0 8px 24px rgba(20,40,68,.06);
+  --shadow-sm:   0 1px 2px rgba(20,40,68,.05), 0 3px 10px rgba(20,40,68,.05);
+
+  --maxw:        1120px;
+
+  /* Tunable layout knobs ---------------------------------- */
+  --nav-h:       40px;   /* height of the sticky tab bar     */
+  --title-h:     54px;   /* height of the sticky big heading */
+  --slot-min:    50vh;   /* min spacing between dividers      */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--body);
+  background: var(--bg);
+  line-height: 1.7;
+  font-size: var(--fs-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===================== COVER PAGE (first tab) ===================== */
+.cover {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+  color: #fff;
+}
+.cover-mark {
+  width: 84px; height: 84px;
+  display: grid; place-items: center;
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,.35);
+  font-weight: 800;
+  letter-spacing: .04em;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 34px;
+}
+.cover-eyebrow {
+  margin: 0 0 14px;
+  font-size: clamp(14px, 1.6vw, 17px);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #9fc0e8;
+}
+.cover-title {
+  margin: 0;
+  font-size: clamp(34px, 5.5vw, 62px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.08;
+  max-width: 16ch;
+}
+.cover-meta {
+  margin: 28px 0 0;
+  font-size: clamp(15px, 2vw, 20px);
+  color: #c2d4ea;
+  font-weight: 500;
+}
+
+/* ===================== TAB BAR (sticky) ===================== */
+.tabbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.tabbar-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  gap: 2px;
+  padding: 0 clamp(12px, 4vw, 28px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabbar-inner::-webkit-scrollbar { display: none; }
+.tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--fs-ui);
+  color: var(--muted);
+  padding: 8px 16px 6px;       /* slim nav */
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab:focus,
+.tab:focus-visible { outline: none; box-shadow: none; }
+.tab:hover { color: var(--navy); }
+.tab[aria-selected="true"] {
+  color: var(--navy);
+  border-bottom-color: var(--blue);
+}
+
+/* ===================== PANELS / LAYOUT ===================== */
+.panel { display: none; }
+.panel.is-active { display: block; }
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 28px) 55vh;
+}
+
+/* Sticky section heading (e.g. "Executive Summary") */
+.panel-title {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 30;
+  margin: 0;
+  padding: 9px 0 8px;
+  background: var(--bg);
+  font-size: clamp(25px, 3.2vw, 34px);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Each subsection = a "slot" with generous, slide-like spacing */
+.slot {
+  min-height: var(--slot-min);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* content hugs the divider; whitespace falls below */
+  padding: 0 0 72px;             /* no gap above heading; breathing room before next divider (1.5×) */
+  border-bottom: 1px solid var(--rule);
+}
+.slot:last-child { border-bottom: 0; }
+
+/* Holds heading + content at natural height so the sticky heading
+   releases when its own content ends (not over the trailing void). */
+.slot-body { flex: 0 0 auto; }
+
+/* When a slot has no small heading of its own, its body would otherwise
+   hug the line above it (big-heading underline or slot divider). Add
+   breathing room. Slots that start with their own <h3> stay tight. */
+.slot-body:not(:has(> h3)) {
+  padding-top: 32px;
+}
+
+/* Small heading — sticky, stacked just under the big heading.
+   Bounded to .slot-body so it swaps cleanly at the next heading. */
+.slot-body > h3 {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--title-h));
+  z-index: 20;
+  background: var(--bg);
+  margin: 0 0 18px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ===================== TYPOGRAPHY ===================== */
+h3 {
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 12px;
+}
+h4 {
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 5px;
+}
+p { margin: 0 0 16px; }
+.slot-body > :last-child { margin-bottom: 0; }
+strong { color: var(--ink); font-weight: 700; }
+
+/* ===================== SHARED SURFACE BOXES ===================== */
+/* Common chrome for every white "card" surface. Individual rules below
+   only set what differs (accent border, padding, layout). */
+.kpi, .card, .priority, .chart-box, .qa, .data-table {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.kpi, .card, .priority, .chart-box { border-radius: var(--radius); }
+.qa, .data-table { border-radius: var(--radius-sm); }
+
+/* ===================== KPI HERO CARDS ===================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.kpi {
+  border-top: 4px solid var(--neutral);
+  padding: var(--pad-box);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.kpi:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+.kpi--good    { border-top-color: var(--good); }
+.kpi--bad     { border-top-color: var(--bad); }
+.kpi--neutral { border-top-color: var(--neutral); }
+.kpi-label {
+  margin: 0;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kpi-value {
+  margin: 9px 0 5px;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  line-height: 1;
+}
+.kpi-delta { margin: 0 0 9px; font-size: var(--fs-ui); font-weight: 700; }
+.delta-up   { color: var(--good); }
+.delta-down { color: var(--bad); }
+.delta-flat { color: var(--neutral); }
+.kpi-foot { margin: 0; font-size: var(--fs-label); line-height: 1.45; color: var(--muted); }
+
+/* ===================== CALLOUTS (colored, not a surface box) ===================== */
+.callout {
+  border-radius: var(--radius);
+  padding: var(--pad-box);
+  margin: 22px 0;
+  border-left: 5px solid var(--neutral);
+  background: var(--neutral-bg);
+}
+.callout h3 { margin: 0 0 8px; color: var(--ink); }
+.callout p { margin: 0; font-size: var(--fs-base); }
+.callout--tension { border-left-color: var(--blue); background: #eaf1fa; }
+.callout--warn    { border-left-color: var(--warn); background: var(--warn-bg); }
+
+/* ===================== CHARTS ===================== */
+.chart-box {
+  padding: var(--pad-box);
+  height: 380px;
+  margin: 12px 0 8px;
+}
+.chart-hint { font-size: var(--fs-ui); color: var(--muted); margin: 4px 0 8px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* ===================== DATA TABLES (collapsible) ===================== */
+.data-table {
+  margin: 8px 0 6px;
+  overflow: hidden;
+}
+.data-table > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 13px 20px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  color: var(--navy);
+  user-select: none;
+}
+.data-table > summary::-webkit-details-marker { display: none; }
+.data-table > summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  transition: transform .15s ease;
+}
+.data-table[open] > summary::before { transform: rotate(90deg); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-data); }
+thead th {
+  background: var(--line-soft);
+  color: var(--navy);
+  font-weight: 700;
+  text-align: right;
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+}
+thead th:first-child { text-align: left; }
+tbody td {
+  padding: 11px 16px;
+  text-align: right;
+  border-top: 1px solid var(--line-soft);
+  color: var(--body);
+}
+tbody td:first-child { text-align: left; font-weight: 600; color: var(--ink); }
+tbody tr:hover { background: #fafcff; }
+
+/* ===================== SOURCE NOTE (subtle) ===================== */
+.source {
+  font-size: var(--fs-label);
+  color: #aab6c7;
+  font-style: italic;
+  margin: 6px 0 0;
+  transition: color .15s ease;
+  cursor: default;
+}
+.source:hover { color: var(--muted); }
+
+/* ===================== CARDS (wins / issues) ===================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 12px 0 8px;
+}
+.card {
+  padding: var(--pad-box);
+  border-top: 4px solid var(--neutral);
+}
+.card--win   { border-top-color: var(--good); }
+.card--issue { border-top-color: var(--bad); }
+.card p { margin: 0 0 8px; }   /* inherits base body size */
+.card-tag {
+  font-size: var(--fs-label) !important;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .02em;
+  margin: 0 0 9px !important;
+}
+
+/* ===================== PRIORITIES ===================== */
+.priority {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: var(--pad-box);
+  margin: 0 0 16px;
+}
+.priority:last-child { margin-bottom: 0; }
+.priority-num {
+  flex: none;
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: #fff;
+  font-weight: 800;
+  font-size: 22px;
+}
+.priority h3 { margin: 4px 0 8px; }
+.priority p  { margin: 0; }
+
+/* ===================== LISTS ===================== */
+.notes, .takeaways { margin: 10px 0 0; padding-left: 24px; }
+.notes li, .takeaways li { margin-bottom: 12px; font-size: var(--fs-base); }
+
+/* ===================== Q&A ACCORDION ===================== */
+.accordion { margin: 12px 0 0; }
+.qa {
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.qa > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 22px;
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: var(--ink);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  user-select: none;
+}
+.qa > summary::-webkit-details-marker { display: none; }
+.qa > summary::before {
+  content: "+";
+  flex: none;
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 7px;
+  background: var(--neutral-bg);
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 18px;
+}
+.qa[open] > summary::before { content: "−"; }
+.qa > p {
+  margin: 0;
+  padding: 0 22px 18px 62px;
+  font-size: var(--fs-base);
+  color: var(--body);
+}
+
+/* ===================== SCROLL-TO-TOP BUTTON ===================== */
+.to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--navy);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(20,40,68,.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .2s ease, transform .2s ease, background .15s ease;
+  z-index: 60;
+}
+.to-top:hover { background: var(--blue); }
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .two-col  { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}
