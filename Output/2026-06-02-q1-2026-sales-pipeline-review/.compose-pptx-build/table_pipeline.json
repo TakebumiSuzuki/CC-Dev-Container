@@ -1,0 +1,11 @@
+{
+  "type": "table",
+  "headers": ["Stage", "Deals", "Expected Value", "Weighted Value"],
+  "rows": [
+    ["Verbal Commit", 33, "$32,294,000", "$27,449,900"],
+    ["Negotiation", 23, "$21,858,000", "$14,207,700"],
+    ["Proposal Submitted", 13, "$11,433,000", "$4,001,548"],
+    ["Qualification", 11, "$15,342,000", "$2,301,300"],
+    ["Total", 80, "$80,927,000", "$47,960,448"]
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {"yaml_index": 0, "template_index": 0, "notes": "Title slide"},
+  {"yaml_index": 1, "template_index": 1, "notes": "Numbered list"},
+  {"yaml_index": 2, "template_index": 3, "notes": "Section divider"},
+  {"yaml_index": 3, "template_index": 7, "notes": "Bar chart — same type, set_chart_data"},
+  {"yaml_index": 4, "template_index": 12, "notes": "Table"},
+  {"yaml_index": 5, "template_index": 3, "notes": "Section divider"},
+  {"yaml_index": 6, "template_index": 7, "notes": "Bar chart — same type, set_chart_data"},
+  {"yaml_index": 7, "template_index": 11, "notes": "Text+Chart layout; pie_chart needed — add_chart (swap type)"},
+  {"yaml_index": 8, "template_index": 3, "notes": "Section divider"},
+  {"yaml_index": 9, "template_index": 12, "notes": "Table"},
+  {"yaml_index": 10, "template_index": 12, "notes": "Table"},
+  {"yaml_index": 11, "template_index": 1, "notes": "Numbered list with bold lead phrases"},
+  {"yaml_index": 12, "template_index": 3, "notes": "Section divider"},
+  {"yaml_index": 13, "template_index": 2, "notes": "Bulleted list"},
+  {"yaml_index": 14, "template_index": 19, "notes": "Thank You / closing slide"}
+]

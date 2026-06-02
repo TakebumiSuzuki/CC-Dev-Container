@@ -1,0 +1,9 @@
+{
+  "type": "table",
+  "headers": ["Driver", "Current State", "Target / Risk", "Revenue Impact"],
+  "rows": [
+    ["T&D Win Rate", "25%", "40% target", "+$1.5M from current pipeline"],
+    ["Verbal Commit ($27.4M)", "~85% conversion prob.", "Execution risk - not sales risk", "-"],
+    ["Qualification ($2.3M)", "Thin early-stage", "Replenish by Q3", "-"]
+  ]
+}

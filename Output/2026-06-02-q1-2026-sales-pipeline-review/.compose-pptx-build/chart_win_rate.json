@@ -1,0 +1,7 @@
+{
+  "type": "bar_chart",
+  "x_axis": "Practice",
+  "y_axis": "Win Rate (%)",
+  "categories": ["Operations Excellence", "Strategy & Growth", "HR & People", "Finance & Risk", "Technology & Digital"],
+  "series": [{"name": "Win Rate", "values": [50, 50, 36, 35, 25]}]
+}

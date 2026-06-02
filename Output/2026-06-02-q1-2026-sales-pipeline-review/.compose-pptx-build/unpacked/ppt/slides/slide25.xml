@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="utf-8"?><p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr/>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="TextBox 1"/>
+          <p:cNvSpPr txBox="1"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="822960" y="502920"/>
+            <a:ext cx="10545775" cy="914400"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr wrap="square">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr sz="3000" b="1" i="0">
+                <a:solidFill>
+                  <a:srgbClr val="1D1D1F"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>Pipeline: $48M Weighted — Strong Coverage, Late-Stage Heavy</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Rectangle 2"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="822960" y="1033271"/>
+            <a:ext cx="4754880" cy="38100"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:solidFill>
+            <a:srgbClr val="0066CC">
+              <a:alpha val="87000"/>
+            </a:srgbClr>
+          </a:solidFill>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+          <a:effectLst/>
+        </p:spPr>
+        <p:style>
+          <a:lnRef idx="1">
+            <a:schemeClr val="accent1"/>
+          </a:lnRef>
+          <a:fillRef idx="3">
+            <a:schemeClr val="accent1"/>
+          </a:fillRef>
+          <a:effectRef idx="0">
+            <a:schemeClr val="accent1"/>
+          </a:effectRef>
+          <a:fontRef idx="minor">
+            <a:schemeClr val="lt1"/>
+          </a:fontRef>
+        </p:style>
+        <p:txBody>
+          <a:bodyPr rtlCol="0" anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr"/>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="4" name="TextBox 3"/>
+          <p:cNvSpPr txBox="1"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="822960" y="1463040"/>
+            <a:ext cx="10545775" cy="548640"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr wrap="square">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr sz="1700" b="0" i="0">
+                <a:solidFill>
+                  <a:srgbClr val="6E6E73"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>80 open opportunities; $80.9M expected / $48.0M weighted. 4.6× quarterly run rate. Late-stage heavy: Negotiation or Verbal Commit account for 70% of deals (56 of 80) and 87% of weighted value.</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:graphicFrame>
+        <p:nvGraphicFramePr>
+          <p:cNvPr id="5" name="Table 4"/>
+          <p:cNvGraphicFramePr>
+            <a:graphicFrameLocks noGrp="1"/>
+          </p:cNvGraphicFramePr>
+          <p:nvPr/>
+        </p:nvGraphicFramePr>
+        <p:xfrm>
+          <a:off x="822960" y="2103120"/>
+          <a:ext cx="10545775" cy="2651760"/>
+        </p:xfrm>
+        <a:graphic>
+          <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table">
+            <a:tbl>
+              <a:tblPr>
+                <a:tableStyleId>{2D5ABB26-0587-4C30-8999-92F81FD0307C}</a:tableStyleId>
+              </a:tblPr>
+              <a:tblGrid>
+                <a:gridCol w="2636443"/>
+                <a:gridCol w="2636443"/>
+                <a:gridCol w="2636443"/>
+              <a:gridCol w="2636443"/></a:tblGrid>
+              <a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="1" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Stage</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="19050" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="1D1D1F"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="1" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Deals</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="19050" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="1D1D1F"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="1" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Expected Value</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="19050" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="1D1D1F"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="1" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Weighted Value</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="19050" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="1D1D1F"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr>
+              <a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Verbal Commit</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>33</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$32,294,000</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$27,449,900</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr>
+              <a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Negotiation</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>23</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$21,858,000</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$14,207,700</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:lnB w="9525" cap="flat" cmpd="sng" algn="ctr">
+                      <a:solidFill>
+                        <a:srgbClr val="E0E0E0"/>
+                      </a:solidFill>
+                    </a:lnB>
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr>
+              <a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Proposal Submitted</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>13</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$11,433,000</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$4,001,548</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr>
+            <a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Qualification</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>11</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$15,342,000</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$2,301,300</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr><a:tr h="662940">
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="l"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>Total</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>80</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+                <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$80,927,000</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc>
+              <a:tc>
+                  <a:txBody>
+                    <a:bodyPr/>
+                    <a:lstStyle/>
+                    <a:p>
+                      <a:pPr algn="r"/>
+                      <a:r>
+                        <a:rPr sz="1500" b="0" i="0">
+                          <a:solidFill>
+                            <a:srgbClr val="1D1D1F"/>
+                          </a:solidFill>
+                          <a:latin typeface="Arial"/>
+                        </a:rPr>
+                        <a:t>$47,960,448</a:t>
+                      </a:r>
+                    </a:p>
+                  </a:txBody>
+                  <a:tcPr anchor="ctr" marL="109728" marR="109728">
+                    <a:solidFill>
+                      <a:srgbClr val="FFFFFF"/>
+                    </a:solidFill>
+                  </a:tcPr>
+                </a:tc></a:tr></a:tbl>
+          </a:graphicData>
+        </a:graphic>
+      </p:graphicFrame>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="6" name="TextBox 5"/>
+          <p:cNvSpPr txBox="1"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="822960" y="5029200"/>
+            <a:ext cx="10545775" cy="548640"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr wrap="square">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr sz="1700" b="0" i="0">
+                <a:solidFill>
+                  <a:srgbClr val="6E6E73"/>
+                </a:solidFill>
+                <a:latin typeface="Arial"/>
+              </a:rPr>
+              <a:t>By practice: Ops Excellence ($12.7M) and Strategy ($10.7M) lead. T&amp;D ($9.2M): watch item at 25% win rate. Financial Services ($6.0M weighted): underweight vs. confirmed regulatory demand.</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>

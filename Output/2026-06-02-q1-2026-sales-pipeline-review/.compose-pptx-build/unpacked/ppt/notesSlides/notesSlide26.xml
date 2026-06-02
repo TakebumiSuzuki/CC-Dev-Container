@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldImg" idx="2"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="body" idx="3" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          
+        <a:p><a:r><a:t>Root cause is likely accumulated friction rather than one incident [needs-verification — driver not isolatable from current data]. Churn figures (5/11/8 FY23/24/25) appear in the narrative without a cited source — treat as author-stated. Small sample (28 respondents) but directional signal is real. Follow up all 16 detractors within 30 days before drawing conclusions. Note: industry_benchmarks.csv contains a 2025 NPS figure of +52, but the quarterly nps_survey_results.csv shows all 2025 quarters negative — these appear to use different methodologies; the comparison was removed from the slide face.</a:t></a:r></a:p><a:p><a:r><a:t></a:t></a:r></a:p><a:p><a:r><a:t>── Supporting claims ──</a:t></a:r></a:p><a:p><a:r><a:t>• "Recurring themes: team chemistry, turnaround time, value for money, communication"</a:t></a:r></a:p><a:p><a:r><a:t>  — ./Data/clients/nps_survey_results.csv</a:t></a:r></a:p><a:p><a:r><a:t>• "Repeat-client revenue 68% vs. 60% industry average"</a:t></a:r></a:p><a:p><a:r><a:t>  — ./Data/market/industry_benchmarks.csv</a:t></a:r></a:p><a:p><a:r><a:t></a:t></a:r></a:p><a:p><a:r><a:t>── Data sources ──</a:t></a:r></a:p><a:p><a:r><a:t>• nps_distribution (pie_chart): ./Data/clients/nps_survey_results.csv</a:t></a:r></a:p></p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:notes>

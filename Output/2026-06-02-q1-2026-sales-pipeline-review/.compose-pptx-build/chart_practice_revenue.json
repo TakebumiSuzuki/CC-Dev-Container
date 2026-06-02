@@ -1,0 +1,7 @@
+{
+  "type": "bar_chart",
+  "x_axis": "Practice",
+  "y_axis": "Q1 2026 Revenue ($M)",
+  "categories": ["Technology & Digital", "Strategy & Growth", "Operations Excellence", "Finance & Risk", "HR & People"],
+  "series": [{"name": "Q1 2026 Revenue", "values": [2.934, 2.2695, 2.0647, 1.863, 1.2175]}]
+}

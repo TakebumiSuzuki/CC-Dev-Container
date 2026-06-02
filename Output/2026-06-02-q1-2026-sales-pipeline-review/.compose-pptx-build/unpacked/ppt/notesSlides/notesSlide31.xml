@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldImg" idx="2"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="body" idx="3" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          
+        <a:p><a:r><a:t>Anticipated Q&amp;A:</a:t></a:r></a:p><a:p><a:r><a:t></a:t></a:r></a:p><a:p><a:r><a:t>- Why did growth slow if the pipeline looks healthy? Q1 revenue came from 2025 wins; the pipeline closes in H2. Converting at current rates should re-accelerate Q3–Q4.</a:t></a:r></a:p><a:p><a:r><a:t>- Is the NPS drop real or a data artifact? Small sample (28), but directional signal is real. Follow up all detractors within 30 days before concluding.</a:t></a:r></a:p><a:p><a:r><a:t>- Should we be more selective given 40% win rate? Yes — especially sub-$300K single-practice RFPs. Best win rates (50%) are multi-practice Ops/Strategy deals.</a:t></a:r></a:p><a:p><a:r><a:t>- Can we build AI advisory without straining the team? Net-new hires, not reallocation — utilization already 76.2%, near top quartile.</a:t></a:r></a:p><a:p><a:r><a:t>- How exposed is the Financial Services gap? $6.0M weighted vs. firm-wide 4.6× coverage is light, against confirmed regulatory demand — a Q2 outbound priority.</a:t></a:r></a:p></p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:notes>

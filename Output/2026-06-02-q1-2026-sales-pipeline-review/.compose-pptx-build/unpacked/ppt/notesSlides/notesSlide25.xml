@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldImg" idx="2"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="body" idx="3" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          
+        <a:p><a:r><a:t>Wins/tracked by practice: Ops Excellence 7/14, Strategy 8/16, HR 5/14, Finance 7/20, T&amp;D 2/8. Pattern in losses: McKinsey entry above the sponsor (board/CEO relationship) before formal scoping — 3rd such loss in 18 months. Deloitte won on sector accelerators despite weaker proposal. Recent MCG wins: senior-in-the-work staffing, faster mobilization, technology-agnostic positioning.</a:t></a:r></a:p><a:p><a:r><a:t></a:t></a:r></a:p><a:p><a:r><a:t>── Supporting claims ──</a:t></a:r></a:p><a:p><a:r><a:t>• "Brand preference (12) and relationship gap (10) account for 51% of losses; top competitors McKinsey (8), PwC (6), BCG (6)"</a:t></a:r></a:p><a:p><a:r><a:t>  — ./Data/pipeline/win_loss_analysis.csv</a:t></a:r></a:p><a:p><a:r><a:t>• "McKinsey took a $1.2M deal via board/CEO relationship before formal scoping — 3rd above-the-sponsor loss in 18 months; Deloitte won $900K energy RFP on sector accelerators; MCG ~$295/hr vs. boutiques $220–280, MBB $580–750"</a:t></a:r></a:p><a:p><a:r><a:t>  — ./Data/pipeline/competitive_intel.txt</a:t></a:r></a:p><a:p><a:r><a:t></a:t></a:r></a:p><a:p><a:r><a:t>── Data sources ──</a:t></a:r></a:p><a:p><a:r><a:t>• win_rate_by_practice (bar_chart): ./Data/pipeline/win_loss_analysis.csv</a:t></a:r></a:p></p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          <p:cNvSpPr>
+            <a:spLocks noGrp="1"/>
+          </p:cNvSpPr>
+          <p:nvPr>
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+          </p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:notes>

@@ -1,0 +1,12 @@
+{
+  "type": "table",
+  "headers": ["Metric", "MCG", "Industry Avg", "Top Quartile"],
+  "rows": [
+    ["Utilization rate (%)", "76.2%", "73.5%", "80.1%"],
+    ["Revenue per consultant ($K)", "$342", "$318", "$390"],
+    ["Project margin (%)", "31.4%", "28.0%", "36.0%"],
+    ["Win rate - competitive RFPs (%)", "39%", "33%", "46%"],
+    ["Repeat client revenue (%)", "68%", "60%", "75%"],
+    ["Revenue growth YoY (%)", "12.8%", "8.5%", "18.0%"]
+  ]
+}

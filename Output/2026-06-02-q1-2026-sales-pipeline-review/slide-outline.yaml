@@ -1,0 +1,218 @@
+---
+title: "Q1 2026 Sales Pipeline Review"
+author: "Meridian Consulting Group — Business Development & Strategy"
+date: "2026-06-02"
+
+slides:
+  - title: "Q1 2026 Sales Pipeline Review"
+    body: |
+      Meridian Consulting Group — Business Development & Strategy
+      2026-06-02
+      Sales Leadership Team · 30 minutes
+    suggested_layout: "Title Slide: Large centered title, with author and date in smaller text below"
+    speaker_notes: |
+      Q1 revenue $10.3M on target; growth decelerated to 5.7% YoY (from 13–16% in 2024–25). Forward pipeline $48M weighted, late-stage heavy (70% of deals / 87% of weighted value). Two flags for leadership: 40% win rate and a sharp NPS drop (–32 in Q1 2026).
+
+  - title: "Agenda"
+    body: |
+      1. Q1 Results
+      2. Risk Signals
+      3. Outlook & Actions
+      4. Conclusion & Q&A
+    suggested_layout: "Bullet list: 4 numbered items stacked vertically in a larger font"
+    speaker_notes: |
+      Four sections. The heaviest content is in Q1 Results (revenue + pipeline) and Risk Signals (the two leadership flags: win rate and NPS). Reserve ~8 minutes for Q&A.
+
+  - title: "Q1 Results"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Q1 Revenue: $10.3M On Target, Growth Decelerating"
+    body: |
+      Growth across all five practices; overall +5.7% YoY — below the 13–16% seen in 2024–25.
+
+      {{practice_revenue}}
+
+      Margin improving: 34.3% → 36.9% through the quarter; $3.6M operating profit.
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      practice_revenue:
+        type: bar_chart
+        source: "./Data/financials/quarterly_revenue.csv"
+        x_axis: "Practice"
+        y_axis: "Q1 2026 Revenue ($M)"
+        categories: ["Technology & Digital", "Strategy & Growth", "Operations Excellence", "Finance & Risk", "HR & People"]
+        series:
+          - name: "Q1 2026 Revenue"
+            values: [2.934, 2.2695, 2.0647, 1.863, 1.2175]
+    prose_sources:
+      - claim: "Margin improving 34.3% to 36.9% through the quarter; $3.6M operating profit"
+        source: "./Data/financials/monthly_financials.csv"
+    speaker_notes: |
+      Monthly detail: Jan $3.19M (33.9% margin), Feb $3.37M (34.6%), Mar $3.79M (36.9%). HR & People softest at +3.9% YoY; Finance & Risk strongest at +6.9%.
+
+  - title: "Pipeline: $48M Weighted — Strong Coverage, Late-Stage Heavy"
+    body: |
+      80 open opportunities; $80.9M expected / $48.0M weighted. 4.6× quarterly run rate. Late-stage heavy: Negotiation or Verbal Commit account for 70% of deals (56 of 80) and 87% of weighted value.
+
+      {{pipeline_by_stage}}
+
+      By practice: Ops Excellence ($12.7M) and Strategy ($10.7M) lead. T&D ($9.2M): watch item at 25% win rate. Financial Services ($6.0M weighted): underweight vs. confirmed regulatory demand.
+    suggested_layout: "Table placed large in the center, with a bullet summary above and below"
+    data:
+      pipeline_by_stage:
+        type: table
+        source: "./Data/pipeline/sales_pipeline.csv"
+        headers: ["Stage", "Deals", "Expected Value", "Weighted Value"]
+        rows:
+          - ["Verbal Commit", 33, "$32,294,000", "$27,449,900"]
+          - ["Negotiation", 23, "$21,858,000", "$14,207,700"]
+          - ["Proposal Submitted", 13, "$11,433,000", "$4,001,548"]
+          - ["Qualification", 11, "$15,342,000", "$2,301,300"]
+          - ["Total", 80, "$80,927,000", "$47,960,448"]
+    prose_sources:
+      - claim: "Ops Excellence $12.7M, Strategy $10.7M, T&D $9.2M weighted by practice"
+        source: "./Data/pipeline/sales_pipeline.csv"
+      - claim: "Financial Services $6.0M weighted — underweight vs. confirmed regulatory demand"
+        source: "./Data/pipeline/sales_pipeline.csv"
+    speaker_notes: |
+      Full practice breakdown: Ops Excellence $12.7M, Strategy $10.7M, T&D $9.2M, HR & People $8.5M, Finance & Risk $6.9M. By industry: Retail & Consumer $11.8M, Healthcare $8.3M, Public Sector $7.6M, Energy $7.6M, Manufacturing $6.7M, Financial Services $6.0M. Close dates May–Dec 2026.
+
+  - title: "Risk Signals"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Win Rate 40%; T&D at 25% Is the Largest Upside Lever"
+    body: |
+      Overall 29/72 (40.3%). Ops Excellence and Strategy at 50%; T&D lags at 25%.
+
+      {{win_rate_by_practice}}
+
+      Top loss reasons: brand preference (12) and relationship gap (10) — 51% of losses. Structural, not proposal quality. MCG ~$295/hr — competitive; don't price-compete. Be selective on sub-$300K single-practice RFPs.
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      win_rate_by_practice:
+        type: bar_chart
+        source: "./Data/pipeline/win_loss_analysis.csv"
+        x_axis: "Practice"
+        y_axis: "Win Rate (%)"
+        categories: ["Operations Excellence", "Strategy & Growth", "HR & People", "Finance & Risk", "Technology & Digital"]
+        series:
+          - name: "Win Rate"
+            values: [50, 50, 36, 35, 25]
+    prose_sources:
+      - claim: "Brand preference (12) and relationship gap (10) account for 51% of losses; top competitors McKinsey (8), PwC (6), BCG (6)"
+        source: "./Data/pipeline/win_loss_analysis.csv"
+      - claim: "McKinsey took a $1.2M deal via board/CEO relationship before formal scoping — 3rd above-the-sponsor loss in 18 months; Deloitte won $900K energy RFP on sector accelerators; MCG ~$295/hr vs. boutiques $220–280, MBB $580–750"
+        source: "./Data/pipeline/competitive_intel.txt"
+    speaker_notes: |
+      Wins/tracked by practice: Ops Excellence 7/14, Strategy 8/16, HR 5/14, Finance 7/20, T&D 2/8. Pattern in losses: McKinsey entry above the sponsor (board/CEO relationship) before formal scoping — 3rd such loss in 18 months. Deloitte won on sector accelerators despite weaker proposal. Recent MCG wins: senior-in-the-work staffing, faster mobilization, technology-agnostic positioning.
+
+  - title: "NPS: –32 in Q1 2026 — Urgent Client-Health Signal"
+    body: |
+      Q1 2026 survey, 28 respondents. 57% detractors.
+
+      {{nps_distribution}}
+
+      Recurring themes: team chemistry, turnaround time, value for money. Repeat-client revenue 68% vs. 60% industry avg — a strength. Churn: 5 / 11 / 8 clients (FY23/24/25).
+    suggested_layout: "Pie chart on the right, bullet commentary on the left"
+    data:
+      nps_distribution:
+        type: pie_chart
+        source: "./Data/clients/nps_survey_results.csv"
+        categories: ["Promoter (9–10)", "Passive (7–8)", "Detractor (0–6)"]
+        series:
+          - name: "Respondents"
+            values: [7, 5, 16]
+    prose_sources:
+      - claim: "Recurring themes: team chemistry, turnaround time, value for money, communication"
+        source: "./Data/clients/nps_survey_results.csv"
+      - claim: "Repeat-client revenue 68% vs. 60% industry average"
+        source: "./Data/market/industry_benchmarks.csv"
+    speaker_notes: |
+      Root cause is likely accumulated friction rather than one incident [needs-verification — driver not isolatable from current data]. Churn figures (5/11/8 FY23/24/25) appear in the narrative without a cited source — treat as author-stated. Small sample (28 respondents) but directional signal is real. Follow up all 16 detractors within 30 days before drawing conclusions. Note: industry_benchmarks.csv contains a 2025 NPS figure of +52, but the quarterly nps_survey_results.csv shows all 2025 quarters negative — these appear to use different methodologies; the comparison was removed from the slide face.
+
+  - title: "Outlook & Actions"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Market Position: Above Average — Headroom on Key Levers"
+    body: |
+      Above industry average on all tracked metrics; below top quartile on utilization, margin, win rate, repeat revenue.
+
+      {{market_benchmarks}}
+
+      H2 tailwinds: Basel IV (financial services), healthcare workforce, manufacturing ESG, energy grid — largely non-discretionary. AI advisory fastest-growing pipeline request (~$3–4M addressable).
+    suggested_layout: "Table placed large in the center, with a brief framing statement above and tailwinds bullets below"
+    data:
+      market_benchmarks:
+        type: table
+        source: "./Data/market/industry_benchmarks.csv"
+        headers: ["Metric", "MCG", "Industry Avg", "Top Quartile"]
+        rows:
+          - ["Utilization rate (%)", "76.2%", "73.5%", "80.1%"]
+          - ["Revenue per consultant ($K)", "$342", "$318", "$390"]
+          - ["Project margin (%)", "31.4%", "28.0%", "36.0%"]
+          - ["Win rate — competitive RFPs (%)", "39%", "33%", "46%"]
+          - ["Repeat client revenue (%)", "68%", "60%", "75%"]
+          - ["Revenue growth YoY (%)", "12.8%", "8.5%", "18.0%"]
+    prose_sources:
+      - claim: "AI advisory ~$3–4M addressable if structured offering and 4–5 consultants fielded; headcount must precede conversion"
+        source: "./Data/market/market_trends_fy26.txt"
+      - claim: "H2 2026 tailwinds: Basel IV, healthcare workforce/revenue cycle, manufacturing ESG reporting, energy grid modernization — much of it non-discretionary"
+        source: "./Data/market/market_trends_fy26.txt"
+    speaker_notes: |
+      Revenue growth YoY of 12.8% (trailing) is strong vs. industry avg (8.5%), but Q1's 5.7% shows deceleration. Utilization at 76.2% is near top quartile (80.1%) — AI advisory build should be net-new hires, not reallocation.
+
+  - title: "H2 Outlook: Realization Risk, Not Volume Risk"
+    body: |
+      H2 target ~$20–21M; $48M weighted pipeline gives >2× coverage. The build is healthy in structure — execution quality is the variable.
+
+      {{h2_conversion_bridge}}
+    suggested_layout: "Table placed large in the center, with a brief framing statement above"
+    data:
+      h2_conversion_bridge:
+        type: table
+        headers: ["Driver", "Current State", "Target / Risk", "Revenue Impact"]
+        rows:
+          - ["T&D Win Rate", "25%", "40% target", "+$1.5M from current pipeline"]
+          - ["Verbal Commit ($27.4M)", "~85% conversion prob.", "Execution risk — not sales risk", "—"]
+          - ["Qualification ($2.3M)", "Thin early-stage", "Replenish by Q3", "—"]
+    speaker_notes: |
+      T&D's $9.2M weighted at 25% win rate is the largest quantified upside lever. Raising to 40% adds ~$1.5M to H2. Verbal Commit stage ($27.4M) is far enough along that delivery matters more than selling. Qualification stage is thin — needs pipeline refresh by Q3 to maintain Q4 coverage.
+
+  - title: "Recommendations: Four Actions for H2"
+    body: |
+      1. **C-suite relationship investment** — partner presence at events for top 15 target accounts; counter McKinsey's board-level entry.
+      2. **T&D win-rate program** — structured win/loss debriefs on all H2 T&D deals; diagnose proposal-stage vs. sourcing-stage loss.
+      3. **NPS triage** — follow up all 16 detractors within 30 days; identify practice/AM concentration.
+      4. **AI advisory build** — plan 4–5 net-new hires in Q2 to capture H2 demand (~$3–4M).
+    suggested_layout: "Bullet list: 4 numbered items stacked vertically with bold lead phrases"
+    speaker_notes: |
+      Priorities are interdependent: NPS triage protects the 68% repeat-client revenue base; T&D win-rate program addresses the largest single upside lever; C-suite relationship investment is a 6–18 month play to close structural loss gap; AI advisory hire decision needs to be made in Q2 to hit H2 demand windows.
+
+  - title: "Conclusion"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Key Takeaways"
+    body: |
+      - Q1 revenue $10.3M on target, but 5.7% YoY growth is a clear deceleration; the $48M weighted pipeline gives strong H2 coverage — the risk is conversion, not volume
+      - T&D's 25% win rate is the single largest upside lever (+$1.5M on conversion to 40%)
+      - NPS –32 in Q1 2026 is an urgent client-health signal requiring immediate follow-up
+      - Losses to McKinsey/Deloitte/PwC are structural — answer with relationships and partnerships, not better proposals
+    suggested_layout: "Bullet list: 4 items stacked vertically in a larger font"
+    speaker_notes: |
+      Frame the close: Q1 is a stable base, not a crisis. The pipeline is healthy in volume and late-stage concentration. Two urgent near-term actions: NPS detractor follow-up (30-day window) and T&D win-rate diagnostic (ongoing H2).
+
+  - title: "Thank You"
+    body: "Q&A"
+    suggested_layout: "Title Slide: Large centered title, with 'Q&A' in smaller text below"
+    speaker_notes: |
+      Anticipated Q&A:
+
+      - Why did growth slow if the pipeline looks healthy? Q1 revenue came from 2025 wins; the pipeline closes in H2. Converting at current rates should re-accelerate Q3–Q4.
+      - Is the NPS drop real or a data artifact? Small sample (28), but directional signal is real. Follow up all detractors within 30 days before concluding.
+      - Should we be more selective given 40% win rate? Yes — especially sub-$300K single-practice RFPs. Best win rates (50%) are multi-practice Ops/Strategy deals.
+      - Can we build AI advisory without straining the team? Net-new hires, not reallocation — utilization already 76.2%, near top quartile.
+      - How exposed is the Financial Services gap? $6.0M weighted vs. firm-wide 4.6× coverage is light, against confirmed regulatory demand — a Q2 outbound priority.

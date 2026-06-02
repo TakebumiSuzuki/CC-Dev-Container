@@ -1,0 +1,5 @@
+{
+  "type": "pie_chart",
+  "categories": ["Promoter (9-10)", "Passive (7-8)", "Detractor (0-6)"],
+  "series": [{"name": "Respondents", "values": [7, 5, 16]}]
+}
