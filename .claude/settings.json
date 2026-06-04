@@ -72,9 +72,7 @@
     "allowUnsandboxedCommands": false,
     "network": {
       "allowedDomains": [
-        "github.com",
-        "*.npmjs.org",
-        "registry.yarnpkg.com"
+        "*"
       ]
     },
     "filesystem": {
@@ -82,7 +80,16 @@
         "~/.ssh/**",
         "~/.aws/**",
         "~/.netrc",
-        "**/.env*"
+        "**/.env*",
+        "~/.config/gcloud/**",
+        "~/.docker/config.json",
+        "**/.git-credentials",
+        "**/*.pem",
+        "**/*.key",
+        "**/id_rsa*",
+        "**/secrets/**",
+        "**/credentials*.json",
+        "**/service-account*.json"
       ],
       "denyWrite": [
         "**/.env*"
