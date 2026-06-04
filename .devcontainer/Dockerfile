@@ -4,6 +4,7 @@ FROM node:22-bookworm
 
 # uv のバイナリを Astral 公式 distroless イメージからコピー。
 # /uv と /uvx は フォルダではなく単一の実行バイナリファイル。(libなどに分散していない)
+# イメージ全体を pull してから必要なファイルだけコピーしている。マルチステージビルドの仕組み。
 COPY --from=ghcr.io/astral-sh/uv:0.11.8 /uv /uvx /usr/local/bin/
 
 # --no-install-recommends は推奨パッケージ(必須ではないが慣習的に一緒に入るもの)はインストールしない。
@@ -70,17 +71,22 @@ RUN mkdir -p /opt/npm-global \
 # npm install -g は NPM_CONFIG_PREFIX で指定した場所に書き込む（デフォルトは /usr/local/lib/node_modules）
 # NPM_CONFIG_PREFIX の値は npm を実行する際に必ず読み込まれ、グローバルインストールの保存先として設定。
 # これにより、パッケージ本体は /opt/npm-global/lib/node_modules/、実行コマンドは /opt/npm-global/bin/
-# /home/node/.local/bin は将来的に uv tool install や pip install --user を使ったときに備えた予防的な PATH 設定
-# ちなみに、このように Dokerfile の中で ENV として設定した変数は、Docker デーモンが保持する設定リストに入り、
-# コンテナ起動後、プロセスが生まれるたびに Docker が毎回そこから読んで渡す。つまりまるでグローバルのような環境変数になる。
+# /home/node/.local/bin は将来的に uv tool install や pip install --user を使ったときに備えた予防的 PATH 設定
+# ちなみに、このように Dockerfile の中で ENV として設定した変数は、イメージ(config の Config.Env)に焼き込まれる。
+# ランタイム(dockerd/containerd)は、コンテナ起動時の PID 1 (即時スリープ状態になる)だけでなく、
+# 後から docker exec で入ってくるプロセス(VS Code Server やターミナル等)にも、同じ Config.Env を適用する。
+# そこから生まれる子プロセス(シェル・npm・python 等)は fork/exec の継承で受け継ぐ。
 ENV NPM_CONFIG_PREFIX=/opt/npm-global \
     PATH="/opt/npm-global/bin:/opt/uv-venv/bin:/home/node/.local/bin:${PATH}" \
     SHELL=/bin/zsh
 
 # node グループに sudo 権限を付与
+# まず、/etc/sudoers.d/ は apt-get で sudo を入れると自動で作られる。そして、
 # /etc/sudoers.d/node という新しい設定ファイルを作り、そこに node ALL=(ALL) NOPASSWD:ALL を書き込む。
 # chmod 0440 で、そのファイルを「管理者以外は書き換えもできない厳重な状態」にする
 # nodeユーザーだけは特別に、パスワードなしでsudoを使えるようにしてあげる
+# 000とはせず440としているのは、慣習的にsudoersファイルは440であるため。
+# 実際には、000にしてもroot以外は読めないため機能的には問題ない。
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node \
     && chmod 0440 /etc/sudoers.d/node
 
@@ -92,9 +98,6 @@ RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/node \
 #   /commandhistory      ← claude-bashhistory ボリューム (.zsh_history 用)
 RUN mkdir -p /commandhistory /home/node/.claude \
     && chown -R node:node /commandhistory /home/node/.claude
-
-# あなたのPC（ホスト）にある zsh 用の設定ファイルを、コンテナ内の node ユーザーの所有物として、正しい場所にコピーする
-# COPY --chown=node:node .zshrc /home/node/.zshrc
 
 # コンテナが起動した時のメインプロセスを実行する人
 USER node

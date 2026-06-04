@@ -10,9 +10,14 @@ services:
     environment:
       # Claude Code の全状態 (.claude/ 配下 + .claude.json) を /home/node/.claude に集約。
       # これにより claude-state ボリューム１個で auth・設定・履歴の永続化が完結する。
+      # ここで定義した環境変数は、Docker(エンジン/ランタイム)の機能として、PID 1 だけでなく
+      # docker exec で入ってくるプロセス(VS Code Server・ターミナル等)にも注入される。
+      # 注入先は Dockerfile の ENV と同じで、プロセスから見ると両者の区別はつかない
       - CLAUDE_CONFIG_DIR=/home/node/.claude
     volumes:
       # ワークスペース bind mount
+      # プロジェクト内で作る .venv や node_module は、名前付きボリュームに逃がすように設定していない。
+      # つまり、必ず、dev container内で使うことを想定している。ホスト側からは動かないので注意。
       - ../:/workspaces/cc-dev-container
 
       # Claude Code の状態 (auth, settings, plugins, sessions, history) を永続化。
@@ -23,10 +28,12 @@ services:
 
       # shell 履歴 (.zsh_history)。単一ファイルは named volume にできないので、
       # ディレクトリ /commandhistory をマウントし .zshrc 側で HISTFILE をそこに向ける。
+      # ターミナルが ./.zshrc を読んで zsh を起動すると、履歴はこの /commandhistory 内に残る。
+      # named volume なのでコンテナを rebuild しても履歴が消えない、というわずかな使い勝手のメリット。
       - claude-bashhistory:/commandhistory
 
-      # .zshrc は repo を SSoT とする bind mount。
-      # named volume と独立したマウントポイントなので、リスト順に関係なく適用される。
+      # ホスト上の ./.zshrc を /home/node/.zshrc として見せる bind mount。
+      # VS Code のターミナル(zsh)が起動時にこの $HOME/.zshrc を読み込む。
       - ./.zshrc:/home/node/.zshrc
 
 volumes:
