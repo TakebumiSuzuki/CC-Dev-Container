@@ -33,6 +33,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
     zsh \
     nano \
+    bubblewrap \
+    socat \
     && rm -rf /var/lib/apt/lists/*
 
 # uvが管理するPython本体を /opt/uv-python にインストール。
@@ -104,6 +106,8 @@ USER node
 
 # node ユーザーとして global にインストールを実行 (/opt/npm-global)
 # /opt にあるためシャドウイング(上書き消去)されず、所有者も node なので auto-update も可能！
-RUN npm install -g @anthropic-ai/claude-code docx pptxgenjs
+# @anthropic-ai/sandbox-runtime は Claude Code サンドボックスの seccomp フィルタを提供し、
+# Unix ドメインソケットの遮断を有効にする（任意だが推奨。未導入でもサンドボックス自体は動く）。
+RUN npm install -g @anthropic-ai/claude-code docx pptxgenjs @anthropic-ai/sandbox-runtime
 
 WORKDIR /workspaces/cc-dev-container
