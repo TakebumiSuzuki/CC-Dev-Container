@@ -7,7 +7,7 @@ Duration: 25 minutes
 
 ## Executive Summary
 
-Q2 2026 delivered our strongest quarter on record. Total revenue reached $187M, up 24% year-over-year and 11% sequentially. Net new ARR closed at $42M against a $35M target — the largest beat in eight quarters. Enterprise momentum continued, with three seven-figure deals signed in June alone. We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
+Q2 2026 was our strongest quarter on record. Revenue reached $187M (+24% YoY), and net new ARR closed at $42M against a $35M target — the largest beat in eight quarters. Enterprise momentum continued, with three seven-figure deals signed in June. We are tracking roughly 2x the growth rate of our nearest competitor (Source: ./data/market_intel.csv).
 
 This deck walks through the headline results, segment and regional performance, deal-size distribution, the wins and friction points carried out of the quarter, and the implications for the H2 plan.
 
@@ -26,7 +26,7 @@ Revenue continued its upward trajectory through the first half of 2026. Q2 reach
 
 (Source: ./data/q2_2026_financials.xlsx, sheet: Revenue_Trend)
 
-The shape of the curve is as important as the level. The 2025 line was steady but gently sloped; the 2026 line is steeper from the start, which gives us materially more confidence in the H2 forecast even before applying the Q2 ARR overperformance.
+The shape matters as much as the level: the 2026 line is steeper from the start than 2025, giving us more confidence in the H2 forecast.
 
 ### Regional Performance
 
@@ -40,7 +40,7 @@ All three regions grew in Q2, but the shape diverged. North America accelerated 
 
 (Source: ./data/q2_2026_financials.xlsx, sheet: Regional_Monthly)
 
-North America's acceleration is being carried by two named accounts that expanded mid-quarter; without those, the line would still be up and to the right, but more gently. APAC's June print reflects the first full month of the new Singapore team, and we expect the Q3 ramp to compound from here.
+North America's acceleration is carried by two named accounts that expanded mid-quarter. APAC's June print reflects the first full month of the new Singapore team.
 
 ## Segment Performance
 
@@ -56,7 +56,7 @@ The Enterprise segment now accounts for roughly 60% of total revenue, up from 54
 
 (Source: ./data/q2_segment_breakdown.csv)
 
-The mix shift is doing what we hoped: net retention follows segment, and the Enterprise lean is materially derisking the FY revenue plan. The SMB decline reads as bad on the surface but is a deliberate, planned outcome — the support load it removed is now flowing into mid-market enablement.
+The mix shift is working as planned: the Enterprise lean is derisking the FY revenue plan, and the SMB decline is a deliberate trade-off, not a warning sign.
 
 ### Deal Size Distribution
 
@@ -110,7 +110,6 @@ Q2 2026 was a record quarter on nearly every dimension that matters: revenue, AR
 
 ### Anticipated Q&A
 
-- *Is the SMB decline a leading indicator of anything broader?* No — it was a deliberate channel reprioritization signed off in the April plan, and the customers we lost there were not predictive of mid-market churn.
-- *Why is EMEA pipeline coverage below target?* Two AE departures in May plus a slower-than-expected ramp of the new regional VP. Backfills are in flight; we expect coverage to recover by end of Q3.
-- *What is the confidence on the H2 forecast given Q2's beat?* High. The beat was concentrated in multi-year enterprise deals that derisk H2 ARR, not pull-forward of H2 pipeline.
-- *Are we comfortable with the onboarding lead-time increase?* Not at 21 days. The H2 plan funds two implementation engineer hires and a CS automation track; we expect to pull lead time back under 16 days by end of Q4.
+- *Is the SMB decline a leading indicator of anything broader?* No — it was a deliberate channel reprioritization signed off in the April plan, not a signal of mid-market churn.
+- *What is the confidence on the H2 forecast given Q2's beat?* High — the beat was concentrated in multi-year enterprise deals that derisk H2 ARR, not pull-forward of H2 pipeline.
+- *Are we comfortable with the onboarding lead-time increase?* Not at 21 days — it is the main execution constraint we are carrying into H2.

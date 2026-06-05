@@ -140,4 +140,4 @@ A Conclusion section at the end of the document is recommended for executive or 
 
 - **`## Conclusion`** — a short wrap-up paragraph framing what the narrative argued for.
 - **`### Key Takeaways`** — 3–5 bullet points capturing the headline conclusions.
-- **`### Anticipated Q&A`** — included only if requested. 3–5 *question → answer* pairs covering likely audience questions, formatted as `- *Question?* Answer.` for each entry.
+- **`### Anticipated Q&A`** — included only if requested. 1–5 *question → answer* pairs covering likely audience questions, formatted as `- *Question?* Answer.` for each entry.

@@ -14,12 +14,12 @@ disable-model-invocation: true
 
 ## Output format
 
-Two reference files define the target — **read both up front in the Preflight at the top of the Workflow** (don't defer them):
+Two reference files define the target — read both in the Preflight (before Step 1):
 
 - `../narrative-to-slide-outline/references/narrative_format.md` — the **single source of truth** for what a valid `narrative.md` is.
 - `../narrative-to-slide-outline/references/example_narrative.md` — a **complete worked example** of that format.
 
-> **Note on the example's density**: `example_narrative.md` is written at the **Long** output-volume level (full paragraphs of interpretation per section, multi-sentence Q&A answers). Treat it as a reference for *structure and formatting*, **not** for prose length. When the user picks **Concise** or **Normal** (see Step 3), write proportionally less prose than the example shows.
+> **Note on the example's density**: `example_narrative.md` is written at the **Normal** output-volume level — short framing/interpretation around each table, Q&A answers of 1–2 sentences. It is your **midpoint anchor**: when the user picks **Concise** (see Step 3) write proportionally less, when they pick **Long** write proportionally more, and when they pick **Normal** match it. Always treat it as a reference for *structure and formatting* first; adjust prose length to the chosen level.
 
 This skill adds **writing discipline** on top of that format — most importantly the source-attaches-to-claim rule below.
 
@@ -78,9 +78,11 @@ If invoked with no context (just `/compose-slide-narrative`), ask: _"What kind o
 
 Build the inventory from cheap signal only — file names, folder structure, lightweight metadata (Excel sheet names, CSV column headers, row counts, PDF page counts). This is what lets Step 3 ask **specific** questions instead of generic ones. Heavy reading waits for Step 4.
 
+For `.txt`/`.md` files (which have no headers or sheet names to sample), the cheap signal is the **first few lines only**: use the **Read tool with a small `limit`** to identify what the file is — never `cat`/`head`/`tail`, and don't read it in full. The full read waits for Step 4.
+
 **Not in this step:** full file contents, summaries, metrics, or drafting.
 
-**Python interpreter** (used here and in Step 4): prefer the project's own venv (e.g. `./.venv/bin/python`) if one exists; otherwise fall back to system `python3`. Confirm packages import in the interpreter you picked before relying on them.
+**Python interpreter** (used here and in Step 4): detect it each run — don't assume a fixed path from CLAUDE.md or memory (this project may run in different environments). Probe for a project-local env first (`./.venv/bin/python`, a `uv`/Poetry venv, or a `pyproject.toml`/`requirements.txt`); else fall back to system `python3`. Confirm packages import before relying on them.
 
 Recommended libraries:
 
@@ -88,7 +90,7 @@ Recommended libraries:
 - **Word** (`.docx`) — `python-docx` (read paragraphs and tables; cite by enclosing heading text)
 - **PDF** — `pdfplumber`; fall back to `pdftotext` or `markitdown` for scanned PDFs
 - **PPTX** — `python-pptx`
-- **Markdown / text** (`.md`, `.txt`) — Read tool
+- **Markdown / text** (`.md`, `.txt`) — **Read tool only** (see the Step 2 note above).
 - **Images** — note path + filename only; do not OCR unless asked
 
 ### Step 3: Initial scoping dialogue
@@ -126,17 +128,27 @@ Then **check in with the user** with what you found:
 
 Closing Q&A is common for board/executive decks, often skipped for status updates, tutorials, short pitches.
 
-You read `../narrative-to-slide-outline/references/example_narrative.md` in the Preflight — it is the concrete target shape for your draft. **Match its structure, not its prose length**: the example is written at **Long** volume, so calibrate density down to the volume level chosen in Step 3 (Concise/Normal).
+**Match the example's structure, not necessarily its prose length.** It is written at **Normal** volume — your midpoint anchor: calibrate **down** for Concise, **up** for Long, match it for Normal. The example is vivid, so resist copying its density when the user picked Concise or Long; write to the level actually chosen, using these concrete targets:
+
+| Level       | Prose per section                                        | Executive Summary | Anticipated Q&A answers |
+| ----------- | ------------------------------------------------------- | ----------------- | ----------------------- |
+| **Concise** | One short framing sentence (or none) + keyword bullets; let tables carry the data | Bullets           | ≤ 1 sentence each       |
+| **Normal**  | Short framing/interpretation around each table, roughly as the example shows      | Short paragraph   | 1–2 sentences each      |
+| **Long**    | Fuller multi-sentence interpretation per section, more than the example           | Full paragraph(s) | Multi-sentence each     |
+
+Tables are not prose — keep the tables a section needs at every level; the volume level scales the **words around** them, not the data.
+
+**Q&A count** (when a closing Q&A is included): ≤2 questions at Concise, ~3 at Normal, ~5 at Long — always within the format's 1–5 range.
 
 Then produce the full first draft in one pass.
 
 Composition rules:
 
 - **Tables vs. inline citation.** When a section should show data visually, extract just the relevant rows and columns from the source file into an inline Markdown table and attach a Source breadcrumb to it. When the number is just supporting a prose claim and doesn't need its own visualization, skip the table and put an inline `(Source: ...)` at the end of the sentence. The downstream pptx skill turns tables into charts, so embedding a table is a deliberate "render this as a chart" signal.
-- **Apply the three-state rule.** **If you cannot find supporting data in scope, do not fabricate a Source path** — keep the claim as prose without Source, or mark `[needs-verification]`. Missing numbers → placeholder like `$XX M`, flag in Step 6.
+- **Apply the three-state rule** (see above) — never fabricate a Source path. Missing numbers → placeholder like `$XX M`, flag in Step 6.
 - **Respect the source author when re-formatting an existing document.** Lift structure and claims; adapt density and framing for the audience, but don't rewrite the analysis. Don't treat the source document itself as a terminal citation — actively hunt in-scope data files (CSV, Excel, etc.) that back its claims and attach Source breadcrumbs to those instead.
 - **Images.** Embed an image (`![meaningful alt](path)`) only when the visual itself carries meaning that prose or a table cannot — a team/event photo, product or UI screenshot, logo, or an existing diagram the user supplied or that lives in scope.
-- **Closing block**: a Conclusion with Key Takeaways (3–5 bullets) is recommended for most decks but skippable for short talks, tutorials, or case-studies. Include Anticipated Q&A (3–5 questions with brief answers) only if the user said yes above.
+- **Closing block**: a Conclusion with Key Takeaways (3–5 bullets) is recommended for most decks but skippable for short talks, tutorials, or case-studies. Include Anticipated Q&A (1–5 questions with brief answers, scaled by volume level — see the Q&A count note above) only if the user said yes above.
 - **One slide ≠ one section** — write flowing narrative prose; let the downstream skill decide slide breaks.
 
 Write the draft to the output path.
