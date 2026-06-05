@@ -70,3 +70,4 @@
 2026-06-02 06:25:32 - /workspaces/cc-dev-container/Output/2026-06-02-q1-2026-sales-pipeline-review/.compose-pptx-build/table_market.json
 2026-06-02 06:25:36 - /workspaces/cc-dev-container/Output/2026-06-02-q1-2026-sales-pipeline-review/.compose-pptx-build/table_h2.json
 2026-06-02 06:26:27 - /workspaces/cc-dev-container/Output/2026-06-02-q1-2026-sales-pipeline-review/.compose-pptx-build/add_all_notes.py
+2026-06-05 06:39:11 - /workspaces/cc-dev-container/Output/2026-06-05-fy2025-annual-review/narrative.md

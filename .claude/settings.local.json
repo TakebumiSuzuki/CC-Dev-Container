@@ -36,7 +36,8 @@
       "Bash(cp /workspaces/cc-dev-container/.claude/Output/2026-05-29-2025-annual-performance-review/2025-annual-performance-review-site/css/styles.css /home/node/.claude/skills/scroll-deck/assets/template/css/styles.css)",
       "Bash(cp /workspaces/cc-dev-container/.claude/Output/2026-05-29-2025-annual-performance-review/2025-annual-performance-review-site/js/main.js /home/node/.claude/skills/scroll-deck/assets/template/js/main.js)",
       "Read(//home/node/.claude/skills/**)",
-      "Bash(/opt/uv-venv/bin/python3 *)"
+      "Bash(/opt/uv-venv/bin/python3 *)",
+      "mcp__plugin_context7_context7__query-docs"
     ]
   }
 }
