@@ -5,6 +5,7 @@
 python3 -c "
 import sys, json, subprocess
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 try:
     d = json.load(sys.stdin)
@@ -26,10 +27,12 @@ def pct(val):
         return '--'
     return str(int(val))
 
+BANGKOK_TZ = ZoneInfo('Asia/Bangkok')
+
 def fmt_time(epoch, fmt, miss):
     if not epoch:
         return miss
-    return datetime.fromtimestamp(epoch, tz=timezone.utc).astimezone().strftime(fmt)
+    return datetime.fromtimestamp(epoch, tz=timezone.utc).astimezone(BANGKOK_TZ).strftime(fmt)
 
 def ctx_color(p):
     if p == '--':
