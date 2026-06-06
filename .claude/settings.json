@@ -1,5 +1,14 @@
 {
   "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:docs.claude.com)",
+      "WebFetch(domain:docs.python.org)",
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:doc.rust-lang.org)",
+      "WebFetch(domain:nodejs.org)"
+    ],
     "deny": [
       "Read(//**/.env*)",
       "Read(//**/.netrc)",
@@ -101,6 +110,7 @@
       "Bash(wget * | bash*)"
     ],
     "ask": [
+      "Bash(git commit*)",
       "Bash(git push *)",
       "Bash(npm publish *)",
       "Bash(docker push *)",
