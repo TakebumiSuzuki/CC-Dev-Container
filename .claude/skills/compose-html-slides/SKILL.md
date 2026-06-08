@@ -50,7 +50,10 @@ Both live in `references/` next to this file:
    every table (and the data shape inside it), and the "Key Takeaways" /
    "Anticipated Q&A" sections. The HTML's structure should *mirror* the
    Markdown's heading structure — don't invent divisions the source lacks, and
-   don't merge things it separates.
+   don't merge things it separates. The input is a `narrative.md` written to the
+   shared pipeline format spec, `../compose-slide-narrative/references/narrative_format.md`
+   (the same contract the upstream skill produces) — consult it if a section's
+   structure is ambiguous.
 
 2. **Copy `template.html`** to the output path. Keep its `<head>`, `<style>`, and
    `<script>` unchanged. You will only edit the `<nav>` list and the `<main>`

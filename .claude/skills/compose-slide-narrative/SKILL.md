@@ -6,25 +6,20 @@ disable-model-invocation: true
 
 # Compose Slide Narrative
 
-```
-[Raw data / docs / user intent]
-        │
-        ▼
-[THIS SKILL: narrative MD]
-        │
-        ├──→ [narrative-to-slide-outline: slide YAML] ──→ [compose-pptx: .pptx]
-        │
-        └──→ [narrative-to-html-deck: .html]
-```
+**Non-negotiables** (full rules below):
+
+- **Stop at every 🛑 GATE** — wait for the user; never run ahead in the same turn.
+- **Never fabricate a Source** — unbacked claims stay plain prose or `[needs-verification]`.
+- **Scope is sacred** — only paths the user pointed at; no network.
 
 ## Output format
 
-Two reference files define the target — read both in the Preflight (before Step 1):
+Two reference files define the target:
 
-- `../narrative-to-slide-outline/references/narrative_format.md` — the **single source of truth** for what a valid `narrative.md` is.
-- `../narrative-to-slide-outline/references/example_narrative.md` — a **complete worked example** of that format.
+- `references/narrative_format.md` — the **single source of truth** for what a valid `narrative.md` is.
+- `references/example_narrative.md` — a **complete worked example** of that format.
 
-> **Note on the example's density**: `example_narrative.md` is written at the **Normal** output-volume level — short framing/interpretation around each table, Q&A answers of 1–2 sentences. It is your **midpoint anchor**: when the user picks **Concise** (see Step 3) write proportionally less, when they pick **Long** write proportionally more, and when they pick **Normal** match it. Always treat it as a reference for *structure and formatting* first; adjust prose length to the chosen level.
+> **Note**: `example_narrative.md` is written at **Normal** volume. Always use it as the *structure and formatting* reference, but calibrate prose length to the level chosen in Step 3 — see the volume table in Step 5.
 
 This skill adds **writing discipline** on top of that format — most importantly the source-attaches-to-claim rule below.
 
@@ -38,27 +33,42 @@ Every numeric or factual claim is in one of three states.
 
 The default failure mode for AI-written narratives is fabricating numbers or sources to sound convincing. This rule makes that failure visible instead of silent.
 
+**Trigger — catch it at the moment of writing.** The instant you're about to put down a number or named fact and can't point to an in-scope file for it, stop: that hesitation *is* the signal. Resolve it into one of the three states — hunt for the backing file (→ Verified), mark `[needs-verification]` (→ Inferred), or leave it as plain prose with no Source (→ Asserted). Never resolve it by inventing a `(Source: ...)`.
+
+## Where this fits
+
+```
+[Raw data / docs / user intent]
+        │
+        ▼
+[THIS SKILL: narrative MD]
+        │
+        ├──→ [narrative-to-slide-outline: slide YAML] ──→ [compose-pptx: .pptx]
+        │
+        └──→ [compose-html-slides: .html]
+```
+
+`narrative.md` feeds two downstream pipelines (slide-outline → pptx, and the HTML deck), so its format is non-negotiable.
+
 ## Workflow
 
-> **🛑 GATE = stop and wait for the user; never proceed past it in the same turn.** Gates are the user check-ins below — skipping them is the most common failure of this skill.
+> **🛑 GATE = stop and wait for the user; never proceed past it in the same turn.** Gates are the user check-ins below — skipping them is the most common failure of this skill. After asking the gate's question(s), **end your turn with that gate's pause line** — a literal `⏸ …` line stating what you're waiting for. The pause line is the proof you stopped: if you didn't emit one, you skipped the gate.
 
 ### Invariants — true at every step; re-check before each gate
 
-- [ ] **Preflight done**: read both `narrative_format.md` + `example_narrative.md` before Step 1.
-- [ ] **Scope is sacred**: never read paths the user didn't point at; never use the network.
-- [ ] **Never fabricate a Source**: an unbacked claim stays plain prose or gets `[needs-verification]`.
-- [ ] **Stop at every 🛑 GATE** (Steps 3, 4, 5) and wait for the user — don't run ahead.
-- [ ] **Draft only after the Step 5 gate** — not before.
-- [ ] **Verify before reporting**: run the Step 6 source-verification pass before writing the Step 6 report.
+- [ ] **Preflight**: read both reference files before Step 1.
+- [ ] **Scope is sacred**: only user-pointed paths; no network.
+- [ ] **Never fabricate a Source** (see § The Source-attaches-to-claim rule).
+- [ ] **Stop at every 🛑 GATE** (Steps 3–5): emit its `⏸` line, end the turn.
+- [ ] **Draft only after the Step 5 gate**.
+- [ ] **Verify before reporting** (Step 6 pass → report).
 
 ### Preflight reads — do this before Step 1, every time
 
-**In a single parallel batch (one round-trip), Read both reference files together** — read both, every time:
+**In a single parallel batch (one round-trip), Read both reference files together:**
 
-- **`../narrative-to-slide-outline/references/narrative_format.md`** — the **rules**: document skeleton, inline tables, `(Source: ...)` breadcrumbs, images. Defines what is *valid*.
-- **`../narrative-to-slide-outline/references/example_narrative.md`** — the **shape to imitate**: a full narrative showing density, voice, and how Source breadcrumbs attach to claims in living prose. The spec's inline snippets do **not** substitute for it.
-
-Do not begin scoping (Step 1) or drafting until both files are read.
+- **`references/narrative_format.md`** — the **rules**: document skeleton, inline tables, `(Source: ...)` breadcrumbs, images. Defines what is *valid*.
+- **`references/example_narrative.md`** — the **shape to imitate**: a full narrative showing density, voice, and how Source breadcrumbs attach to claims in living prose. The spec's inline snippets do **not** substitute for it.
 
 **Two entry points**:
 
@@ -80,13 +90,13 @@ If invoked with no context (just `/compose-slide-narrative`), ask: _"What kind o
 
 ### Step 2: Inventory the scope (do not analyze yet)
 
-**Why its own step:** you can't know which files deserve a deep read until the angle is locked _with the user_ in Step 3 — relevance is defined by an angle not yet chosen. So the deliverable is **a map of what's in scope, not analysis, not a draft**.
+**Why its own step:** you can't know which files deserve a deep read until the angle is locked _with the user_ in Step 3 — relevance is defined by an angle not yet chosen. So the deliverable is **a map of what's in scope**.
 
-Build the inventory from cheap signal only — file names, folder structure, lightweight metadata (Excel sheet names, CSV column headers, row counts, PDF page counts). This is what lets Step 3 ask **specific** questions instead of generic ones. Heavy reading waits for Step 4.
+Build the inventory from cheap signal only — file names, folder structure, lightweight metadata (Excel sheet names, CSV column headers, row counts, PDF page counts). This is what lets Step 3 ask **specific** questions instead of generic ones.
 
-For `.txt`/`.md` files (which have no headers or sheet names to sample), the cheap signal is the **first few lines only**: use the **Read tool with a small `limit`** to identify what the file is — never `cat`/`head`/`tail`, and don't read it in full. The full read waits for Step 4.
+For `.txt`/`.md` files (which have no headers or sheet names to sample), the cheap signal is the **first few lines only**: use the **Read tool with a small `limit`** to identify what the file is — never `cat`/`head`/`tail`.
 
-**Not in this step:** full file contents, summaries, metrics, or drafting.
+**Not in this step:** full file contents, summaries, metrics, or drafting — those wait for Step 4.
 
 **Python interpreter** (used here and in Step 4): detect it each run — don't assume a fixed path from CLAUDE.md or memory (this project may run in different environments). Probe for a project-local env first (`./.venv/bin/python`, a `uv`/Poetry venv, or a `pyproject.toml`/`requirements.txt`); else fall back to system `python3`. Confirm packages import before relying on them.
 
@@ -114,7 +124,9 @@ Style:
 
 - Plain prose for open questions; `AskUserQuestion` only when there's a clean set of discrete options
 
-> **🛑 GATE — do not start Step 4 until the user has answered.** You MUST put the scoping questions to the user (`AskUserQuestion` for the discrete ones) and get a reply before opening any source file. The angle they pick decides *which* files Step 4 reads — reading ahead means reading the wrong ones. Do not begin deep reading while waiting.
+> **🛑 GATE — do not start Step 4 until the user has answered.** You MUST put the scoping questions to the user (`AskUserQuestion` for the discrete ones) and get a reply before opening any source file. The angle they pick decides *which* files Step 4 reads — reading ahead means reading the wrong ones. Do not begin deep reading while waiting. End the turn with:
+>
+> `⏸ Waiting for your answers before Step 4 (deep read).`
 
 ### Step 4: Deep exploration + scope confirmation
 
@@ -126,15 +138,19 @@ Then **check in with the user** with what you found:
 - What's thinner, missing, or contradictory
 - Whether a different angle from Step 3's options now looks stronger
 
-> **🛑 GATE — stop here and end your turn.** Present what the data supports cleanly, what's thin or contradictory, and whether another angle now looks stronger — then **wait for the user's reply**. Do not start drafting in the same turn on the assumption the angle still holds. The user's response is what locks the scope; only after it do you go to Step 5. If they switch to an angle needing other files, loop back: read those, report, wait again.
+> **🛑 GATE — stop here and end your turn.** Present what the data supports cleanly, what's thin or contradictory, and whether another angle now looks stronger — then **wait for the user's reply**. Do not start drafting in the same turn on the assumption the angle still holds. The user's response is what locks the scope; only after it do you go to Step 5. If they switch to an angle needing other files, loop back: read those, report, wait again. End the turn with:
+>
+> `⏸ Waiting for you to lock the angle before Step 5 (draft).`
 
 ### Step 5: Draft the narrative
 
-> **🛑 GATE — ask before writing a single line.** Put one final question to the user — **closing Q&A section, yes or no?** — and wait for the answer before drafting. One short question only; don't reopen the scoping dialogue.
+> **🛑 GATE — ask before writing a single line.** Put one final question to the user — **closing Q&A section, yes or no?** — and wait for the answer before drafting. One short question only; don't reopen the scoping dialogue. End the turn with:
+>
+> `⏸ Waiting for your yes/no on a closing Q&A before drafting.`
 
 Closing Q&A is common for board/executive decks, often skipped for status updates, tutorials, short pitches.
 
-**Match the example's structure, not necessarily its prose length.** It is written at **Normal** volume — your midpoint anchor: calibrate **down** for Concise, **up** for Long, match it for Normal. The example is vivid, so resist copying its density when the user picked Concise or Long; write to the level actually chosen, using these concrete targets:
+**Match the example's structure, not necessarily its prose length** — it's written at **Normal**, so calibrate to the level chosen in Step 3 using these targets:
 
 | Level       | Prose per section                                        | Executive Summary | Anticipated Q&A answers |
 | ----------- | ------------------------------------------------------- | ----------------- | ----------------------- |

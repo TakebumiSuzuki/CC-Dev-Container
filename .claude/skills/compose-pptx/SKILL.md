@@ -6,6 +6,13 @@ disable-model-invocation: true
 
 # Compose PPTX (raw-XML build)
 
+**Non-negotiables** (rationale below):
+
+- Both inputs are user-supplied — never scan the project to guess a YAML or template, never invent a template; if either is missing, ask.
+- The YAML's `data:` blocks are authoritative — render charts/tables from them; never re-open source CSV/Excel/PDF (only `type: image` reads from disk).
+- Raw-XML build only — no python-pptx in the build; run the `scripts/` helpers, don't re-implement their logic inline.
+- All structural `sldIdLst` edits come before any content editing.
+
 ## Purpose
 
 Final stage of the three-stage pipeline. Consume the slide-deck YAML and produce a `.pptx`.
@@ -107,6 +114,15 @@ import …` — resolves on `sys.path`.
 
 
 ## Workflow
+
+### Invariants — hold at every step
+
+- [ ] **Inputs are user-supplied**: never scan/guess a YAML or template; never invent a template; ask if either is missing.
+- [ ] **`data:` is authoritative**: render from the YAML's data blocks; never re-open source CSV/Excel/PDF (only `type: image` reads from disk).
+- [ ] **Raw-XML only**: edit slide XML with the Edit tool + `scripts/` helpers; no python-pptx in the build (it appears only in the read-only Step-2 inventory fallback).
+- [ ] **Use the scripts**: launch the `scripts/` helpers from the `scripts/` working dir; don't re-implement their logic inline.
+- [ ] **Structure before content**: finish all `sldIdLst` edits (add new, remove samples) before filling any slide text.
+- [ ] **Scratch dir**: delete `<scratch>` only after `deck.pptx` is confirmed packed; leave it in place if the build failed.
 
 ### Step 1: Resolve inputs and read references
 
@@ -335,14 +351,6 @@ sample for.
 
 `clone_grid.py` does **not** fit text — a cell narrower than the source may overflow
 (caught in the separate QA stage).
-
-## Important principles
-
-- **Raw-XML build, no python-pptx.** Unpack → edit slide XML (Edit tool + the
-  plumbing scripts) → pack. python-pptx appears only in the read-only Step-2
-  inventory fallback, never in the build.
-- **Structural changes before content.** Finish `sldIdLst` edits (add new, remove
-  samples) before filling slide text.
 
 ## Formatting rules (when editing slide XML)
 

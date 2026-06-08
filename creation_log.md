@@ -84,3 +84,4 @@
 2026-06-08 07:16:33 - /workspaces/cc-dev-container/.claude/skills/compose-html-slides/SKILL.md
 2026-06-08 07:20:07 - /workspaces/cc-dev-container/.claude/skills/compose-html-slides/references/example_deck.html
 2026-06-08 07:22:36 - /workspaces/cc-dev-container/.claude/skills/compose-html-slides/references/template.html
+2026-06-08 18:24:52 - /home/node/.claude/projects/-workspaces-cc-dev-container/memory/slide-pipeline-format-spec-ownership.md

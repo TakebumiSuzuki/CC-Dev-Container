@@ -6,6 +6,13 @@ disable-model-invocation: true
 
 # Narrative to Slide Outline
 
+**Non-negotiables** (full rules below):
+
+- During generation (Steps 1-5), never open referenced data files — that's the Step 6 QA subagent's job.
+- Never fabricate data or invent a `source:` path.
+- Scope: read prose → produce YAML; never generate the pptx.
+- Never report without a completed Step 6 QA pass; Step 7 is the only exit.
+
 ## Purpose
 
 Convert a Markdown narrative document (flowing prose containing analysis, recommendations, and embedded data references) into a structured YAML intermediate file consumed by a downstream pptx-generation skill.
@@ -51,7 +58,7 @@ For a trivial text-only tweak (rename a title, fix a typo, reword `speaker_notes
 
 ## Input
 
-A narrative Markdown document. **The file format is specified in `references/narrative_format.md`** (read up front in [Step 1](#step-1-read-the-input-and-references)). It covers the document skeleton, inline tables, `(Source: ...)` breadcrumbs, and image references.
+A narrative Markdown document. **The file format is specified in `../compose-slide-narrative/references/narrative_format.md`** (read up front in [Step 1](#step-1-read-the-input-and-references)). It covers the document skeleton, inline tables, `(Source: ...)` breadcrumbs, and image references.
 
 Input may be supplied as:
 
@@ -72,7 +79,7 @@ rule for cell values, and YAML formatting conventions — is defined in
 **`references/slide_yaml_schema.md`** (read up front in
 [Step 1](#step-1-read-the-input-and-references)). A complete worked example
 lives in `references/example_output.yaml`, paired with its input in
-`references/example_narrative.md`.
+`../compose-slide-narrative/references/example_narrative.md`.
 
 The key under `data:` MUST match the `{{placeholder_name}}` token in `body`. The
 narrative does not carry these names, so this skill coins them from context in
@@ -80,12 +87,20 @@ short `snake_case` (e.g. `revenue_trend`, `team_photo`, `segment_breakdown`).
 
 ## Workflow
 
+### Invariants — hold at every step
+
+- [ ] **No data-file I/O during generation** (Steps 1-5): inline tables are authoritative; raw files are opened only by the Step 6 QA subagent.
+- [ ] **Never fabricate**: no invented numbers, no invented `source:` paths. Missing data → ask in Step 3 or omit.
+- [ ] **Stay in scope**: read prose → produce YAML; never generate the pptx.
+- [ ] **QA before reporting**: run the full Step 6 pass before the Step 7 summary — a full re-run after any Step 8 edit, never partial.
+- [ ] **Step 7 is the only exit**: every Step 8 → 6 → 7 cycle terminates through it.
+
 ### Step 1: Read the input and references
 
 Issue these reads **together in a single parallel batch** (one round-trip), so later steps aren't stalled by sequential reads:
 
 - **The narrative input** — if a file path was given, Read it; if text was pasted, use it directly (nothing to read); if neither, ask: "Where is the narrative document?"
-- **`references/narrative_format.md`** — the input format spec you parse against in Step 2 (document skeleton, inline tables, `(Source: ...)` breadcrumbs, image references)
+- **`../compose-slide-narrative/references/narrative_format.md`** — the input format spec you parse against in Step 2 (document skeleton, inline tables, `(Source: ...)` breadcrumbs, image references)
 - **`references/slide_yaml_schema.md`** — the output YAML schema you generate against in Step 4
 
 (If you instead entered at Step 8 to edit an existing YAML, you do the equivalent batched read there — see that section.)
@@ -104,9 +119,9 @@ Recognize each pattern below using the syntax defined in the [Input](#input) sec
 - **Tone**: formal/casual, optimistic/cautious, internal/external audience
 - **Anticipated Q&A**: often appears in a closing section
 
-Do not invent data the narrative doesn't contain. If a slide would obviously benefit from a chart but neither the prose nor an inline table provides the data, surface that in Step 3 and ask the user.
-
 ### Step 3: Clarify with the user
+
+This is the **only** point where the skill checks in with the user. `AskUserQuestion` is already a blocking call — it waits for the answer before the flow continues — so no extra stop-and-end-turn gate is needed. The one risk it does not cover is *not asking at all*: do not start Step 4 while any question below still lacks a clear answer.
 
 Use AskUserQuestion. Batch related questions into one call (the tool accepts up to 4 questions).
 
@@ -126,10 +141,6 @@ Common questions:
 5. **Audience/tone** — only if unclear from the document
 
 Skip questions that already have clear answers. Over-asking is friction.
-
-#### When running non-interactively
-
-If `AskUserQuestion` is unavailable (parent agent, script, test harness), don't block — use these defaults: slide count = document-derived baseline, body verbosity = balanced, tone = inferred from the document, missing data = omit the chart (never fabricate numbers). In the Step 7 summary, list every skipped question and the default taken so the caller can re-run with overrides.
 
 ### Step 4: Generate the YAML
 
@@ -257,7 +268,6 @@ Tell the user:
 - QA findings from Step 6 (verified / summarized / discrepancies / inaccessible)
 - How many chart/table entries were emitted **without** a `source`, and which ones — so the user can spot data that should have carried a breadcrumb (these are valid, just un-cited)
 - Any data sources that are still TODOs (the user said they'd provide but haven't)
-- If running non-interactively, the list of questions you would have asked and the defaults you took
 - Open question: "Anything to refine?" — if yes, proceed to Step 8; if no, **the workflow ends here**. Step 7 is the sole termination point; any Step 8 → Step 6 → Step 7 cycle always exits through this same question.
 
 ### Step 8: Iterative revision (user-driven loop)
