@@ -7,9 +7,14 @@ disable-model-invocation: true
 # Compose Slide Narrative
 
 ```
-                                                              ┌→ [narrative-to-slide-outline: slide YAML] → [compose-pptx: .pptx]
-[Raw data / docs / user intent] → [THIS SKILL: narrative MD] ─┤
-                                                              └→ [narrative-to-html-deck: .html]
+[Raw data / docs / user intent]
+        │
+        ▼
+[THIS SKILL: narrative MD]
+        │
+        ├──→ [narrative-to-slide-outline: slide YAML] ──→ [compose-pptx: .pptx]
+        │
+        └──→ [narrative-to-html-deck: .html]
 ```
 
 ## Output format
@@ -44,6 +49,7 @@ The default failure mode for AI-written narratives is fabricating numbers or sou
 - [ ] **Never fabricate a Source**: an unbacked claim stays plain prose or gets `[needs-verification]`.
 - [ ] **Stop at every 🛑 GATE** (Steps 3, 4, 5) and wait for the user — don't run ahead.
 - [ ] **Draft only after the Step 5 gate** — not before.
+- [ ] **Verify before reporting**: run the Step 6 source-verification pass before writing the Step 6 report.
 
 ### Preflight reads — do this before Step 1, every time
 
@@ -161,13 +167,36 @@ Write the draft to the output path.
 
 The folder — not the file — is the unit of work: it is the home for all downstream artifacts of this deck (the slide outline YAML and the final `.pptx`), so the narrative file name stays the fixed `narrative.md`. The user may override this path.
 
-### Step 6: Report and iterate
+### Step 6: Verify against sources, then report and iterate
 
-After writing, report back:
+**Source-verification pass (runs automatically, before the report).** Once the draft is written, dispatch a
+subagent (Agent tool, `subagent_type: general-purpose`) to fact-check every `(Source: ...)` breadcrumb in
+the draft against the file it points at. This is the QA gate that catches the skill's default failure mode —
+numbers that drift from their source.
+
+- The subagent's full instructions live in **`./references/source_verification.md`** — point it there and
+  have it read that file before acting. Do not inline the procedure here.
+- In the dispatch prompt, hand it: the `narrative.md` path, the in-scope source paths, and the standing
+  constraints (**scope is sacred, no network, never fabricate a Source**). It starts cold and inherits none
+  of this conversation.
+- **Fix policy** (enforced by the reference file): the subagent **auto-fixes only unambiguous value
+  mismatches** (a plain transcription error against a single clearly-resolved source cell) with the Edit
+  tool. Everything judgment-dependent — rounding/aggregation differences, ambiguous or broken locators,
+  stale-source suspicion, structural mismatches, uncited claims, `[needs-verification]` markers — is
+  **reported, not edited**.
+- It returns a structured report; fold that into the report below rather than messaging the user mid-pass.
+
+This pass is read-and-verify plus narrow auto-correction — it does **not** replace the user's authority over
+un-cited claims and markers. Those still go to the user in the report below.
+
+After verification, report back:
 
 - Output path
 - Section count and inline-table count
 - Sources cited — number of distinct files referenced
+- **Verification result** (from the Step 6 pass): breadcrumbs checked, **auto-fixes applied** (list each as
+  old → new with location), and **findings needing a human decision** (broken/ambiguous locators,
+  rounding/aggregation or stale-source mismatches). User decides each.
 - **Un-cited claims** — list each. User decides: add evidence, accept, or drop.
 - **`[needs-verification]` markers** — list each with surrounding sentence. User decides: provide source → cite it; confirm without data → drop the marker, keep as prose; reject → remove or rephrase.
 - _"Anything to refine?"_

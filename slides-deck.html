@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML スライドデッキ — テンプレート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5ecd6; --ink:#2b1d14; --espresso:#3a2417; --crema:#c98a3c;
+    --terracotta:#b8502f; --olive:#7a7340; --line:#d8c7a4; --soft:#efe2c4;
+    --nav-bg:#2b1d14; --nav-ink:#e9dcc0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Zen Kaku Gothic New",-apple-system,sans-serif;color:var(--ink);
+    background:var(--espresso);line-height:1.6;-webkit-font-smoothing:antialiased;
+    display:flex;height:100vh;overflow:hidden;}
+
+  /* ============ LEFT NAV ============ */
+  .nav{width:260px;flex:0 0 260px;background:var(--nav-bg);color:var(--nav-ink);
+    height:100vh;overflow-y:auto;padding:26px 0;display:flex;flex-direction:column;}
+  .nav .brand{padding:0 24px 22px;border-bottom:1px solid rgba(233,220,192,.15);}
+  .nav .brand b{font-family:"Fraunces",serif;font-size:20px;color:#fff;display:block;letter-spacing:-.01em;}
+  .nav .brand span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;}
+  .nav ul{list-style:none;padding:14px 0;flex:1;}
+  .nav li{margin:2px 12px;}
+  .nav a{display:flex;gap:12px;align-items:baseline;padding:11px 12px;border-radius:8px;
+    text-decoration:none;color:var(--nav-ink);font-size:14px;transition:.18s;border:1px solid transparent;}
+  .nav a .n{font-family:"Fraunces",serif;font-size:12px;opacity:.5;min-width:18px;}
+  .nav a:hover{background:rgba(233,220,192,.08);}
+  .nav a.active{background:var(--terracotta);color:#fff;border-color:rgba(255,255,255,.15);}
+  .nav a.active .n{opacity:.85;}
+  .nav .foot{padding:16px 24px 0;font-size:11px;opacity:.45;border-top:1px solid rgba(233,220,192,.15);}
+  .nav .foot kbd{background:rgba(233,220,192,.15);border-radius:4px;padding:1px 6px;font-family:inherit;}
+
+  /* ============ RIGHT STAGE ============ */
+  .stage{flex:1;height:100vh;overflow-y:auto;padding:40px;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(201,138,60,.10), transparent 42%),
+      radial-gradient(circle at 88% 78%, rgba(184,80,47,.08), transparent 45%);}
+
+  .slide{display:none;max-width:1040px;margin:0 auto;background:#fbf5e6;
+    border:1px solid var(--line);min-height:585px; /* 1040*9/16≈585 → 最低16:9 */
+    box-shadow:0 30px 60px -25px rgba(58,36,23,.5);
+    padding:56px 60px;position:relative;overflow:hidden;
+    animation:fade .45s ease;}
+  .slide.show{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .slide::after{content:"";position:absolute;top:0;right:0;width:0;height:0;
+    border-style:solid;border-width:0 56px 56px 0;
+    border-color:transparent var(--terracotta) transparent transparent;opacity:.9;}
+  .pageno{position:absolute;bottom:22px;right:26px;font-family:"Fraunces",serif;
+    font-size:13px;color:#b09a72;}
+
+  /* shared type */
+  .kicker{font-family:"Fraunces",serif;font-style:italic;font-weight:500;color:var(--terracotta);
+    font-size:17px;display:flex;align-items:center;gap:12px;}
+  .kicker::before{content:"";width:42px;height:2px;background:var(--terracotta);}
+  h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(40px,5.5vw,72px);
+    line-height:.98;letter-spacing:-.02em;color:var(--espresso);margin:14px 0 8px;}
+  h1 em{font-style:italic;font-weight:500;color:var(--crema);}
+  h2{font-family:"Fraunces",serif;font-weight:600;font-size:28px;color:var(--espresso);
+    margin-bottom:24px;display:flex;align-items:baseline;gap:12px;}
+  h2 i{font-style:normal;color:var(--crema);font-size:16px;border:1.5px solid var(--crema);
+    border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .lede{max-width:620px;color:#5a4630;font-size:17px;margin-top:14px;}
+
+  /* cover */
+  .cover{display:flex;flex-direction:column;justify-content:center;min-height:520px;}
+  .cover .meta{margin-top:34px;padding-top:20px;border-top:1px dashed var(--line);
+    display:flex;gap:30px;flex-wrap:wrap;font-size:12.5px;color:#8a6f4d;text-transform:uppercase;letter-spacing:.12em;}
+  .cover .meta b{color:var(--espresso);}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);margin:8px 0 0;
+    border-top:2px solid var(--espresso);border-bottom:2px solid var(--espresso);}
+  .stat{padding:28px 22px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(36px,5vw,58px);
+    line-height:1;color:var(--terracotta);letter-spacing:-.02em;}
+  .stat .num span{font-size:.42em;color:var(--espresso);font-weight:600;}
+  .stat .cap{margin-top:10px;font-size:13px;color:#6b543a;}
+
+  /* bars */
+  .bar{margin-bottom:18px;}
+  .bar .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .bar .name{font-size:15px;font-weight:500;}
+  .bar .val{font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:var(--terracotta);}
+  .track{height:16px;background:var(--soft);border-radius:3px;overflow:hidden;}
+  .fill{height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--crema),var(--terracotta));}
+  .show .fill{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes grow{to{width:var(--w);}}
+
+  /* two-col */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start;}
+
+  /* donut */
+  .donut-wrap{display:flex;flex-direction:column;align-items:center;gap:22px;}
+  .donut{position:relative;width:210px;height:210px;}
+  .donut svg{transform:rotate(-90deg);}
+  .ring{fill:none;stroke-width:28;stroke-dasharray:var(--dash);stroke-dashoffset:var(--off);}
+  .show .ring{animation:draw 1.3s ease forwards;}
+  @keyframes draw{from{stroke-dasharray:0 999;}}
+  .donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .donut .center b{font-family:"Fraunces",serif;font-size:32px;color:var(--espresso);line-height:1;}
+  .donut .center span{font-size:11px;color:#8a6f4d;letter-spacing:.1em;}
+  .legend{display:flex;flex-direction:column;gap:9px;width:100%;}
+  .legend div{display:flex;align-items:center;gap:10px;font-size:14px;}
+  .legend i{width:13px;height:13px;border-radius:3px;}
+  .legend b{margin-left:auto;font-family:"Fraunces",serif;}
+
+  /* points */
+  .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px;}
+  .pt .ic{width:48px;height:48px;border-radius:13px;background:var(--espresso);color:#fbf5e6;
+    display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;
+    font-style:italic;font-size:23px;margin-bottom:14px;}
+  .pt:nth-child(2) .ic{background:var(--terracotta);}
+  .pt:nth-child(3) .ic{background:var(--olive);}
+  .pt h3{font-size:17px;color:var(--espresso);margin-bottom:6px;}
+  .pt p{font-size:14px;color:#6b543a;}
+
+  .big-quote{font-family:"Fraunces",serif;font-size:clamp(28px,3.6vw,46px);line-height:1.25;
+    color:var(--espresso);max-width:780px;font-weight:500;}
+  .big-quote em{color:var(--terracotta);font-style:italic;}
+</style>
+</head>
+<body>
+
+  <!-- ============ LEFT NAVIGATION ============ -->
+  <nav class="nav">
+    <div class="brand">
+      <b>World of Coffee</b>
+      <span>2025 Briefing</span>
+    </div>
+    <ul id="navlist">
+      <li><a href="#" data-i="0" class="active"><span class="n">01</span>表紙</a></li>
+      <li><a href="#" data-i="1"><span class="n">02</span>サマリー（主要指標）</a></li>
+      <li><a href="#" data-i="2"><span class="n">03</span>国別の消費量</a></li>
+      <li><a href="#" data-i="3"><span class="n">04</span>嗜好とトレンド</a></li>
+      <li><a href="#" data-i="4"><span class="n">05</span>まとめ</a></li>
+    </ul>
+    <div class="foot">
+      <kbd>←</kbd> <kbd>→</kbd> キーでも移動できます
+    </div>
+  </nav>
+
+  <!-- ============ RIGHT STAGE ============ -->
+  <main class="stage" id="stage">
+
+    <!-- Slide 1: cover -->
+    <section class="slide show">
+      <div class="cover">
+        <p class="kicker">Global Report — 2025年版（※ダミーデータ）</p>
+        <h1>世界の<em>コーヒー</em><br>事情を1枚で。</h1>
+        <p class="lede">毎朝、地球上では何杯のコーヒーが淹れられているのか。消費・嗜好・トレンドを、数字とグラフで俯瞰する。</p>
+        <div class="meta">
+          <div><b>調査対象</b> 53か国</div>
+          <div><b>サンプル</b> 28,400人</div>
+          <div><b>出典</b> Sample Coffee Institute</div>
+        </div>
+      </div>
+      <div class="pageno">01 / 05</div>
+    </section>
+
+    <!-- Slide 2: summary stats -->
+    <section class="slide">
+      <h2><i>1</i>サマリー — 主要指標</h2>
+      <p class="lede" style="margin-bottom:30px;">まず押さえるべき3つの数字。市場は堅調に拡大を続けている。</p>
+      <div class="stats">
+        <div class="stat"><div class="num">2.25<span>兆杯</span></div><div class="cap">年間の世界総消費量（推計）</div></div>
+        <div class="stat"><div class="num">73<span>%</span></div><div class="cap">「1日2杯以上飲む」と回答した割合</div></div>
+        <div class="stat"><div class="num">+5.8<span>%</span></div><div class="cap">前年比のスペシャルティ市場成長率</div></div>
+      </div>
+      <div class="pageno">02 / 05</div>
+    </section>
+
+    <!-- Slide 3: bar chart -->
+    <section class="slide">
+      <h2><i>2</i>一人あたり消費量の多い国</h2>
+      <div class="bar"><div class="row"><span class="name">フィンランド</span><span class="val">12.0 kg</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+      <div class="bar"><div class="row"><span class="name">ノルウェー</span><span class="val">9.9 kg</span></div><div class="track"><div class="fill" style="--w:82%"></div></div></div>
+      <div class="bar"><div class="row"><span class="name">アイスランド</span><span class="val">9.0 kg</span></div><div class="track"><div class="fill" style="--w:75%"></div></div></div>
+      <div class="bar"><div class="row"><span class="name">デンマーク</span><span class="val">8.7 kg</span></div><div class="track"><div class="fill" style="--w:72%"></div></div></div>
+      <div class="bar"><div class="row"><span class="name">スウェーデン</span><span class="val">8.2 kg</span></div><div class="track"><div class="fill" style="--w:68%"></div></div></div>
+      <div class="bar"><div class="row"><span class="name">日本</span><span class="val">3.6 kg</span></div><div class="track"><div class="fill" style="--w:30%"></div></div></div>
+      <p class="lede" style="margin-top:24px;font-size:14px;">北欧諸国が上位を独占。日本は伸びしろが大きい市場と言える。</p>
+      <div class="pageno">03 / 05</div>
+    </section>
+
+    <!-- Slide 4: donut + trends -->
+    <section class="slide">
+      <h2><i>3</i>嗜好とトレンド</h2>
+      <div class="two">
+        <div class="donut-wrap">
+          <div class="donut">
+            <svg width="210" height="210" viewBox="0 0 210 210">
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#3a2417" style="--dash:246 547;--off:0"></circle>
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#b8502f" style="--dash:153 547;--off:-246"></circle>
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#c98a3c" style="--dash:88 547;--off:-399"></circle>
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#7a7340" style="--dash:60 547;--off:-487"></circle>
+            </svg>
+            <div class="center"><b>4.2億</b><span>杯 / 日</span></div>
+          </div>
+          <div class="legend">
+            <div><i style="background:#3a2417"></i>ドリップ <b>45%</b></div>
+            <div><i style="background:#b8502f"></i>エスプレッソ系 <b>28%</b></div>
+            <div><i style="background:#c98a3c"></i>インスタント <b>16%</b></div>
+            <div><i style="background:#7a7340"></i>その他 <b>11%</b></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:'Fraunces',serif;font-size:19px;color:var(--espresso);margin-bottom:18px;">2025年の3つのトレンド</h3>
+          <div class="plist" style="grid-template-columns:1fr;gap:18px;">
+            <div class="pt" style="display:flex;gap:14px;align-items:flex-start;"><div class="ic" style="margin-bottom:0;flex:0 0 auto;width:40px;height:40px;font-size:19px;">A</div><div><h3>コールドブリュー定着</h3><p>若年層中心に通年需要化。アイス系比率が9pt上昇。</p></div></div>
+            <div class="pt" style="display:flex;gap:14px;align-items:flex-start;"><div class="ic" style="margin-bottom:0;flex:0 0 auto;width:40px;height:40px;font-size:19px;">B</div><div><h3>サステナブル豆</h3><p>フェアトレード重視が初めて過半数を突破。</p></div></div>
+            <div class="pt" style="display:flex;gap:14px;align-items:flex-start;"><div class="ic" style="margin-bottom:0;flex:0 0 auto;width:40px;height:40px;font-size:19px;">C</div><div><h3>自宅の本格化</h3><p>家庭用エスプレッソマシン普及率が3年で2.4倍。</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pageno">04 / 05</div>
+    </section>
+
+    <!-- Slide 5: closing -->
+    <section class="slide">
+      <div class="cover">
+        <p class="kicker">Conclusion</p>
+        <p class="big-quote">市場は拡大し、嗜好は<em>多様化</em>している。<br>次の一手は、<em>スペシャルティ</em>と<em>サステナビリティ</em>。</p>
+        <p class="lede" style="margin-top:30px;">ご清聴ありがとうございました。質疑応答へ。</p>
+      </div>
+      <div class="pageno">05 / 05</div>
+    </section>
+
+  </main>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const links  = document.querySelectorAll('#navlist a');
+  let current = 0;
+
+  function go(i){
+    if(i < 0 || i >= slides.length) return;
+    slides[current].classList.remove('show');
+    links[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('show');
+    links[current].classList.add('active');
+    document.getElementById('stage').scrollTop = 0; // 切替時は先頭へ
+  }
+
+  links.forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      go(parseInt(a.dataset.i,10));
+    });
+  });
+
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'ArrowRight' || e.key === 'PageDown') go(current+1);
+    if(e.key === 'ArrowLeft'  || e.key === 'PageUp')   go(current-1);
+  });
+</script>
+</body>
+</html>
