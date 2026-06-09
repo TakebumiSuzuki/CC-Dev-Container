@@ -58,12 +58,21 @@ charts fully populated with hand-computed geometry:
    (the same contract the upstream skill produces) — consult it if a section's
    structure is ambiguous.
 
-2. **Copy `template.html`** to the output path **with a real file copy** (e.g.
-   `cp references/template.html <out>.html`) — do **not** regenerate it from
-   memory with `Write`. Re-emitting the ~430-line design system by hand is slow
-   and silently risks CSS/JS drift; copy it byte-for-byte. Then keep its
-   `<head>`, `<style>`, and `<script>` unchanged and edit **only** the `<nav>`
-   list and the `<main>` slides.
+2. **Copy `template.html`, then mutate it only with `Edit` — never `Write`.**
+   - First: `cp references/template.html <out>.html` (a real, byte-for-byte copy).
+   - **Bright-line rule: after that `cp`, the `Write` tool must never target the
+     output file again — every later change is an `Edit`.** Re-`Write`-ing the
+     whole file re-emits the ~300-line design system (`<style>` + `<script>`) from
+     memory: it's slow and silently risks CSS/JS drift. If you catch yourself
+     assembling the full file in a `Write`, stop — you've thrown away the copy.
+   - You touch exactly **two regions, one `Edit` each**:
+       1. **nav** — replace the template's `<ul id="navlist"> … </ul>` block.
+       2. **slides** — replace from the first `<!-- ░░ COVER ░░ -->` section
+          through the last `</section>` before `</main>`.
+     Leave the shared `<defs>` SVG, and everything above `<main>` / below
+     `</main>`, untouched. The `old_string` is the template's *existing* text
+     (known and fixed); only your new content goes in `new_string`. The head,
+     `<style>`, and `<script>` are never retyped.
 
 3. **Split into pages (pptx mindset)** using the rules below, and build the nav
    to match.
@@ -205,6 +214,18 @@ you should not be hunting through rules.
 
 ## Before you finish — verification checklist
 
+- **Chrome is byte-identical:** the `<style>` and `<script>` blocks must exactly
+  match `references/template.html` — you only `Edit`-ed nav + slides, never
+  `Write`. Verify:
+  ```
+  for tag in style script; do
+    diff <(awk -v t=$tag 'BEGIN{o="^<"t">$";c="^</"t">$"} $0~o{f=1} f{print} $0~c{f=0}' references/template.html) \
+         <(awk -v t=$tag 'BEGIN{o="^<"t">$";c="^</"t">$"} $0~o{f=1} f{print} $0~c{f=0}' <out>.html) \
+      && echo "$tag OK";
+  done
+  ```
+  Any diff means the design system was re-emitted — discard the file, re-`cp`,
+  and redo the two `Edit`s.
 - **Counts match:** number of `.slide` sections == number of `#navlist a`, and
   `data-i` runs `0..n−1` with no gaps. (`grep -c` both.)
 - **Donuts close:** each donut's segment lengths sum to ~547.
