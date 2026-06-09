@@ -152,10 +152,11 @@ Map the document to slides:
 - **Agenda slide** (if the document has an executive summary or section list): numbered list of sections
 - **Section divider slides** for major `##` transitions: `body: ""`, `suggested_layout: "Section Divider: Large centered title only"`
 - **Content slides**: title + prose summary (1-3 short paragraphs or bullets) + `{{placeholder}}` where any data lives + `data:` block
-- **Closing block** (3 slides, in this order, as a deliberate pattern):
-    1. Section divider with title like "Conclusion" — body is `""`, signals the wrap-up
-    2. Recap slide — 2-4 bullets capturing the key takeaways (often Markdown bullets pulled from the final section of the narrative)
-    3. Thank-you slide — title like "Thank you", body holds "Q&A". If the narrative includes an Anticipated Q&A section, lift those question/answer pairs into `speaker_notes`; otherwise keep `speaker_notes` minimal (e.g., a brief prompt to open the floor) or omit it.
+- **Closing block** (in this order, as a deliberate pattern):
+    1. Section divider with title like "Conclusion" — `body: ""`, `suggested_layout: "Section Divider: Large centered title only"`, signals the wrap-up. Keep this even when the narrative's `## Conclusion` has a wrap-up paragraph: the divider opens the closing section, the paragraph goes on the next slide.
+    2. Summary slide — carries the narrative's `## Conclusion` wrap-up paragraph (the input format in `../compose-slide-narrative/references/narrative_format.md` guarantees one) as a short centered prose body. **Never drop this paragraph.** Omit this slide only when the Conclusion has no wrap-up text.
+    3. Recap slide — 2-4 bullets capturing the key takeaways (often Markdown bullets pulled from the final section of the narrative)
+    4. Thank-you slide — title like "Thank you", body holds "Q&A". If the narrative includes an Anticipated Q&A section, lift those question/answer pairs into `speaker_notes`; otherwise keep `speaker_notes` minimal (e.g., a brief prompt to open the floor) or omit it.
 
     Collapse into a single slide only when the document is very short (<5 slides total).
 

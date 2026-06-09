@@ -34,11 +34,17 @@ inherits the template's exact axis/label styling). Use this when no sample exist
 or to swap a sample chart to a different plot type while keeping its placement.
 
 Usage:
+    # Preferred: read the data entry straight from the slide-deck YAML (no temp JSON).
+    python add_chart.py <unpacked_dir> <slideN.xml> --yaml <deck.yaml> --index N [--data KEY]
+        [--area-in "x,y,w,h"] [--title "Chart title"]
+    # Or pass a pre-extracted entry as JSON.
     python add_chart.py <unpacked_dir> <slideN.xml> --data-json <entry.json>
         [--area-in "x,y,w,h"]   # frame box in inches; overrides inherited/default geometry
         [--title "Chart title"] # optional chart title; default: none (slide title carries it)
 
-`entry.json` is one YAML `data:` entry, e.g.
+With `--yaml/--index`, the script extracts `slides[N].data[KEY]` itself (KEY may
+be omitted when the slide has a single data entry), so values are never retyped
+by hand. `entry.json` is one YAML `data:` entry, e.g.
     {"type":"bar_chart","categories":["Q1","Q2"],
      "series":[{"name":"2024","values":[10,20]},{"name":"2025","values":[12,25]}]}
     {"type":"line_chart","categories":["Jan","Feb","Mar"],
@@ -429,7 +435,11 @@ def main():
         description="Author a native chart from YAML data and embed it in a slide.")
     ap.add_argument("unpacked_dir")
     ap.add_argument("slide", help="slide file name, e.g. slide8.xml")
-    ap.add_argument("--data-json", required=True, help="path to one YAML data entry as JSON")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--yaml", help="slide-deck YAML; the data entry is extracted directly (no temp JSON)")
+    src.add_argument("--data-json", help="path to one pre-extracted YAML data entry as JSON")
+    ap.add_argument("--index", type=int, help="0-based slide index in --yaml")
+    ap.add_argument("--data", help="data key within the slide (omit if it has a single data entry)")
     ap.add_argument("--area-in", default=None,
                     help='frame box "x,y,w,h" in inches; default = content area below a title')
     ap.add_argument("--title", default=None, help="optional chart title")
@@ -439,7 +449,13 @@ def main():
     if not (unpacked / "ppt" / "slides" / args.slide).exists():
         raise SystemExit(f"Error: {unpacked / 'ppt' / 'slides' / args.slide} not found")
 
-    entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
+    if args.yaml:
+        if args.index is None:
+            ap.error("--index is required with --yaml")
+        from office.yaml_entry import load_data_entry
+        entry = load_data_entry(args.yaml, args.index, args.data)
+    else:
+        entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
     kind, cats, series = _normalize(entry)
 
     charts_dir = unpacked / "ppt" / "charts"

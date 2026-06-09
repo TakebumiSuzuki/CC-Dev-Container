@@ -154,5 +154,5 @@
   },
   "plansDirectory": "./docs/plans",
   "tui": "fullscreen",
-  "autoScrollEnabled": false
+  "autoScrollEnabled": true
 }

@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 **Non-negotiables** (full rules below):
 
-- **Stop at every 🛑 GATE** — wait for the user; never run ahead in the same turn.
+- **Stop at every 🛑 GATE** — get the user's input before proceeding: via `AskUserQuestion`, or by ending your turn and waiting for their reply.
 - **Never fabricate a Source** — unbacked claims stay plain prose or `[needs-verification]`.
 - **Scope is sacred** — only paths the user pointed at; no network.
 
@@ -52,14 +52,17 @@ The default failure mode for AI-written narratives is fabricating numbers or sou
 
 ## Workflow
 
-> **🛑 GATE = stop and wait for the user; never proceed past it in the same turn.** Gates are the user check-ins below — skipping them is the most common failure of this skill. After asking the gate's question(s), **end your turn with that gate's pause line** — a literal `⏸ …` line stating what you're waiting for. The pause line is the proof you stopped: if you didn't emit one, you skipped the gate.
+> **🛑 GATE = obtain the user's input before proceeding; never act on an assumption you could have checked.** Gates are the user check-ins below — skipping them is the most common failure of this skill. A gate is cleared one of two ways:
+>
+> - **(a) `AskUserQuestion`** (discrete choices — Steps 3, 5): the call blocks and returns the user's answer, so **the tool call itself is the proof you stopped**. Continue in the same turn once you have the answer; no `⏸` line is needed.
+> - **(b) Prose question + turn end** (open / free-form — Step 4): **end your turn with that gate's `⏸ …` pause line** — a literal line stating what you're waiting for — and resume only after the user's next message. For these gates the pause line is the proof you stopped: a prose gate with no `⏸` line was skipped.
 
 ### Invariants — true at every step; re-check before each gate
 
 - [ ] **Preflight**: read both reference files before Step 1.
 - [ ] **Scope is sacred**: only user-pointed paths; no network.
 - [ ] **Never fabricate a Source** (see § The Source-attaches-to-claim rule).
-- [ ] **Stop at every 🛑 GATE** (Steps 3–5): emit its `⏸` line, end the turn.
+- [ ] **Stop at every 🛑 GATE** (Steps 3–5): clear it via `AskUserQuestion` (Steps 3, 5), or — for the prose gate (Step 4) — by emitting its `⏸` line and ending the turn.
 - [ ] **Draft only after the Step 5 gate**.
 - [ ] **Verify before reporting** (Step 6 pass → report).
 
@@ -124,9 +127,7 @@ Style:
 
 - Plain prose for open questions; `AskUserQuestion` only when there's a clean set of discrete options
 
-> **🛑 GATE — do not start Step 4 until the user has answered.** You MUST put the scoping questions to the user (`AskUserQuestion` for the discrete ones) and get a reply before opening any source file. The angle they pick decides *which* files Step 4 reads — reading ahead means reading the wrong ones. Do not begin deep reading while waiting. End the turn with:
->
-> `⏸ Waiting for your answers before Step 4 (deep read).`
+> **🛑 GATE — do not start Step 4 until the user has answered.** You MUST put the scoping questions to the user via `AskUserQuestion` (for the discrete ones) and get a reply before opening any source file. The angle they pick decides *which* files Step 4 reads — reading ahead means reading the wrong ones. Do not begin deep reading until their answer is in hand; once it is, continue in the same turn.
 
 ### Step 4: Deep exploration + scope confirmation
 
@@ -144,9 +145,7 @@ Then **check in with the user** with what you found:
 
 ### Step 5: Draft the narrative
 
-> **🛑 GATE — ask before writing a single line.** Put one final question to the user — **closing Q&A section, yes or no?** — and wait for the answer before drafting. One short question only; don't reopen the scoping dialogue. End the turn with:
->
-> `⏸ Waiting for your yes/no on a closing Q&A before drafting.`
+> **🛑 GATE — ask before writing a single line.** Put one final question to the user via `AskUserQuestion` — **closing Q&A section, yes or no?** — and get the answer before drafting. One short question only; don't reopen the scoping dialogue.
 
 Closing Q&A is common for board/executive decks, often skipped for status updates, tutorials, short pitches.
 

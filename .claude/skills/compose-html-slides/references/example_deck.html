@@ -318,6 +318,17 @@
   <!-- ============ RIGHT STAGE ============ -->
   <main class="stage" id="stage">
 
+    <!-- Shared SVG paint servers — defined ONCE for the whole deck so any number
+         of line charts can reference url(#lg) without duplicating the id. -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c98a3c" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#c98a3c" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
     <!-- 01 — COVER -->
     <section class="slide show">
       <div class="cover">
@@ -408,12 +419,6 @@
       <h2><i>3</i>Retention</h2>
       <p class="lede sm" style="margin-bottom:14px;">Client retention rebounded to <b>89%</b>, recovering most of the ground lost in FY2024 (85%) though still below the FY2023 high of 93%. FY2025 non-renewals spread across pricing, competitive switching, and budget cuts — no systemic churn driver.</p>
       <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Renewal rate by fiscal year">
-        <defs>
-          <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c98a3c" stop-opacity=".55"/>
-            <stop offset="100%" stop-color="#c98a3c" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
         <line class="axis" x1="40" y1="195" x2="520" y2="195"></line>
         <polygon class="area" points="80,195 80,56.3 280,141.7 480,99 480,195"></polygon>
         <polyline class="ln" points="80,56.3 280,141.7 480,99"></polyline>

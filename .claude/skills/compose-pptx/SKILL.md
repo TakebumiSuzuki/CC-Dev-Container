@@ -118,10 +118,11 @@ import …` — resolves on `sys.path`.
 ### Invariants — hold at every step
 
 - [ ] **Inputs are user-supplied**: never scan/guess a YAML or template; never invent a template; ask if either is missing.
-- [ ] **`data:` is authoritative**: render from the YAML's data blocks; never re-open source CSV/Excel/PDF (only `type: image` reads from disk).
+- [ ] **`data:` is authoritative**: render from the YAML's data blocks; never re-open source CSV/Excel/PDF (only `type: image` reads from disk). Feed the scripts the YAML directly (`--yaml/--index`) — never hand-transcribe values into a temp JSON (that's where `↑`→"up", en-dash→hyphen, and dropped rows creep in).
 - [ ] **Raw-XML only**: edit slide XML with the Edit tool + `scripts/` helpers; no python-pptx in the build (it appears only in the read-only Step-2 inventory fallback).
 - [ ] **Use the scripts**: launch the `scripts/` helpers from the `scripts/` working dir; don't re-implement their logic inline.
 - [ ] **Structure before content**: finish all `sldIdLst` edits (add new, remove samples) before filling any slide text.
+- [ ] **Notes on every slide**: call `set_notes.py` once per built slide, unconditionally — the script no-ops when there's nothing; never decide per-slide whether notes are "needed" (that drops `data`-only provenance).
 - [ ] **Scratch dir**: delete `<scratch>` only after `deck.pptx` is confirmed packed; leave it in place if the build failed.
 
 ### Step 1: Resolve inputs and read references
@@ -223,21 +224,33 @@ Work inside `<scratch>` (created in Step 1).
        text slides. It only covers what its spec expresses; **fall back to the
        Edit tool** for richer formatting (hyperlinks, per-word colour, superscript,
        mixed sizes, multi-level nesting). See `fill_text.py`'s header for the schema.
-   - **`data` entries**, by their `type`:
-     - `bar_chart`/`line_chart`/`pie_chart`/`histogram` → write the entry to a temp
-       JSON, then route by the `mapping.json` note (see [Charts](#charts) for the why):
+   - **`data` entries** — the chart/table/notes scripts read the YAML **directly**
+     via `--yaml <input.yaml> --index <yaml_index>` (and `--data <key>` to pick one
+     of several `data` entries; omit when the slide has just one). **Never hand-write
+     a temp JSON of the data** — that transcription step is where cell values get
+     altered (e.g. `↑` → "up", en-dash → hyphen) and rows get dropped. Route by `type`:
+     - `bar_chart`/`line_chart`/`pie_chart`/`histogram` → route by the `mapping.json`
+       note (see [Charts](#charts) for the why):
        - Same-type sample (no `add_chart` note) → reuse it:
-         `python set_chart_data.py <scratch>/unpacked slideK.xml --data-json <entry.json>`.
+         `python set_chart_data.py <scratch>/unpacked slideK.xml --yaml <input.yaml> --index <i> [--data <key>]`.
        - `add_chart` note (wrong plot type, or no chart sample) → build from scratch:
-         `python add_chart.py <scratch>/unpacked slideK.xml --data-json <entry.json>`.
-     - `table` → `python fill_table.py <scratch>/unpacked slideK.xml --data-json <entry.json>`.
+         `python add_chart.py <scratch>/unpacked slideK.xml --yaml <input.yaml> --index <i> [--data <key>]`.
+     - `table` → `python fill_table.py <scratch>/unpacked slideK.xml --yaml <input.yaml> --index <i> [--data <key>]`.
      - `image` → `python set_image.py <scratch>/unpacked slideK.xml --path <file> --alt "<caption>"`.
-   - **`speaker_notes`** → write the **whole slide entry** to a temp JSON and run
-     `python set_notes.py <scratch>/unpacked slideK.xml --entry-json <entry.json>`. The
-     script assembles the notes body itself: the `speaker_notes` prose, then a
-     **Supporting claims** block (each `prose_sources` claim + its source), then a
-     **Data sources** block (each `data` entry's name, type and source/path). A slide
-     with none of these gets no notes part.
+
+     (Each still accepts a pre-extracted `--data-json <entry.json>` if you ever need
+     it, but `--yaml/--index` is the default — it keeps values verbatim from source.)
+   - **Notes / provenance — run for *every* slide, unconditionally.** Run
+     `python set_notes.py <scratch>/unpacked slideK.xml --yaml <input.yaml> --index <i>`
+     (it extracts the whole slide entry from the YAML itself).
+     **Do not pre-judge whether the slide "has notes"** — call this once per built
+     slide regardless. The script decides: it assembles the notes body from the
+     `speaker_notes` prose, then a **Supporting claims** block (each `prose_sources`
+     claim + its source), then a **Data sources** block (each `data` entry's name,
+     type and source/path), and emits a notes part when *any* of those three is
+     present (no-op otherwise). Keying this off `speaker_notes` alone silently drops
+     the **Data sources** provenance on chart/table slides that carry `data` but no
+     prose notes.
    - **Grid layouts** the sample can't express → see
      [The grid solver](#the-grid-solver-clone_gridpy).
 

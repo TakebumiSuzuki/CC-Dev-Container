@@ -326,6 +326,18 @@
   <!-- ============ RIGHT STAGE ============ -->
   <main class="stage" id="stage">
 
+    <!-- Shared SVG paint servers — defined ONCE for the whole deck so any number
+         of line charts can reference url(#lg) without duplicating the id.
+         (Two <svg>s both declaring id="lg" is invalid HTML and the ids collide.) -->
+    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+      <defs>
+        <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c98a3c" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#c98a3c" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
     <!-- ░░ COVER ░░ built from the report's title block. Slide 0 keeps class "show". -->
     <section class="slide show">
       <div class="cover">
@@ -406,13 +418,9 @@
     <section class="slide">
       <h2><i>3</i>Subsection Heading</h2>
       <p class="lede sm" style="margin-bottom:14px;">Framing sentence.</p>
+      <!-- The fill gradient #lg is defined ONCE globally at the top of <main>;
+           every line chart reuses class="area" + url(#lg) — no per-chart <defs>. -->
       <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Describe the series">
-        <defs>
-          <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c98a3c" stop-opacity=".55"/>
-            <stop offset="100%" stop-color="#c98a3c" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
         <line class="axis" x1="40" y1="195" x2="520" y2="195"></line>
         <polygon class="area" points="80,195 80,56.3 280,141.7 480,99 480,195"></polygon>
         <polyline class="ln" points="80,56.3 280,141.7 480,99"></polyline>

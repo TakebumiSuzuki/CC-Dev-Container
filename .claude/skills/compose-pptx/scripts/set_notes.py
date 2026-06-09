@@ -17,8 +17,15 @@ If the template contains no notesSlide at all (no notesMaster to hang one on),
 it prints a warning and does nothing — notes are skipped for that deck.
 
 Usage:
+    # Preferred: read the whole slide entry straight from the slide-deck YAML.
+    python set_notes.py <unpacked_dir> <slideN.xml> --yaml <deck.yaml> --index N
     python set_notes.py <unpacked_dir> <slideN.xml> --entry-json <entry.json>
     python set_notes.py <unpacked_dir> <slideN.xml> --text-file <notes.txt>
+
+With `--yaml/--index`, the script extracts `slides[N]` itself, so the notes
+prose and source citations come straight from the YAML with no hand-transcription.
+Run it for every slide unconditionally — it emits a notes part only when the
+entry has `speaker_notes`, `prose_sources`, or `data`, and no-ops otherwise.
 """
 
 import argparse
@@ -107,12 +114,20 @@ def main():
     ap.add_argument("unpacked_dir")
     ap.add_argument("slide", help="slide file name, e.g. slide5.xml")
     src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--yaml", help="slide-deck YAML; the slide entry is extracted directly (no temp JSON)")
     src.add_argument("--entry-json", help="slide entry JSON; notes are assembled from it")
     src.add_argument("--text-file", help="file holding raw, pre-assembled notes text")
+    ap.add_argument("--index", type=int, help="0-based slide index in --yaml")
     args = ap.parse_args()
 
     unpacked = Path(args.unpacked_dir)
-    if args.entry_json:
+    if args.yaml:
+        if args.index is None:
+            ap.error("--index is required with --yaml")
+        from office.yaml_entry import load_slide_entry
+        entry = load_slide_entry(args.yaml, args.index)
+        notes_text = build_notes_text(entry).rstrip("\n")
+    elif args.entry_json:
         entry = json.loads(Path(args.entry_json).read_text(encoding="utf-8"))
         notes_text = build_notes_text(entry).rstrip("\n")
     else:

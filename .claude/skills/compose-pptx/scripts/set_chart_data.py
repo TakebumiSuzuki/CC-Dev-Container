@@ -16,9 +16,14 @@ of the matching type in the mapping step; if the YAML type and the sample's plot
 type disagree this script warns but still fills the data.
 
 Usage:
+    # Preferred: read the data entry straight from the slide-deck YAML (no temp JSON).
+    python set_chart_data.py <unpacked_dir> <slideN.xml> --yaml <deck.yaml> --index N [--data KEY]
+    # Or pass a pre-extracted entry as JSON.
     python set_chart_data.py <unpacked_dir> <slideN.xml> --data-json <entry.json>
 
-`entry.json` is one YAML `data:` entry, e.g.
+With `--yaml/--index`, the script extracts `slides[N].data[KEY]` itself (KEY may
+be omitted when the slide has a single data entry), so values are never retyped
+by hand. `entry.json` is one YAML `data:` entry, e.g.
     {"type":"bar_chart","categories":["Q1","Q2"],
      "series":[{"name":"2024","values":[10,20]},{"name":"2025","values":[12,25]}]}
     {"type":"histogram","bins":["0-20","20-40"],"frequencies":[3,12]}
@@ -262,11 +267,21 @@ def main():
     ap = argparse.ArgumentParser(description="Fork a slide's chart and fill it with YAML data.")
     ap.add_argument("unpacked_dir")
     ap.add_argument("slide", help="slide file name, e.g. slide8.xml")
-    ap.add_argument("--data-json", required=True, help="path to one YAML data entry as JSON")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--yaml", help="slide-deck YAML; the data entry is extracted directly (no temp JSON)")
+    src.add_argument("--data-json", help="path to one pre-extracted YAML data entry as JSON")
+    ap.add_argument("--index", type=int, help="0-based slide index in --yaml")
+    ap.add_argument("--data", help="data key within the slide (omit if it has a single data entry)")
     args = ap.parse_args()
 
     unpacked = Path(args.unpacked_dir)
-    entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
+    if args.yaml:
+        if args.index is None:
+            ap.error("--index is required with --yaml")
+        from office.yaml_entry import load_data_entry
+        entry = load_data_entry(args.yaml, args.index, args.data)
+    else:
+        entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
     cats, series = _normalize(entry)
 
     new_chart = fork_chart(unpacked, args.slide)

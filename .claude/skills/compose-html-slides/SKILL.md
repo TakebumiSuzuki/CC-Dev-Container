@@ -26,7 +26,10 @@ chapter dividers between sections" rhythm, but editable as plain HTML/CSS.
 
 ## The two reference files — read them before building
 
-Both live in `references/` next to this file:
+Both live in `references/` next to this file. **In a single parallel batch (one
+round-trip), Read both reference files together** before you build anything —
+reading the template alone is not enough, since only the worked example shows the
+charts fully populated with hand-computed geometry:
 
 - **`references/template.html`** — the **design system + every component**, in a
   small skeleton deck. Its `<style>` block (the design tokens) and its `<script>`
@@ -55,9 +58,12 @@ Both live in `references/` next to this file:
    (the same contract the upstream skill produces) — consult it if a section's
    structure is ambiguous.
 
-2. **Copy `template.html`** to the output path. Keep its `<head>`, `<style>`, and
-   `<script>` unchanged. You will only edit the `<nav>` list and the `<main>`
-   slides.
+2. **Copy `template.html`** to the output path **with a real file copy** (e.g.
+   `cp references/template.html <out>.html`) — do **not** regenerate it from
+   memory with `Write`. Re-emitting the ~430-line design system by hand is slow
+   and silently risks CSS/JS drift; copy it byte-for-byte. Then keep its
+   `<head>`, `<style>`, and `<script>` unchanged and edit **only** the `<nav>`
+   list and the `<main>` slides.
 
 3. **Split into pages (pptx mindset)** using the rules below, and build the nav
    to match.
@@ -144,6 +150,11 @@ Show your arithmetic in your reasoning so it can be checked.
   `baseline-left → each point → baseline-right`, the `.ln` polyline through the
   points, a `.dot` per point, a `.vlab` value label above each, and `.xlab`
   category labels under the baseline.
+  The fill gradient `#lg` is defined **once globally** in a 0×0 `<defs>` SVG at
+  the top of `<main>` (already in the template). Every line chart — no matter how
+  many the deck has — just uses `class="area"` + `url(#lg)`; **never give a chart
+  its own `<defs>` or a second gradient id.** Two `<svg>`s both declaring
+  `id="lg"` is invalid HTML and the ids collide (a common multi-line-chart bug).
 
 - **Bullet / benchmark row** (`.bul`) — for each metric pick a window `[lo, hi]`
   padding the three values, then `pos% = (value − lo)/(hi − lo) × 100` for each
@@ -197,6 +208,8 @@ you should not be hunting through rules.
 - **Counts match:** number of `.slide` sections == number of `#navlist a`, and
   `data-i` runs `0..n−1` with no gaps. (`grep -c` both.)
 - **Donuts close:** each donut's segment lengths sum to ~547.
+- **One gradient id:** `id="lg"` appears exactly once (the shared global def); no
+  line chart re-declares it or invents a second id. (`grep -c 'id="lg"'` → 1.)
 - **Bars in range:** every `--w` is ≤ 100%; every bullet `pos%` is within 0–100.
 - **Sources & flags carried:** every `Source:` and `[needs-verification]` from the
   Markdown appears on the right slide.

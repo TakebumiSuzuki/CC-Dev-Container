@@ -9,8 +9,14 @@ still fits, and each cell's text is rewritten in place — keeping the first run
 properties so the template's cell font/size/colour is preserved.
 
 Usage:
+    # Preferred: read the table entry straight from the slide-deck YAML (no temp JSON).
+    python fill_table.py <unpacked_dir> <slideN.xml> --yaml <deck.yaml> --index N [--data KEY] [--table-index 0]
+    # Or pass a pre-extracted entry as JSON.
     python fill_table.py <unpacked_dir> <slideN.xml> --data-json <entry.json> [--table-index 0]
 
+With `--yaml/--index`, the script extracts `slides[N].data[KEY]` itself (KEY may
+be omitted when the slide has a single data entry), so cell values — including
+strings like "↑" or "68%" — are copied verbatim and never retyped by hand.
 `entry.json` is one YAML `table` data entry:
     {"type":"table","headers":["Segment","Customers","Revenue"],
      "rows":[["Enterprise",45,112],["SMB",620,18]]}
@@ -116,14 +122,24 @@ def main():
     ap = argparse.ArgumentParser(description="Reshape and fill a template table.")
     ap.add_argument("unpacked_dir")
     ap.add_argument("slide", help="slide file name, e.g. slide4.xml")
-    ap.add_argument("--data-json", required=True)
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--yaml", help="slide-deck YAML; the table entry is extracted directly (no temp JSON)")
+    src.add_argument("--data-json", help="path to one pre-extracted YAML table entry as JSON")
+    ap.add_argument("--index", type=int, help="0-based slide index in --yaml")
+    ap.add_argument("--data", help="data key within the slide (omit if it has a single data entry)")
     ap.add_argument("--table-index", type=int, default=0,
                     help="which table on the slide (0 = first), default 0")
     args = ap.parse_args()
 
     unpacked = Path(args.unpacked_dir)
     slide_path = unpacked / "ppt" / "slides" / args.slide
-    entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
+    if args.yaml:
+        if args.index is None:
+            ap.error("--index is required with --yaml")
+        from office.yaml_entry import load_data_entry
+        entry = load_data_entry(args.yaml, args.index, args.data)
+    else:
+        entry = json.loads(Path(args.data_json).read_text(encoding="utf-8"))
 
     headers = entry.get("headers")
     rows = entry.get("rows", []) or []
