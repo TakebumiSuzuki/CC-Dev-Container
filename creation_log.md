@@ -91,3 +91,7 @@
 2026-06-09 08:48:32 - /workspaces/cc-dev-container/.claude/skills/compose-pptx/scripts/office/yaml_entry.py
 2026-06-09 09:09:58 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/deck.html
 2026-06-09 09:42:17 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/deck.html
+2026-06-09 13:04:19 - /workspaces/cc-dev-container/claude-to-antigravity-migration.md
+2026-06-10 06:18:11 - /workspaces/cc-dev-container/.claude/skills/compose-html-slides/references/check_prose_verbatim.py
+2026-06-10 06:54:47 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/chrome.txt
+2026-06-10 06:58:20 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/chrome.txt

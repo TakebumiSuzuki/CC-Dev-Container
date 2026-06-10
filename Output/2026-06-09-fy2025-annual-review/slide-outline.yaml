@@ -1,0 +1,294 @@
+---
+title: "FY2025 Annual Performance Review — Meridian Consulting Group"
+author: "Executive Leadership Team"
+date: "2026-06-09"
+
+slides:
+  - title: "FY2025 Annual Performance Review"
+    body: |
+      Meridian Consulting Group
+      Executive Leadership Team
+      June 9, 2026 · 30 minutes
+    suggested_layout: "Title Slide: Large centered title, with author and date in smaller text below"
+
+  - title: "Agenda"
+    body: |
+      1. Financial Performance
+      2. Client Health
+      3. People & Capacity
+      4. Delivery Performance
+      5. Pipeline & Business Development
+      6. Conclusion & Key Takeaways
+    suggested_layout: "Bullet list: 6 items stacked vertically in a larger font"
+
+  - title: "Executive Summary"
+    body: |
+      - Revenue $43.7M, +12.9% YoY — above the 8.5% industry average
+      - Operating margin 35.8%, stable vs. FY2024 (35.6%)
+      - Client retention recovered to 89.3%; NPS 52 vs. industry avg 44
+      - Headcount 105; employee engagement improved to 72/100
+      - On-time delivery 54.8% — the year's sharpest operational gap
+      - Weighted pipeline $48M; win rate 29%, below 33% industry average
+    suggested_layout: "Bullet list: 6 items stacked vertically, each a concise KPI headline"
+    prose_sources:
+      - claim: "NPS 52 above industry avg of 44"
+        source: "./Data/market/industry_benchmarks.csv"
+      - claim: "Headcount 105"
+        source: "./Data/people/consultant_roster.csv"
+
+  - title: "Financial Performance"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Revenue by Practice"
+    body: |
+      All five practices grew in FY2025. Technology & Digital leads at $12.3M.
+      Total revenue of $43.7M represents +12.9% YoY growth, outpacing the 8.5% industry average.
+
+      {{revenue_by_practice}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      revenue_by_practice:
+        type: bar_chart
+        source: "./Data/financials/quarterly_revenue.csv"
+        x_axis: "Practice"
+        y_axis: "Revenue ($M)"
+        categories: ["Technology & Digital", "Strategy & Growth", "Operations Excellence", "Finance & Risk", "HR & People"]
+        series:
+          - name: "FY2025 Revenue"
+            values: [12.3, 9.6, 8.7, 7.8, 5.2]
+    prose_sources:
+      - claim: "Total revenue +12.9% YoY vs. 8.5% industry average"
+        source: "./Data/market/industry_benchmarks.csv"
+
+  - title: "Quarterly Revenue Progression"
+    body: |
+      Growth was uneven across quarters but closed strong.
+      Q4 at $11.7M was the highest quarter of the year.
+
+      {{quarterly_revenue}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      quarterly_revenue:
+        type: bar_chart
+        source: "./Data/financials/quarterly_revenue.csv"
+        x_axis: "Quarter"
+        y_axis: "Revenue ($M)"
+        categories: ["Q1", "Q2", "Q3", "Q4"]
+        series:
+          - name: "FY2025"
+            values: [9.8, 11.5, 10.7, 11.7]
+
+  - title: "Profitability by Practice"
+    body: |
+      Firm-wide margin held at 35.8% (FY2024: 35.6%) — growth without dilution.
+      All practices within a 1.3-point band around the firm average.
+
+      {{profitability_table}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      profitability_table:
+        type: table
+        source: "./Data/financials/monthly_financials.csv"
+        headers: ["Practice", "Revenue ($M)", "Operating Margin"]
+        rows:
+          - ["Technology & Digital", 12.3, "36.6%"]
+          - ["Operations Excellence", 8.7, "36.1%"]
+          - ["HR & People", 5.2, "35.6%"]
+          - ["Finance & Risk", 7.8, "35.3%"]
+          - ["Strategy & Growth", 9.6, "35.3%"]
+          - ["Total", 43.7, "35.8%"]
+
+  - title: "Client Health"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Client Retention Recovery"
+    body: |
+      Retention recovered to 89.3% after the FY2024 dip to 85.3%.
+      Eight clients churned in FY2025; primary reasons: pricing (2), competitor (2), budget cuts (2).
+
+      {{retention_trend}}
+    suggested_layout: "One-line comment on top, a large line chart centered below"
+    data:
+      retention_trend:
+        type: line_chart
+        source: "./Data/clients/client_retention.csv"
+        x_axis: "Fiscal Year"
+        y_axis: "Retention Rate (%)"
+        categories: ["FY2023", "FY2024", "FY2025"]
+        series:
+          - name: "Retention Rate"
+            values: [93.3, 85.3, 89.3]
+    speaker_notes: |
+      75 clients tracked in each year. Recovery is positive but FY2025 (89.3%) has not yet returned to FY2023 levels (93.3%). Continue monitoring churn drivers: pricing and competitive displacement account for 4 of 8 churned clients.
+
+  - title: "Client Satisfaction & Benchmarks"
+    body: |
+      Both NPS and repeat-revenue metrics are above industry average,
+      though below top-quartile benchmarks. Top FY2025 feedback themes:
+      communication, project management, expertise depth.
+
+      {{satisfaction_benchmarks}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      satisfaction_benchmarks:
+        type: table
+        source: "./Data/market/industry_benchmarks.csv"
+        headers: ["Metric", "MCG", "Industry Avg", "Top Quartile"]
+        rows:
+          - ["Client NPS (0–100)", 52, 44, 65]
+          - ["Revenue from repeat clients (%)", "68%", "60%", "75%"]
+    prose_sources:
+      - claim: "Top FY2025 feedback themes: communication (17), project management (15), expertise depth (15)"
+        source: "./Data/clients/nps_survey_results.csv"
+
+  - title: "People & Capacity"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Workforce Metrics"
+    body: |
+      55 of 56 planned hires completed. All three key metrics are above industry average.
+      Capacity pressure: Tech & Digital running 7 projects with 3 consultants >95% utilized;
+      Finance & Risk approaching capacity (~80%).
+
+      {{workforce_benchmarks}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      workforce_benchmarks:
+        type: table
+        source: "./Data/market/industry_benchmarks.csv"
+        headers: ["Metric", "MCG", "Industry Avg", "Top Quartile"]
+        rows:
+          - ["Consultant utilization (%)", "76.2%", "73.5%", "80.1%"]
+          - ["Revenue per consultant ($K)", 342, 318, 390]
+          - ["Voluntary attrition (%)", "14.8%", "16.5%", "11.0%"]
+    prose_sources:
+      - claim: "55 of 56 planned hires completed"
+        source: "./Data/people/hiring_plan.csv"
+    speaker_notes: |
+      Two near-term capacity actions committed: two Tech & Digital Senior Consultant hires in Q1 2026.
+
+  - title: "Employee Engagement"
+    body: |
+      Overall engagement up 3 points to 72/100 (87% survey participation).
+      Two scores flagged for attention: career development clarity (↓4) and work-life balance (↓2).
+
+      {{engagement_scores}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      engagement_scores:
+        type: table
+        source: "./Data/people/team_survey_fy25.txt"
+        headers: ["Theme", "FY2024 Score", "FY2025 Score", "Direction"]
+        rows:
+          - ["Overall engagement", 69, 72, "↑"]
+          - ["Leadership satisfaction", 71, 74, "↑"]
+          - ["Career development clarity", 65, 61, "↓ flagged"]
+          - ["Work-life balance", 60, 58, "↓ flagged"]
+    speaker_notes: |
+      Actions committed: practice-specific promotion criteria (due Feb 2026), semi-annual compensation benchmarking (due Jun 2026).
+
+  - title: "Delivery Performance"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Project Outcomes"
+    body: |
+      31 projects completed. On-time delivery at 54.8% is the firm's primary operational gap.
+      Average client satisfaction 4.15/5.0. Notable win: Apex Financial ($1.1M, 2 weeks early, 34% margin).
+      Delivery issues: Triumph Automotive (6 weeks late) and Empire Retail (partial deliverable).
+
+      {{project_outcomes}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      project_outcomes:
+        type: table
+        source: "./Data/projects/completed_projects.csv"
+        headers: ["Practice", "Satisfaction (/5.0)", "Avg Margin"]
+        rows:
+          - ["Strategy & Growth", 4.5, "27.1%"]
+          - ["HR & People", 4.4, "30.3%"]
+          - ["Technology & Digital", 4.1, "31.6%"]
+          - ["Finance & Risk", 3.9, "32.6%"]
+          - ["Operations Excellence", 3.9, "29.8%"]
+          - ["Overall", 4.15, "30.6%"]
+    speaker_notes: |
+      Root causes for late delivery: (1) mid-engagement scope expansion without timely amendments (Triumph pattern), (2) client-side sponsor instability (Empire pattern). Fix: tighter SOW scope gates on transformation engagements.
+
+  - title: "Pipeline & Business Development"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Open Pipeline"
+    body: |
+      Weighted pipeline $48M; $27.4M already in Verbal Commit stage — strong near-term visibility.
+
+      {{pipeline_by_stage}}
+    suggested_layout: "One-line comment on top, a large bar chart centered below"
+    data:
+      pipeline_by_stage:
+        type: bar_chart
+        source: "./Data/pipeline/sales_pipeline.csv"
+        x_axis: "Stage"
+        y_axis: "Value ($M)"
+        categories: ["Verbal Commit", "Negotiation", "Proposal Submitted", "Qualification"]
+        series:
+          - name: "Expected Value ($M)"
+            values: [32.3, 21.9, 11.4, 15.3]
+          - name: "Weighted Value ($M)"
+            values: [27.4, 14.2, 4.0, 2.3]
+
+  - title: "Win / Loss Analysis"
+    body: |
+      Win rate 29% (7/24 deals) — below the 33% industry average for competitive RFPs.
+      Relationship gap drove 8 of 17 losses. Primary competitors: Deloitte, BCG, Accenture, Oliver Wyman.
+      Win drivers: prior relationship (4 of 7 wins), innovation, expertise, price.
+
+      {{win_loss}}
+    suggested_layout: "Table placed large in the center of the slide"
+    data:
+      win_loss:
+        type: table
+        source: "./Data/pipeline/win_loss_analysis.csv"
+        headers: ["Outcome", "Deals", "Deal Value ($M)"]
+        rows:
+          - ["Won", 7, 6.5]
+          - ["Lost", 17, 13.8]
+    prose_sources:
+      - claim: "Win rate 29% below 33% competitive RFP and 35% all-proposals industry averages"
+        source: "./Data/market/industry_benchmarks.csv"
+    speaker_notes: |
+      Relationship is the primary win predictor in our own data (4 of 7 wins came from prior relationships). The fix is deepening existing accounts before chasing new logos — 68% of revenue already comes from repeat clients.
+
+  - title: "Conclusion"
+    body: ""
+    suggested_layout: "Section Divider: Large centered title only"
+
+  - title: "Summary"
+    body: |
+      Strong growth and margin stability in FY2025. Two areas require focused ELT action in FY2026: on-time delivery discipline and BD relationship coverage.
+    suggested_layout: "Title with a short centered wrap-up paragraph"
+
+  - title: "Key Takeaways"
+    body: |
+      - Revenue $43.7M (+12.9% YoY), margin 35.8% — growth without dilution
+      - Client retention recovered to 89.3%; NPS and repeat-revenue metrics above industry average
+      - People metrics broadly healthy; Tech & Digital capacity and junior career development clarity need near-term action
+      - On-time delivery at 54.8% is the firm's sharpest operational gap — scope gate discipline is the primary fix
+      - $48M weighted pipeline is strong; win rate improvement requires a relationship coverage strategy, not a pricing or quality fix
+    suggested_layout: "Bullet list: 5 items stacked vertically in a larger font"
+
+  - title: "Thank You"
+    body: |
+      Q&A
+    suggested_layout: "Title Slide: Large centered title, with 'Q&A' in smaller text below"
+    speaker_notes: |
+      Anticipated questions:
+
+      Q: Why did on-time delivery fall to 54.8%?
+      A: Two root causes — mid-engagement scope expansion without timely amendments (Triumph Automotive pattern) and client-side sponsor instability (Empire Retail pattern). Fix is tighter SOW scope gates on transformation engagements.
+
+      Q: If we're losing on relationships, not quality, what's the fix?
+      A: Deepen existing accounts before chasing new logos — 68% of revenue already comes from repeat clients, and relationship is the primary win predictor in our own data.
