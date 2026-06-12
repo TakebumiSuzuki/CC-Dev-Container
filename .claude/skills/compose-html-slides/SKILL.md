@@ -24,25 +24,26 @@ the nav, the `←`/`→` keys, or `PageUp`/`PageDown`.
 This is the HTML analogue of a PowerPoint deck: the same "one idea per slide,
 chapter dividers between sections" rhythm, but editable as plain HTML/CSS.
 
-## The two reference files — read them before building
+## The reference file — read it before building
 
-Both live in `references/` next to this file. **In a single parallel batch (one
-round-trip), Read both reference files together** before you build anything:
+`references/template.html` lives next to this file. **Read it before you build
+anything.** It is the **design system + every component** in a small skeleton
+deck. Its `<style>` block (the design tokens) and its `<script>` block are the
+**source of truth**: copy them **verbatim**. Its slides demonstrate one of each
+component (cover, chapter divider, stats, bars, histogram, line chart, scatter
+plot, donut, bullet/benchmark, callout, two-column, summary, takeaways, Q&A), each
+populated with representative demo data and hand-computed charts — so you can see
+a component filled in, not just its empty shell. Build your deck by copying this
+file and replacing the example slides.
 
-- **`references/template.html`** — the **design system + every component**, in a
-  small skeleton deck. Its `<style>` block (the design tokens) and its `<script>`
-  block are the **source of truth**: copy them **verbatim**. Its slides
-  demonstrate one of each component (cover, chapter divider, stats, bars, line
-  chart, donut, bullet/benchmark, callout, two-column, takeaways, Q&A). Build
-  your deck by copying this file and replacing the example slides.
-- **`references/example_deck.html`** — a **complete worked example** (an 18-slide
-  FY2025 performance review) showing every component populated with real data and
-  hand-computed charts. When you are unsure how a component should look fully
-  filled in, read the matching slide here.
-
-> The two files share the exact same `<style>`/`<script>`. If you ever change the
-> design system, change it in one place and keep them in sync — but for normal
-> use you only **copy**, never rewrite, the CSS/JS.
+**A slide grows to fit its content — so never trim the content to fit the slide.**
+Each slide has a 16:9 floor and then **grows taller**, scrolling vertically, when
+there is more to show. So when one `###` carries a lot — a long paragraph, many
+bars, a full table — put **all of it on that one slide, copied verbatim from
+`narrative.md`**, and let the slide get tall. Do **not** truncate, condense, or
+drop source text to make it "fit", and do **not** split a `###` across extra
+slides to relieve density: `narrative.md` is the single source of truth (see
+Fidelity rules). The demo slides show how each component *looks*, not a size cap.
 
 ## Inputs — both are required
 
@@ -50,7 +51,7 @@ This skill takes **two** inputs, collected up front:
 
 1. **`narrative.md`** — the structured report to render (the build source).
 2. **the data directory** — the folder holding the raw source files the narrative
-   cites in its `Source:` lines (e.g. `./Data/financials/quarterly_revenue.csv`).
+   cites in its `Source:` lines.
    This is **not optional**: it is what the final **Fidelity QA** uses to confirm
    every number in the narrative actually matches its source data.
 
@@ -65,19 +66,32 @@ the data-integrity pass cannot run without it, and skipping it defeats the QA.
    every table (and the data shape inside it), and the "Key Takeaways" /
    "Anticipated Q&A" sections. The HTML's structure should *mirror* the
    Markdown's heading structure — don't invent divisions the source lacks, and
-   don't merge things it separates. The input is a `narrative.md` written to the
-   shared pipeline format spec, `../compose-slide-narrative/references/narrative_format.md`
-   (the same contract the upstream skill produces) — consult it if a section's
-   structure is ambiguous.
+   don't merge things it separates. The input `narrative.md` follows the shared
+   pipeline format spec `../compose-slide-narrative/references/narrative_format.md`
+   — consult it if a section's structure is ambiguous.
 
-2. **Copy `template.html`, then mutate it only with `Edit` — never `Write`.**
+2. **Plan the deck — decide *what* goes on each slide.** Don't touch any file
+   yet; this step only produces the content plan that step 3 will write in.
+   - **Map the source's heading structure to pages** using the rules below, and
+     plan the nav to match.
+   - **For each table, pick the chart** that fits its data shape (see the
+     mapping), then **compute the geometry by hand** (see the recipes). Never
+     eyeball a bar width or a donut arc — wrong numbers are the most common
+     failure here.
+   - **Carry every `Source:` line and `[needs-verification]` marker** to the
+     right slide (see Fidelity). A source that sits **inline** in the narrative's
+     prose stays inline, attached to the claim it backs — don't aggregate it away.
+
+3. **Write the deck — copy the template, then mutate it only with `Edit`, never
+   `Write`.** This step pours the step-2 plan into the file.
    - First: `cp references/template.html <out>.html` (a real, byte-for-byte copy).
    - **Bright-line rule: after that `cp`, the `Write` tool must never target the
      output file again — every later change is an `Edit`.** Re-`Write`-ing the
      whole file re-emits the ~300-line design system (`<style>` + `<script>`) from
      memory: it's slow and silently risks CSS/JS drift. If you catch yourself
      assembling the full file in a `Write`, stop — you've thrown away the copy.
-   - You touch exactly **two regions, one `Edit` each**:
+   - You touch **only two regions** — build each up with as many `Edit` calls
+     as you need (one big replace, or several smaller ones, whatever is cleanest):
        1. **nav** — replace the template's `<ul id="navlist"> … </ul>` block.
        2. **slides** — replace from the first `<!-- ░░ COVER ░░ -->` section
           through the last `</section>` before `</main>`.
@@ -86,27 +100,18 @@ the data-integrity pass cannot run without it, and skipping it defeats the QA.
      (known and fixed); only your new content goes in `new_string`. The head,
      `<style>`, and `<script>` are never retyped.
 
-3. **Split into pages (pptx mindset)** using the rules below, and build the nav
-   to match.
-
-4. **For each table, pick the chart** that fits its data shape (see the mapping),
-   then **compute the geometry by hand** (see the recipes). Never eyeball a bar
-   width or a donut arc — wrong numbers are the most common failure here.
-
-5. **Carry every `Source:` line and `[needs-verification]` marker** to the right
-   slide (see Fidelity). A source that sits **inline** in the narrative's prose
-   stays inline, attached to the claim it backs — don't aggregate it away.
-
-6. **Fidelity QA** (see "Fidelity QA"). Three **mandatory** passes — coverage,
+4. **Fidelity QA** (see "Fidelity QA"). Three **mandatory** passes — coverage,
    no-drift (the `check_prose_verbatim.py` substring check), and data-integrity;
    apply every discrepancy before continuing.
 
-7. **Verify the structure** (see the checklist).
+5. **Verify the structure** (see the checklist).
 
 ## Page-splitting rules (Markdown → slides)
 
-The guiding idea: **one slide per `###`, one divider per `##`** — split *more*
-rather than less, like a PowerPoint of many small, legible slides.
+The guiding idea: **one slide per `###`, one divider per `##`** — mirror the
+source's heading structure faithfully (don't merge two `###`s onto one slide). A
+single `###` is **one** slide that **grows as tall as its content needs**, never
+split for size.
 
 - **Cover** — build a leading cover slide from the title block (title, author/org,
   audience, duration, date) using `.cover` + `.kicker` + `h1` + `.lede` + `.meta`.
@@ -133,8 +138,9 @@ rather than less, like a PowerPoint of many small, legible slides.
 - **Key Takeaways → its own takeaways slide** (`.takeaways`) — a standalone page,
   not appended to a divider or to the Summary slide.
 - **Anticipated Q&A → a Q&A slide** (`.qa` with `.item`/`.q`/`.a`).
-- **If a slide would overflow heavily**, split it into two (e.g. stats on one,
-  the supporting bar chart on the next). More pages is the correct instinct.
+- **A heavy slide is fine — it grows taller and scrolls;** don't split a `###`
+  across extra slides or trim its content to relieve density. Split only where the
+  *source structure* says to (a new `###` or `##`), never to make content "fit".
 
 **Nav contract:** every slide has **exactly one** `<a>` in `#navlist`, in slide
 order, with `data-i` running `0,1,2,…` with no gaps. Chapter dividers use
@@ -150,7 +156,9 @@ Pick the component whose shape matches the data. The goal the user cares about:
 | --- | --- | --- |
 | A handful of headline KPIs (one number each) | **Stat band** | `.stats` (3 cols) / `.stats.four` (4) |
 | One series across categories (e.g. revenue by practice) | **Horizontal bars** | `.barwrap` › `.bar` |
+| The distribution of one variable — how often each value-range occurs | **Histogram** | `.hist` (contiguous bins) |
 | One metric over time, where the *shape* of the trend matters (a dip-and-recover) | **Line chart** | `<svg class="linechart">` |
+| Two numeric variables, one point per item — correlation / spread | **Scatter plot** | `<svg class="scatter">` (vary `r` → bubble) |
 | Two periods compared per metric (FY24 vs FY25) | **Bars with a FY-tick + delta chip** | `.bar` + `.tick` + `.chip up/dn` |
 | Parts of a whole (NPS mix, win/loss split) | **Donut** | `<svg>` + `.ring` + `.legend` |
 | One headline number that needs emphasis as a "watch" item | **Callout** | `.callout` (big number + text) |
@@ -169,6 +177,14 @@ Show your arithmetic in your reasoning so it can be checked.
   `value%` scale and say so in the caption rather than zooming the axis (zooming
   exaggerates and misleads). Annotate each bar's true value in `.val` (with a
   `<small>` for secondary figures like YoY).
+
+- **Histogram** — vertical bars for one variable's distribution, bins
+  **contiguous** (a hair of gap, not the airy spacing of a bar chart). For each
+  bin `style="--h: P%"` where `P = count / max(counts) × 100` — the height is a
+  percent of the plot area, so the tallest bin is 100%. Put the raw count in
+  `data-c` (it renders above the bar) and label each bin with its **range** (e.g.
+  `20–30`) centered beneath it. Keep bins in value order, ≤ ~7 of them so the
+  axis stays legible.
 
 - **Donut** — the ring is a circle of radius `r=87`, so its circumference is
   `C = 2πr ≈ 547`. Each segment is
@@ -190,6 +206,20 @@ Show your arithmetic in your reasoning so it can be checked.
   its own `<defs>` or a second gradient id.** Two `<svg>`s both declaring
   `id="lg"` is invalid HTML and the ids collide (a common multi-line-chart bug).
 
+- **Scatter plot** (SVG `viewBox="0 0 560 300"`, plot box L=56 R=544 T=16 B=260 →
+  `plotW=488`, `plotH=244`) — unlike the line chart, **both** axes are real value
+  scales, so pick a window for each: `[xlo, xhi]` and `[ylo, yhi]` (pad the data so
+  no point sits on an edge). For every point
+  `cx = 56 + (x − xlo)/(xhi − xlo) × 488` and
+  `cy = 260 − (y − ylo)/(yhi − ylo) × 244`. Draw a few `.grid` lines at the round
+  ticks (same formulas), `.alab` tick labels, the two `.axis` lines, an x-axis
+  `.atitle` and a rotated y-axis `.atitle`, then one `.mk` circle per point.
+  **Never** connect the points and **never** add an `.area` — a scatter has no
+  line, and it does **not** use the `#lg` gradient. For a **bubble** chart, size
+  each marker by a third value: `r = 5 + (size − slo)/(shi − slo) × 11`. EXAMPLE:
+  x-window `[0,60]`, y-window `[0,100]`; point (38, 70) →
+  `cx = 56 + 38/60 × 488 = 365.1`, `cy = 260 − 70/100 × 244 = 89.2`.
+
 - **Bullet / benchmark row** (`.bul`) — for each metric pick a window `[lo, hi]`
   padding the three values, then `pos% = (value − lo)/(hi − lo) × 100` for each
   of `.mcg` (us), `.ind` (industry), `.topq` (top quartile). **Orient every row
@@ -209,9 +239,11 @@ readout.
 
 - **Transcribe prose; don't paraphrase it.** Reader-visible prose in the deck is
   copied **verbatim** from `narrative.md` — each text run must be a *contiguous
-  span* of the source. The only edits allowed are **truncation** (drop a trailing
-  or leading clause, or a whole sentence, to fit) and **splitting** one span across
-  elements. No synonyms, no reordering, no added words, and **never retype a number
+  span* of the source. The only edit allowed is **splitting** one span across
+  elements — flowing a long passage through `.lede` plus further paragraphs on the
+  same slide, which simply **grows taller** to hold all of it. Never **truncate,
+  drop, or condense** a passage to make it "fit" — the slide grows instead. No
+  synonyms, no reordering, no added words, and **never retype a number
   from memory — copy it.** Rewriting is exactly how wording and figures silently
   drift; the no-drift check (`check_prose_verbatim.py`) proves you didn't. The sole
   exception is **chrome** the narrative lacks — the cover `<h1>`, chapter-divider
@@ -235,18 +267,21 @@ readout.
   `<span class="note">[needs verification]</span>` — visible but understated.
   Never silently "clean them up": their job is to show what isn't yet confirmed.
 - **Never invent numbers, sources, trends, or framing** the Markdown doesn't
-  contain. In particular, **`example_deck.html` is a layout/geometry reference
-  only** — never lift its wording, headlines, or taglines. Every word of prose in
-  your output must trace to `narrative.md`.
+  contain. In particular, **`template.html` is a layout/geometry reference
+  only** — never lift its placeholder wording, headings, or demo figures. Every
+  word of prose in your output must trace to `narrative.md`.
 
 ## Restyling via design tokens
 
 Everything visual is centralized in `:root` so a restyle is a few-line change —
 you should not be hunting through rules.
 
-- **Type size — one master knob.** `--fs-scale` (default `1`) multiplies **every**
-  font size at once. For a large room bump it to `1.1`; for a denser deck drop to
-  `0.9`. To resize a single role instead, edit its own `--fs-*` token (e.g.
+- **Type size — one master knob.** `--fs-scale` (default `1.2`) multiplies
+  **every** font size at once (`1.0` is the original design size). For a larger
+  room push it higher; for a denser deck drop it toward `1.0`. Two display roles —
+  the cover/chapter `h1` titles and the Summary body — carry a fixed `/1.2` offset
+  so they keep their intended size, but still track the knob. To resize a single
+  role instead, edit its own `--fs-*` token (e.g.
   `--fs-lede`, `--fs-h2`, `--fs-barname`). The tokens are grouped and commented
   (headings, body, chart elements, nav). **Never hard-code a `font-size` in px on
   a slide;** if you truly need a one-off, write `calc(<px> * var(--fs-scale))` so
@@ -313,7 +348,9 @@ checklist.
   `data-i` runs `0..n−1` with no gaps. (`grep -c` both.)
 - **Donuts close:** each donut's segment lengths sum to ~547.
 - **One gradient id:** `grep -c 'id="lg"'` → 1 (the shared global def).
-- **Bars in range:** every `--w` is ≤ 100%; every bullet `pos%` is within 0–100.
+- **Bars in range:** every bar `--w` and histogram `--h` is ≤ 100%; every bullet
+  `pos%` is within 0–100; every scatter `.mk` sits in the plot box (`cx` 56–544,
+  `cy` 16–260).
 - **Sources & flags carried:** every `Source:` and `[needs-verification]` from the
   Markdown appears in the deck — table/chart sources at slide level, **inline
   sources kept inline** next to their claim (`grep -c 'Source:'` deck vs. narrative).
