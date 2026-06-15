@@ -95,3 +95,4 @@
 2026-06-10 06:18:11 - /workspaces/cc-dev-container/.claude/skills/compose-html-slides/references/check_prose_verbatim.py
 2026-06-10 06:54:47 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/chrome.txt
 2026-06-10 06:58:20 - /workspaces/cc-dev-container/Output/2026-06-09-fy2025-annual-review/chrome.txt
+2026-06-12 04:52:20 - /home/node/.claude/projects/-workspaces-cc-dev-container/memory/slide-deck-verbatim-no-truncate.md

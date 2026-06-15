@@ -16,14 +16,14 @@
 
   See ../SKILL.md for the page-splitting rules, the table→chart mapping, and the
   fidelity rules (carry every "Source:" line and "[needs-verification]" marker).
-  See example_deck.html for every component populated with real data.
+  Every component appears once below, populated with representative demo data.
   ════════════════════════════════════════════════════════════════════════════
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FY2025 Annual Performance Review — Meridian Consulting Group</title>
+<title>DECK TITLE — Organization</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..900;1,400..700&display=swap" rel="stylesheet">
@@ -36,9 +36,10 @@
 
     /* ============ TYPE SCALE ============
        ▼▼ MASTER KNOB — change ONLY this to resize EVERY piece of text on every
-          slide at once.  1 = 100% (as designed) · 1.1 = +10% · 0.9 = −10%.
+          slide at once.  1.0 = original design · 1.2 = shipped default (+20%) ·
+          push higher for a large room, lower for a denser deck.
        To nudge a single role instead, edit its individual token below. */
-    --fs-scale:1;
+    --fs-scale:1.2;
 
     /* headings & display */
     --fs-h1:         calc(clamp(40px,5.5vw,72px) * var(--fs-scale));
@@ -70,6 +71,10 @@
     --fs-donutcap:   calc(11px   * var(--fs-scale));
     --fs-vlab:       calc(18px   * var(--fs-scale));   /* line-chart value labels  */
     --fs-xlab:       calc(13px   * var(--fs-scale));   /* line-chart x labels      */
+    --fs-histcount:  calc(15px   * var(--fs-scale));   /* histogram bin counts     */
+    --fs-histx:      calc(13px   * var(--fs-scale));   /* histogram bin labels     */
+    --fs-scatlab:    calc(12px   * var(--fs-scale));   /* scatter tick labels      */
+    --fs-scattitle:  calc(13.5px * var(--fs-scale));   /* scatter axis titles      */
     --fs-callout:    calc(16px   * var(--fs-scale));
     --fs-bullegend:  calc(14px   * var(--fs-scale));
     --fs-bullbl:     calc(15px   * var(--fs-scale));
@@ -179,6 +184,10 @@
     font-weight:900;font-size:var(--fs-watermark);line-height:1;color:rgba(184,80,47,.07);pointer-events:none;z-index:0;}
   .chapter .cover{position:relative;z-index:1;}
   .chapter h1{font-weight:800;}
+  /* Cover + chapter-divider display titles keep their pre-bump size: the /1.2
+     cancels the global +20% (--fs-scale) so these already-large titles don't grow,
+     while still tracking any future --fs-scale change. */
+  .cover h1{font-size:calc(var(--fs-h1) / 1.2);}
 
   /* stats */
   .stats{display:grid;grid-template-columns:repeat(3,1fr);margin:8px 0 0;
@@ -243,6 +252,30 @@
   .linechart .vlab{font-family:"Inter",sans-serif;font-weight:700;font-size:var(--fs-vlab);fill:var(--espresso);text-anchor:middle;}
   .linechart .xlab{font-size:var(--fs-xlab);fill:#8a6f4d;text-anchor:middle;}
 
+  /* histogram (distribution of one variable; bins contiguous) */
+  .histwrap{margin-top:6px;}
+  .hist-title{font-family:"Inter",sans-serif;font-size:var(--fs-bartitle);color:var(--espresso);margin:0 0 18px;font-weight:600;}
+  .hist{display:flex;align-items:flex-end;gap:3px;height:280px;padding-top:26px;border-bottom:2px solid var(--espresso);}
+  .hist .col{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hist .hbar{width:100%;height:0;border-radius:3px 3px 0 0;position:relative;
+    background:linear-gradient(180deg,var(--crema),var(--terracotta));}
+  .show .hist .hbar{animation:histgrow 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
+  @keyframes histgrow{to{height:var(--h);}}
+  .hist .hbar::before{content:attr(data-c);position:absolute;top:-22px;left:0;right:0;text-align:center;
+    font-family:"Inter",sans-serif;font-weight:600;font-size:var(--fs-histcount);color:var(--terracotta);}
+  .hist-x{display:flex;gap:3px;margin-top:8px;}
+  .hist-x span{flex:1;text-align:center;font-size:var(--fs-histx);color:#8a6f4d;}
+
+  /* scatter plot (two value axes; vary .mk r for a bubble chart) */
+  .scatter{width:100%;height:auto;}
+  .scatter .grid{stroke:var(--line);stroke-width:1;}
+  .scatter .axis{stroke:var(--espresso);stroke-width:1.5;}
+  .scatter .mk{fill:var(--terracotta);fill-opacity:.72;stroke:#fbf5e6;stroke-width:1.5;}
+  .show .scatter .mk{animation:pop .55s cubic-bezier(.2,.7,.2,1) backwards;transform-box:fill-box;transform-origin:center;}
+  @keyframes pop{from{transform:scale(0);}}
+  .scatter .alab{font-size:var(--fs-scatlab);fill:#8a6f4d;}
+  .scatter .atitle{font-family:"Inter",sans-serif;font-size:var(--fs-scattitle);font-weight:600;fill:var(--espresso);}
+
   /* points */
   .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px;}
   .pt .ic{width:48px;height:48px;border-radius:13px;background:var(--espresso);color:#fbf5e6;
@@ -294,6 +327,9 @@
   .big-quote{font-family:"Inter",sans-serif;font-size:var(--fs-quote);line-height:1.25;
     color:var(--espresso);max-width:820px;font-weight:500;}
   .big-quote em{color:var(--terracotta);font-style:italic;}
+  /* Summary-slide body: 20% smaller than its pre-bump size (×.8), with /1.2 to
+     cancel the global +20% bump. Tracks --fs-scale like everything else. */
+  .big-quote.summary-body{font-size:calc(var(--fs-quote) * .8 / 1.2);}
 </style>
 </head>
 <body>
@@ -305,33 +341,27 @@
   <nav class="nav">
     <div class="brand">
       <b>Meridian Consulting Group</b>
-      <span>FY2025 Annual Performance Review</span>
+      <span>FY2025 Annual Review</span>
     </div>
     <ul id="navlist">
       <li><a href="#" data-i="0" class="active"><span class="n">01</span>Cover</a></li>
-      <li><a href="#" data-i="1"><span class="n">02</span>Executive Summary</a></li>
-
-      <li><a href="#" data-i="2" class="part"><span class="n">I</span>Financial Performance</a></li>
-      <li><a href="#" data-i="3" class="sub"><span class="n">04</span>Revenue by Practice</a></li>
-      <li><a href="#" data-i="4" class="sub"><span class="n">05</span>Quarterly Revenue</a></li>
+      <li><a href="#" data-i="1" class="part"><span class="n">I</span>Executive Summary</a></li>
+      <li><a href="#" data-i="2" class="sub"><span class="n">03</span>Key Metrics</a></li>
+      <li><a href="#" data-i="3" class="part"><span class="n">II</span>Financial Performance</a></li>
+      <li><a href="#" data-i="4" class="sub"><span class="n">05</span>Revenue &amp; Growth</a></li>
       <li><a href="#" data-i="5" class="sub"><span class="n">06</span>Profitability</a></li>
-
-      <li><a href="#" data-i="6" class="part"><span class="n">II</span>Client Health</a></li>
+      <li><a href="#" data-i="6" class="part"><span class="n">III</span>Client Health</a></li>
       <li><a href="#" data-i="7" class="sub"><span class="n">08</span>Retention</a></li>
-      <li><a href="#" data-i="8" class="sub"><span class="n">09</span>Client Satisfaction &amp; Benchmarks</a></li>
-
-      <li><a href="#" data-i="9" class="part"><span class="n">III</span>People &amp; Capacity</a></li>
+      <li><a href="#" data-i="8" class="sub"><span class="n">09</span>Satisfaction &amp; Benchmarks</a></li>
+      <li><a href="#" data-i="9" class="part"><span class="n">IV</span>People &amp; Capacity</a></li>
       <li><a href="#" data-i="10" class="sub"><span class="n">11</span>Workforce Metrics</a></li>
       <li><a href="#" data-i="11" class="sub"><span class="n">12</span>Employee Engagement</a></li>
-
-      <li><a href="#" data-i="12" class="part"><span class="n">IV</span>Delivery Performance</a></li>
+      <li><a href="#" data-i="12" class="part"><span class="n">V</span>Delivery Performance</a></li>
       <li><a href="#" data-i="13" class="sub"><span class="n">14</span>Project Outcomes</a></li>
-
-      <li><a href="#" data-i="14" class="part"><span class="n">V</span>Pipeline &amp; Business Dev</a></li>
+      <li><a href="#" data-i="14" class="part"><span class="n">VI</span>Pipeline &amp; Biz Dev</a></li>
       <li><a href="#" data-i="15" class="sub"><span class="n">16</span>Open Pipeline</a></li>
       <li><a href="#" data-i="16" class="sub"><span class="n">17</span>Win / Loss Analysis</a></li>
-
-      <li><a href="#" data-i="17" class="part"><span class="n">VI</span>Conclusion</a></li>
+      <li><a href="#" data-i="17" class="part"><span class="n">VII</span>Conclusion</a></li>
       <li><a href="#" data-i="18" class="sub"><span class="n">19</span>Summary</a></li>
       <li><a href="#" data-i="19" class="sub"><span class="n">20</span>Key Takeaways</a></li>
       <li><a href="#" data-i="20" class="sub"><span class="n">21</span>Anticipated Q&amp;A</a></li>
@@ -356,10 +386,10 @@
       </defs>
     </svg>
 
-    <!-- 00 — COVER -->
+    <!-- ░░ COVER ░░ -->
     <section class="slide show">
       <div class="cover">
-        <p class="kicker">FY2025 Annual Performance Review</p>
+        <p class="kicker">Annual Performance Review</p>
         <h1>FY2025 Annual Performance Review — <em>Meridian Consulting Group</em></h1>
         <div class="meta">
           <div><b>Prepared by</b> Executive Leadership Team</div>
@@ -371,127 +401,129 @@
       <div class="pageno"></div>
     </section>
 
-    <!-- 01 — EXECUTIVE SUMMARY -->
+    <!-- ░░ CHAPTER: EXECUTIVE SUMMARY ░░ -->
+    <section class="slide chapter">
+      <div class="watermark">I</div>
+      <div class="cover">
+        <p class="kicker">Part I</p>
+        <h1>Executive<br><em>Summary</em></h1>
+        <p class="lede">A snapshot of FY2025 performance across finance, clients, people, delivery, and pipeline.</p>
+      </div>
+      <div class="pageno"></div>
+    </section>
+
+    <!-- ░░ CONTENT: EXECUTIVE SUMMARY body ░░ -->
     <section class="slide">
-      <h2><i>0</i>Executive Summary</h2>
+      <h2><i>1</i>Executive Summary</h2>
       <ul class="takeaways">
         <li>Revenue $43.7M, +12.9% YoY — above the 8.5% industry average growth rate</li>
         <li>Operating margin 35.8%, stable vs. FY2024 (35.6%)</li>
         <li>Client retention recovered to 89.3% (from 85.3% in FY2024); NPS 52 above industry avg of 44 <span class="note">(Source: ./Data/market/industry_benchmarks.csv)</span></li>
         <li>Headcount 105 <span class="note">(Source: ./Data/people/consultant_roster.csv)</span>; employee engagement improved to 72/100; voluntary attrition below industry average</li>
-        <li><b>On-time delivery 54.8% — the year's sharpest operational gap</b></li>
         <li>Weighted pipeline $48M; win rate 29% on tracked competitive deals, below the 33% industry average; primary loss driver is relationship coverage</li>
       </ul>
-      <div class="pageno"></div>
-    </section>
-
-    <!-- 02 — CHAPTER I: FINANCIAL PERFORMANCE -->
-    <section class="slide chapter">
-      <div class="watermark">I</div>
-      <div class="cover">
-        <p class="kicker">Part I</p>
-        <h1>Financial<br><em>Performance</em></h1>
-        <p class="lede">All five practices grew; total revenue +12.9% YoY at a stable 35.8% margin.</p>
+      <div class="callout">
+        <div class="big">54.8%</div>
+        <div class="txt"><b>On-time delivery 54.8% — the year's sharpest operational gap</b></div>
       </div>
       <div class="pageno"></div>
     </section>
 
-    <!-- 03 — REVENUE BY PRACTICE
-         Bars: max = 12.3. widths = value/12.3 × 100.
-         Tech&Dig 12.3→100%; Strat&Growth 9.6→78.0%; OpsExc 8.7→70.7%; Fin&Risk 7.8→63.4%; HR&People 5.2→42.3% -->
+    <!-- ░░ CHAPTER: FINANCIAL PERFORMANCE ░░ -->
+    <section class="slide chapter">
+      <div class="watermark">II</div>
+      <div class="cover">
+        <p class="kicker">Part II</p>
+        <h1>Financial<br><em>Performance</em></h1>
+        <p class="lede">Revenue grew 12.9% to $43.7M with stable margins across all five practices.</p>
+      </div>
+      <div class="pageno"></div>
+    </section>
+
+    <!-- ░░ CONTENT: REVENUE & GROWTH ░░ -->
     <section class="slide">
       <h2><i>1</i>Revenue &amp; Growth</h2>
-      <p class="lede sm" style="margin-bottom:22px;">Technology &amp; Digital is the largest practice at $12.3M; all five practices grew. Total revenue +12.9% YoY vs. 8.5% industry average <span class="note">(Source: ./Data/market/industry_benchmarks.csv)</span>.</p>
-      <div class="barwrap">
-        <p class="bar-title">FY2025 Revenue by Practice ($M)</p>
-        <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">$12.3<span>M</span></span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">$9.6<span>M</span></span></div><div class="track"><div class="fill" style="--w:78.0%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">$8.7<span>M</span></span></div><div class="track"><div class="fill" style="--w:70.7%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">$7.8<span>M</span></span></div><div class="track"><div class="fill" style="--w:63.4%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">$5.2<span>M</span></span></div><div class="track"><div class="fill" style="--w:42.3%"></div></div></div>
+      <p class="lede sm" style="margin-bottom:16px;">Technology &amp; Digital is the largest practice at $12.3M; all five practices grew. Total revenue +12.9% YoY vs. 8.5% industry average <span class="note">(Source: ./Data/market/industry_benchmarks.csv)</span>.</p>
+      <div class="two wide-left">
+        <div>
+          <div class="barwrap">
+            <p class="bar-title">FY2025 Revenue by Practice ($M)</p>
+            <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">$12.3M</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">$9.6M</span></div><div class="track"><div class="fill" style="--w:78.0%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">$8.7M</span></div><div class="track"><div class="fill" style="--w:70.7%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">$7.8M</span></div><div class="track"><div class="fill" style="--w:63.4%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">$5.2M</span></div><div class="track"><div class="fill" style="--w:42.3%"></div></div></div>
+          </div>
+          <p class="src">Source: ./Data/financials/quarterly_revenue.csv</p>
+        </div>
+        <div>
+          <p class="bar-title">Quarterly Revenue ($M)</p>
+          <p class="lede sm" style="margin-bottom:12px;">Quarterly progression was uneven but closed strong: Q4 at $11.7M was the highest quarter of the year.</p>
+          <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Quarterly revenue FY2025">
+            <line class="axis" x1="40" y1="195" x2="520" y2="195"></line>
+            <polygon class="area" points="80,195 80,152.3 213,61.7 346,104.3 480,51.0 480,195"></polygon>
+            <polyline class="ln" points="80,152.3 213,61.7 346,104.3 480,51.0"></polyline>
+            <circle class="dot" cx="80" cy="152.3" r="6"></circle>
+            <circle class="dot" cx="213" cy="61.7" r="6"></circle>
+            <circle class="dot" cx="346" cy="104.3" r="6"></circle>
+            <circle class="dot" cx="480" cy="51.0" r="6"></circle>
+            <text class="vlab" x="80" y="134">$9.8M</text>
+            <text class="vlab" x="213" y="44">$11.5M</text>
+            <text class="vlab" x="346" y="86">$10.7M</text>
+            <text class="vlab" x="480" y="33">$11.7M</text>
+            <text class="xlab" x="80" y="218">Q1</text>
+            <text class="xlab" x="213" y="218">Q2</text>
+            <text class="xlab" x="346" y="218">Q3</text>
+            <text class="xlab" x="480" y="218">Q4</text>
+          </svg>
+          <p class="src">Source: ./Data/financials/quarterly_revenue.csv</p>
+        </div>
       </div>
-      <p class="src">Source: ./Data/financials/quarterly_revenue.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 04 — QUARTERLY REVENUE (line chart)
-         lo=9.0, hi=12.0, range=3.0. x=80,213,347,480.
-         Q1 9.8: y=195−(0.8/3.0)×160=152.3  Q2 11.5: y=195−(2.5/3.0)×160=61.7
-         Q3 10.7: y=195−(1.7/3.0)×160=104.3  Q4 11.7: y=195−(2.7/3.0)×160=51.0 -->
+    <!-- ░░ CONTENT: PROFITABILITY ░░ -->
     <section class="slide">
-      <h2><i>2</i>Quarterly Revenue Progression</h2>
-      <p class="lede sm" style="margin-bottom:14px;">Quarterly progression was uneven but closed strong: Q4 at $11.7M was the highest quarter of the year.</p>
-      <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Quarterly revenue FY2025">
-        <line class="axis" x1="40" y1="195" x2="520" y2="195"></line>
-        <polygon class="area" points="80,195 80,152.3 213,61.7 347,104.3 480,51.0 480,195"></polygon>
-        <polyline class="ln" points="80,152.3 213,61.7 347,104.3 480,51.0"></polyline>
-        <circle class="dot" cx="80" cy="152.3" r="6"></circle>
-        <circle class="dot" cx="213" cy="61.7" r="6"></circle>
-        <circle class="dot" cx="347" cy="104.3" r="6"></circle>
-        <circle class="dot" cx="480" cy="51.0" r="6"></circle>
-        <text class="vlab" x="80" y="136">$9.8M</text>
-        <text class="vlab" x="213" y="45">$11.5M</text>
-        <text class="vlab" x="347" y="88">$10.7M</text>
-        <text class="vlab" x="480" y="35">$11.7M</text>
-        <text class="xlab" x="80" y="218">Q1</text>
-        <text class="xlab" x="213" y="218">Q2</text>
-        <text class="xlab" x="347" y="218">Q3</text>
-        <text class="xlab" x="480" y="218">Q4</text>
-      </svg>
-      <p class="src">Source: ./Data/financials/quarterly_revenue.csv</p>
-      <div class="pageno"></div>
-    </section>
-
-    <!-- 05 — PROFITABILITY
-         Bars: value/max(36.6)×100. Tech&Dig 36.6→100%; OpsExc 36.1→98.6%; HR&People 35.6→97.3%;
-         Fin&Risk 35.3→96.4%; Strat&Growth 35.3→96.4%. Margins tightly clustered by design. -->
-    <section class="slide">
-      <h2><i>3</i>Profitability</h2>
-      <p class="lede sm" style="margin-bottom:22px;">Margin held at 35.8% (FY2024: 35.6%) — growth without dilution.</p>
+      <h2><i>2</i>Profitability</h2>
+      <p class="lede sm" style="margin-bottom:18px;">Margin held at 35.8% (FY2024: 35.6%) — growth without dilution.</p>
       <div class="barwrap">
-        <p class="bar-title">Operating Margin by Practice — bars show actual margin %; range 35.3–36.6% by design</p>
-        <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">36.6<span>%</span> <small>· $12.3M rev</small></span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">36.1<span>%</span> <small>· $8.7M rev</small></span></div><div class="track"><div class="fill" style="--w:98.6%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">35.6<span>%</span> <small>· $5.2M rev</small></span></div><div class="track"><div class="fill" style="--w:97.3%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">35.3<span>%</span> <small>· $7.8M rev</small></span></div><div class="track"><div class="fill" style="--w:96.4%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">35.3<span>%</span> <small>· $9.6M rev</small></span></div><div class="track"><div class="fill" style="--w:96.4%"></div></div></div>
-      </div>
-      <div class="callout">
-        <div class="big">35.8<span style="font-size:.4em">%</span></div>
-        <div class="txt"><b>Total operating margin — essentially flat vs. FY2024 (35.6%).</b> Cost-to-serve is scaling proportionally rather than eroding.</div>
+        <p class="bar-title">Operating Margin by Practice (bars to scale; differences are genuinely small)</p>
+        <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">36.6%</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">36.1%</span></div><div class="track"><div class="fill" style="--w:98.6%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">35.6%</span></div><div class="track"><div class="fill" style="--w:97.3%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">35.3%</span></div><div class="track"><div class="fill" style="--w:96.4%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">35.3%</span></div><div class="track"><div class="fill" style="--w:96.4%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name"><b>Total</b></span><span class="val"><b>35.8%</b></span></div><div class="track"><div class="fill" style="--w:97.8%"></div></div></div>
       </div>
       <p class="src">Source: ./Data/financials/monthly_financials.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 06 — CHAPTER II: CLIENT HEALTH -->
+    <!-- ░░ CHAPTER: CLIENT HEALTH ░░ -->
     <section class="slide chapter">
-      <div class="watermark">II</div>
+      <div class="watermark">III</div>
       <div class="cover">
-        <p class="kicker">Part II</p>
+        <p class="kicker">Part III</p>
         <h1>Client<br><em>Health</em></h1>
-        <p class="lede">Retention recovered and both key metrics sit above industry averages.</p>
+        <p class="lede">Retention rebounded to 89.3% with NPS and repeat-revenue above industry benchmarks.</p>
       </div>
       <div class="pageno"></div>
     </section>
 
-    <!-- 07 — RETENTION (line chart)
-         lo=82, hi=96, range=14. x=80,280,480.
-         FY2023 93.3%: y=195−(11.3/14)×160=65.9  FY2024 85.3%: y=195−(3.3/14)×160=157.3
-         FY2025 89.3%: y=195−(7.3/14)×160=111.6 -->
+    <!-- ░░ CONTENT: RETENTION ░░ -->
     <section class="slide">
-      <h2><i>4</i>Retention</h2>
-      <p class="lede sm" style="margin-bottom:14px;">Recovery from the FY2024 dip. Eight churned; primary reasons: pricing (2), competitor (2), budget cuts (2).</p>
-      <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Client retention rate by fiscal year">
+      <h2><i>1</i>Retention</h2>
+      <p class="lede sm" style="margin-bottom:18px;">Recovery from the FY2024 dip. Eight churned; primary reasons: pricing (2), competitor (2), budget cuts (2).</p>
+      <svg class="linechart" viewBox="0 0 560 240" role="img" aria-label="Client retention rate FY2023–FY2025">
         <line class="axis" x1="40" y1="195" x2="520" y2="195"></line>
-        <polygon class="area" points="80,195 80,65.9 280,157.3 480,111.6 480,195"></polygon>
-        <polyline class="ln" points="80,65.9 280,157.3 480,111.6"></polyline>
-        <circle class="dot" cx="80" cy="65.9" r="6"></circle>
-        <circle class="dot" cx="280" cy="157.3" r="6"></circle>
-        <circle class="dot" cx="480" cy="111.6" r="6"></circle>
-        <text class="vlab" x="80" y="49">93.3%</text>
-        <text class="vlab" x="280" y="141">85.3%</text>
-        <text class="vlab" x="480" y="95">89.3%</text>
+        <polygon class="area" points="80,195 80,57.7 280,164.3 480,111.0 480,195"></polygon>
+        <polyline class="ln" points="80,57.7 280,164.3 480,111.0"></polyline>
+        <circle class="dot" cx="80" cy="57.7" r="6"></circle>
+        <circle class="dot" cx="280" cy="164.3" r="6"></circle>
+        <circle class="dot" cx="480" cy="111.0" r="6"></circle>
+        <text class="vlab" x="80" y="40">93.3%</text>
+        <text class="vlab" x="280" y="147">85.3%</text>
+        <text class="vlab" x="480" y="93">89.3%</text>
         <text class="xlab" x="80" y="218">FY2023</text>
         <text class="xlab" x="280" y="218">FY2024</text>
         <text class="xlab" x="480" y="218">FY2025</text>
@@ -500,214 +532,267 @@
       <div class="pageno"></div>
     </section>
 
-    <!-- 08 — CLIENT SATISFACTION & BENCHMARKS (bullet chart)
-         NPS: MCG 52, Ind 44, Top 65. lo=38, hi=72, range=34.
-           MCG=(52−38)/34×100=41.2%; Ind=(44−38)/34×100=17.6%; Top=(65−38)/34×100=79.4%
-           band: left=17.6%, width=61.8%
-         Repeat revenue: MCG 68, Ind 60, Top 75. lo=54, hi=82, range=28.
-           MCG=(68−54)/28×100=50%; Ind=(60−54)/28×100=21.4%; Top=(75−54)/28×100=75%
-           band: left=21.4%, width=53.6% -->
+    <!-- ░░ CONTENT: CLIENT SATISFACTION & BENCHMARKS ░░ -->
     <section class="slide">
-      <h2><i>5</i>Client Satisfaction &amp; Benchmarks</h2>
-      <p class="lede sm" style="margin-bottom:14px;">Both metrics above industry averages. Top FY2025 feedback themes: communication (17), project management (15), expertise depth (15) <span class="note">(Source: ./Data/clients/nps_survey_results.csv)</span>.</p>
+      <h2><i>2</i>Client Satisfaction &amp; Benchmarks</h2>
+      <p class="lede sm" style="margin-bottom:18px;">Both metrics above industry averages. Top FY2025 feedback themes: communication (17), project management (15), expertise depth (15) <span class="note">(Source: ./Data/clients/nps_survey_results.csv)</span>.</p>
       <div class="bullet-legend">
         <span><span class="dotm"></span> MCG</span>
         <span><span class="linei"></span> Industry average</span>
         <span><span class="linet"></span> Top quartile</span>
         <span class="note">Oriented so "better" is rightward.</span>
       </div>
-      <div class="bul"><div class="lbl">Client NPS<small>0–100</small></div><div class="track2"><div class="band" style="left:17.6%;width:61.8%"></div><div class="ind" style="left:17.6%"></div><div class="topq" style="left:79.4%"></div><div class="mcg" style="left:41.2%"></div></div><div class="vals"><b>52</b> / 44 / 65</div></div>
-      <div class="bul"><div class="lbl">Revenue from repeat clients<small>%</small></div><div class="track2"><div class="band" style="left:21.4%;width:53.6%"></div><div class="ind" style="left:21.4%"></div><div class="topq" style="left:75%"></div><div class="mcg" style="left:50%"></div></div><div class="vals"><b>68%</b> / 60% / 75%</div></div>
+      <div class="bul">
+        <div class="lbl">Client NPS (0–100)<small>points</small></div>
+        <div class="track2">
+          <div class="band" style="left:25.7%;width:60.0%"></div>
+          <div class="ind" style="left:25.7%"></div>
+          <div class="topq" style="left:85.7%"></div>
+          <div class="mcg" style="left:48.6%"></div>
+        </div>
+        <div class="vals"><b>52</b> / 44 / 65</div>
+      </div>
+      <div class="bul">
+        <div class="lbl">Revenue from repeat clients<small>%</small></div>
+        <div class="track2">
+          <div class="band" style="left:28.6%;width:42.9%"></div>
+          <div class="ind" style="left:28.6%"></div>
+          <div class="topq" style="left:71.4%"></div>
+          <div class="mcg" style="left:51.4%"></div>
+        </div>
+        <div class="vals"><b>68%</b> / 60% / 75%</div>
+      </div>
       <p class="src">Source: ./Data/market/industry_benchmarks.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 09 — CHAPTER III: PEOPLE & CAPACITY -->
-    <section class="slide chapter">
-      <div class="watermark">III</div>
-      <div class="cover">
-        <p class="kicker">Part III</p>
-        <h1>People &amp;<br><em>Capacity</em></h1>
-        <p class="lede">All three key workforce metrics above industry average; two engagement scores flagged.</p>
-      </div>
-      <div class="pageno"></div>
-    </section>
-
-    <!-- 10 — WORKFORCE METRICS (bullet chart)
-         Utilization: MCG 76.2, Ind 73.5, Top 80.1. lo=70, hi=85, range=15.
-           MCG=(76.2−70)/15×100=41.3%; Ind=(73.5−70)/15×100=23.3%; Top=(80.1−70)/15×100=67.3%
-           band: left=23.3%, width=44.0%
-         Revenue/consultant: MCG 342, Ind 318, Top 390. lo=295, hi=415, range=120.
-           MCG=(342−295)/120×100=39.2%; Ind=(318−295)/120×100=19.2%; Top=(390−295)/120×100=79.2%
-           band: left=19.2%, width=60.0%
-         Attrition (lower=better, inverted): MCG 14.8, Ind 16.5, Top 11.0. lo=9, hi=19, range=10.
-           raw: MCG=(14.8−9)/10×100=58%; Ind=(16.5−9)/10×100=75%; Top=(11.0−9)/10×100=20%
-           inverted: MCG=42%, Ind=25%, Top=80%. band: left=25%, width=55% -->
-    <section class="slide">
-      <h2><i>6</i>Workforce Metrics</h2>
-      <p class="lede sm" style="margin-bottom:14px;">55 of 56 planned hires completed <span class="note">(Source: ./Data/people/hiring_plan.csv)</span>. All three key metrics above industry average.</p>
-      <div class="bullet-legend">
-        <span><span class="dotm"></span> MCG</span>
-        <span><span class="linei"></span> Industry average</span>
-        <span><span class="linet"></span> Top quartile</span>
-        <span class="note">Attrition inverted — lower is better, so rightward = better.</span>
-      </div>
-      <div class="bul"><div class="lbl">Consultant utilization<small>%</small></div><div class="track2"><div class="band" style="left:23.3%;width:44.0%"></div><div class="ind" style="left:23.3%"></div><div class="topq" style="left:67.3%"></div><div class="mcg" style="left:41.3%"></div></div><div class="vals"><b>76.2%</b> / 73.5% / 80.1%</div></div>
-      <div class="bul"><div class="lbl">Revenue per consultant<small>$K</small></div><div class="track2"><div class="band" style="left:19.2%;width:60.0%"></div><div class="ind" style="left:19.2%"></div><div class="topq" style="left:79.2%"></div><div class="mcg" style="left:39.2%"></div></div><div class="vals"><b>342</b> / 318 / 390</div></div>
-      <div class="bul"><div class="lbl">Voluntary attrition<small>% · lower is better</small></div><div class="track2"><div class="band" style="left:25%;width:55%"></div><div class="ind" style="left:25%"></div><div class="topq" style="left:80%"></div><div class="mcg" style="left:42%"></div></div><div class="vals"><b>14.8%</b> / 16.5% / 11.0%</div></div>
-      <p class="lede sm" style="margin-top:18px;">Capacity pressure: Tech &amp; Digital running 7 projects with 3 consultants &gt;95% utilized; Finance &amp; Risk near capacity (~80%).</p>
-      <p class="src">Source: ./Data/market/industry_benchmarks.csv</p>
-      <div class="pageno"></div>
-    </section>
-
-    <!-- 11 — EMPLOYEE ENGAGEMENT (bars with ticks for FY2024 vs FY2025)
-         Bar width = FY2025 value%. Tick left = FY2024 value%.
-         Declining metrics use fill.down. -->
-    <section class="slide">
-      <h2><i>7</i>Employee Engagement</h2>
-      <p class="lede sm" style="margin-bottom:22px;">87% participation; overall up 3 points. Two scores flagged: <span class="note">bars show FY2025; tick marks FY2024.</span></p>
-      <div class="barwrap">
-        <div class="bar"><div class="row"><span class="name">Overall engagement</span><span class="val">72<span class="chip up">+3</span></span></div><div class="track"><div class="fill" style="--w:72%"></div><div class="tick" data-label="FY24:69" style="left:69%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Leadership satisfaction</span><span class="val">74<span class="chip up">+3</span></span></div><div class="track"><div class="fill" style="--w:74%"></div><div class="tick" data-label="FY24:71" style="left:71%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Career development clarity</span><span class="val">61<span class="chip dn">−4 flagged</span></span></div><div class="track"><div class="fill down" style="--w:61%"></div><div class="tick" data-label="FY24:65" style="left:65%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Work-life balance</span><span class="val">58<span class="chip dn">−2 flagged</span></span></div><div class="track"><div class="fill down" style="--w:58%"></div><div class="tick" data-label="FY24:60" style="left:60%"></div></div></div>
-      </div>
-      <p class="lede sm" style="margin-top:18px;">Actions committed: practice-specific promotion criteria (due Feb 2026), two Tech &amp; Digital Senior Consultant hires (Q1 2026), semi-annual compensation benchmarking (due Jun 2026).</p>
-      <p class="src">Source: ./Data/people/team_survey_fy25.txt</p>
-      <div class="pageno"></div>
-    </section>
-
-    <!-- 12 — CHAPTER IV: DELIVERY PERFORMANCE -->
+    <!-- ░░ CHAPTER: PEOPLE & CAPACITY ░░ -->
     <section class="slide chapter">
       <div class="watermark">IV</div>
       <div class="cover">
         <p class="kicker">Part IV</p>
-        <h1>Delivery<br><em>Performance</em></h1>
-        <p class="lede">On-time delivery 54.8% — the firm's primary operational gap.</p>
+        <h1>People &amp;<br><em>Capacity</em></h1>
+        <p class="lede">Headcount at plan; workforce metrics above industry average with engagement improvements.</p>
       </div>
       <div class="pageno"></div>
     </section>
 
-    <!-- 13 — PROJECT OUTCOMES
-         Stats: 31 projects, 4.15/5.0 satisfaction, 54.8% on-time (callout).
-         Margin bars: max=32.6. Fin&Risk 32.6→100%; Tech&Dig 31.6→96.9%;
-         HR&People 30.3→92.9%; OpsExc 29.8→91.4%; Strat&Growth 27.1→83.1% -->
+    <!-- ░░ CONTENT: WORKFORCE METRICS ░░ -->
     <section class="slide">
-      <h2><i>8</i>Project Outcomes</h2>
-      <p class="lede sm" style="margin-bottom:22px;">31 projects completed. On-time delivery 54.8% — the firm's primary operational gap. Avg satisfaction 4.15/5.0; margins vary by practice.</p>
-      <div class="stats">
-        <div class="stat"><div class="num">31</div><div class="cap">Projects completed</div></div>
-        <div class="stat"><div class="num">4.15<span>/5.0</span></div><div class="cap">Avg client satisfaction</div></div>
-        <div class="stat"><div class="num">30.6<span>%</span></div><div class="cap">Overall avg project margin</div></div>
+      <h2><i>1</i>Workforce Metrics</h2>
+      <p class="lede sm" style="margin-bottom:18px;">55 of 56 planned hires completed <span class="note">(Source: ./Data/people/hiring_plan.csv)</span>. All three key metrics above industry average.</p>
+      <div class="bullet-legend">
+        <span><span class="dotm"></span> MCG</span>
+        <span><span class="linei"></span> Industry average</span>
+        <span><span class="linet"></span> Top quartile</span>
+        <span class="note">Oriented so "better" is rightward; attrition row inverted (lower is better).</span>
       </div>
-      <div class="callout">
-        <div class="big">54.8<span style="font-size:.4em">%</span></div>
-        <div class="txt"><b>On-time delivery — the firm's primary operational gap.</b> Fix: tighter SOW scope gates on transformation engagements.</div>
+      <div class="bul">
+        <div class="lbl">Consultant utilization<small>%</small></div>
+        <div class="track2">
+          <div class="band" style="left:23.3%;width:44.0%"></div>
+          <div class="ind" style="left:23.3%"></div>
+          <div class="topq" style="left:67.3%"></div>
+          <div class="mcg" style="left:41.3%"></div>
+        </div>
+        <div class="vals"><b>76.2%</b> / 73.5% / 80.1%</div>
       </div>
-      <div class="barwrap" style="margin-top:26px;">
-        <p class="bar-title">Avg Project Margin by Practice (%)</p>
-        <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">32.6<span>%</span></span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">31.6<span>%</span></span></div><div class="track"><div class="fill" style="--w:96.9%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">30.3<span>%</span></span></div><div class="track"><div class="fill" style="--w:92.9%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">29.8<span>%</span></span></div><div class="track"><div class="fill" style="--w:91.4%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">27.1<span>%</span></span></div><div class="track"><div class="fill" style="--w:83.1%"></div></div></div>
+      <div class="bul">
+        <div class="lbl">Revenue per consultant<small>$K</small></div>
+        <div class="track2">
+          <div class="band" style="left:16.4%;width:65.5%"></div>
+          <div class="ind" style="left:16.4%"></div>
+          <div class="topq" style="left:81.8%"></div>
+          <div class="mcg" style="left:38.2%"></div>
+        </div>
+        <div class="vals"><b>342</b> / 318 / 390</div>
       </div>
-      <p class="lede sm" style="margin-top:16px;">Notable wins: Apex Financial ($1.1M, 2 weeks early, 34% margin); Cardinal Health Systems (4.8/5.0, reusable workforce methodology); Quantum Computing (4.6/5.0). Delivery issues: Triumph Automotive (6 weeks late, scope expansion); Empire Retail (partial deliverable, $320K of $500K invoiced, three sponsor changes).</p>
-      <p class="src">Source: ./Data/projects/completed_projects.csv</p>
+      <div class="bul">
+        <div class="lbl">Voluntary attrition<small>% · lower is better · inverted</small></div>
+        <div class="track2">
+          <div class="band" style="left:25.0%;width:55.0%"></div>
+          <div class="ind" style="left:25.0%"></div>
+          <div class="topq" style="left:80.0%"></div>
+          <div class="mcg" style="left:42.0%"></div>
+        </div>
+        <div class="vals"><b>14.8%</b> / 16.5% / 11.0%</div>
+      </div>
+      <p class="lede sm" style="margin-top:14px;">Capacity pressure: Tech &amp; Digital running 7 projects with 3 consultants &gt;95% utilized; Finance &amp; Risk near capacity (~80%).</p>
+      <p class="src">Source: ./Data/market/industry_benchmarks.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 14 — CHAPTER V: PIPELINE & BUSINESS DEVELOPMENT -->
+    <!-- ░░ CONTENT: EMPLOYEE ENGAGEMENT ░░ -->
+    <section class="slide">
+      <h2><i>2</i>Employee Engagement</h2>
+      <p class="lede sm" style="margin-bottom:18px;">87% participation; overall up 3 points. Two scores flagged:</p>
+      <div class="barwrap">
+        <p class="bar-title">Engagement Scores — FY2024 vs FY2025 (out of 100)</p>
+        <div class="bar">
+          <div class="row"><span class="name">Overall engagement</span><span class="val">72<span class="chip up">+3</span></span></div>
+          <div class="track">
+            <div class="fill" style="--w:97.3%"></div>
+            <div class="tick" data-label="FY2024: 69" style="left:93.2%"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="row"><span class="name">Leadership satisfaction</span><span class="val">74<span class="chip up">+3</span></span></div>
+          <div class="track">
+            <div class="fill" style="--w:100%"></div>
+            <div class="tick" data-label="FY2024: 71" style="left:95.9%"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="row"><span class="name">Career development clarity</span><span class="val">61<span class="chip dn">−4</span></span></div>
+          <div class="track">
+            <div class="fill down" style="--w:82.4%"></div>
+            <div class="tick" data-label="FY2024: 65" style="left:87.8%"></div>
+          </div>
+        </div>
+        <div class="bar">
+          <div class="row"><span class="name">Work-life balance</span><span class="val">58<span class="chip dn">−2</span></span></div>
+          <div class="track">
+            <div class="fill down" style="--w:78.4%"></div>
+            <div class="tick" data-label="FY2024: 60" style="left:81.1%"></div>
+          </div>
+        </div>
+      </div>
+      <p class="lede sm" style="margin-top:14px;">Actions committed: practice-specific promotion criteria (due Feb 2026), two Tech &amp; Digital Senior Consultant hires (Q1 2026), semi-annual compensation benchmarking (due Jun 2026).</p>
+      <p class="src">Source: ./Data/people/team_survey_fy25.txt</p>
+      <div class="pageno"></div>
+    </section>
+
+    <!-- ░░ CHAPTER: DELIVERY PERFORMANCE ░░ -->
     <section class="slide chapter">
       <div class="watermark">V</div>
       <div class="cover">
         <p class="kicker">Part V</p>
-        <h1>Pipeline &amp;<br><em>Business Development</em></h1>
-        <p class="lede">Weighted pipeline $48M; win rate 29% — below the 33% industry average.</p>
+        <h1>Delivery<br><em>Performance</em></h1>
+        <p class="lede">31 projects delivered; on-time rate needs immediate attention.</p>
       </div>
       <div class="pageno"></div>
     </section>
 
-    <!-- 15 — OPEN PIPELINE (bars on weighted value)
-         Max weighted = 27.4. Verbal Commit 27.4→100%; Negotiation 14.2→51.8%;
-         Proposal Submitted 4.0→14.6%; Qualification 2.3→8.4% -->
+    <!-- ░░ CONTENT: PROJECT OUTCOMES ░░ -->
     <section class="slide">
-      <h2><i>9</i>Open Pipeline</h2>
-      <p class="lede sm" style="margin-bottom:22px;">Weighted pipeline $48M; $27.4M in Verbal Commit stage.</p>
+      <h2><i>1</i>Project Outcomes</h2>
+      <p class="lede sm" style="margin-bottom:16px;">31 projects completed. On-time delivery 54.8% — the firm's primary operational gap. Avg satisfaction 4.15/5.0; margins vary by practice.</p>
+      <div class="two">
+        <div>
+          <div class="barwrap">
+            <p class="bar-title">Client Satisfaction (/ 5.0)</p>
+            <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">4.5</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">4.4</span></div><div class="track"><div class="fill" style="--w:97.8%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">4.1</span></div><div class="track"><div class="fill" style="--w:91.1%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">3.9</span></div><div class="track"><div class="fill" style="--w:86.7%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">3.9</span></div><div class="track"><div class="fill" style="--w:86.7%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name"><b>Overall</b></span><span class="val"><b>4.15</b></span></div><div class="track"><div class="fill" style="--w:92.2%"></div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="barwrap">
+            <p class="bar-title">Avg Margin (%)</p>
+            <div class="bar"><div class="row"><span class="name">Finance &amp; Risk</span><span class="val">32.6%</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Technology &amp; Digital</span><span class="val">31.6%</span></div><div class="track"><div class="fill" style="--w:96.9%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">HR &amp; People</span><span class="val">30.3%</span></div><div class="track"><div class="fill" style="--w:92.9%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Operations Excellence</span><span class="val">29.8%</span></div><div class="track"><div class="fill" style="--w:91.4%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name">Strategy &amp; Growth</span><span class="val">27.1%</span></div><div class="track"><div class="fill" style="--w:83.1%"></div></div></div>
+            <div class="bar"><div class="row"><span class="name"><b>Overall</b></span><span class="val"><b>30.6%</b></span></div><div class="track"><div class="fill" style="--w:93.9%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="lede sm" style="margin-top:14px;">Notable wins: Apex Financial ($1.1M, 2 weeks early, 34% margin); Cardinal Health Systems (4.8/5.0, reusable workforce methodology); Quantum Computing (4.6/5.0).</p>
+      <p class="lede sm">Delivery issues: Triumph Automotive (6 weeks late, scope expansion); Empire Retail (partial deliverable, $320K of $500K invoiced, three sponsor changes). Fix: tighter SOW scope gates.</p>
+      <p class="src">Source: ./Data/projects/completed_projects.csv</p>
+      <div class="pageno"></div>
+    </section>
+
+    <!-- ░░ CHAPTER: PIPELINE & BUSINESS DEVELOPMENT ░░ -->
+    <section class="slide chapter">
+      <div class="watermark">VI</div>
+      <div class="cover">
+        <p class="kicker">Part VI</p>
+        <h1>Pipeline &amp;<br><em>Business Development</em></h1>
+        <p class="lede">A $48M weighted pipeline with win rate improvement requiring relationship coverage focus.</p>
+      </div>
+      <div class="pageno"></div>
+    </section>
+
+    <!-- ░░ CONTENT: OPEN PIPELINE ░░ -->
+    <section class="slide">
+      <h2><i>1</i>Open Pipeline</h2>
+      <p class="lede sm" style="margin-bottom:18px;">Weighted pipeline $48M; $27.4M in Verbal Commit stage.</p>
       <div class="barwrap">
-        <p class="bar-title">Weighted Pipeline by Stage ($M) — total weighted $47.9M</p>
-        <div class="bar"><div class="row"><span class="name">Verbal Commit</span><span class="val">$27.4<span>M</span> <small>· $32.3M expected</small></span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Negotiation</span><span class="val">$14.2<span>M</span> <small>· $21.9M expected</small></span></div><div class="track"><div class="fill" style="--w:51.8%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Proposal Submitted</span><span class="val">$4.0<span>M</span> <small>· $11.4M expected</small></span></div><div class="track"><div class="fill" style="--w:14.6%"></div></div></div>
-        <div class="bar"><div class="row"><span class="name">Qualification</span><span class="val">$2.3<span>M</span> <small>· $15.3M expected</small></span></div><div class="track"><div class="fill" style="--w:8.4%"></div></div></div>
+        <p class="bar-title">Pipeline by Stage — Weighted Value ($M)</p>
+        <div class="bar"><div class="row"><span class="name">Verbal Commit</span><span class="val">$27.4M <small>($32.3M expected)</small></span></div><div class="track"><div class="fill" style="--w:100%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Negotiation</span><span class="val">$14.2M <small>($21.9M expected)</small></span></div><div class="track"><div class="fill" style="--w:51.8%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Proposal Submitted</span><span class="val">$4.0M <small>($11.4M expected)</small></span></div><div class="track"><div class="fill" style="--w:14.6%"></div></div></div>
+        <div class="bar"><div class="row"><span class="name">Qualification</span><span class="val">$2.3M <small>($15.3M expected)</small></span></div><div class="track"><div class="fill" style="--w:8.4%"></div></div></div>
       </div>
       <p class="src">Source: ./Data/pipeline/sales_pipeline.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 16 — WIN / LOSS ANALYSIS (donut)
-         C=547. Lost 17/24: 17/24×547=387.4→387, offset=0.
-         Won 7/24: 7/24×547=159.5→160, offset=−387. Sum=547 ✓ -->
+    <!-- ░░ CONTENT: WIN / LOSS ANALYSIS ░░ -->
     <section class="slide">
-      <h2><i>10</i>Win / Loss Analysis</h2>
-      <p class="lede sm" style="margin-bottom:24px;">29% win rate (7/24 deals) — below the 33% competitive RFP and 35% all-proposals industry averages. Relationship gap drove 8 of 17 losses; not a quality or price issue. Primary competitors: Deloitte (4), BCG (4), Accenture (3), Oliver Wyman (3).</p>
+      <h2><i>2</i>Win / Loss Analysis</h2>
+      <p class="lede sm" style="margin-bottom:18px;">29% win rate (7/24 deals) — below the 33% competitive RFP and 35% all-proposals industry averages. Relationship gap drove 8 of 17 losses; not a quality or price issue. Primary competitors: Deloitte (4), BCG (4), Accenture (3), Oliver Wyman (3).</p>
       <div class="two">
         <div class="donut-wrap">
           <div class="donut">
             <svg width="210" height="210" viewBox="0 0 210 210">
-              <circle class="ring" cx="105" cy="105" r="87" stroke="#3a2417" style="--dash:387 547;--off:0"></circle>
-              <circle class="ring" cx="105" cy="105" r="87" stroke="#7a7340" style="--dash:160 547;--off:-387"></circle>
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#6f7a3a" style="--dash:160 547;--off:0"></circle>
+              <circle class="ring" cx="105" cy="105" r="87" stroke="#b8502f" style="--dash:387 547;--off:-160"></circle>
             </svg>
-            <div class="center"><b>29%</b><span>WIN RATE</span></div>
+            <div class="center"><b>24</b><span>DEALS</span></div>
           </div>
           <div class="legend">
-            <div><i style="background:#3a2417"></i>Lost <b>17 deals <small>· $13.8M</small></b></div>
-            <div><i style="background:#7a7340"></i>Won <b>7 deals <small>· $6.5M</small></b></div>
+            <div><i style="background:#6f7a3a"></i>Won <b>7 · $6.5M <small>· 29%</small></b></div>
+            <div><i style="background:#b8502f"></i>Lost <b>17 · $13.8M <small>· 71%</small></b></div>
           </div>
         </div>
         <div style="align-self:center;">
           <p class="lede sm">Win drivers: prior relationship (4 of 7), innovation in approach (1), expertise (1), price (1).</p>
-          <p class="lede sm" style="margin-top:14px;">Deepen existing accounts before chasing new logos — 68% of revenue already comes from repeat clients, and relationship is the primary win predictor in our own data.</p>
         </div>
       </div>
       <p class="src">Source: ./Data/pipeline/win_loss_analysis.csv</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 17 — CHAPTER VI: CONCLUSION -->
+    <!-- ░░ CHAPTER: CONCLUSION ░░ -->
     <section class="slide chapter">
-      <div class="watermark">VI</div>
+      <div class="watermark">VII</div>
       <div class="cover">
-        <p class="kicker">Part VI</p>
-        <h1><em>Conclusion</em></h1>
-        <p class="lede">Strong growth and margin stability in FY2025 — with a clear punch-list for FY2026.</p>
+        <p class="kicker">Part VII</p>
+        <h1>Conclusion</h1>
+        <p class="lede">Two focus areas for ELT action in FY2026.</p>
       </div>
       <div class="pageno"></div>
     </section>
 
-    <!-- 18 — SUMMARY -->
+    <!-- ░░ CLOSING: SUMMARY ░░ -->
     <section class="slide">
-      <h2><i>11</i>Summary</h2>
-      <p class="big-quote">Strong growth and margin stability in FY2025. Two areas require focused ELT action in FY2026: <em>on-time delivery discipline</em> and <em>BD relationship coverage</em>.</p>
+      <h2><i>1</i>Summary</h2>
+      <p class="big-quote summary-body">Strong growth and margin stability in FY2025. Two areas require focused ELT action in FY2026: on-time delivery discipline and BD relationship coverage.</p>
       <div class="pageno"></div>
     </section>
 
-    <!-- 19 — KEY TAKEAWAYS -->
+    <!-- ░░ CLOSING: KEY TAKEAWAYS ░░ -->
     <section class="slide">
-      <h2><i>12</i>Key Takeaways</h2>
+      <h2><i>2</i>Key Takeaways</h2>
       <ul class="takeaways">
-        <li><b>Revenue $43.7M (+12.9% YoY), margin 35.8%</b> — growth without margin dilution</li>
-        <li><b>Client retention recovered to 89.3%;</b> NPS and repeat-revenue metrics above industry average</li>
-        <li><b>People metrics broadly healthy;</b> Technology &amp; Digital capacity and junior career development clarity require near-term action</li>
-        <li><b>On-time delivery at 54.8% is the firm's sharpest operational gap</b> — scope gate discipline is the primary fix</li>
-        <li><b>$48M weighted pipeline is strong;</b> win rate improvement requires a relationship coverage strategy, not a pricing or quality fix</li>
+        <li>Revenue $43.7M (+12.9% YoY), margin 35.8% — growth without margin dilution</li>
+        <li>Client retention recovered to 89.3%; NPS and repeat-revenue metrics above industry average</li>
+        <li>People metrics broadly healthy; Technology &amp; Digital capacity and junior career development clarity require near-term action</li>
+        <li>On-time delivery at 54.8% is the firm's sharpest operational gap — scope gate discipline is the primary fix</li>
+        <li>$48M weighted pipeline is strong; win rate improvement requires a relationship coverage strategy, not a pricing or quality fix</li>
       </ul>
       <div class="pageno"></div>
     </section>
 
-    <!-- 20 — ANTICIPATED Q&A -->
+    <!-- ░░ CLOSING: ANTICIPATED Q&A ░░ -->
     <section class="slide">
-      <h2><i>13</i>Anticipated Q&amp;A</h2>
+      <h2><i>3</i>Anticipated Q&amp;A</h2>
       <div class="qa">
         <div class="item">
           <p class="q">Why did on-time delivery fall to 54.8%?</p>

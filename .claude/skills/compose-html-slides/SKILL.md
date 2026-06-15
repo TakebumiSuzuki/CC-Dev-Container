@@ -21,9 +21,6 @@ and **grows taller when the content needs it**, so a dense slide simply scrolls
 vertically rather than overflowing or shrinking the type. The reader moves with
 the nav, the `←`/`→` keys, or `PageUp`/`PageDown`.
 
-This is the HTML analogue of a PowerPoint deck: the same "one idea per slide,
-chapter dividers between sections" rhythm, but editable as plain HTML/CSS.
-
 ## The reference file — read it before building
 
 `references/template.html` lives next to this file. **Read it before you build
@@ -36,14 +33,10 @@ populated with representative demo data and hand-computed charts — so you can 
 a component filled in, not just its empty shell. Build your deck by copying this
 file and replacing the example slides.
 
-**A slide grows to fit its content — so never trim the content to fit the slide.**
-Each slide has a 16:9 floor and then **grows taller**, scrolling vertically, when
-there is more to show. So when one `###` carries a lot — a long paragraph, many
-bars, a full table — put **all of it on that one slide, copied verbatim from
-`narrative.md`**, and let the slide get tall. Do **not** truncate, condense, or
-drop source text to make it "fit", and do **not** split a `###` across extra
-slides to relieve density: `narrative.md` is the single source of truth (see
-Fidelity rules). The demo slides show how each component *looks*, not a size cap.
+**The demo slides show how each component *looks*, not a size cap.** When one
+`###` carries a lot — a long paragraph, many bars, a full table — put **all of it
+on that one slide, copied verbatim from `narrative.md`**, and let the slide grow
+tall: the 16:9 floor is a minimum, not a ceiling.
 
 ## Inputs — both are required
 
@@ -119,7 +112,8 @@ split for size.
   default;** only if you want a punchier headline may you use a phrase **lifted
   verbatim from a real narrative sentence** (e.g. a Conclusion thesis) — **never an
   invented tagline.** The cover is the single highest-risk spot for invented prose,
-  so the `h1` and any non-title `.lede` go in the no-drift allowlist.
+  so the `h1` and any non-title `.lede` go in the no-drift allowlist (the file
+  `chrome.txt`, one string per line — see Fidelity QA pass 2).
 - **`##` section → a chapter-divider slide** (`<section class="slide chapter">`):
   a near-empty page showing only the section title (as `h1`), a `Part N` kicker,
   a one-line lede, and a big faded numeral watermark. This is the pptx
@@ -138,9 +132,6 @@ split for size.
 - **Key Takeaways → its own takeaways slide** (`.takeaways`) — a standalone page,
   not appended to a divider or to the Summary slide.
 - **Anticipated Q&A → a Q&A slide** (`.qa` with `.item`/`.q`/`.a`).
-- **A heavy slide is fine — it grows taller and scrolls;** don't split a `###`
-  across extra slides or trim its content to relieve density. Split only where the
-  *source structure* says to (a new `###` or `##`), never to make content "fit".
 
 **Nav contract:** every slide has **exactly one** `<a>` in `#navlist`, in slide
 order, with `data-i` running `0,1,2,…` with no gaps. Chapter dividers use
@@ -237,18 +228,15 @@ Show your arithmetic in your reasoning so it can be checked.
 These keep the deck trustworthy — the single most important property for an exec
 readout.
 
-- **Transcribe prose; don't paraphrase it.** Reader-visible prose in the deck is
-  copied **verbatim** from `narrative.md` — each text run must be a *contiguous
-  span* of the source. The only edit allowed is **splitting** one span across
-  elements — flowing a long passage through `.lede` plus further paragraphs on the
-  same slide, which simply **grows taller** to hold all of it. Never **truncate,
-  drop, or condense** a passage to make it "fit" — the slide grows instead. No
-  synonyms, no reordering, no added words, and **never retype a number
-  from memory — copy it.** Rewriting is exactly how wording and figures silently
-  drift; the no-drift check (`check_prose_verbatim.py`) proves you didn't. The sole
-  exception is **chrome** the narrative lacks — the cover `<h1>`, chapter-divider
-  ledes, "Part N" kickers — which you keep tiny and grounded (see the Cover rule)
-  and list in the check's allowlist so it stays explicit and countable.
+- **Transcribe prose; don't paraphrase it.** Reader-visible prose is copied
+  **verbatim** from `narrative.md` — each text run a *contiguous span* of the
+  source. No synonyms, no reordering, no added words, and **never retype a number
+  from memory — copy it.** The only edit allowed is **splitting** one span across
+  elements on the same slide (which grows to hold it); never **truncate or
+  condense** a passage to make it "fit". The no-drift check
+  (`check_prose_verbatim.py`) proves you didn't. The sole exception is **chrome**
+  the narrative lacks — the cover `<h1>`, chapter-divider ledes, "Part N" kickers —
+  which you keep tiny and list in the allowlist (`chrome.txt`).
 - **Language follows the source.** If the report is in English, the slides
   (including UI chrome like the nav and "Part N") are in English. Don't translate
   unless asked.
@@ -266,10 +254,8 @@ readout.
 - **Preserve `[needs-verification]` markers.** Render them inline as
   `<span class="note">[needs verification]</span>` — visible but understated.
   Never silently "clean them up": their job is to show what isn't yet confirmed.
-- **Never invent numbers, sources, trends, or framing** the Markdown doesn't
-  contain. In particular, **`template.html` is a layout/geometry reference
-  only** — never lift its placeholder wording, headings, or demo figures. Every
-  word of prose in your output must trace to `narrative.md`.
+- **`template.html` is a layout/geometry reference only** — never lift its
+  placeholder wording, headings, or demo figures into your output.
 
 ## Restyling via design tokens
 
@@ -313,8 +299,7 @@ apply every fix, then re-run. **If you cannot spawn a sub-agent, run passes 1 an
    ```
    It confirms every reader-visible prose run in the deck is a **contiguous,
    verbatim substring** of the narrative — proving the wording, and the numbers
-   embedded in it, did not drift. The guarantee comes from this check, not from how
-   carefully the prose was typed. Whatever it flags is either **chrome** (cover
+   embedded in it, did not drift. Whatever it flags is either **chrome** (cover
    `h1` / divider lede / kicker) you add to the allowlist `chrome.txt`, one string
    per line — keeping chrome explicit and countable — or **drift** you rewrite to a
    verbatim span. This replaces eyeballing provenance with a check, and covers
@@ -333,8 +318,7 @@ checklist.
 ## Before you finish — verification checklist
 
 - **Chrome is byte-identical:** the `<style>` and `<script>` blocks must exactly
-  match `references/template.html` — you only `Edit`-ed nav + slides, never
-  `Write`. Verify:
+  match `references/template.html`. Verify:
   ```
   for tag in style script; do
     diff <(awk -v t=$tag 'BEGIN{o="^<"t">$";c="^</"t">$"} $0~o{f=1} f{print} $0~c{f=0}' references/template.html) \
@@ -342,8 +326,7 @@ checklist.
       && echo "$tag OK";
   done
   ```
-  Any diff means the design system was re-emitted — discard the file, re-`cp`,
-  and redo the two `Edit`s.
+  Any diff → discard the file, re-`cp`, and redo the nav + slides edits.
 - **Counts match:** number of `.slide` sections == number of `#navlist a`, and
   `data-i` runs `0..n−1` with no gaps. (`grep -c` both.)
 - **Donuts close:** each donut's segment lengths sum to ~547.

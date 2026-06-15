@@ -39,5 +39,9 @@
       "Bash(/opt/uv-venv/bin/python3 *)",
       "mcp__plugin_context7_context7__query-docs"
     ]
+  },
+  "sandbox": {
+    "enabled": false,
+    "autoAllowBashIfSandboxed": false
   }
 }
